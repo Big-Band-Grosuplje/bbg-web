@@ -16,7 +16,7 @@ Ključno:
 - Tokeni v `src/styles/brand.css`: zlata #C9A227 (svetla #D4AF37), topla črna #181512, ink #111111, paper #FAF7F0
 - Znak: `src/assets/brand/bbg-znak.svg` (currentColor) + statične variante; favicon monogram "B"
 - Slog: moderno, minimalistično, črno-zlato; izstopajoči featurji: avdio/video hero, interaktivna postavitev orkestra
-- Ton besedil (napovedniki, novice): duhovito in samoironično, a informativno — glej arhivske napovednike (npr. december 2025). Kolofon, uradni in poslovni deli strani ostanejo nevtralni.
+- Ton besedil (napovedniki, novice): duhovito in samoironično, a informativno — glej `docs/ton-vzorci.md`. Kolofon, uradni in poslovni deli strani ostanejo nevtralni.
 
 ## Tehnična pravila
 - **Repo je JAVEN — nikoli ne commitaj bbg-osnova.md, pogodb, financ ali osebnih podatkov.**
@@ -30,7 +30,7 @@ Ključno:
 - `src/layouts/Layout.astro` — head, favicon, OG
 - `src/pages/` — strani; `src/styles/brand.css` — tokeni
 - `src/data/` — strukturirani podatki (koncerti ipd.)
-- `docs/` — kronika.md, sodelovanja.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
+- `docs/` — kronika.md, sodelovanja.md, ton-vzorci.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 
 ## Commit sporočila
