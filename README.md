@@ -1,43 +1,22 @@
-# Astro Starter Kit: Minimal
+# bbg-web — začetni skelet
 
-```sh
-npm create astro@latest -- --template minimal
-```
+## Če je repo prazen (ali samo z src/assets/brand)
+1. Razpakiraj VSO vsebino tega zipa v koren repa (povozi obstoječe brand datoteke — identične so).
+2. V korenu repa:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+    npm install
+    npm run dev
 
-## 🚀 Project Structure
+3. Odpri http://localhost:4321 — temni hero z zlatim znakom in pravilno nogo (kolofon po bbg-osnova).
 
-Inside of your Astro project, you'll see the following folders and files:
+## Če Astro projekt že obstaja
+Skopiraj samo:
+- src/layouts/Layout.astro
+- src/pages/index.astro (ali njegov <main> prenesi v svojo stran)
+- preveri, da astro.config.mjs vsebuje: site: 'https://bigband-grosuplje.com'
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Deploy (Vercel)
+Framework preset: Astro. Build: astro build, output: dist/. DNS ostane na Hitrost — spreminjaš samo A/CNAME za www in koren, MX/SPF/MS zapisov NE.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Commit predlog:
+feat: Astro skelet z layoutom, brand tokeni in začetno stranjo

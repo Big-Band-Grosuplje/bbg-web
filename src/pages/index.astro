@@ -1,17 +1,56 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main class="hero bbg-dark">
+    <p class="nadnaslov">kulturno društvo</p>
+    <img src={znakZlat.src} alt="Big Band Grosuplje" class="znak" width="640" />
+    <p class="podnaslov">Prvi grosupeljški big band — od leta 1997/98.</p>
+    <p class="kontakt"><a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a></p>
+  </main>
+
+  <footer class="bbg-dark noga">
+    <p>
+      Kulturno društvo Big Band Grosuplje<br />
+      Adamičeva cesta 16, 1290 Grosuplje<br />
+      Davčna številka: 12579076 (nismo zavezanci za DDV) · Matična številka: 1179241000<br />
+      <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>
+    </p>
+  </footer>
+</Layout>
+
+<style>
+  .hero {
+    min-height: 82vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    gap: 1.25rem;
+  }
+  .nadnaslov {
+    margin: 0;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--bbg-gold);
+  }
+  .znak {
+    max-width: min(640px, 88vw);
+    height: auto;
+  }
+  .podnaslov { margin: 0; opacity: 0.85; }
+  .kontakt a, .noga a { color: var(--bbg-gold-light); }
+  .noga {
+    border-top: 1px solid var(--bbg-border-dark);
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+</style>

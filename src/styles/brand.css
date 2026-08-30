@@ -1,0 +1,30 @@
+/* ============================================================
+   BBG brand tokeni — vir resnice za barve in znak
+   Potrjeno: avg. 2026 (zlata #C9A227 na topli črni #181512)
+   Uporaba: import '../styles/brand.css' v Layout.astro
+   ============================================================ */
+
+:root {
+  /* Barve */
+  --bbg-gold: #C9A227;        /* primarna zlata */
+  --bbg-gold-light: #D4AF37;  /* hover / poudarki na temnem */
+  --bbg-black: #181512;       /* topla črna — ozadja, hero */
+  --bbg-ink: #111111;         /* besedilo na svetlem */
+  --bbg-paper: #FAF7F0;       /* topla bela — svetle sekcije */
+
+  /* Izpeljanke */
+  --bbg-gold-30: color-mix(in srgb, var(--bbg-gold) 30%, transparent);
+  --bbg-border-dark: color-mix(in srgb, var(--bbg-gold) 22%, var(--bbg-black));
+}
+
+/* Znak (bbg-znak.svg uporablja fill="currentColor") */
+.bbg-znak         { color: var(--bbg-ink); }
+.bbg-znak--gold   { color: var(--bbg-gold); }
+.bbg-znak--white  { color: #ffffff; }
+
+/* Temna sekcija — privzeti kontekst znamke */
+.bbg-dark {
+  background: var(--bbg-black);
+  color: var(--bbg-paper);
+}
+.bbg-dark a { color: var(--bbg-gold-light); }

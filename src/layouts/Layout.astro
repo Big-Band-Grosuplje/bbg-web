@@ -1,0 +1,51 @@
+---
+import '../styles/brand.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Big Band Grosuplje',
+  description = 'Big Band Grosuplje — klasična big band zasedba, ki deluje od leta 1997/98. Koncerti, tematski programi in izobraževalne delavnice.',
+} = Astro.props;
+
+const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-grosuplje.com');
+---
+
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:site_name" content="Big Band Grosuplje" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="sl_SI" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--bbg-black);
+    color: var(--bbg-paper);
+  }
+</style>
