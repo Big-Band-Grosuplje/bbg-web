@@ -5,15 +5,22 @@
   "koncerti": [
     {
       "id": "grosuplje-v-jeseni-2026",
-      "naziv": "Grosuplje v jeseni",
-      "opis": "Tradicionalni jesenski koncert Big Banda Grosuplje z gostujočimi pevskimi zbori.",
+      "naziv": "Koncert pod zvezdami — Grosuplje v jeseni",
+      "opis": "Tradicionalni jesenski koncert Big Banda Grosuplje z gostujočimi pevskimi zbori. Otvoritveni večer 14. festivala Grosuplje v jeseni; ob slabem vremenu prestavitev na nadomestno lokacijo.",
       "gostje": [
         { "naziv": "Rok Ferengja", "tip": "Person" },
         { "naziv": "pevski zbori", "tip": null }
       ],
-      "datumIso": null,
-      "datumOpis": "jesen 2026",
-      "lokacija": null,
+      "datumIso": "2026-09-18",
+      "ura": "19:00",
+      "datumOpis": "september 2026",
+      "lokacija": {
+        "naziv": "Grosuplje (prireditev na prostem)",
+        "ulica": null,
+        "postna": "1290",
+        "kraj": "Grosuplje",
+        "drzava": "SI"
+      },
       "vstopniceUrl": null
     },
     {
@@ -23,9 +30,16 @@
       "gostje": [
         { "naziv": "Slon in sadež", "tip": "MusicGroup" }
       ],
-      "datumIso": null,
-      "datumOpis": "datum še ni potrjen",
-      "lokacija": null,
+      "datumIso": "2026-12-13",
+      "ura": null,
+      "datumOpis": "december 2026",
+      "lokacija": {
+        "naziv": "Kulturni dom Grosuplje",
+        "ulica": "Adamičeva cesta 16",
+        "postna": "1290",
+        "kraj": "Grosuplje",
+        "drzava": "SI"
+      },
       "vstopniceUrl": null
     }
   ]

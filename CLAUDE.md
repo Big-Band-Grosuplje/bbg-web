@@ -16,6 +16,7 @@ Ključno:
 - Tokeni v `src/styles/brand.css`: zlata #C9A227 (svetla #D4AF37), topla črna #181512, ink #111111, paper #FAF7F0
 - Znak: `src/assets/brand/bbg-znak.svg` (currentColor) + statične variante; favicon monogram "B"
 - Slog: moderno, minimalistično, črno-zlato; izstopajoči featurji: avdio/video hero, interaktivna postavitev orkestra
+- Ton besedil (napovedniki, novice): duhovito in samoironično, a informativno — glej arhivske napovednike (npr. december 2025). Kolofon, uradni in poslovni deli strani ostanejo nevtralni.
 
 ## Tehnična pravila
 - **Repo je JAVEN — nikoli ne commitaj bbg-osnova.md, pogodb, financ ali osebnih podatkov.**

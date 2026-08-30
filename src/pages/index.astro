@@ -19,6 +19,7 @@ type Koncert = {
   opis: string;
   gostje: Gost[];
   datumIso: string | null;
+  ura: string | null;
   datumOpis: string;
   lokacija: Lokacija;
   vstopniceUrl: string | null;
@@ -26,16 +27,18 @@ type Koncert = {
 
 const koncerti = koncertiData.koncerti as Koncert[];
 
-/* Datum v sl-SI zapisu: polni datum kot d. M. yyyy, sam mesec kot "oktober 2026". */
-function formatDatum(datumIso: string | null): string | null {
+/* Datum v sl-SI zapisu: polni datum kot d. M. yyyy, sam mesec kot "oktober 2026".
+   Ob znani uri se doda "ob 19.00" (slovenski zapis ure s piko). */
+function formatDatum(datumIso: string | null, ura: string | null): string | null {
   if (!datumIso) return null;
   if (/^\d{4}-\d{2}-\d{2}$/.test(datumIso)) {
-    return new Intl.DateTimeFormat('sl-SI', {
+    const datum = new Intl.DateTimeFormat('sl-SI', {
       day: 'numeric',
       month: 'numeric',
       year: 'numeric',
       timeZone: 'UTC',
     }).format(new Date(datumIso + 'T00:00:00Z'));
+    return ura ? `${datum} ob ${ura.replace(':', '.')}` : datum;
   }
   if (/^\d{4}-\d{2}$/.test(datumIso)) {
     return new Intl.DateTimeFormat('sl-SI', {
@@ -63,6 +66,26 @@ function jePrihajajoc(datumIso: string | null): boolean {
   return true;
 }
 
+/* Časovni odmik za Europe/Ljubljana ob danem trenutku — septembra CEST (+02:00),
+   decembra CET (+01:00). Odmika ne zapisujemo v podatke, ker se z datumom spreminja. */
+function odmikLjubljana(datumIso: string, ura: string): string {
+  const priblizek = new Date(`${datumIso}T${ura}:00Z`);
+  const zapis = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Ljubljana',
+    timeZoneName: 'longOffset',
+  })
+    .formatToParts(priblizek)
+    .find((del) => del.type === 'timeZoneName')?.value;
+  const odmik = (zapis ?? '').replace('GMT', '');
+  return odmik === '' ? 'Z' : odmik;
+}
+
+/* startDate po ISO 8601: z uro vključno s časovnim odmikom, brez ure samo datum. */
+function startDate(datumIso: string, ura: string | null): string {
+  if (!ura || !/^\d{4}-\d{2}-\d{2}$/.test(datumIso)) return datumIso;
+  return `${datumIso}T${ura}:00${odmikLjubljana(datumIso, ura)}`;
+}
+
 /* JSON-LD nastane samo, če sta znana datum in lokacija — nepopoln MusicEvent
    je za iskalnike slabši od nobenega. */
 function musicEvent(k: Koncert) {
@@ -78,7 +101,7 @@ function musicEvent(k: Koncert) {
     '@type': 'MusicEvent',
     name: k.naziv,
     description: k.opis,
-    startDate: k.datumIso,
+    startDate: startDate(k.datumIso, k.ura),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     performer: izvajalci,
@@ -113,7 +136,7 @@ const prihajajoci = koncerti
   .filter((k) => jePrihajajoc(k.datumIso))
   .map((k) => ({
     ...k,
-    datumPrikaz: formatDatum(k.datumIso) ?? k.datumOpis,
+    datumPrikaz: formatDatum(k.datumIso, k.ura) ?? k.datumOpis,
     jsonLd: musicEvent(k),
   }));
 ---
