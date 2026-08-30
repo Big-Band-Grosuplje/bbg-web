@@ -1,0 +1,32 @@
+{
+  "posodobljeno": "2026-08-30",
+  "vir": "docs/kronika.md — sekcija 2026",
+  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Delavnica aranziranja z Lojzetom Krajncanom (oktober 2026) ni koncert - sodi v loceno sekcijo Delavnice z EducationEvent.",
+  "koncerti": [
+    {
+      "id": "grosuplje-v-jeseni-2026",
+      "naziv": "Grosuplje v jeseni",
+      "opis": "Tradicionalni jesenski koncert Big Banda Grosuplje z gostujočimi pevskimi zbori.",
+      "gostje": [
+        { "naziv": "Rok Ferengja", "tip": "Person" },
+        { "naziv": "pevski zbori", "tip": null }
+      ],
+      "datumIso": null,
+      "datumOpis": "jesen 2026",
+      "lokacija": null,
+      "vstopniceUrl": null
+    },
+    {
+      "id": "bbg-x-slon-in-sadez-2026",
+      "naziv": "BBG x Slon in sadež",
+      "opis": "Skupni projekt Big Banda Grosuplje in skupine Slon in sadež.",
+      "gostje": [
+        { "naziv": "Slon in sadež", "tip": "MusicGroup" }
+      ],
+      "datumIso": null,
+      "datumOpis": "datum še ni potrjen",
+      "lokacija": null,
+      "vstopniceUrl": null
+    }
+  ]
+}

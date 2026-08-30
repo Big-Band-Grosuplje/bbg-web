@@ -1,6 +1,121 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
+import koncertiData from '../data/koncerti.json';
+
+const SITE = 'https://bigband-grosuplje.com';
+
+type Gost = { naziv: string; tip: string | null };
+type Lokacija = {
+  naziv: string;
+  ulica?: string | null;
+  postna?: string | null;
+  kraj: string;
+  drzava?: string | null;
+} | null;
+type Koncert = {
+  id: string;
+  naziv: string;
+  opis: string;
+  gostje: Gost[];
+  datumIso: string | null;
+  datumOpis: string;
+  lokacija: Lokacija;
+  vstopniceUrl: string | null;
+};
+
+const koncerti = koncertiData.koncerti as Koncert[];
+
+/* Datum v sl-SI zapisu: polni datum kot d. M. yyyy, sam mesec kot "oktober 2026". */
+function formatDatum(datumIso: string | null): string | null {
+  if (!datumIso) return null;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(datumIso)) {
+    return new Intl.DateTimeFormat('sl-SI', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      timeZone: 'UTC',
+    }).format(new Date(datumIso + 'T00:00:00Z'));
+  }
+  if (/^\d{4}-\d{2}$/.test(datumIso)) {
+    return new Intl.DateTimeFormat('sl-SI', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    }).format(new Date(datumIso + '-01T00:00:00Z'));
+  }
+  return null;
+}
+
+/* Prihajajoč = brez znanega datuma (napovedan, a še ne uvrščen) ali datum v prihodnosti.
+   Filtriranje se izvede ob buildu — po preteku koncerta je potrebna nova objava. */
+function jePrihajajoc(datumIso: string | null): boolean {
+  if (!datumIso) return true;
+  const danes = new Date();
+  danes.setUTCHours(0, 0, 0, 0);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(datumIso)) {
+    return new Date(datumIso + 'T00:00:00Z') >= danes;
+  }
+  if (/^\d{4}-\d{2}$/.test(datumIso)) {
+    const [leto, mesec] = datumIso.split('-').map(Number);
+    return new Date(Date.UTC(leto, mesec, 0)) >= danes;
+  }
+  return true;
+}
+
+/* JSON-LD nastane samo, če sta znana datum in lokacija — nepopoln MusicEvent
+   je za iskalnike slabši od nobenega. */
+function musicEvent(k: Koncert) {
+  if (!k.datumIso || !k.lokacija) return null;
+  const izvajalci: Record<string, string>[] = [
+    { '@type': 'MusicGroup', name: 'Big Band Grosuplje', url: SITE },
+  ];
+  for (const gost of k.gostje) {
+    if (gost.tip) izvajalci.push({ '@type': gost.tip, name: gost.naziv });
+  }
+  const dogodek: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicEvent',
+    name: k.naziv,
+    description: k.opis,
+    startDate: k.datumIso,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    performer: izvajalci,
+    organizer: {
+      '@type': 'Organization',
+      name: 'Kulturno društvo Big Band Grosuplje',
+      url: SITE,
+    },
+    location: {
+      '@type': 'Place',
+      name: k.lokacija.naziv,
+      address: {
+        '@type': 'PostalAddress',
+        ...(k.lokacija.ulica ? { streetAddress: k.lokacija.ulica } : {}),
+        ...(k.lokacija.postna ? { postalCode: k.lokacija.postna } : {}),
+        addressLocality: k.lokacija.kraj,
+        addressCountry: k.lokacija.drzava ?? 'SI',
+      },
+    },
+  };
+  if (k.vstopniceUrl) {
+    dogodek.offers = {
+      '@type': 'Offer',
+      url: k.vstopniceUrl,
+      availability: 'https://schema.org/InStock',
+    };
+  }
+  return dogodek;
+}
+
+const prihajajoci = koncerti
+  .filter((k) => jePrihajajoc(k.datumIso))
+  .map((k) => ({
+    ...k,
+    datumPrikaz: formatDatum(k.datumIso) ?? k.datumOpis,
+    jsonLd: musicEvent(k),
+  }));
 ---
 
 <Layout>
@@ -10,6 +125,46 @@ import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
     <p class="podnaslov">Prvi grosupeljški big band — od leta 1997/98.</p>
     <p class="kontakt"><a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a></p>
   </main>
+
+  <section class="koncerti" id="koncerti" aria-labelledby="koncerti-naslov">
+    <p class="nadnaslov nadnaslov--svetlo">prihajajoče</p>
+    <h2 id="koncerti-naslov">Koncerti</h2>
+
+    {prihajajoci.length === 0 ? (
+      <p class="prazno">
+        Trenutno ni napovedanih koncertov. Novice objavljamo na
+        <a href="https://www.facebook.com/BigBandGrosuplje">Facebooku</a> in
+        <a href="https://www.instagram.com/bigbandgrosuplje/">Instagramu</a>.
+      </p>
+    ) : (
+      <ul class="kartice">
+        {prihajajoci.map((k) => (
+          <li class="kartica">
+            <p class="kartica__datum">{k.datumPrikaz}</p>
+            <h3 class="kartica__naziv">{k.naziv}</h3>
+            <p class="kartica__opis">{k.opis}</p>
+            {k.gostje.length > 0 && (
+              <p class="kartica__gostje">
+                <span class="oznaka">Gostje</span>
+                {k.gostje.map((g) => g.naziv).join(', ')}
+              </p>
+            )}
+            <p class="kartica__lokacija">
+              {k.lokacija
+                ? k.lokacija.naziv + ', ' + k.lokacija.kraj
+                : 'Prizorišče še ni potrjeno'}
+            </p>
+            {k.vstopniceUrl && (
+              <p><a class="kartica__cta" href={k.vstopniceUrl}>Vstopnice</a></p>
+            )}
+            {k.jsonLd && (
+              <script type="application/ld+json" set:html={JSON.stringify(k.jsonLd)} />
+            )}
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
 
   <footer class="bbg-dark noga">
     <p>
@@ -52,5 +207,93 @@ import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
     font-size: 0.85rem;
     line-height: 1.7;
     opacity: 0.9;
+  }
+
+  /* --- Koncerti: svetla sekcija med temnim hero in nogo --- */
+  .koncerti {
+    background: var(--bbg-paper);
+    color: var(--bbg-ink);
+    padding: clamp(3rem, 8vw, 5.5rem) 1.25rem;
+  }
+  .koncerti > * {
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+  .nadnaslov--svetlo { color: color-mix(in srgb, var(--bbg-gold) 88%, var(--bbg-ink)); }
+  .koncerti h2 {
+    margin: 0.5rem auto 2.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .prazno { line-height: 1.7; }
+  .prazno a { color: color-mix(in srgb, var(--bbg-gold) 70%, var(--bbg-ink)); }
+
+  .kartice {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  }
+  .kartica {
+    border: 1px solid var(--bbg-gold-30);
+    border-top: 3px solid var(--bbg-gold);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: #ffffff;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .kartica:hover {
+    border-color: var(--bbg-gold);
+    transform: translateY(-2px);
+  }
+  .kartica__datum {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--bbg-gold) 80%, var(--bbg-ink));
+  }
+  .kartica__naziv {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .kartica__opis,
+  .kartica__gostje,
+  .kartica__lokacija {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .kartica__gostje,
+  .kartica__lokacija { opacity: 0.75; }
+  .oznaka {
+    display: inline-block;
+    margin-right: 0.4rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .kartica__lokacija { margin-top: auto; padding-top: 0.4rem; }
+  .kartica__cta {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    background: var(--bbg-black);
+    color: var(--bbg-paper);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .kartica__cta:hover { background: var(--bbg-gold); color: var(--bbg-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kartica { transition: none; }
+    .kartica:hover { transform: none; }
   }
 </style>
