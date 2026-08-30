@@ -23,7 +23,7 @@ Lara Grbić, Maruša Kos, Manca Fekonja, Peter Savizon (UK)
 ## Instrumentalni solisti
 - klarinet: Tomaž Zevnik
 - bobni, tolkala: Gašper Bertoncelj, Ratko Divjak, Aljoša Jerič, Aleš Kajtna,
-  Gašper Peršl, Tim Froncek (ZDA), Tomi Purič, Janez Zrnec*
+  Gašper Peršl, Tim Froncek (ZDA), Tomi Purič
 - trobenta, krilni rog: Marko Djordević (Srbija), Davor Križić (Hrvaška),
   Igor Matkovič, Matic Bolhan, Matjaž Kajzer, Matej Rihter, Marko Voljč,
   Rick Stitzel (ZDA), John Thomas (ZDA), Franc Korbar
@@ -36,8 +36,6 @@ Lara Grbić, Maruša Kos, Manca Fekonja, Peter Savizon (UK)
 - kontrabas, bas kitara: Robert Jukič, Nikola Matošič, Ivan Jakob, Tom Knific (ZDA)
 - drugo: Cita Galič (citre), Karin Garb (piccolo), Jurka Pavlovčič (flavta),
   Alenka Maier Popov (violina), Dean T. Zavašnik (harmonika), Boštjan Dimnik (klarinet)
-
-*Opomba: preveri, ali je Janez Zrnec gost ali član — člane iz javnih seznamov izpustimo.
 
 ## Pedagogi (seminarji in delavnice)
 - improvizacija in orkestrska igra: Rick Stitzel (ZDA)

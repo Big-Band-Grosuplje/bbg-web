@@ -3,3 +3,7 @@ dist/
 .astro/
 .vercel/
 .DS_Store
+
+# Interni dokumenti — repo je javen
+docs/bbg-osnova.md
+docs/interno*

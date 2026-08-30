@@ -4,6 +4,7 @@ Astro 5 (static) + Vercel. Jezik strani in komunikacije: slovenščina (sl-SI).
 
 ## Vir resnice
 Uradni podatki društva so v `docs/bbg-osnova.md` — VEDNO uporabljaj te.
+Datoteka je lokalna in NI v gitu (`.gitignore`); v svežem klonu je ni.
 Ključno:
 - Polni naziv: **Kulturno društvo Big Band Grosuplje** (nikoli "Kulturno društvo Grosuplje")
 - Društvo **NI zavezanec za DDV** — na strani in dokumentih vedno "Davčna številka: 12579076 (nismo zavezanci za DDV)", nikoli "ID za DDV"
@@ -17,6 +18,7 @@ Ključno:
 - Slog: moderno, minimalistično, črno-zlato; izstopajoči featurji: avdio/video hero, interaktivna postavitev orkestra
 
 ## Tehnična pravila
+- **Repo je JAVEN — nikoli ne commitaj bbg-osnova.md, pogodb, financ ali osebnih podatkov.**
 - SEO in AI-najdljivost: schema.org (MusicGroup, MusicEvent, EducationEvent), Open Graph (og:locale sl_SI), sitemap, llms.txt
 - lang="sl", sl-SI formati datumov (d. M. yyyy)
 - Astro.site = https://bigband-grosuplje.com (astro.config.mjs)
@@ -27,7 +29,7 @@ Ključno:
 - `src/layouts/Layout.astro` — head, favicon, OG
 - `src/pages/` — strani; `src/styles/brand.css` — tokeni
 - `src/data/` — strukturirani podatki (koncerti ipd.)
-- `docs/` — bbg-osnova.md, arhivsko gradivo (ne gre v build)
+- `docs/` — kronika.md, sodelovanja.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 
 ## Commit sporočila
