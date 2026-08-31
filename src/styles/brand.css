@@ -19,7 +19,12 @@
   /* --- Paleta znamke (neodvisna od teme) --- */
   --bbg-gold: #C9A227;         /* primarna zlata — poudarki na temnem */
   --bbg-gold-light: #E8C95C;   /* naslovi in povezave na temnem */
-  --bbg-gold-dark: #8A6E14;    /* naslovi in povezave na papirju (kontrast!) */
+  /* Naslovi in obrobe na papirju. Prej #8A6E14, kar je doseglo 4,40 :1 na
+     papirju in 4,06 :1 na podlagi panela — pod AA za normalno besedilo, ki
+     ta token uporablja (13,5 px obvestila obrazca, 17 px letnice časovnice,
+     23 px h3 v panelih). #806613 doseže 4,96 :1 na papirju #FAF3E3 in
+     4,58 :1 na podlagi panela #F1EADB. Enaka vrednost velja v smeri A. */
+  --bbg-gold-dark: #806613;
   --bbg-gold-darker: #6B5410;  /* hover na papirju */
   /* Rdeč akcent — podlaga badge/CTA in trde sence gumbov.
      Izmerjeno po WCAG 2.1 proti besedilu --bbg-paper #FAF3E3: stari
@@ -111,8 +116,8 @@
 /* ==========================================================
    SVETLA tema
    Zlata #C9A227 je na papirju prešibka za besedilo, zato gredo
-   naslovi na --bbg-gold-dark #8A6E14 (velik tekst), povezave pa na
-   še temnejši #7D6412, ker morajo doseči AA za normalno besedilo.
+   naslovi na --bbg-gold-dark #806613 (4,96 :1), povezave pa na
+   še temnejši #7D6412 (5,13 :1).
    Kartice koncertov so inverzne: temna podlaga, svetlo besedilo.
    Gumbi, badge in akcent ostanejo nespremenjeni.
    ========================================================== */
@@ -121,8 +126,8 @@
   --bbg-besedilo: #191512;
   --bbg-naslov: var(--bbg-gold-dark);
   --bbg-nadnaslov: var(--bbg-gold-dark);
-  /* #8A6E14 doseže na papirju 4,40 :1 — dovolj za velike naslove,
-     premalo za besedilo v povezavah, zato te dobijo #7D6412 (5,13 :1). */
+  /* Povezave so stopnjo temnejše od naslovov: #7D6412 doseže 5,13 :1 na
+     papirju in 4,73 :1 na podlagi panela. */
   --bbg-povezava: #7D6412;
   --bbg-povezava-hover: #503C0A;
   --bbg-obroba: color-mix(in srgb, var(--bbg-ink) 18%, var(--bbg-paper));
@@ -303,13 +308,16 @@
   transform: rotate(-0.6deg);
   transform-origin: left center;
 }
+/* Oznaka pred sekundarnim podatkom (Gostje, Solisti).
+   Motnost 0,7 se je množila z motnostjo starša (0,75–0,8) in oznako pri
+   11 px spustila na 3,62–4,04 :1. Motnost je odpadla, velikost gre na
+   12 px; oznako od sosednjega besedila ločita velikost in razmik črk. */
 .oznaka {
   display: inline-block;
   margin-right: 0.4rem;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.7;
 }
 
 /* Vrnitev na naslovnico — brez okvirja */
@@ -535,11 +543,6 @@
   letter-spacing: 0.01em;
 }
 
-/* --- Drobno besedilo: motnost zamenjamo z barvo ---
-   Motnost stisne tudi povezave v istem odstavku; pri 0,65 pade zlata
-   povezava v nogi na 2,72 :1. Enakovredna umiritev prek color-mix pusti
-   povezavam polno moč. */
-:root[data-skin='a'] .oznaka { opacity: 1; }
 
 /* --- Gumbi: pilula brez trde sence --- */
 :root[data-skin='a'] .bbg-gumb {

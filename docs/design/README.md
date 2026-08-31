@@ -86,29 +86,35 @@ prosojnosti in motnosti, prag 4,5 :1 oz. 3 :1 za velik tekst. 5 strani ×
 
 | Kombinacija | Preverjenih | Napak |
 |---|---|---|
-| C temna | 437 | 2 |
-| C svetla | 437 | 100 |
+| **C temna** | 437 | **0** |
+| **C svetla** | 437 | **0** |
 | **A temna** | 445 | **0** |
 | **A svetla** | 445 | **0** |
 
-### Popravljeno
+### ✅ Popravljeno
 
 | Napaka | Prej | Zdaj |
 |---|---|---|
 | Gumbi iz `<a>` (`Kdaj igramo?`, `Vstopnice`) — `a:link` (0,1,1) je premagal `.bbg-gumb` (0,1,0), zato zlato besedilo na zlati podlagi | 1,49 :1 (C temna), 2,34 :1 (C svetla), 1,45 :1 (A) | 7,50 :1 / 7,64 :1 |
 | CTA `Najemi band` v svetli temi — `.nav a:link` (0,3,1) je premagal `.nav__cta:link` (0,2,1) | 3,35 :1 | 4,90 :1 |
+| `--bbg-gold-dark` kot `--bbg-naslov` in `--bbg-nadnaslov` v svetli temi — 68 pojavitev (nadnaslovi, letnice časovnice, naslovi v nogi, `h3` v panelih) | 4,40 :1 na papirju, 4,06 :1 na panelu | **#806613**: 4,96 :1 na papirju, 4,58 :1 na panelu |
+| Povezave v nogi znotraj `.noga__drobno` (`opacity: 0.65`) in `.novice__soglasje` (`0.8`) | 2,64 :1 in 3,47 :1 | motnost zamenjana z izračunano barvo, povezave niso več zatemnjene |
+| `.oznaka` (`Gostje`, `Solisti`) pri 11 px in `opacity: 0.7`, ki se je množila z motnostjo starša | 4,04 :1 temna, 3,62 :1 svetla | 12 px brez motnosti |
+| `.uvod` na `/zasebnost` z `opacity: 0.95` nad temno zlato | 4,50 :1 C, 4,21 :1 A | motnost odstranjena: 4,96 :1 / 4,62 :1 |
 
-Obe napaki sta bili v smeri C že prej. Gumbi iz `<button>` so bili ves čas v redu.
+Prve tri napake so bile v smeri C že pred uvedbo predoglega. Gumbi iz
+`<button>` so bili ves čas v redu.
 
-### ☐ Odprto v smeri C — ni popravljeno
+**Zakaj mešanje z barvo namesto motnosti:** motnost stisne cel poddrevesni
+izris, torej tudi povezave v istem odstavku. `color-mix` z odstotkom, enakim
+prejšnji motnosti, da natanko isto barvo odstavka (preverjeno: `rgb(170, 164,
+153)` prej in potem), povezave pa obdržijo polno barvo.
 
-Predlagani popravki spreminjajo potrjeno smer C, zato čakajo na odločitev.
-
-| Prioriteta | Napaka | Izmerjeno | Predlog |
-|---|---|---|---|
-| 🟠 | `--bbg-gold-dark #8A6E14` kot `--bbg-naslov` v svetli temi — 68 pojavitev (nadnaslovi, letnice časovnice, naslovi v nogi, `h3` v panelih) | 4,40 :1, mestoma 4,06 :1 | `#806613` (4,77 :1); ena vrstica v `brand.css` |
-| 🟠 | Povezave v nogi znotraj `.noga__drobno` (`opacity: 0.65`) in `.novice__soglasje` (`0.8`) v svetli temi | 2,64 :1 in 3,47 :1 | motnost zamenjati z barvo, kot je narejeno pri A |
-| 🟡 | `.oznaka` (`Gostje`, `Solisti`) pri 11 px in `opacity: 0.7` | 4,04 :1 temna, 3,62 :1 svetla | motnost na 1 ali večja pisava |
+**Zakaj #806613 in ne bolj potemnjeno:** doseže AA na obeh svetlih podlagah
+smeri C. Na podlagi panela smeri A (`#EAE2D0`) doseže 4,26 :1, kar zadošča,
+ker so tam naslovi Playfair 700 pri 22–23 px in zanje velja meja 3 :1. Če bi
+kdaj potrebovali AA za normalno besedilo tudi na A-jevem panelu, je najsvetlejša
+ustrezna vrednost `#7A6212` (4,55 :1 na vseh štirih podlagah).
 
 ## Zgodovina revizij
 
@@ -116,3 +122,4 @@ Predlagani popravki spreminjajo potrjeno smer C, zato čakajo na odločitev.
 |---|---|
 | 31. 8. 2026 | Prva različica; dodan predogled `?skin=a` |
 | 31. 8. 2026 | Predogled nadgrajen v zvesto izvedbo: fullbleed hero, svetla tema, datumski blok, obrobe polj; kontrastna revizija štirih kombinacij |
+| 31. 8. 2026 | Popravljene odprte kontrastne napake svetle teme smeri C; vse štiri kombinacije brez napak |

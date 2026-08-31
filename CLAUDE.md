@@ -24,7 +24,8 @@ Ključno:
 - **Gumbi**: trda senca `box-shadow: 4px 4px 0 var(--bbg-accent)`
 - Ton besedil (napovedniki, novice): duhovito in samoironično, a informativno — glej `docs/ton-vzorci.md`. Kolofon, uradni in poslovni deli strani ostanejo nevtralni.
 - **Predogled smeri A** je dosegljiv prek `?skin=a` (izbira v `localStorage`, ključ `bbg-skin`); javnega gumba ni. Tokeni so v `brand.css` pod `:root[data-skin='a']` in `:root[data-skin='a'][data-theme='light']`, popravki, ki morajo premagati scoped pravila, pa v komponentah prek `:global(:root[data-skin='a'])`. **Smer C je privzeta in mora ob vsaki spremembi predoglega ostati nespremenjena** — glej `docs/design/README.md`
-- Obe smeri imata temno in svetlo temo; štiri kombinacije so kontrastno izmerjene. Odprte ugotovitve za svetlo temo smeri C so v `docs/design/README.md`, razdelek o kontrastni reviziji — pred spreminjanjem zlatih odtenkov ga preberi
+- Obe smeri imata temno in svetlo temo; vse štiri kombinacije so kontrastno izmerjene in **brez napak po WCAG 2.1 AA**. Meritve in razlogi za izbrane odtenke so v `docs/design/README.md` — pred spreminjanjem zlatih odtenkov ga preberi
+- **Sekundarnega besedila ne umirjaj z `opacity`.** Motnost stisne cel poddrevesni izris, torej tudi povezave v istem odstavku, in se množi z motnostjo starša. Uporabi `color: color-mix(in srgb, var(--bbg-besedilo) N%, var(--bbg-bg))` — pri enakem odstotku je barva odstavka identična, povezave pa obdržijo polno moč
 - Pisavi: C uporablja Archivo Black/Archivo, predogled A pa Playfair Display/Source Sans 3. Menjava gre samo prek `--font-display` in `--font-body`; `--bbg-font-naslov`/`--bbg-font-besedilo` sta samo imeni, ki kažeta nanju. Pisav ne navajaj neposredno v komponentah
 
 ## Tehnična pravila

@@ -186,16 +186,15 @@ const POSODOBLJENO = '31. 8. 2026';
     font-size: 21px;
     color: var(--bbg-naslov);
   }
+  /* Brez motnosti: --bbg-naslov je v svetlih temah temna zlata tik nad AA
+     (4,96 :1 v C, 4,62 :1 v A), motnost 0,95 pa jo je spustila na 4,50
+     oz. 4,21 :1. Razlika v videzu je neopazna. */
   .uvod {
     margin: 0 0 8px;
     font-size: 18px;
     font-style: italic;
     color: var(--bbg-naslov);
-    opacity: 0.95;
   }
-  /* V svetli temi smeri A je --bbg-naslov temna zlata pri 4,62 :1;
-     motnost 0,95 jo spusti na 4,21 :1, kar je pod AA za 18 px. */
-  :global(:root[data-skin='a']) .uvod { opacity: 1; }
   p { margin: 0 0 14px; }
   ul { margin: 0 0 14px; padding-left: 1.3rem; }
   li { margin-bottom: 8px; }
