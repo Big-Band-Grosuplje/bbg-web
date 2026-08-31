@@ -72,4 +72,17 @@ const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-gro
     letter-spacing: 0.005em;
   }
   strong, b { font-weight: 800; }
+
+  /* Osnova za povezave: stran je temna, zato privzeta modra/vijolična
+     brskalnika ni berljiva. visited je enak kot normal. */
+  a,
+  a:link,
+  a:visited,
+  a:active {
+    color: var(--bbg-gold-light);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  a:hover,
+  a:focus-visible { color: var(--bbg-gold); }
 </style>
