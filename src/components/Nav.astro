@@ -236,6 +236,27 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
   .nav__burger:hover .nav__crte::before,
   .nav__burger:hover .nav__crte::after { background: var(--bbg-povezava); }
 
+  /* --- Predogled smeri A ---
+     Pravila so tu in ne v brand.css, ker morajo premagati scoped pravila
+     te komponente; :global() poskrbi, da Astro selektorja :root ne omeji. */
+  :global(:root[data-skin='a']) .nav {
+    border-bottom: 1px solid color-mix(in srgb, var(--bbg-gold) 25%, transparent);
+    backdrop-filter: blur(8px);
+  }
+  :global(:root[data-skin='a']) .nav a { letter-spacing: 0.06em; }
+  :global(:root[data-skin='a']) .nav__znak img { height: 44px; }
+  /* Smer A svetle teme nima, zato preklopnika ni. Ker je nosil
+     margin-left: auto, mora CTA odmik prevzeti nase. */
+  :global(:root[data-skin='a']) .nav__tema { display: none; }
+  :global(:root[data-skin='a']) .nav__meni .nav__cta { margin-left: auto; }
+  /* Zlata podlaga zahteva temno besedilo — papirnato bi padlo na 1,9 :1. */
+  :global(:root[data-skin='a']) .nav__cta,
+  :global(:root[data-skin='a']) .nav__cta:link,
+  :global(:root[data-skin='a']) .nav__cta:visited {
+    color: var(--bbg-ink);
+    font-weight: 600;
+  }
+
   /* --- Ozek zaslon --- */
   @media (max-width: 820px) {
     .nav__vrstica { gap: 12px; }
@@ -277,5 +298,9 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     }
     /* Zaprt meni skrijemo samo, kadar ga JS lahko spet odpre. */
     :global(html[data-js='da']) .nav[data-meni='zaprt'] .nav__meni { display: none; }
+
+    /* Pri skin=a preklopnika teme ni, zato odmik prevzame burger. */
+    :global(:root[data-skin='a']) .nav__burger { margin-left: auto; }
+    :global(:root[data-skin='a']) .nav__meni .nav__cta { margin-left: 0; }
   }
 </style>

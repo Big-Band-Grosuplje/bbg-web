@@ -36,9 +36,14 @@
   --bbg-ink: #191512;          /* temno besedilo in temni bloki */
   --bbg-paper: #FAF3E3;        /* papirnata podlaga */
 
-  /* --- Tipografija --- */
-  --bbg-font-naslov: 'Archivo Black', 'Archivo', system-ui, sans-serif;
-  --bbg-font-besedilo: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* --- Tipografija ---
+     --font-display in --font-body sta edini točki, kjer se pisava zamenja
+     (glej [data-skin] spodaj). --bbg-font-* ostajata kot imeni, ki ju
+     uporablja vsa obstoječa koda — ne zamenjuj ju, samo kažeta naprej. */
+  --font-display: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bbg-font-naslov: var(--font-display);
+  --bbg-font-besedilo: var(--font-body);
 
   /* --- Postavitev --- */
   --bbg-sirina: 1100px;
@@ -324,4 +329,192 @@
   left: -9999px;
   opacity: 0;
   pointer-events: none;
+}
+
+/* ============================================================
+   PREDOGLED SMERI A  ([data-skin="a"] na <html>)
+   ============================================================
+   Namen: da se med smerema A in C primerja na živi strani, ne na
+   mockupu. Ni končna izvedba A — polna A-jeva fullbleed postavitev
+   heroja je strukturna in je predogled ne dela. Glej docs/design/README.md.
+
+   Aktivacija: samo prek ?skin=a (izbira se shrani v localStorage pod
+   bbg-skin). Javnega gumba za preklop ni; iz predoglega se vrneš prek
+   plavajoče značke na dnu, ki nastavi skin=c.
+
+   Vse spodaj je pod :root[data-skin='a'], da specifičnost zanesljivo
+   premaga :root[data-theme='light'] (enaka specifičnost, a ta blok je
+   pozneje) in osnovna pravila v tej datoteki.
+
+   Privzeti skin C ostane NEDOTAKNJEN — brez atributa se ne uporabi nič
+   od tega, zato je izris pri skin=c enak kot pred uvedbo predogleda.
+   ============================================================ */
+
+:root[data-skin='a'] {
+  /* --- Paleta (vrednosti iz docs/design/smer-a.html) --- */
+  --bbg-gold: #C9A227;
+  --bbg-gold-light: #E3C765;
+  --bbg-paper: #F3EBD8;
+  --bbg-black: #181512;
+  --bbg-ink: #171310;
+
+  /* Rdečega akcenta smer A nima — vlogo prevzame zlata. Ker s tem odpade
+     kontrast med podlago in trdo senco, sence ugasnemo. */
+  --bbg-accent: var(--bbg-gold);
+  --bbg-accent-light: var(--bbg-gold-light);
+  --bbg-senca: none;
+  --bbg-senca-mala: none;
+  --bbg-senca-kartica: none;
+  --bbg-senca-foto: none;
+
+  /* --- Geometrija: gumbi v pilulo, kartice mehkeje --- */
+  --bbg-r-badge: 999px;
+  --bbg-r-gumb: 999px;
+  --bbg-r-s: 10px;
+  --bbg-r-m: 12px;
+  --bbg-r-l: 14px;
+  --bbg-sirina: 1060px;
+
+  /* --- Pisavi (naložita se samo tu; pri skin=c se woff2 ne prenese) --- */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* --- Semantični tokeni. Smer A je samo temna; svetle teme nima, zato
+         inline skripta pri skin=a data-theme vedno postavi na dark. --- */
+  --bbg-bg: var(--bbg-black);
+  --bbg-besedilo: var(--bbg-paper);
+  --bbg-naslov: var(--bbg-gold-light);
+  --bbg-nadnaslov: var(--bbg-gold);
+  --bbg-povezava: var(--bbg-gold-light);
+  --bbg-povezava-hover: var(--bbg-gold);
+  --bbg-obroba: color-mix(in srgb, var(--bbg-gold) 25%, transparent);
+  /* Ostane polna zlata: ta token nosi tudi obrise fokusa, prosojna
+     različica bi jih na temni podlagi naredila nevidne. */
+  --bbg-obroba-mocna: var(--bbg-gold);
+
+  /* Kartice v A niso papirnate, ampak prosojne z zlato obrobo. Brez tega
+     bi zlata meta vrstica pristala na papirju pri 2,2 :1. */
+  --bbg-kartica-bg: color-mix(in srgb, var(--bbg-paper) 5%, transparent);
+  --bbg-kartica-besedilo: var(--bbg-paper);
+  --bbg-blok-bg: transparent;
+  --bbg-blok-besedilo: var(--bbg-gold);
+  --bbg-meta: var(--bbg-gold-light);
+  --bbg-napaka: var(--bbg-gold-light);
+
+  --bbg-panel-bg: color-mix(in srgb, var(--bbg-paper) 5%, transparent);
+  --bbg-vnos-bg: color-mix(in srgb, var(--bbg-paper) 8%, transparent);
+  --bbg-vnos-besedilo: var(--bbg-paper);
+  --bbg-nalepka-bg: var(--bbg-gold);
+  --bbg-nalepka-besedilo: var(--bbg-ink);
+
+  --bbg-noga-bg: #131009;
+  --bbg-kolofon-bg: transparent;
+  --bbg-kolofon-besedilo: var(--bbg-paper);
+  --bbg-kolofon-obroba: rgba(255, 255, 255, 0.08);
+
+  --bbg-nav-bg: color-mix(in srgb, var(--bbg-black) 88%, transparent);
+  --bbg-nav-povezava: var(--bbg-paper);
+
+  --bbg-border-dark: var(--bbg-obroba);
+}
+
+/* --- Razigranost ugasnjena ---
+   Smer A stoji na mirni tipografiji, ne na nagibih. Rotacije so v tej
+   datoteki definirane kot razredi, zato zadošča skupen reset.
+   Protirotacij v komponentah (obrazci, panel na /zgodovina) ta reset ne
+   doseže — te so razvrednotene v samih komponentah. */
+:root[data-skin='a'] .bbg-rot-znak,
+:root[data-skin='a'] .bbg-rot-znak-nav,
+:root[data-skin='a'] .bbg-rot-badge,
+:root[data-skin='a'] .bbg-rot-nalepka,
+:root[data-skin='a'] .bbg-rot-foto,
+:root[data-skin='a'] .bbg-mikro-kartica,
+:root[data-skin='a'] .bbg-mikro-levo,
+:root[data-skin='a'] .bbg-mikro-desno {
+  transform: none;
+}
+
+/* --- Teže pisav ---
+   Za A naložimo Playfair 700 (+ 500 italic) in Source Sans 3 400/600.
+   Osnovna pravila zahtevajo 400 za naslove (Archivo Black ima eno težo) in
+   500 za besedilo; brez tega popravka bi ju izbira najbližje teže sicer
+   ujela, a naslovi bi bili tanjši, kot je A mišljena. */
+:root[data-skin='a'] body {
+  font-weight: 400;
+  line-height: 1.65;
+}
+:root[data-skin='a'] h1,
+:root[data-skin='a'] h2,
+:root[data-skin='a'] h3 {
+  font-weight: 700;
+}
+
+/* Naslovi h2: Playfair, zlato svetla, brez nagiba. */
+:root[data-skin='a'] .sekcija h2 {
+  transform: none;
+  color: var(--bbg-gold-light);
+  letter-spacing: 0.01em;
+}
+
+/* --- Gumbi: pilula brez trde sence --- */
+:root[data-skin='a'] .bbg-gumb {
+  font-weight: 600;
+  box-shadow: none;
+}
+:root[data-skin='a'] .bbg-gumb:hover,
+:root[data-skin='a'] .bbg-gumb:focus-visible {
+  transform: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+:root[data-skin='a'] .bbg-gumb:active {
+  transform: none;
+  box-shadow: none;
+}
+:root[data-skin='a'] .bbg-gumb--obris {
+  border-width: 1.5px;
+  box-shadow: none;
+}
+
+/* Zlata podlaga zahteva temno besedilo — papirnato bi padlo na 1,9 :1. */
+:root[data-skin='a'] .bbg-badge {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--bbg-ink);
+}
+
+/* --- Plavajoča značka predoglega ---
+   Edina pot nazaj na C brez tipkanja URL-ja. Pri skin=c je skrita, zato
+   je ni ne na zaslonu ne v drevesu dostopnosti. */
+.predogled { display: none; }
+:root[data-skin='a'] .predogled {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 9px 18px;
+  font-family: var(--bbg-font-besedilo);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--bbg-paper);
+  background: color-mix(in srgb, #000000 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bbg-gold) 45%, transparent);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+:root[data-skin='a'] .predogled:hover {
+  border-color: var(--bbg-gold);
+}
+:root[data-skin='a'] .predogled:focus-visible {
+  outline: 2px solid var(--bbg-gold);
+  outline-offset: 2px;
+}
+.predogled__nazaj {
+  color: var(--bbg-gold-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }

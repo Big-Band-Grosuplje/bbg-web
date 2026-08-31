@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Noga from '../components/Noga.astro';
@@ -9,6 +9,8 @@ import Posnetek from '../components/Posnetek.astro';
 import GalerijaSlika from '../components/GalerijaSlika.astro';
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 import fotoHero from '../assets/foto/orkester/kotar-dirigent-energija.jpg';
+/* Hero predoglega smeri A — glej docs/design/README.md. */
+import fotoHeroA from '../assets/foto/hero/hero-kazina-zlati-napis-2026.jpg';
 import koncertiData from '../data/koncerti.json';
 import zgodovinaData from '../data/zgodovina.json';
 import { najnovejse } from '../lib/galerija';
@@ -182,6 +184,14 @@ const mejniki = zgodovinaData.mejniki as {
 }[];
 
 const web3formsVklopljen = WEB3FORMS_KEY !== '';
+
+/* Hero predoglega A je CSS ozadje, ne <img>. Razlog: skrit <img> Chrome
+   prenese tudi z loading="lazy" (display:none nima okvira, zato odložitev
+   odpade), s čimer bi privzeti skin C plačal 37 kB po nepotrebnem. Ozadje
+   v var(--hero-a) se ne zahteva, dokler pravilo ne velja — izmerjeno.
+   Cena: pri A ni srcset. Za predogled je to sprejemljivo. */
+const heroA = await getImage({ src: fotoHeroA, width: 900, format: 'webp' });
+const heroARazmerje = `${fotoHeroA.width} / ${fotoHeroA.height}`;
 ---
 
 <Layout>
@@ -206,8 +216,24 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
         </p>
       </div>
 
-      <div class="hero__foto">
-        <Image src={fotoHero} alt="Dirigent med vodenjem orkestra" width={900} loading="eager" class="bbg-rot-foto" />
+      <div
+        class="hero__foto"
+        style={`--hero-a: url('${heroA.src}'); --hero-a-razmerje: ${heroARazmerje};`}
+      >
+        <Image
+          src={fotoHero}
+          alt="Dirigent med vodenjem orkestra"
+          width={900}
+          loading="eager"
+          class="bbg-rot-foto hero__slika--c"
+        />
+        {/* Predogled A: skin se določi šele v brskalniku, zato je element
+            vedno v oznakah, sliko pa nosi CSS ozadje (glej opombo zgoraj). */}
+        <div
+          class="hero__slika--a"
+          role="img"
+          aria-label="Zlati napis Jazz kluba Kazina pred koncertom"
+        ></div>
         <span class="hero__nalepka bbg-rot-nalepka">dirigent, presenetljivo miren</span>
       </div>
     </div>
@@ -752,6 +778,45 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
 
   /* Pet stolpcev pod 900 px stisne besedilo mejnika na dve besedi na
      vrstico, zato se os obrne v navpično — enak vzorec kot na /zgodovina. */
+  /* --- Predogled smeri A ---
+     :global(), da Astro selektorja :root ne omeji na to komponento;
+     pravila so tu, ker morajo premagati scoped pravila zgoraj. */
+  /* Selektor mora vsebovati .hero__foto in img, sicer ga pravilo
+     ".hero__foto img { display: block }" zgoraj premaga po specifičnosti
+     in skrita fotografija vseeno zavzame prostor. */
+  .hero__slika--a { display: none; }
+  :global(:root[data-skin='a']) .hero__foto img.hero__slika--c { display: none; }
+  :global(:root[data-skin='a']) .hero__foto .hero__slika--a {
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--hero-a-razmerje);
+    background-image: var(--hero-a);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--bbg-gold);
+    border-radius: var(--bbg-r-l);
+  }
+  /* A stoji na mirni tipografiji — badge in nalepka odpadeta. */
+  :global(:root[data-skin='a']) .hero__badge,
+  :global(:root[data-skin='a']) .hero__nalepka { display: none; }
+  :global(:root[data-skin='a']) .hero__foto img {
+    border-width: 1px;
+    border-radius: var(--bbg-r-l);
+    box-shadow: none;
+  }
+  :global(:root[data-skin='a']) .hero__slogan {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(19px, 2.6vw, 26px);
+    color: var(--bbg-gold-light);
+    max-width: 35rem;
+  }
+  :global(:root[data-skin='a']) .panel { border-width: 1px; }
+  /* Panela pri A nista zarotirana, zato protirotacija obrazcev odpade. */
+  :global(:root[data-skin='a']) .bbg-mikro-levo .obrazec,
+  :global(:root[data-skin='a']) .bbg-mikro-desno .obrazec { transform: none; }
+
   @media (max-width: 900px) {
     .mejniki { grid-template-columns: 1fr; }
     .mejnik { padding: 0 0 0 34px; }

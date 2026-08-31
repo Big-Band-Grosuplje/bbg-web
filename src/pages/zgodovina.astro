@@ -231,6 +231,11 @@ const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
     max-width: 46rem;
   }
 
+  /* --- Predogled smeri A: brez nagibov, tanjša obroba panela --- */
+  :global(:root[data-skin='a']) .obdobje__naslov { transform: none; }
+  :global(:root[data-skin='a']) .panel__besedilo { transform: none; }
+  :global(:root[data-skin='a']) .panel { border-width: 1px; }
+
   @media (max-width: 620px) {
     .vnos { padding-left: 28px; }
   }
