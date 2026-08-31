@@ -221,8 +221,8 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
       {prihajajoci.length === 0 ? (
         <p class="prazno">
           Trenutno ni napovedanih koncertov. Novice objavljamo na
-          <a href={KANALI.facebook}>Facebooku</a> in
-          <a href={KANALI.instagram}>Instagramu</a>.
+          <a href={KANALI.facebook} target="_blank" rel="noopener noreferrer">Facebooku</a> in
+          <a href={KANALI.instagram} target="_blank" rel="noopener noreferrer">Instagramu</a>.
         </p>
       ) : (
         <ul class="kartice">
@@ -255,9 +255,15 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
                     {k.gostje.map((g) => g.naziv).join(', ')}
                   </p>
                 )}
+                {/* Prodaja vstopnic je vedno na tuji domeni — novi zavihek. */}
                 {k.vstopniceUrl && (
                   <p class="kartica__cta">
-                    <a class="bbg-gumb bbg-gumb--mali" href={k.vstopniceUrl}>Vstopnice</a>
+                    <a
+                      class="bbg-gumb bbg-gumb--mali"
+                      href={k.vstopniceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >Vstopnice</a>
                   </p>
                 )}
               </div>
@@ -295,21 +301,6 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     </div>
   </section>
 
-  <section class="sekcija" id="multimedija" aria-labelledby="mediji-naslov">
-    <div class="ovoj">
-      <p class="nadnaslov">arhiv posnetkov</p>
-      <h2 id="mediji-naslov">Multimedija</h2>
-
-      <ul class="posnetki">
-        {posnetkiIzsek.map((m) => <Posnetek medij={m} />)}
-      </ul>
-
-      <p class="vec">
-        <a class="bbg-gumb bbg-gumb--obris" href="/multimedija">Vsi posnetki →</a>
-      </p>
-    </div>
-  </section>
-
   <section class="sekcija" id="galerija" aria-labelledby="galerija-naslov">
     <div class="ovoj">
       <p class="nadnaslov">iz arhiva</p>
@@ -323,6 +314,21 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
         <a class="bbg-gumb bbg-gumb--obris" href="/galerija">Celotna galerija →</a>
       </p>
       <p class="galerija__kredit">Foto: arhiv KD Big Band Grosuplje</p>
+    </div>
+  </section>
+
+  <section class="sekcija" id="multimedija" aria-labelledby="mediji-naslov">
+    <div class="ovoj">
+      <p class="nadnaslov">arhiv posnetkov</p>
+      <h2 id="mediji-naslov">Multimedija</h2>
+
+      <ul class="posnetki">
+        {posnetkiIzsek.map((m) => <Posnetek medij={m} />)}
+      </ul>
+
+      <p class="vec">
+        <a class="bbg-gumb bbg-gumb--obris" href="/multimedija">Vsi posnetki →</a>
+      </p>
     </div>
   </section>
 

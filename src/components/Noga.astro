@@ -16,7 +16,7 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
     <div class="noga__mreza">
       <div class="noga__znamka">
         <img src={znakZlat.src} alt="Big Band Grosuplje" width="150" class="noga__znak" />
-        <p class="noga__ton">Prvi grosupeljški big band — od leta 1997/98.</p>
+        <p class="noga__ton">Prvi grosupeljski big band — od leta 1997/98.</p>
       </div>
 
       <div class="noga__novice">
@@ -57,16 +57,19 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
           <p class="obrazec__stanje" role="status" aria-live="polite"></p>
         </form>
         <p class="noga__drobno">
-          Nekaj obvestil na leto, samo o koncertih. Brez spama, častna pihalska.
+          Nekaj obvestil na leto, samo o koncertih. Brez spama, častna jazzovska.
         </p>
       </div>
 
       <nav class="noga__kanali" aria-label="Družbena omrežja">
         <h3 class="noga__naslov">Spremljaj nas</h3>
+        {/* Zunanje domene se odpirajo v novem zavihku; rel prepreči, da bi
+            odprta stran prek window.opener segla nazaj v našo. Interne
+            povezave ostanejo v istem oknu. */}
         <p class="kanali__povezave">
-          <a href={KANALI.facebook}>Facebook</a> ·
-          <a href={KANALI.instagram}>Instagram</a> ·
-          <a href={KANALI.youtube}>YouTube</a>
+          <a href={KANALI.facebook} target="_blank" rel="noopener noreferrer">Facebook</a> ·
+          <a href={KANALI.instagram} target="_blank" rel="noopener noreferrer">Instagram</a> ·
+          <a href={KANALI.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
         </p>
         <p class="noga__drobno">
           <a href={`mailto:${KONTAKT_EPOSTA}`}>{KONTAKT_EPOSTA}</a><br />

@@ -6,8 +6,11 @@
    Pisave se uvozijo v Layout.astro prek @fontsource paketov
    (samo-gostovano — nikoli Google Fonts CDN).
 
-   TEMI: privzeta je temna. Svetlo temo nosi [data-theme="light"] na
-   <html>, ki ga postavi inline skripta v <head> (glej Layout.astro).
+   TEMI: privzeta je temna in to velja brezpogojno — sistemske nastavitve
+   (prefers-color-scheme) NE upoštevamo, tudi brez JS ne. Svetla tema
+   nastopi samo prek [data-theme="light"] na <html>, ki ga postavi inline
+   skripta v <head> (glej Layout.astro) na podlagi izbire s preklopnikom,
+   shranjene v localStorage pod ključem bbg-tema.
    Barv NIKOLI ne kodiraj trdo v komponentah — uporabi semantične
    tokene spodaj, sicer se ob preklopu teme ne posodobijo.
    ============================================================ */
@@ -146,39 +149,6 @@
   --bbg-nav-povezava: var(--bbg-ink);
 
   --bbg-border-dark: var(--bbg-obroba);
-}
-
-/* Brez JS: spoštuj sistemsko nastavitev. Inline skripta v <head>
-   data-theme sicer vedno postavi, tako da to velja le kot varovalka. */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme='dark']):not([data-theme='light']) {
-    --bbg-bg: var(--bbg-paper);
-    --bbg-besedilo: #191512;
-    --bbg-naslov: var(--bbg-gold-dark);
-    --bbg-nadnaslov: var(--bbg-gold-dark);
-    --bbg-povezava: #7D6412;
-    --bbg-povezava-hover: #503C0A;
-    --bbg-obroba: color-mix(in srgb, var(--bbg-ink) 18%, var(--bbg-paper));
-    --bbg-obroba-mocna: var(--bbg-gold-dark);
-    --bbg-kartica-bg: #191512;
-    --bbg-kartica-besedilo: var(--bbg-paper);
-    --bbg-blok-bg: var(--bbg-paper);
-    --bbg-blok-besedilo: var(--bbg-ink);
-    --bbg-meta: var(--bbg-accent-light);
-    --bbg-napaka: var(--bbg-accent);
-    --bbg-panel-bg: color-mix(in srgb, var(--bbg-ink) 4%, transparent);
-    --bbg-vnos-bg: #ffffff;
-    --bbg-vnos-besedilo: var(--bbg-ink);
-    --bbg-nalepka-bg: var(--bbg-ink);
-    --bbg-nalepka-besedilo: var(--bbg-paper);
-    --bbg-noga-bg: var(--bbg-paper);
-    --bbg-kolofon-bg: var(--bbg-ink);
-    --bbg-kolofon-besedilo: var(--bbg-paper);
-    --bbg-kolofon-obroba: transparent;
-    --bbg-nav-bg: var(--bbg-paper);
-    --bbg-nav-povezava: var(--bbg-ink);
-    --bbg-border-dark: var(--bbg-obroba);
-  }
 }
 
 /* Znak (bbg-znak.svg uporablja fill="currentColor") */

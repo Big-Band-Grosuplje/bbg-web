@@ -68,17 +68,18 @@ const musicGroup = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {/* Tema se postavi PRED izrisom, da ni bliska napačne teme.
-        Vrstni red: izbira v localStorage, sicer sistemska nastavitev. */}
+        Privzeta je TEMNA. Sistemske nastavitve (prefers-color-scheme)
+        namenoma ne upoštevamo — svetla tema velja samo, kadar jo je
+        obiskovalec izbral s preklopnikom in je izbira v localStorage. */}
     <script is:inline>
       (() => {
+        let izbrana = null;
         try {
-          const shranjeno = localStorage.getItem('bbg-tema');
-          const svetla = window.matchMedia('(prefers-color-scheme: light)').matches;
-          document.documentElement.dataset.theme =
-            shranjeno === 'light' || shranjeno === 'dark' ? shranjeno : svetla ? 'light' : 'dark';
+          izbrana = localStorage.getItem('bbg-tema');
         } catch (e) {
-          document.documentElement.dataset.theme = 'dark';
+          /* zasebni način ipd. — ostane privzeta temna */
         }
+        document.documentElement.dataset.theme = izbrana === 'light' ? 'light' : 'dark';
       })();
     </script>
 
@@ -110,12 +111,10 @@ const musicGroup = {
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
 
-  /* Barvna shema za sistemske gradnike (drsniki, izbirniki, polja) */
+  /* Barvna shema za sistemske gradnike (drsniki, izbirniki, polja).
+     Privzeto temna, tudi brez JS — sistemske nastavitve ne upoštevamo. */
   :root { color-scheme: dark; }
   :root[data-theme='light'] { color-scheme: light; }
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme='dark']):not([data-theme='light']) { color-scheme: light; }
-  }
 
   body {
     /* Po mockupu smer-c.html: 500 17px/1.62 */
