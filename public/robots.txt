@@ -1,0 +1,8 @@
+# Kulturno društvo Big Band Grosuplje — bigband-grosuplje.com
+# Dostop je odprt za vse pajke, tudi za tiste, ki gradijo jezikovne modele.
+# Strnjena dejstva o orkestru so v /llms.txt.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://bigband-grosuplje.com/sitemap-index.xml

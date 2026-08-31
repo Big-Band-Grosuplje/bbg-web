@@ -59,3 +59,24 @@ export function poLetih(): { naslov: string; fotografije: Fotografija[] }[] {
 export function najnovejse(n: number): Fotografija[] {
   return razvrsceno().slice(0, n);
 }
+
+/* Fotografije za obdobje na /zgodovina, navedene z imenom datoteke iz
+   src/assets/foto/zgodovina.
+
+   Dve različni napaki, dva različna izida:
+   - imena datoteke ni na disku → slikaZa vrže napako in build pade
+     (tipkarska napaka v zgodovina.json ne sme priti do produkcije),
+   - datoteka je na disku, a je ni v galerija.json → tiho izpuščena,
+     ker čaka na potrjeno dovoljenje avtorja. Pravilo o dovoljenjih je
+     zapisano na enem mestu (galerija.json) in velja tudi tu. */
+export function zgodovinske(imena: string[]): Fotografija[] {
+  const seznam = galerijaData.fotografije as Fotografija[];
+  const izbor: Fotografija[] = [];
+  for (const ime of imena) {
+    const pot = `zgodovina/${ime}`;
+    slikaZa(pot);
+    const foto = seznam.find((f) => f.datoteka === pot);
+    if (foto) izbor.push(foto);
+  }
+  return izbor;
+}

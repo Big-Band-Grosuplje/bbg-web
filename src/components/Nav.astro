@@ -2,7 +2,9 @@
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 
 interface Props {
-  /* Na naslovnici kažeta Koncerti in Kontakt na sidri, drugod na naslovnico. */
+  /* Na naslovnici kažeta Koncerti in Kontakt na sidri, drugod na naslovnico.
+     Zgodovina, Multimedija in Galerija vodijo vedno na podstran — tam je
+     celotna vsebina, izsek na naslovnici je samo napovednik. */
   naslovnica?: boolean;
 }
 const { naslovnica = false } = Astro.props;
@@ -10,14 +12,30 @@ const koncerti = naslovnica ? '#koncerti' : '/#koncerti';
 const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
 ---
 
-<nav class="nav" aria-label="Glavna navigacija">
+{/* Zastavica "stran ima JS", postavljena sinhrono PRED navigacijo, torej pred
+    njenim prvim izrisom — brez utripa razgrnjenega menija. Brez nje CSS pusti
+    meni razgrnjen in skrije burger, ker ga brez JS nihče ne more odpreti.
+    (Enak vzorec kot inline skripta za temo v Layout.astro.) */}
+<script is:inline>
+  document.documentElement.dataset.js = 'da';
+</script>
+
+<nav class="nav" aria-label="Glavna navigacija" data-meni="zaprt">
   <div class="ovoj nav__vrstica">
     <a href="/" class="nav__znak" aria-label="Big Band Grosuplje — naslovnica">
       <img src={znakZlat.src} alt="" width="120" class="bbg-rot-znak-nav" />
     </a>
-    <a href={koncerti}>Koncerti</a>
-    <a href="/multimedija">Multimedija</a>
-    <a href="/galerija">Galerija</a>
+
+    {/* display: contents na širokem zaslonu — povezave in CTA se postavijo
+        neposredno v vrstico, zato vrstni red določa CSS order. Na ožjem
+        zaslonu se .nav__meni spremeni v pravi blok pod vrstico. */}
+    <div class="nav__meni" id="nav-meni">
+      <a href={koncerti}>Koncerti</a>
+      <a href="/zgodovina">Zgodovina</a>
+      <a href="/multimedija">Multimedija</a>
+      <a href="/galerija">Galerija</a>
+      <a class="nav__cta" href={kontakt}>Najemi band</a>
+    </div>
 
     <button
       type="button"
@@ -29,13 +47,23 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
       <span class="nav__ikona" aria-hidden="true">☾</span>
     </button>
 
-    <a class="nav__cta" href={kontakt}>Najemi band</a>
+    <button
+      type="button"
+      class="nav__burger"
+      id="preklop-menija"
+      aria-controls="nav-meni"
+      aria-expanded="false"
+    >
+      <span class="nav__crte" aria-hidden="true"></span>
+      <span class="vizualno-skrito">Meni</span>
+    </button>
   </div>
 </nav>
 
 <script>
-  /* Preklop teme. Začetno stanje postavi inline skripta v <head>
-     (Layout.astro), zato tu samo obrnemo in shranimo izbiro. */
+  /* --- Preklop teme ---
+     Začetno stanje postavi inline skripta v <head> (Layout.astro),
+     zato tu samo obrnemo in shranimo izbiro. */
   const gumb = document.querySelector<HTMLButtonElement>('#preklop-teme');
   const ikona = gumb?.querySelector<HTMLElement>('.nav__ikona');
 
@@ -57,6 +85,43 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     }
     osvezi(nova);
   });
+
+  /* --- Burger meni ---
+     Stanje nosi data-meni na <nav>, skrivanje pa velja SAMO znotraj
+     medijske poizvedbe za ozek zaslon. Zato zaprt meni ob razširitvi
+     okna ne more skriti navigacije na širokem zaslonu. */
+  const nav = document.querySelector<HTMLElement>('.nav');
+  const burger = document.querySelector<HTMLButtonElement>('#preklop-menija');
+  const meni = document.querySelector<HTMLElement>('#nav-meni');
+  const sirok = window.matchMedia('(min-width: 821px)');
+
+  function nastaviMeni(odprt: boolean) {
+    if (!nav || !burger) return;
+    nav.dataset.meni = odprt ? 'odprt' : 'zaprt';
+    burger.setAttribute('aria-expanded', odprt ? 'true' : 'false');
+  }
+
+  burger?.addEventListener('click', () => {
+    nastaviMeni(nav?.dataset.meni !== 'odprt');
+  });
+
+  /* Klik na povezavo v meniju: pri sidru na isti strani se stran ne naloži
+     znova, zato meni zapremo sami. */
+  meni?.addEventListener('click', (dogodek) => {
+    if ((dogodek.target as HTMLElement).closest('a')) nastaviMeni(false);
+  });
+
+  document.addEventListener('keydown', (dogodek) => {
+    if (dogodek.key !== 'Escape' || nav?.dataset.meni !== 'odprt') return;
+    nastaviMeni(false);
+    burger?.focus();
+  });
+
+  /* Ob prehodu na širok zaslon meni ni več skrit, zato mora aria-expanded
+     nehati trditi nasprotno. */
+  sirok.addEventListener('change', (dogodek) => {
+    if (dogodek.matches) nastaviMeni(false);
+  });
 </script>
 
 <style>
@@ -74,7 +139,15 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     padding: 12px var(--bbg-rob);
     flex-wrap: wrap;
   }
-  .nav__znak { line-height: 0; }
+
+  /* Vrstni red na širokem zaslonu: znak · povezave · tema · CTA. */
+  .nav__znak { order: 1; line-height: 0; }
+  .nav__meni { display: contents; }
+  .nav__meni a { order: 2; }
+  .nav__tema { order: 3; margin-left: auto; }
+  .nav__meni .nav__cta { order: 4; }
+  .nav__burger { display: none; }
+
   .nav__znak img {
     height: 46px;
     width: auto;
@@ -92,9 +165,9 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
   .nav a:focus-visible { color: var(--bbg-povezava); }
 
   .nav__tema {
-    margin-left: auto;
     width: 38px;
     height: 38px;
+    flex: 0 0 auto;
     display: grid;
     place-items: center;
     font-size: 18px;
@@ -123,8 +196,84 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
   .nav__cta:hover,
   .nav__cta:focus-visible { color: var(--bbg-paper); }
 
-  @media (max-width: 620px) {
-    .nav__vrstica { gap: 14px; }
+  /* --- Burger: tri črte iz enega elementa, da ni treba treh praznih span --- */
+  .nav__burger {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    place-items: center;
+    background: transparent;
+    border: 2px solid var(--bbg-obroba-mocna);
+    border-radius: var(--bbg-r-badge);
+    cursor: pointer;
+    padding: 0;
+  }
+  .nav__burger:focus-visible {
+    outline: 2px solid var(--bbg-obroba-mocna);
+    outline-offset: 2px;
+  }
+  .nav__crte,
+  .nav__crte::before,
+  .nav__crte::after {
+    display: block;
+    width: 18px;
+    height: 2.5px;
+    background: var(--bbg-nav-povezava);
+    border-radius: 2px;
+  }
+  .nav__crte { position: relative; }
+  .nav__crte::before,
+  .nav__crte::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .nav__crte::before { top: -6px; }
+  .nav__crte::after { top: 6px; }
+  .nav__burger:hover .nav__crte,
+  .nav__burger:hover .nav__crte::before,
+  .nav__burger:hover .nav__crte::after { background: var(--bbg-povezava); }
+
+  /* --- Ozek zaslon --- */
+  @media (max-width: 820px) {
+    .nav__vrstica { gap: 12px; }
     .nav__znak img { height: 36px; }
+
+    .nav__tema { order: 2; }
+    .nav__burger {
+      display: grid;
+      order: 3;
+      margin-left: 0;
+    }
+    /* Brez JS gumb ničesar ne odpre, zato ga ni. Zastavico postavi
+       is:inline skripta nad navigacijo. */
+    :global(html:not([data-js='da'])) .nav__burger { display: none; }
+
+    /* Meni postane pravi blok pod vrstico in se razteza po celotni širini. */
+    .nav__meni {
+      display: flex;
+      order: 4;
+      flex: 0 0 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      margin: 4px 0 0;
+      padding: 8px 0 12px;
+      border-top: 1px solid var(--bbg-obroba);
+    }
+    .nav__meni a {
+      order: 0;
+      width: 100%;
+      padding: 11px 2px;
+      font-size: 16px;
+    }
+    .nav__meni .nav__cta {
+      order: 0;
+      width: auto;
+      margin-top: 10px;
+      padding: 11px 22px;
+    }
+    /* Zaprt meni skrijemo samo, kadar ga JS lahko spet odpre. */
+    :global(html[data-js='da']) .nav[data-meni='zaprt'] .nav__meni { display: none; }
   }
 </style>

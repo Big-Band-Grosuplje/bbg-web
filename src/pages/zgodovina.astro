@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Noga from '../components/Noga.astro';
+import Lightbox from '../components/Lightbox.astro';
+import GalerijaSlika from '../components/GalerijaSlika.astro';
+import { zgodovinske } from '../lib/galerija';
+import zgodovinaData from '../data/zgodovina.json';
+
+type Vnos = { leto: string; besedilo: string };
+type Obdobje = {
+  id: string;
+  obdobje: string;
+  vodstvo: string;
+  vloga: string;
+  opis: string;
+  vnosi: Vnos[];
+  fotografije: string[];
+};
+
+const predstavitev = zgodovinaData.predstavitev;
+const gostujociDirigenti = zgodovinaData.gostujociDirigenti as string[];
+const jubilej = zgodovinaData.jubilej;
+
+/* Fotografije razrešimo že tu, da so obdobja brez slik prepoznana pred izrisom.
+   Tiste brez potrjenega dovoljenja avtorja pomočnik izpusti sam. */
+const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
+  ...o,
+  fotke: zgodovinske(o.fotografije),
+}));
+---
+
+<Layout
+  title="Zgodovina — Big Band Grosuplje"
+  description="Zgodovina Big Banda Grosuplje od ustanovitve v šolskem letu 1997/98 do danes: obdobja dirigentov, mejniki, televizijski nastopi in festivali."
+>
+  <Nav />
+
+  <main class="stran">
+    <div class="ovoj">
+      <p class="nazaj"><a href="/">← Nazaj na naslovnico</a></p>
+      <p class="nadnaslov">od 1997/98 do danes</p>
+      <h1>Zgodovina</h1>
+      <p class="uvod">{predstavitev}</p>
+    </div>
+
+    {obdobja.map((o) => (
+      <section class="obdobje" aria-labelledby={`obdobje-${o.id}`}>
+        <div class="ovoj">
+          <p class="obdobje__leta">{o.obdobje}</p>
+          <h2 id={`obdobje-${o.id}`} class="obdobje__naslov">{o.vodstvo}</h2>
+          <p class="obdobje__vloga">{o.vloga}</p>
+          <p class="obdobje__opis">{o.opis}</p>
+
+          <ol class="vnosi">
+            {o.vnosi.map((v) => (
+              <li class="vnos">
+                <p class="vnos__leto">{v.leto}</p>
+                <p class="vnos__besedilo">{v.besedilo}</p>
+              </li>
+            ))}
+          </ol>
+
+          {o.fotke.length > 0 && (
+            <ul class="slike">
+              {o.fotke.map((f) => <GalerijaSlika foto={f} />)}
+            </ul>
+          )}
+        </div>
+      </section>
+    ))}
+
+    {/* Projekt 2027 je pod embargom: samo napovednik, brez imen gostov,
+        podrobnosti in finančnih podatkov. Pravilo je v CLAUDE.md. */}
+    <section class="obdobje" aria-labelledby="obdobje-jubilej">
+      <div class="ovoj">
+        <p class="obdobje__leta">2027</p>
+        <h2 id="obdobje-jubilej" class="obdobje__naslov">Trideset let</h2>
+        <p class="obdobje__opis obdobje__opis--sam">{jubilej}</p>
+      </div>
+    </section>
+
+    <div class="ovoj">
+      <div class="panel bbg-mikro-desno">
+        <h2 class="panel__naslov">Gostujoči dirigenti</h2>
+        <p class="panel__besedilo">{gostujociDirigenti.join(' · ')}</p>
+      </div>
+
+      <p class="kredit">
+        Foto: arhiv KD Big Band Grosuplje. Fotografije zunanjih avtorjev so
+        objavljene šele po potrjenem dovoljenju in vedno s podpisom avtorja.
+        Imen članov orkestra ne objavljamo; podpisujejo se dirigenti, umetniško
+        vodstvo in gostujoči umetniki.
+      </p>
+    </div>
+  </main>
+
+  <Noga />
+  <Lightbox />
+</Layout>
+
+<style>
+  .stran { padding: 52px 0 20px; }
+  h1 {
+    margin: 10px 0 18px;
+    font-size: clamp(28px, 4.4vw, 44px);
+    color: var(--bbg-naslov);
+  }
+  .uvod {
+    margin: 0;
+    max-width: 46rem;
+    opacity: 0.9;
+  }
+
+  /* --- Obdobje --- */
+  .obdobje {
+    padding: 46px 0 0;
+    margin-top: 46px;
+    border-top: 1px solid var(--bbg-obroba);
+  }
+  .obdobje__leta {
+    margin: 0;
+    font-family: var(--bbg-font-naslov);
+    letter-spacing: 0.16em;
+    font-size: 13px;
+    color: var(--bbg-nadnaslov);
+  }
+  /* Mikrorotacija naslova po mockupu smer-c.html, kot pri .sekcija h2. */
+  .obdobje__naslov {
+    margin: 8px 0 4px;
+    font-size: clamp(24px, 3.2vw, 34px);
+    color: var(--bbg-naslov);
+    transform: rotate(-0.6deg);
+    transform-origin: left center;
+  }
+  .obdobje__vloga {
+    margin: 0 0 18px;
+    font-style: italic;
+    font-size: 15px;
+    opacity: 0.75;
+  }
+  .obdobje__opis {
+    margin: 0 0 30px;
+    max-width: 46rem;
+  }
+  .obdobje__opis--sam { margin-bottom: 0; }
+
+  /* --- Vnosi časovnice ---
+     Osi ne rišemo prek celotnega seznama: zadnji vnos je visok več vrstic,
+     zato bi pod njegovo piko ostal rep. Namesto tega vsak vnos razen zadnjega
+     nariše spojnico do naslednje pike. */
+  .vnosi {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .vnos {
+    position: relative;
+    padding: 0 0 26px 34px;
+  }
+  .vnos:last-child { padding-bottom: 0; }
+  .vnos::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--bbg-gold);
+  }
+  /* Od spodnjega roba pike (7 + 15) do zgornjega roba naslednje, ki leži
+     7 px pod dnom tega vnosa. Barva sledi temi prek --bbg-gold. */
+  .vnos:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 22px;
+    bottom: -7px;
+    left: 6px;
+    width: 3px;
+    background: color-mix(in srgb, var(--bbg-gold) 40%, transparent);
+  }
+  .vnos__leto {
+    margin: 0 0 4px;
+    font-family: var(--bbg-font-naslov);
+    font-size: 17px;
+    color: var(--bbg-naslov);
+  }
+  .vnos__besedilo {
+    margin: 0;
+    max-width: 46rem;
+    font-size: 16px;
+  }
+
+  /* --- Fotografije obdobja --- */
+  .slike {
+    list-style: none;
+    margin: 34px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 26px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  }
+
+  /* --- Gostujoči dirigenti --- */
+  .panel {
+    margin-top: 52px;
+    border: 2.5px solid var(--bbg-obroba-mocna);
+    border-radius: var(--bbg-r-l);
+    padding: 30px 32px;
+    background: var(--bbg-panel-bg);
+  }
+  .panel__naslov {
+    margin: 0 0 10px;
+    font-size: 22px;
+    color: var(--bbg-naslov);
+  }
+  /* Panel je mikrozarotiran, daljše besedilo v njem ostane ravno. */
+  .panel__besedilo {
+    margin: 0;
+    transform: rotate(-0.5deg);
+  }
+
+  .kredit {
+    margin: 52px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--bbg-border-dark);
+    font-size: 12.5px;
+    line-height: 1.7;
+    opacity: 0.65;
+    max-width: 46rem;
+  }
+
+  @media (max-width: 620px) {
+    .vnos { padding-left: 28px; }
+  }
+</style>

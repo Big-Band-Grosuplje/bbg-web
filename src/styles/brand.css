@@ -18,7 +18,17 @@
   --bbg-gold-light: #E8C95C;   /* naslovi in povezave na temnem */
   --bbg-gold-dark: #8A6E14;    /* naslovi in povezave na papirju (kontrast!) */
   --bbg-gold-darker: #6B5410;  /* hover na papirju */
-  --bbg-accent: #D4553B;       /* rdeč akcent — trde sence, badge, meta */
+  /* Rdeč akcent — podlaga badge/CTA in trde sence gumbov.
+     Izmerjeno po WCAG 2.1 proti besedilu --bbg-paper #FAF3E3: stari
+     #D4553B je dosegel le 3,68 :1, #B8432B doseže 4,90 :1 (proti čisti
+     beli 5,42 :1). Matematična meja pri istem odtenku znamke
+     (H 10,2° / S 0,64) je #C3452B s 4,52 :1 — zavrnjena, ker 0,02
+     rezerve nad mejo ne prenese nobene kasnejše prilagoditve papirja.
+     Kot BESEDILO je ta odtenek uporaben samo na papirju; na temni
+     podlagi doseže 3,47 :1, zato je za temno --bbg-accent-light. */
+  --bbg-accent: #B8432B;
+  /* Rdeče besedilo na temnem: 6,10 :1 na #141110, 5,89 :1 na #191512. */
+  --bbg-accent-light: #E4715C;
   --bbg-black: #141110;        /* topla črna */
   --bbg-ink: #191512;          /* temno besedilo in temni bloki */
   --bbg-paper: #FAF3E3;        /* papirnata podlaga */
@@ -62,9 +72,11 @@
   --bbg-kartica-besedilo: var(--bbg-ink);
   --bbg-blok-bg: var(--bbg-ink);
   --bbg-blok-besedilo: var(--bbg-gold-light);
-  /* Meta vrstica na kartici: akcent #D4553B na papirju doseže le 3,68 :1,
-     zato temnejši odtenek (4,72 :1). */
-  --bbg-meta: #BC4529;
+  /* Kartice so v temni temi papirnate, zato meta vrstica vzame akcent
+     neposredno — #B8432B na #FAF3E3 doseže 4,90 :1. */
+  --bbg-meta: var(--bbg-accent);
+  /* Besedilo napake stoji na temni podlagi strani. */
+  --bbg-napaka: var(--bbg-accent-light);
 
   /* Paneli, vnosna polja, nalepke */
   --bbg-panel-bg: color-mix(in srgb, var(--bbg-paper) 4%, transparent);
@@ -113,8 +125,10 @@
   --bbg-kartica-besedilo: var(--bbg-paper);
   --bbg-blok-bg: var(--bbg-paper);
   --bbg-blok-besedilo: var(--bbg-ink);
-  /* Na temni kartici gre akcent v svetlejši odtenek (5,79 :1). */
-  --bbg-meta: #E2705A;
+  /* Na temni kartici gre akcent v svetlejši odtenek (5,89 :1). */
+  --bbg-meta: var(--bbg-accent-light);
+  /* Napaka stoji na papirnati podlagi — tam je berljiv temni akcent (4,90 :1). */
+  --bbg-napaka: var(--bbg-accent);
 
   --bbg-panel-bg: color-mix(in srgb, var(--bbg-ink) 4%, transparent);
   --bbg-vnos-bg: #ffffff;
@@ -150,7 +164,8 @@
     --bbg-kartica-besedilo: var(--bbg-paper);
     --bbg-blok-bg: var(--bbg-paper);
     --bbg-blok-besedilo: var(--bbg-ink);
-    --bbg-meta: #E2705A;
+    --bbg-meta: var(--bbg-accent-light);
+    --bbg-napaka: var(--bbg-accent);
     --bbg-panel-bg: color-mix(in srgb, var(--bbg-ink) 4%, transparent);
     --bbg-vnos-bg: #ffffff;
     --bbg-vnos-besedilo: var(--bbg-ink);

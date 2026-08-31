@@ -1,0 +1,213 @@
+{
+  "posodobljeno": "2026-08-31",
+  "vir": "docs/kronika.md (časovnica), docs/bbg-osnova.md (obdobja dirigentov)",
+  "opomba": "Obdobja dirigentov so povzeta po bbg-osnova.md, ki je vir resnice za uradne podatke; kronika.md navaja Lundra kot '2004-~2008' in nato '~2008-2012 manj aktivno obdobje' - to ni drug dirigent, ampak mirnejsi del istega obdobja, zato je tu 2004-2011 z izrecno opombo o mirnejsih letih. Za leto 2027 velja embargo iz bbg-osnova.md: samo napovednik, brez imen gostov in brez podrobnosti. Fotografije so navedene z imenom datoteke iz src/assets/foto/zgodovina; tiste, ki cakajo na potrjeno dovoljenje avtorja, niso v src/data/galerija.json in jih stran samodejno izpusti.",
+  "predstavitev": "Big Band Grosuplje je klasična big band zasedba, ki deluje od šolskega leta 1997/98, ko jo je pri Glasbeni šoli Grosuplje ustanovil priznani slovenski glasbenik Braco J. Doblekar skupaj s tedanjim ravnateljem šole Francem Korbarjem. Od leta 2001 orkester deluje kot samostojno kulturno društvo. V treh desetletjih je nastopil na najprestižnejših prizoriščih doma in v tujini, se predstavil na radiu in televiziji ter sodeloval z vrsto priznanih slovenskih in mednarodnih umetnikov. Orkester povezuje izkušene ljubiteljske in profesionalne glasbenike, mladim pa prek comba in saksofonskega kvinteta ponuja razvojno pot v veliki jazzovski orkester. Poleg koncertne dejavnosti redno pripravlja tematske programe in izobraževalne delavnice za glasbenike. Umetniški vodja in dirigent orkestra je Klemen Kotar.",
+  "mejniki": [
+    {
+      "leto": "1997/98",
+      "naslov": "Ustanovitev",
+      "besedilo": "Pri Glasbeni šoli Grosuplje orkester ustanovita Braco J. Doblekar in tedanji ravnatelj Franc Korbar."
+    },
+    {
+      "leto": "2003",
+      "naslov": "Državna proslava",
+      "besedilo": "Osrednja proslava ob dnevu državnosti na Trgu republike; Doblekar prejme zlati znak Občine Grosuplje."
+    },
+    {
+      "leto": "2012",
+      "naslov": "Kotar prevzame",
+      "besedilo": "Dirigent in umetniški vodja postane mag. Klemen Kotar. Začne se obdobje tematskih programov."
+    },
+    {
+      "leto": "2018",
+      "naslov": "Nishville",
+      "besedilo": "Ellingtonova Far East Suite na glavnem odru festivala v Nišu, s pohvalami kritikov."
+    },
+    {
+      "leto": "2027",
+      "naslov": "Trideset let",
+      "besedilo": "Jubilejni mednarodni projekt je v pripravi."
+    }
+  ],
+  "obdobja": [
+    {
+      "id": "doblekar",
+      "obdobje": "1997/98–2003",
+      "vodstvo": "Braco J. Doblekar",
+      "vloga": "ustanovitelj in prvi dirigent",
+      "opis": "Orkester nastane na pobudo ravnatelja Glasbene šole Grosuplje Franca Korbarja, izključno z mladimi glasbeniki iz okolice Grosuplja. V šestih letih se iz šolske zasedbe prelevi v samostojno kulturno društvo z rednimi televizijskimi nastopi.",
+      "vnosi": [
+        {
+          "leto": "1997/98",
+          "besedilo": "Ustanovitev pri Glasbeni šoli Grosuplje. 18. februarja 1998 prvi samostojni koncert v dvorani šole, 26. junija 1998 proslava ob dnevu državnosti na Pogačarjevem trgu v Ljubljani."
+        },
+        {
+          "leto": "1998",
+          "besedilo": "Prvi poletni seminar v Fiesi. Tradicija se nadaljuje: Čatež 1999, Fiesa 2000–01, Kranjska Gora 2004–06, Kobarid 2007."
+        },
+        {
+          "leto": "1999",
+          "besedilo": "21. decembra 25. obletnica Glasbene šole Grosuplje z Evo Sršen in Janezom Bončino - Benčem."
+        },
+        {
+          "leto": "2000",
+          "besedilo": "21. februarja enourni koncert v Jazz klubu Gajo, ki ga posname TV Slovenija. 22. decembra Športniki Slovenije 2000 v Cankarjevem domu v neposrednem prenosu TVS2."
+        },
+        {
+          "leto": "2001",
+          "besedilo": "Zidak dobre volje v neposrednem prenosu TVS1 in snemanje v Studiu 14 Radia Slovenija. Oktobra preimenovanje iz Big Banda GŠ Grosuplje v Big Band Grosuplje in registracija kulturnega društva (uradni vpis 9. novembra 2001) ter včlanitev v ZKD Grosuplje. Nastop v Cankarjevem domu ob deseti obletnici Slovenske nogometne lige, decembra Športnik leta na TVS2 in samostojni koncert na Prešernovem trgu."
+        },
+        {
+          "leto": "2002",
+          "besedilo": "Predstavitvi poslovenjenih Windows XP in Office XP v Koloseju, poletni program Franka Sinatre s Tuliom Furlaničem po obali, Glasbena ogrlica na TVS in Športnik leta z Ireno Vidic."
+        },
+        {
+          "leto": "2003",
+          "besedilo": "24. junija osrednja državna proslava ob dnevu državnosti na Trgu republike (TVS), 24. julija Braco Doblekar prejme zlati znak Občine Grosuplje. Mednarodni poletni seminar z Rickom Stitzlom (ZDA), gostovanje v Nemčiji (Hirschaid), Microsoftova NT konferenca v Portorožu in zaključna prireditev Slovenskega filmskega festivala z aranžmaji Lojzeta Krajnčana in gostjo Cito Galič."
+        }
+      ],
+      "fotografije": [
+        "mladi-orkester-dvorana-zgodnja-leta.jpg",
+        "nastop-bele-srajce-zgodnja-leta.jpg",
+        "tv-nastop-zgodnja-leta.jpg",
+        "doblekar-orkester-spomenik-barvna.jpg",
+        "doblekar-orkester-spomenik-cb.jpg",
+        "doblekar-vibrafon-mentorstvo.jpg"
+      ]
+    },
+    {
+      "id": "lunder",
+      "obdobje": "2004–2011",
+      "vodstvo": "Igor Lunder",
+      "vloga": "dirigent, kitarist in aranžer",
+      "opis": "Konec leta 2003 dobi društvo novo vodstvo, dirigentsko taktirko prevzame Igor Lunder. Obdobje prinese vrsto tematskih projektov, mednarodne goste in mladinski ansambel kot prvo razvojno pot za mlade glasbenike.",
+      "vnosi": [
+        {
+          "leto": "2004",
+          "besedilo": "Snemanje za CD, 30. obletnica Glasbene šole Grosuplje, soorganizacija delavnice The Kelly Johnson Quartet v podpori ameriškega veleposlaništva in projekt »Glasba Glenna Millerja in Counta Basiea« ob stoti obletnici rojstva obeh; samostojni koncert 14. oktobra."
+        },
+        {
+          "leto": "2005",
+          "besedilo": "Sodelovanje z MPZ Corona, otvoritev Vodnega mesta Atlantis in 60. obletnica Mladinske knjige s podelitvijo Levstikovih nagrad v Gallusovi dvorani Cankarjevega doma. Oktobra »Poklon Franku Sinatri« ob 90. obletnici rojstva z Otom Pestnerjem in Adamom Klemmom, decembra Miklavžev dobrodelni koncert na TVS."
+        },
+        {
+          "leto": "2006",
+          "besedilo": "Koncerta z vibrafonistoma Boškom Petrovićem in Vidom Jamnikom z javnim snemanjem, festival big bandov v Bjelovarju (Hrvaška), poletni seminar pod vodstvom dr. Sigija Feigla (Avstrija), jesenski koncert z Nino Pušlar in ustanovitev mladinskega ansambla BiBa."
+        },
+        {
+          "leto": "2007",
+          "besedilo": "Dobrodelna prireditev »Zlati ključ mesta Grosuplje« z Alenko Godec, Nino Pušlar in Nušo Derendo, praznovanje petih let City Parka z Otom Pestnerjem, Eldo Viler, Aniko Horvat in skupino Pepel in kri, jazzovski koncert in javno snemanje v Studiu 14 z Davorjem Križićem in Sašo Nestorovićem, koncert z ameriškim Western Jazz Quartetom, 2. državno srečanje big bandov v Krškem in jesenski poklon Jožetu Privšku."
+        },
+        {
+          "leto": "2008",
+          "besedilo": "Deseta obletnica orkestra in koncert »American Jazz History«."
+        },
+        {
+          "leto": "2010–2011",
+          "besedilo": "Mirnejši leti: sodelovanje ob 50. letnici Jazza na Bledu in projekt »Music Unites« z ameriško pevko Gwen Hughes ob podpori ameriškega veleposlaništva."
+        }
+      ],
+      "fotografije": ["koncert-gros-ozadje-lunder.jpg"]
+    },
+    {
+      "id": "kotar-prvo",
+      "obdobje": "2012–2019",
+      "vodstvo": "mag. Klemen Kotar",
+      "vloga": "prvo obdobje",
+      "opis": "Septembra 2012 dirigent in umetniški vodja postane mag. Klemen Kotar. Sledi niz tematskih programov, po katerih je orkester prepoznaven še danes, in prvi festivalski nastop v tujini.",
+      "vnosi": [
+        {
+          "leto": "2012",
+          "besedilo": "Koncerti s Prifarskimi muzikanti in delavnice jazzobraževanja. Septembra dirigentsko taktirko prevzame Klemen Kotar, leto sklene novoletni koncert z Nino Pušlar."
+        },
+        {
+          "leto": "2013",
+          "besedilo": "Program glasbe Franka Sinatre »A Swingin' Affair« z Blažem Vrbičem ob podpori ameriškega veleposlaništva, julija nastop ob dnevu neodvisnosti ZDA v Narodni galeriji."
+        },
+        {
+          "leto": "2014",
+          "besedilo": "Novoletni koncert z deli Gordona Goodwina — prva izvedba Goodwina v zgodovini orkestra, z gostoma Ireno Vidic in Tomažem Zevnikom."
+        },
+        {
+          "leto": "2015",
+          "besedilo": "2. julija »Songs for Swingin' Lovers« (Sinatra in Bennett) ob dnevu neodvisnosti ZDA v Križankah, »Ellingtonia« 1. decembra v Španskih borcih in 19. decembra v KD Grosuplje, turneja s Prifarskimi muzikanti z dvema koncertoma v Cankarjevem domu ter koncert z Ladom Leskovarjem v Festivalni dvorani."
+        },
+        {
+          "leto": "2016",
+          "besedilo": "Januarsko-februarska turneja po Avstriji (Bruck an der Mur, Wiener Neustadt, Gradec – Stefaniesaal, Weiz, Knittelfeld, Celovec), koncerta v Novi Gorici in Rogaški Slatini ter 23. decembra »Jazz in the Coffin« z glasbo Jeffa Coffina."
+        },
+        {
+          "leto": "2017",
+          "besedilo": "»The Ella Fitzgerald Songbook« ob stoletnici rojstva z Ano Čop: 20. maja KD Grosuplje, 18. avgusta Jazzinty Novo mesto, 24. avgusta Idrija. 29. junija dan neodvisnosti ZDA v Festivalni dvorani, dvajset let orkestra 15. septembra v KD Grosuplje in 7. oktobra v Španskih borcih, 22. decembra »Crazy Christmas« z Boštjanom Gombačem in božičnimi priredbami Gordona Goodwina."
+        },
+        {
+          "leto": "2018",
+          "besedilo": "2. februarja »Help! A Beatles Tribute« s combom BBG, spomladi program Buddyja Richa. Septembra Nishville Jazz Festival v Nišu (Srbija): Far East Suite Duka Ellingtona na glavnem odru Earth & Sky, s pohvalami kritikov Davorja Hrvoja in Saše Dracha."
+        }
+      ],
+      "fotografije": [
+        "vrbic-sinatra-2013.jpg",
+        "mejnik-us-embassy-combo-2017.jpg",
+        "mejnik-nishville-2018-oder.jpg"
+      ]
+    },
+    {
+      "id": "javornik",
+      "obdobje": "2019–2022",
+      "vodstvo": "Rudi Javornik",
+      "vloga": "dirigent in saksofonist",
+      "opis": "Obdobje zaznamujeta program velikih swing orkestrov in dve covidni leti, ko orkestrske koncerte nadomestijo nastopi comba.",
+      "vnosi": [
+        {
+          "leto": "2019",
+          "besedilo": "Sinatra z Blažem Vrbičem v Grosupljem, na Ljubljanskem gradu, v Plečnikovem avditoriju in v ČinČinu; decembra program Counta Basiea in Diane Schuur z gostom Zanchinnijem."
+        },
+        {
+          "leto": "2020–2021",
+          "besedilo": "Covidno obdobje: posamezni nastopi comba na otvoritvah in protokolarnih dogodkih ter Sinatra v Portorožu."
+        },
+        {
+          "leto": "2022",
+          "besedilo": "Koncert z Urošem Peričem, Marezijazz s programom Jeffa Coffina in Sinatra v Velenju. Decembra program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem, ki se vrne kot dirigent."
+        }
+      ],
+      "fotografije": ["koncert-javornik-obdobje.jpg"]
+    },
+    {
+      "id": "kotar-drugo",
+      "obdobje": "2022–danes",
+      "vodstvo": "mag. Klemen Kotar",
+      "vloga": "drugo obdobje",
+      "opis": "Kotar se decembra 2022 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.",
+      "vnosi": [
+        {
+          "leto": "2023",
+          "besedilo": "Sinatra na Ljubljanskem gradu in na Krki, »Grosuplje v jeseni« z Nino Strnad, 70 let vrtca Brinje ter novoletni koncert z Juretom Puklom, Laro Grbić in Marušo Kos."
+        },
+        {
+          "leto": "2024",
+          "besedilo": "»Flying Start« s Tadejem Tomšičem in gosti Petro Vidmar, Erikom Ceboklijem in Žigo Kozarjem; combo na dogodku ameriškega veleposlaništva."
+        },
+        {
+          "leto": "2025",
+          "besedilo": "Koncerta z Gašperjem Kržmancem, Sinatra v Marezigah, »Images« s Klaro Lavrišo in Žanom Cesarjem ter tradicionalni božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem."
+        },
+        {
+          "leto": "2026",
+          "besedilo": "»Poklon Gordonu Goodwinu« s solistom Tomažem Zevnikom: maja na festivalu JSKD v Grosupljem, 5. junija v Jazz klubu Kazina v Ljubljani, 10. julija na MarezziJazzu. Avgusta koncert s HGM Jazz orkestrom Zagreb in ameriškim trobentačem Johnom Thomasom, oktobra delavnica aranžiranja z Lojzetom Krajnčanom, »Grosuplje v jeseni« z Rokom Ferengja in zbori ter BBG x Slon in sadež."
+        }
+      ],
+      "fotografije": []
+    }
+  ],
+  "gostujociDirigenti": [
+    "Rick Stitzel (ZDA)",
+    "Sigi Feigl (Avstrija)",
+    "Aleš Suša",
+    "Klara Lavriša",
+    "Tadej Tomšič",
+    "Gašper Kržmanc"
+  ],
+  "jubilej": "V letu 2027 orkester praznuje 30 let — jubilejni mednarodni projekt je v pripravi."
+}

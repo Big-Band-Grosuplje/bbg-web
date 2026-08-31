@@ -23,7 +23,42 @@ const {
   description = 'Big Band Grosuplje — klasična big band zasedba, ki deluje od leta 1997/98. Koncerti, tematski programi in izobraževalne delavnice.',
 } = Astro.props;
 
-const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-grosuplje.com');
+const SITE = Astro.site ?? new URL('https://bigband-grosuplje.com');
+const ogImage = new URL('/og/og-default.png', SITE);
+
+/* MusicGroup je na VSAKI strani, ker je to identiteta orkestra, ne vsebina
+   posamezne strani — iskalniki in jeziki modeli tako dobijo dejstva ne glede
+   na to, kje pristanejo. Kanali so isti kot v nogi (src/components/Noga.astro).
+   Uradnega naziva ne krajšaj: "Kulturno društvo Big Band Grosuplje". */
+const musicGroup = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  '@id': `${SITE.origin}/#orkester`,
+  name: 'Big Band Grosuplje',
+  alternateName: 'Kulturno društvo Big Band Grosuplje',
+  foundingDate: '1997',
+  genre: ['jazz', 'swing', 'big band'],
+  url: `${SITE.origin}/`,
+  logo: new URL('/icon-512.png', SITE).href,
+  image: ogImage.href,
+  email: 'info@bigband-grosuplje.com',
+  sameAs: [
+    'https://www.facebook.com/BigBandGrosuplje',
+    'https://www.instagram.com/bigbandgrosuplje/',
+    'https://www.youtube.com/@bigbandgrosuplje9236',
+  ],
+  location: {
+    '@type': 'Place',
+    name: 'Grosuplje',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Adamičeva cesta 16',
+      postalCode: '1290',
+      addressLocality: 'Grosuplje',
+      addressCountry: 'SI',
+    },
+  },
+};
 ---
 
 <!doctype html>
@@ -62,6 +97,8 @@ const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-gro
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(musicGroup)} />
   </head>
   <body>
     <slot />

@@ -10,6 +10,7 @@ import GalerijaSlika from '../components/GalerijaSlika.astro';
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 import fotoHero from '../assets/foto/orkester/kotar-dirigent-energija.jpg';
 import koncertiData from '../data/koncerti.json';
+import zgodovinaData from '../data/zgodovina.json';
 import { najnovejse } from '../lib/galerija';
 import { najnovejsi } from '../lib/mediji';
 import { WEB3FORMS_KEY, KONTAKT_EPOSTA } from '../config';
@@ -170,9 +171,15 @@ const prihajajoci = koncerti
     jsonLd: musicEvent(k),
   }));
 
-/* Izseka na naslovnici — celotna vsebina je na podstranih. */
+/* Izseki na naslovnici — celotna vsebina je na podstranih. */
 const posnetkiIzsek = najnovejsi(3);
 const fotografijeIzsek = najnovejse(6);
+const predstavitev = zgodovinaData.predstavitev;
+const mejniki = zgodovinaData.mejniki as {
+  leto: string;
+  naslov: string;
+  besedilo: string;
+}[];
 
 const web3formsVklopljen = WEB3FORMS_KEY !== '';
 ---
@@ -262,6 +269,29 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
           ))}
         </ul>
       )}
+    </div>
+  </section>
+
+  <section class="sekcija" id="zgodovina" aria-labelledby="zgodovina-naslov">
+    <div class="ovoj">
+      <p class="nadnaslov">od 1997/98 do danes</p>
+      <h2 id="zgodovina-naslov">Zgodovina</h2>
+
+      <p class="zgodovina__uvod">{predstavitev}</p>
+
+      <ol class="mejniki" style={`--stolpci: ${mejniki.length}`}>
+        {mejniki.map((m) => (
+          <li class="mejnik">
+            <p class="mejnik__leto">{m.leto}</p>
+            <h3 class="mejnik__naslov">{m.naslov}</h3>
+            <p class="mejnik__opis">{m.besedilo}</p>
+          </li>
+        ))}
+      </ol>
+
+      <p class="vec">
+        <a class="bbg-gumb bbg-gumb--obris" href="/zgodovina">Celotna zgodovina →</a>
+      </p>
     </div>
   </section>
 
@@ -562,6 +592,70 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
   .kartica__gostje { margin: 0; font-size: 15px; opacity: 0.8; }
   .kartica__cta { margin: 18px 0 0; }
 
+  /* --- Zgodovina --- */
+  .zgodovina__uvod {
+    margin: 0;
+    max-width: 46rem;
+    opacity: 0.92;
+  }
+  /* Vodoravna mini-časovnica. Osi ne rišemo prek celotnega ovoja, ker bi za
+     zadnjo piko ostal rep v prazno; namesto tega vsak mejnik razen zadnjega
+     nariše spojnico do naslednje pike. Rep tako ne more nastati, ne glede na
+     število mejnikov. --stolpci pride iz podatkov (mejniki.length). */
+  .mejniki {
+    --reza: 24px;
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--stolpci), 1fr);
+    gap: var(--reza);
+  }
+  .mejnik {
+    position: relative;
+    padding-top: 32px;
+  }
+  .mejnik::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--bbg-gold);
+  }
+  /* Od desnega roba pike (17 px) do levega roba naslednje pike, ki je natanko
+     za režo naprej. Navpična sredina 8,5 px je sredina pike. */
+  .mejnik:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 17px;
+    right: calc(-1 * var(--reza));
+    height: 3px;
+    background: color-mix(in srgb, var(--bbg-gold) 40%, transparent);
+  }
+  .mejnik__leto {
+    margin: 0 0 2px;
+    font-family: var(--bbg-font-naslov);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--bbg-nadnaslov);
+  }
+  .mejnik__naslov {
+    margin: 0 0 8px;
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--bbg-naslov);
+  }
+  .mejnik__opis {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    opacity: 0.82;
+  }
+
   /* --- Izseka multimedije in galerije --- */
   .posnetki,
   .slike {
@@ -646,7 +740,27 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     min-height: 1.2em;
     color: var(--bbg-naslov);
   }
-  .obrazec__stanje--napaka { color: var(--bbg-accent); }
+  /* Ne --bbg-accent: potemnjen akcent je berljiv samo na papirju.
+     --bbg-napaka izbere odtenek glede na podlago teme. */
+  .obrazec__stanje--napaka { color: var(--bbg-napaka); }
+
+  /* Pet stolpcev pod 900 px stisne besedilo mejnika na dve besedi na
+     vrstico, zato se os obrne v navpično — enak vzorec kot na /zgodovina. */
+  @media (max-width: 900px) {
+    .mejniki { grid-template-columns: 1fr; }
+    .mejnik { padding: 0 0 0 34px; }
+    .mejnik::before { top: 1px; }
+    /* Os se obrne v navpično: od spodnjega roba pike (1 + 17) do zgornjega
+       roba naslednje, ki je za režo in nadaljnji 1 px naprej. */
+    .mejnik:not(:last-child)::after {
+      top: 18px;
+      left: 7px;
+      right: auto;
+      bottom: calc(-1 * var(--reza) - 1px);
+      width: 3px;
+      height: auto;
+    }
+  }
 
   @media (max-width: 820px) {
     .hero__mreza,
