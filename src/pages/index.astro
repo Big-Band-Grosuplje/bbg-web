@@ -374,8 +374,8 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
             novalidate
           >
             <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-            <input type="hidden" name="subject" value="Povpraševanje za nastop (bigband-grosuplje.com)" />
-            <input type="hidden" name="from_name" value="Spletna stran BBG" />
+            <input type="hidden" name="subject" value="Povpraševanje za nastop — spletna stran" />
+            <input type="hidden" name="from_name" value="bigband-grosuplje.com" />
             {/* honeypot za robote — človek tega polja ne vidi */}
             <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" />
 
@@ -409,8 +409,8 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
             novalidate
           >
             <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-            <input type="hidden" name="subject" value="Pridružitev orkestru (bigband-grosuplje.com)" />
-            <input type="hidden" name="from_name" value="Spletna stran BBG" />
+            <input type="hidden" name="subject" value="Pridružitev orkestru — spletna stran" />
+            <input type="hidden" name="from_name" value="bigband-grosuplje.com" />
             <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" />
 
             <label for="pri-ime">Ime in priimek</label>
@@ -443,7 +443,24 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
 </Layout>
 
 <script>
-  /* Kontaktna obrazca: Web3Forms, dokler ključa ni — mailto. */
+  /* Kontaktna obrazca: Web3Forms prek fetch, da obiskovalec ostane na strani.
+     Telo je FormData — vrsta vsebine multipart/form-data je na seznamu varnih
+     za CORS in ne sproži preflighta.
+
+     Kaj je preverjeno (31. 8. 2026) in kaj ne:
+     - Web3Forms zavrača strežniške zahteve (curl dobi 403 "Use our API in
+       client side"), zato je fetch iz brskalnika edina pot; navadnega POST
+       v novem zavihku ne moremo uporabiti kot rezervo.
+     - Odziv na NAPAKO nima CORS glav: poskus iz brskalnika z neveljavnim
+       ključem konča v catch z "Failed to fetch". Za nas to ni težava —
+       napaka je napaka in obiskovalec dobi sporočilo z e-naslovom.
+     - Odziva na USPEŠNO oddajo nismo preverili, ker bi za to morali poslati
+       pravo sporočilo. Če bi CORS blokiral tudi uspešen odziv, bi sporočilo
+       prišlo do nas, obiskovalec pa bi videl napako. Prepoznaš po tem: mail
+       prispe, stran javi "Pošiljanje ni uspelo". V tem primeru preklopi na
+       navaden POST z target="_blank".
+
+     Ob napaki ponudimo e-naslov, mailto rezerve ni več. */
   const EPOSTA = 'info@bigband-grosuplje.com';
 
   function stanje(obrazec: HTMLFormElement, sporocilo: string, napaka = false) {
@@ -461,25 +478,10 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
       const podatki = new FormData(obrazec);
       if (podatki.get('botcheck')) return; /* honeypot */
 
-      const ime = String(podatki.get('ime') ?? '');
-      const eposta = String(podatki.get('eposta') ?? '');
-      const sporocilo = String(podatki.get('sporocilo') ?? '');
-      const podrocje = podatki.get('podrocje');
-      const kljuc = obrazec.dataset.w3fKey ?? '';
-      const zadeva = String(podatki.get('subject') ?? 'Sporočilo s spletne strani');
-
-      if (kljuc === '') {
-        const telo = [
-          `Ime: ${ime}`,
-          `E-pošta: ${eposta}`,
-          podrocje ? `Področje: ${podrocje}` : null,
-          '',
-          sporocilo,
-        ]
-          .filter((vrstica) => vrstica !== null)
-          .join('\n');
-        window.location.href = `mailto:${EPOSTA}?subject=${encodeURIComponent(zadeva)}&body=${encodeURIComponent(telo)}`;
-        stanje(obrazec, 'Odpiramo tvoj e-poštni odjemalec s pripravljenim sporočilom.');
+      /* Brez ključa oddaje ni; obiskovalcu ponudimo naš e-naslov, ne
+         odpremo pa mu odjemalca — mailto rezerve v vmesniku ni več. */
+      if ((obrazec.dataset.w3fKey ?? '') === '') {
+        stanje(obrazec, `Obrazec trenutno ne deluje. Piši nam na ${EPOSTA}.`, true);
         return;
       }
 

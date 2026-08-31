@@ -118,7 +118,8 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
      prijava uspela. Tak odziv pride kot type 'opaqueredirect' in ga
      štejemo za uspeh, enako kot 2xx in 3xx.
 
-     Dokler BREVO_FORM_URL ni nastavljen, obrazec pade na mailto. */
+     Brez BREVO_FORM_URL obrazec javi napako z našim e-naslovom; mailto
+     rezerve v vmesniku ni več, enako kot pri kontaktnih obrazcih. */
   const EPOSTA = 'info@bigband-grosuplje.com';
   const novice = document.querySelector<HTMLFormElement>('#novice');
 
@@ -139,11 +140,11 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
     const naslov = String(podatki.get('EMAIL') ?? '').trim();
     if (!naslov) return;
 
+    /* Brez URL-ja prijave ni; ponudimo e-naslov, ne odpremo pa odjemalca —
+       enako kot pri kontaktnih obrazcih, mailto rezerve v vmesniku ni več. */
     const brevo = novice.dataset.brevo ?? '';
     if (brevo === '') {
-      const telo = `Prijavljam se na e-novice Big Banda Grosuplje.\nE-naslov: ${naslov}\nSoglašam s politiko zasebnosti.\n`;
-      window.location.href = `mailto:${EPOSTA}?subject=${encodeURIComponent('Prijava na e-novice')}&body=${encodeURIComponent(telo)}`;
-      stanjeNovic('Odpiramo tvoj e-poštni odjemalec s pripravljenim sporočilom.');
+      stanjeNovic(`Prijava trenutno ne deluje. Piši nam na ${EPOSTA}.`, true);
       return;
     }
 
