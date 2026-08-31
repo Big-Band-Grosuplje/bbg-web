@@ -1,0 +1,152 @@
+---
+/* Skupni lightbox za galerijo — nativni <dialog>, brez knjižnic.
+   Skript pobere vse gumbe .slika__gumb v vrstnem redu, kot so v DOM,
+   in med njimi lista s puščicama, tipkama ← → in kroženjem. */
+---
+
+<dialog id="lightbox" class="lightbox" aria-label="Povečana fotografija">
+  <button
+    type="button"
+    class="lightbox__krmilo lightbox__krmilo--prej"
+    data-prej
+    aria-label="Prejšnja fotografija"
+  >‹</button>
+
+  <img id="lightbox-slika" src="" alt="" />
+  <p id="lightbox-opis" class="lightbox__opis"></p>
+
+  <button
+    type="button"
+    class="lightbox__krmilo lightbox__krmilo--naprej"
+    data-naprej
+    aria-label="Naslednja fotografija"
+  >›</button>
+</dialog>
+
+<script>
+  const lightbox = document.querySelector<HTMLDialogElement>('#lightbox');
+  const slika = document.querySelector<HTMLImageElement>('#lightbox-slika');
+  const opis = document.querySelector<HTMLElement>('#lightbox-opis');
+  const gumbi = Array.from(document.querySelectorAll<HTMLButtonElement>('.slika__gumb'));
+
+  let trenutni = 0;
+
+  function pokazi(indeks: number) {
+    if (!slika || gumbi.length === 0) return;
+    /* Kroženje: zadnja → prva in prva → zadnja. */
+    trenutni = (indeks + gumbi.length) % gumbi.length;
+    const gumb = gumbi[trenutni];
+    slika.src = gumb.dataset.slika ?? '';
+    slika.alt = gumb.dataset.opis ?? '';
+    if (opis) opis.textContent = gumb.dataset.opis ?? '';
+  }
+
+  gumbi.forEach((gumb, indeks) => {
+    gumb.addEventListener('click', () => {
+      if (!lightbox) return;
+      pokazi(indeks);
+      lightbox.showModal();
+    });
+  });
+
+  lightbox?.addEventListener('click', (dogodek) => {
+    const cilj = dogodek.target as HTMLElement;
+    if (cilj.closest('[data-prej]')) {
+      pokazi(trenutni - 1);
+      return;
+    }
+    if (cilj.closest('[data-naprej]')) {
+      pokazi(trenutni + 1);
+      return;
+    }
+    /* Klik kamorkoli drugam zapre — Esc obdela <dialog> sam. */
+    lightbox.close();
+  });
+
+  lightbox?.addEventListener('keydown', (dogodek) => {
+    if (dogodek.key === 'ArrowLeft') {
+      dogodek.preventDefault();
+      pokazi(trenutni - 1);
+    } else if (dogodek.key === 'ArrowRight') {
+      dogodek.preventDefault();
+      pokazi(trenutni + 1);
+    }
+  });
+
+  lightbox?.addEventListener('close', () => {
+    if (slika) slika.src = '';
+  });
+</script>
+
+<style>
+  .lightbox {
+    max-width: none;
+    max-height: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    display: none;
+    cursor: zoom-out;
+  }
+  .lightbox[open] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .lightbox::backdrop { background: rgba(20, 17, 16, 0.92); }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: var(--bbg-r-l);
+    border: 2.5px solid var(--bbg-gold);
+  }
+  .lightbox__opis {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--bbg-paper);
+    opacity: 0.85;
+    text-align: center;
+    max-width: 90vw;
+  }
+
+  .lightbox__krmilo {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    font-size: 34px;
+    line-height: 1;
+    font-family: var(--bbg-font-naslov);
+    background: var(--bbg-gold);
+    color: var(--bbg-ink);
+    border: 0;
+    border-radius: var(--bbg-r-gumb);
+    box-shadow: var(--bbg-senca-mala);
+    cursor: pointer;
+  }
+  .lightbox__krmilo--prej { left: 16px; }
+  .lightbox__krmilo--naprej { right: 16px; }
+  .lightbox__krmilo:hover { background: var(--bbg-gold-light); }
+  .lightbox__krmilo:focus-visible {
+    outline: 2px solid var(--bbg-paper);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 620px) {
+    .lightbox__krmilo {
+      width: 42px;
+      height: 42px;
+      font-size: 26px;
+    }
+    .lightbox__krmilo--prej { left: 8px; }
+    .lightbox__krmilo--naprej { right: 8px; }
+  }
+</style>

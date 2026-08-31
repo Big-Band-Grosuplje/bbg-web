@@ -19,7 +19,7 @@ Ključno:
 - Tipografija: **Archivo Black** (naslovi) + **Archivo** (besedilo, 500/600/800), samo-gostovano prek `@fontsource` paketov. Google Fonts CDN NIKOLI — prenesel bi IP obiskovalca tretji osebi
 - Znak: `src/assets/brand/bbg-znak.svg` (currentColor) + statične variante; favicon monogram "B"
 - Slog: moderno, minimalistično, črno-zlato; izstopajoči featurji: avdio/video hero, interaktivna postavitev orkestra
-- **Rotacije**: rahle rotacije (−4° do +2°) SAMO za znak, badge in nalepke — nikoli za daljša besedila. Največ dva zarotirana elementa na zaslon
+- **Rotacije**: rahle rotacije (−4° do +2°) SAMO za znak, badge in nalepke — nikoli za daljša besedila. Največ **trije** zarotirani elementi na zaslon v heroju (znak + badge + nalepka), drugod največ dva. Navigacija ostane ravna, ker je hkrati vidna s hero
 - **Gumbi**: trda senca `box-shadow: 4px 4px 0 var(--bbg-accent)`
 - Kolofon in poslovni deli strani ostanejo ravni in nevtralni
 - Ton besedil (napovedniki, novice): duhovito in samoironično, a informativno — glej `docs/ton-vzorci.md`. Kolofon, uradni in poslovni deli strani ostanejo nevtralni.

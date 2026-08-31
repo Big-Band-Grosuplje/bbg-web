@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Noga from '../components/Noga.astro';
+import VideoModal from '../components/VideoModal.astro';
+import Posnetek from '../components/Posnetek.astro';
+import { razvrsceno } from '../lib/mediji';
+
+/* Vsi objavljeni posnetki, od najnovejšega. */
+const posnetki = razvrsceno();
+---
+
+<Layout
+  title="Multimedija — Big Band Grosuplje"
+  description="Posnetki Big Banda Grosuplje: koncerti, javna snemanja in festivalski nastopi od leta 2012 do danes."
+>
+  <Nav />
+
+  <main class="stran">
+    <div class="ovoj">
+      <p class="nadnaslov">arhiv posnetkov</p>
+      <h1>Multimedija</h1>
+      <p class="uvod">
+        {posnetki.length} posnetkov, od najnovejšega do najstarejšega.
+        Predvajalnik se naloži šele ob kliku — do takrat s YouTuba ne prenesemo
+        ničesar razen sličice.
+      </p>
+
+      <ul class="posnetki">
+        {posnetki.map((m) => <Posnetek medij={m} />)}
+      </ul>
+
+      <p class="kredit">
+        Avtorje posnetkov navajamo pri vsakem posnetku. Kjer kredit manjka,
+        vira še nismo potrdili.
+      </p>
+    </div>
+  </main>
+
+  <Noga />
+  <VideoModal />
+</Layout>
+
+<style>
+  .stran { padding: 52px 0 74px; }
+  h1 {
+    margin: 10px 0 18px;
+    font-size: clamp(28px, 4.4vw, 44px);
+    color: var(--bbg-gold-light);
+  }
+  .uvod {
+    margin: 0 0 40px;
+    max-width: 42rem;
+    opacity: 0.9;
+  }
+  .posnetki {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 34px 26px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+  .kredit {
+    margin: 52px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--bbg-border-dark);
+    font-size: 12.5px;
+    line-height: 1.7;
+    opacity: 0.65;
+    max-width: 44rem;
+  }
+</style>

@@ -60,12 +60,13 @@
 
 /* ------------------------------------------------------------
    Rotacije — SAMO znak, badge in nalepke. Nikoli daljša besedila.
-   Največ dva zarotirana elementa na zaslon. Kolofon in poslovni
-   deli strani ostanejo ravni. Pravila so zapisana v CLAUDE.md.
+   Največ trije zarotirani elementi na zaslon v heroju (znak + badge +
+   nalepka), drugod največ dva. Navigacija, kolofon in poslovni deli
+   strani ostanejo ravni. Pravila so zapisana v CLAUDE.md.
    ------------------------------------------------------------ */
 .bbg-rot-znak    { transform: rotate(-4deg); }
 .bbg-rot-badge   { transform: rotate(2deg); }
-.bbg-rot-nalepka { transform: rotate(-2deg); }
+.bbg-rot-nalepka { transform: rotate(-4deg); }  /* po mockupu smer-c.html */
 
 /* Gumb znamke — trda senca v akcentni barvi */
 .bbg-gumb {
@@ -136,4 +137,53 @@
   border-radius: var(--bbg-r-badge);
   background: var(--bbg-accent);
   color: var(--bbg-paper);
+}
+
+/* ------------------------------------------------------------
+   Skupne postavitvene pomožnice (uporabljajo jih vse strani in
+   komponente, zato so globalne in ne v scoped blokih)
+   ------------------------------------------------------------ */
+.ovoj {
+  max-width: var(--bbg-sirina);
+  margin: 0 auto;
+  padding: 0 var(--bbg-rob);
+}
+.sekcija {
+  padding: var(--bbg-sekcija) 0;
+  border-top: 1px solid var(--bbg-border-dark);
+}
+.nadnaslov {
+  margin: 0;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--bbg-gold);
+}
+.sekcija h2 {
+  margin: 10px 0 30px;
+  font-size: clamp(26px, 3.4vw, 38px);
+  color: var(--bbg-gold-light);
+}
+.oznaka {
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.vizualno-skrito {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
 }

@@ -1,0 +1,61 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { slikaZa, type Fotografija } from '../lib/galerija';
+
+interface Props {
+  foto: Fotografija;
+}
+const { foto } = Astro.props;
+
+const vir = slikaZa(foto.datoteka);
+/* Za lightbox pripravimo večjo različico iste fotografije. */
+const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
+---
+
+<li class="slika">
+  <figure>
+    <button
+      type="button"
+      class="slika__gumb"
+      data-slika={velika.src}
+      data-opis={foto.podnapis}
+      aria-label={`Povečaj fotografijo: ${foto.podnapis}`}
+    >
+      <Image src={vir} alt={foto.podnapis} width={800} loading="lazy" />
+    </button>
+    <figcaption>{foto.podnapis}</figcaption>
+  </figure>
+</li>
+
+<style>
+  .slika figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .slika__gumb {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    line-height: 0;
+  }
+  .slika__gumb:focus-visible {
+    outline: 2px solid var(--bbg-gold-light);
+    outline-offset: 3px;
+  }
+  .slika img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--bbg-r-l);
+    border: 2.5px solid var(--bbg-gold);
+  }
+  .slika figcaption {
+    font-size: 13.5px;
+    line-height: 1.5;
+    opacity: 0.78;
+  }
+</style>

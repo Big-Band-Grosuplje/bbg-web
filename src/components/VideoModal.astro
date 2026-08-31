@@ -1,0 +1,88 @@
+---
+/* Skupni modal za vse posnetke — brez listanja (tako je določeno).
+   iframe nastane šele ob kliku in se ob zaprtju odstrani iz DOM,
+   kar ustavi predvajanje. */
+---
+
+<dialog id="video-modal" class="modal" aria-label="Predvajalnik posnetka">
+  <button type="button" class="modal__zapri" data-zapri aria-label="Zapri predvajalnik">×</button>
+  <div class="modal__okvir" id="video-okvir"></div>
+</dialog>
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>('#video-modal');
+  const okvir = document.querySelector<HTMLElement>('#video-okvir');
+
+  document.querySelectorAll<HTMLButtonElement>('.video__gumb').forEach((gumb) => {
+    gumb.addEventListener('click', () => {
+      if (!modal || !okvir) return;
+      const id = gumb.dataset.videoId;
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = gumb.dataset.videoNaslov ?? 'Posnetek Big Banda Grosuplje';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      okvir.replaceChildren(iframe);
+      modal.showModal();
+    });
+  });
+
+  modal?.addEventListener('click', (dogodek) => {
+    const cilj = dogodek.target as HTMLElement;
+    if (cilj.closest('[data-zapri]') || !cilj.closest('.modal__okvir')) {
+      modal.close();
+    }
+  });
+
+  /* close pokrije tudi Esc, ki ga <dialog> obdela sam. */
+  modal?.addEventListener('close', () => {
+    if (okvir) okvir.replaceChildren();
+  });
+</script>
+
+<style>
+  .modal {
+    width: min(1100px, 92vw);
+    max-width: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+  }
+  .modal::backdrop { background: rgba(20, 17, 16, 0.92); }
+  .modal__okvir {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    background: #000;
+    border: 2.5px solid var(--bbg-gold);
+    border-radius: var(--bbg-r-l);
+    overflow: hidden;
+  }
+  .modal__okvir :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .modal__zapri {
+    position: absolute;
+    top: -46px;
+    right: 0;
+    width: 38px;
+    height: 38px;
+    font-size: 24px;
+    line-height: 1;
+    font-family: var(--bbg-font-naslov);
+    background: var(--bbg-accent);
+    color: var(--bbg-paper);
+    border: 0;
+    border-radius: var(--bbg-r-s);
+    cursor: pointer;
+  }
+  .modal__zapri:focus-visible {
+    outline: 2px solid var(--bbg-gold-light);
+    outline-offset: 2px;
+  }
+</style>

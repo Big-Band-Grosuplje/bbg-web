@@ -1,0 +1,76 @@
+---
+/* Navigacija je hkrati vidna s hero, zato ostane RAVNA — kvoto treh
+   rotacij v heroju porabijo znak, badge in nalepka (glej CLAUDE.md). */
+import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
+
+interface Props {
+  /* Na naslovnici kažeta Koncerti in Kontakt na sidri, drugod na naslovnico. */
+  naslovnica?: boolean;
+}
+const { naslovnica = false } = Astro.props;
+const koncerti = naslovnica ? '#koncerti' : '/#koncerti';
+const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
+---
+
+<nav class="nav" aria-label="Glavna navigacija">
+  <div class="ovoj nav__vrstica">
+    <a href="/" class="nav__znak" aria-label="Big Band Grosuplje — naslovnica">
+      <img src={znakZlat.src} alt="" width="120" />
+    </a>
+    <a href={koncerti}>Koncerti</a>
+    <a href="/multimedija">Multimedija</a>
+    <a href="/galerija">Galerija</a>
+    <a class="nav__cta" href={kontakt}>Najemi band</a>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background: var(--bbg-black);
+    border-bottom: 3px solid var(--bbg-gold);
+  }
+  .nav__vrstica {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    padding: 12px var(--bbg-rob);
+    flex-wrap: wrap;
+  }
+  .nav__znak { line-height: 0; }
+  .nav__znak img {
+    height: 46px;
+    width: auto;
+    display: block;
+  }
+  .nav a,
+  .nav a:link,
+  .nav a:visited {
+    color: var(--bbg-paper);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .nav a:hover,
+  .nav a:focus-visible { color: var(--bbg-gold-light); }
+  .nav__cta,
+  .nav__cta:link,
+  .nav__cta:visited {
+    margin-left: auto;
+    background: var(--bbg-accent);
+    color: var(--bbg-paper);
+    padding: 9px 20px;
+    border-radius: var(--bbg-r-badge);
+    font-weight: 800;
+  }
+  .nav__cta:hover,
+  .nav__cta:focus-visible { color: var(--bbg-paper); }
+
+  @media (max-width: 620px) {
+    .nav__vrstica { gap: 14px; }
+    .nav__znak img { height: 36px; }
+    .nav__cta { margin-left: 0; }
+  }
+</style>

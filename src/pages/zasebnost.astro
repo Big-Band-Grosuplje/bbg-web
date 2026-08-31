@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Noga from '../components/Noga.astro';
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 
 const POSODOBLJENO = '31. 8. 2026';
@@ -9,8 +11,10 @@ const POSODOBLJENO = '31. 8. 2026';
   title="Politika zasebnosti — Big Band Grosuplje"
   description="Kako Big Band Grosuplje ravna z osebnimi podatki: obisk strani, vgrajeni posnetki, e-novice in kontaktni obrazci."
 >
+  <Nav />
+
   <main class="stran">
-    <div class="ovoj">
+    <div class="ozko">
       <p class="nazaj"><a href="/">← Nazaj na naslovnico</a></p>
 
       <h1>Politika zasebnosti</h1>
@@ -142,19 +146,11 @@ const POSODOBLJENO = '31. 8. 2026';
     </div>
   </main>
 
-  <footer class="noga">
-    <div class="ovoj">
-      <p class="kolofon">
-        Kulturno društvo Big Band Grosuplje · Adamičeva cesta 16, 1290 Grosuplje<br />
-        Davčna številka: 12579076 (nismo zavezanci za DDV) · Matična številka: 1179241000 ·
-        <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>
-      </p>
-    </div>
-  </footer>
+  <Noga />
 </Layout>
 
 <style>
-  .ovoj {
+  .ozko {
     max-width: 46rem;
     margin: 0 auto;
     padding: 0 var(--bbg-rob);
@@ -189,16 +185,4 @@ const POSODOBLJENO = '31. 8. 2026';
   }
   .podpis { margin: 48px 0 0; opacity: 0.7; }
   .podpis img { height: auto; display: block; }
-
-  .noga {
-    border-top: 3px solid var(--bbg-gold);
-    padding: 40px 0 30px;
-  }
-  .kolofon {
-    margin: 0;
-    font-size: 12.5px;
-    opacity: 0.6;
-    text-align: center;
-    line-height: 1.8;
-  }
 </style>

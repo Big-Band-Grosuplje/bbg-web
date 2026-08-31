@@ -1,0 +1,144 @@
+---
+import { kreditiVrstica, slicicaZa, videoObject, type Medij } from '../lib/mediji';
+
+interface Props {
+  medij: Medij;
+  /* JSON-LD naj bo na strani samo enkrat na posnetek. */
+  jsonLd?: boolean;
+}
+const { medij, jsonLd = true } = Astro.props;
+
+const krediti = kreditiVrstica(medij.krediti);
+const slicica = slicicaZa(medij.id);
+---
+
+<li class="posnetek">
+  <div class="video__ovoj">
+    <img
+      class="video__slika"
+      src={slicica}
+      alt={`Sličica posnetka: ${medij.naslov}`}
+      width="480"
+      height="360"
+      loading="lazy"
+    />
+    <button
+      class="video__gumb"
+      type="button"
+      data-video-id={medij.id}
+      data-video-naslov={medij.naslov}
+      aria-label={`Predvajaj posnetek: ${medij.naslov}`}
+    >
+      <span class="video__ikona" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <h3 class="posnetek__naslov">{medij.naslov}</h3>
+  {medij.avtor_glasbe && <p class="posnetek__avtor">{medij.avtor_glasbe}</p>}
+  <p class="posnetek__zasedba">{medij.zasedba}</p>
+  {medij.solisti.length > 0 && (
+    <p class="posnetek__solisti">
+      <span class="oznaka">Solisti</span>
+      {medij.solisti.join(', ')}
+    </p>
+  )}
+  <p class="posnetek__dogodek">{medij.dogodek}, {medij.leto}</p>
+  {krediti && <p class="posnetek__krediti">{krediti}</p>}
+
+  {jsonLd && (
+    <script type="application/ld+json" set:html={JSON.stringify(videoObject(medij))} />
+  )}
+</li>
+
+<style>
+  .posnetek {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .video__ovoj {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    border: 2.5px solid var(--bbg-gold);
+    border-radius: var(--bbg-r-l);
+    margin-bottom: 14px;
+  }
+  .video__slika {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* hqdefault.jpg je 4:3 s črnima pasovoma — obreži na 16:9 */
+    transform: scale(1.35);
+  }
+  .video__gumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--bbg-black) 30%, transparent);
+    border: 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .video__gumb:hover,
+  .video__gumb:focus-visible {
+    background: color-mix(in srgb, var(--bbg-black) 12%, transparent);
+  }
+  .video__gumb:focus-visible {
+    outline: 2px solid var(--bbg-gold-light);
+    outline-offset: -5px;
+  }
+  .video__ikona {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: var(--bbg-gold);
+    position: relative;
+    box-shadow: var(--bbg-senca-mala);
+    transition: transform 0.2s ease;
+  }
+  .video__ikona::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 11px 0 11px 18px;
+    border-color: transparent transparent transparent var(--bbg-ink);
+  }
+  .video__gumb:hover .video__ikona { transform: scale(1.08); }
+
+  .posnetek__naslov { margin: 0; font-size: 18px; line-height: 1.3; }
+  .posnetek__avtor,
+  .posnetek__zasedba,
+  .posnetek__solisti,
+  .posnetek__dogodek,
+  .posnetek__krediti {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .posnetek__avtor { color: var(--bbg-gold-light); font-weight: 600; }
+  .posnetek__zasedba { opacity: 0.9; }
+  .posnetek__solisti,
+  .posnetek__dogodek { opacity: 0.75; }
+  .posnetek__krediti {
+    margin-top: 6px;
+    padding-top: 10px;
+    border-top: 1px solid var(--bbg-border-dark);
+    font-size: 12.5px;
+    opacity: 0.62;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .video__gumb,
+    .video__ikona { transition: none; }
+    .video__gumb:hover .video__ikona { transform: none; }
+  }
+</style>
