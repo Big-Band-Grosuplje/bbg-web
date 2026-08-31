@@ -1,57 +1,177 @@
 /* ============================================================
    BBG brand tokeni — vir resnice za barve, tipografijo in znak
    Smer C, potrjena 31. 8. 2026.
-   Geometrija (dimenzije, sence, zaobljenosti, razmiki) je povzeta po
-   referenčnem mockupu docs/design/smer-c.html.
-   Rotacije NISO povzete po mockupu — ta jih uporablja tudi na naslovih
-   in karticah, pravila znamke pa jih dovoljujejo samo na znaku, badgeu
-   in nalepkah (glej CLAUDE.md).
+   Geometrija (dimenzije, sence, zaobljenosti, razmiki, mikrorotacije)
+   je povzeta po referenčnem mockupu docs/design/smer-c.html.
    Pisave se uvozijo v Layout.astro prek @fontsource paketov
    (samo-gostovano — nikoli Google Fonts CDN).
+
+   TEMI: privzeta je temna. Svetlo temo nosi [data-theme="light"] na
+   <html>, ki ga postavi inline skripta v <head> (glej Layout.astro).
+   Barv NIKOLI ne kodiraj trdo v komponentah — uporabi semantične
+   tokene spodaj, sicer se ob preklopu teme ne posodobijo.
    ============================================================ */
 
 :root {
-  /* Barve */
-  --bbg-gold: #C9A227;        /* primarna zlata */
-  --bbg-gold-light: #E8C95C;  /* naslovi, hover, poudarki na temnem */
-  --bbg-accent: #D4553B;      /* rdeč akcent — trde sence, badge, meta */
-  --bbg-black: #141110;       /* topla črna — ozadja, hero */
-  --bbg-ink: #191512;         /* besedilo in bloki na svetlem (po mockupu) */
-  --bbg-paper: #FAF3E3;       /* papirnata podlaga — kartice, vnosna polja */
+  /* --- Paleta znamke (neodvisna od teme) --- */
+  --bbg-gold: #C9A227;         /* primarna zlata — poudarki na temnem */
+  --bbg-gold-light: #E8C95C;   /* naslovi in povezave na temnem */
+  --bbg-gold-dark: #8A6E14;    /* naslovi in povezave na papirju (kontrast!) */
+  --bbg-gold-darker: #6B5410;  /* hover na papirju */
+  --bbg-accent: #D4553B;       /* rdeč akcent — trde sence, badge, meta */
+  --bbg-black: #141110;        /* topla črna */
+  --bbg-ink: #191512;          /* temno besedilo in temni bloki */
+  --bbg-paper: #FAF3E3;        /* papirnata podlaga */
 
-  /* Tipografija */
+  /* --- Tipografija --- */
   --bbg-font-naslov: 'Archivo Black', 'Archivo', system-ui, sans-serif;
   --bbg-font-besedilo: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* Postavitev */
+  /* --- Postavitev --- */
   --bbg-sirina: 1100px;
   --bbg-rob: 24px;
   --bbg-sekcija: 74px;
 
-  /* Zaobljenosti */
+  /* --- Zaobljenosti --- */
   --bbg-r-badge: 6px;
   --bbg-r-s: 8px;
   --bbg-r-gumb: 10px;
   --bbg-r-m: 12px;
   --bbg-r-l: 16px;
 
-  /* Trde sence */
+  /* --- Trde sence --- */
   --bbg-senca: 4px 4px 0 var(--bbg-accent);
   --bbg-senca-mala: 3px 3px 0 var(--bbg-accent);
   --bbg-senca-kartica: 8px 8px 0 color-mix(in srgb, var(--bbg-gold) 45%, transparent);
   --bbg-senca-foto: 10px 12px 0 rgba(201, 162, 39, 0.25);
 
-  /* Izpeljanke */
+  /* ==========================================================
+     Semantični tokeni — TEMNA tema (privzeta)
+     ========================================================== */
+  --bbg-bg: var(--bbg-black);
+  --bbg-besedilo: var(--bbg-paper);
+  --bbg-naslov: var(--bbg-gold-light);
+  --bbg-nadnaslov: var(--bbg-gold);
+  --bbg-povezava: var(--bbg-gold-light);
+  --bbg-povezava-hover: var(--bbg-gold);
+  --bbg-obroba: color-mix(in srgb, var(--bbg-gold) 22%, var(--bbg-black));
+  --bbg-obroba-mocna: var(--bbg-gold);
+
+  /* Kartice koncertov — na temnem so papirnate */
+  --bbg-kartica-bg: var(--bbg-paper);
+  --bbg-kartica-besedilo: var(--bbg-ink);
+  --bbg-blok-bg: var(--bbg-ink);
+  --bbg-blok-besedilo: var(--bbg-gold-light);
+  /* Meta vrstica na kartici: akcent #D4553B na papirju doseže le 3,68 :1,
+     zato temnejši odtenek (4,72 :1). */
+  --bbg-meta: #BC4529;
+
+  /* Paneli, vnosna polja, nalepke */
+  --bbg-panel-bg: color-mix(in srgb, var(--bbg-paper) 4%, transparent);
+  --bbg-vnos-bg: var(--bbg-paper);
+  --bbg-vnos-besedilo: var(--bbg-ink);
+  --bbg-nalepka-bg: var(--bbg-paper);
+  --bbg-nalepka-besedilo: var(--bbg-ink);
+
+  /* Noga in kolofon */
+  --bbg-noga-bg: transparent;
+  --bbg-kolofon-bg: transparent;
+  --bbg-kolofon-besedilo: var(--bbg-paper);
+  --bbg-kolofon-obroba: rgba(250, 243, 227, 0.15);
+
+  /* Navigacija */
+  --bbg-nav-bg: var(--bbg-black);
+  --bbg-nav-povezava: var(--bbg-paper);
+
+  /* Izpeljanki, ki ju uporabljajo starejša pravila */
   --bbg-gold-30: color-mix(in srgb, var(--bbg-gold) 30%, transparent);
-  --bbg-border-dark: color-mix(in srgb, var(--bbg-gold) 22%, var(--bbg-black));
+  --bbg-border-dark: var(--bbg-obroba);
+}
+
+/* ==========================================================
+   SVETLA tema
+   Zlata #C9A227 je na papirju prešibka za besedilo, zato gredo
+   naslovi na --bbg-gold-dark #8A6E14 (velik tekst), povezave pa na
+   še temnejši #7D6412, ker morajo doseči AA za normalno besedilo.
+   Kartice koncertov so inverzne: temna podlaga, svetlo besedilo.
+   Gumbi, badge in akcent ostanejo nespremenjeni.
+   ========================================================== */
+:root[data-theme='light'] {
+  --bbg-bg: var(--bbg-paper);
+  --bbg-besedilo: #191512;
+  --bbg-naslov: var(--bbg-gold-dark);
+  --bbg-nadnaslov: var(--bbg-gold-dark);
+  /* #8A6E14 doseže na papirju 4,40 :1 — dovolj za velike naslove,
+     premalo za besedilo v povezavah, zato te dobijo #7D6412 (5,13 :1). */
+  --bbg-povezava: #7D6412;
+  --bbg-povezava-hover: #503C0A;
+  --bbg-obroba: color-mix(in srgb, var(--bbg-ink) 18%, var(--bbg-paper));
+  --bbg-obroba-mocna: var(--bbg-gold-dark);
+
+  /* Inverzne kartice */
+  --bbg-kartica-bg: #191512;
+  --bbg-kartica-besedilo: var(--bbg-paper);
+  --bbg-blok-bg: var(--bbg-paper);
+  --bbg-blok-besedilo: var(--bbg-ink);
+  /* Na temni kartici gre akcent v svetlejši odtenek (5,79 :1). */
+  --bbg-meta: #E2705A;
+
+  --bbg-panel-bg: color-mix(in srgb, var(--bbg-ink) 4%, transparent);
+  --bbg-vnos-bg: #ffffff;
+  --bbg-vnos-besedilo: var(--bbg-ink);
+  --bbg-nalepka-bg: var(--bbg-ink);
+  --bbg-nalepka-besedilo: var(--bbg-paper);
+
+  /* Noga svetla, kolofon temen */
+  --bbg-noga-bg: var(--bbg-paper);
+  --bbg-kolofon-bg: var(--bbg-ink);
+  --bbg-kolofon-besedilo: var(--bbg-paper);
+  --bbg-kolofon-obroba: transparent;
+
+  --bbg-nav-bg: var(--bbg-paper);
+  --bbg-nav-povezava: var(--bbg-ink);
+
+  --bbg-border-dark: var(--bbg-obroba);
+}
+
+/* Brez JS: spoštuj sistemsko nastavitev. Inline skripta v <head>
+   data-theme sicer vedno postavi, tako da to velja le kot varovalka. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']):not([data-theme='light']) {
+    --bbg-bg: var(--bbg-paper);
+    --bbg-besedilo: #191512;
+    --bbg-naslov: var(--bbg-gold-dark);
+    --bbg-nadnaslov: var(--bbg-gold-dark);
+    --bbg-povezava: #7D6412;
+    --bbg-povezava-hover: #503C0A;
+    --bbg-obroba: color-mix(in srgb, var(--bbg-ink) 18%, var(--bbg-paper));
+    --bbg-obroba-mocna: var(--bbg-gold-dark);
+    --bbg-kartica-bg: #191512;
+    --bbg-kartica-besedilo: var(--bbg-paper);
+    --bbg-blok-bg: var(--bbg-paper);
+    --bbg-blok-besedilo: var(--bbg-ink);
+    --bbg-meta: #E2705A;
+    --bbg-panel-bg: color-mix(in srgb, var(--bbg-ink) 4%, transparent);
+    --bbg-vnos-bg: #ffffff;
+    --bbg-vnos-besedilo: var(--bbg-ink);
+    --bbg-nalepka-bg: var(--bbg-ink);
+    --bbg-nalepka-besedilo: var(--bbg-paper);
+    --bbg-noga-bg: var(--bbg-paper);
+    --bbg-kolofon-bg: var(--bbg-ink);
+    --bbg-kolofon-besedilo: var(--bbg-paper);
+    --bbg-kolofon-obroba: transparent;
+    --bbg-nav-bg: var(--bbg-paper);
+    --bbg-nav-povezava: var(--bbg-ink);
+    --bbg-border-dark: var(--bbg-obroba);
+  }
 }
 
 /* Znak (bbg-znak.svg uporablja fill="currentColor") */
-.bbg-znak         { color: var(--bbg-ink); }
+.bbg-znak         { color: var(--bbg-besedilo); }
 .bbg-znak--gold   { color: var(--bbg-gold); }
 .bbg-znak--white  { color: #ffffff; }
 
-/* Temna sekcija — privzeti kontekst znamke */
+/* Temna sekcija — ohranjena za posebne primere */
 .bbg-dark {
   background: var(--bbg-black);
   color: var(--bbg-paper);
@@ -59,16 +179,25 @@
 .bbg-dark a { color: var(--bbg-gold-light); }
 
 /* ------------------------------------------------------------
-   Rotacije — SAMO znak, badge in nalepke. Nikoli daljša besedila.
-   Največ trije zarotirani elementi na zaslon v heroju (znak + badge +
-   nalepka), drugod največ dva. Navigacija, kolofon in poslovni deli
-   strani ostanejo ravni. Pravila so zapisana v CLAUDE.md.
+   Rotacije
+   Izrazite (do ±4°): samo znak, badge in nalepke.
+   Mikrorotacije (do ±0,6°): naslovi h2, kartice in paneli — po
+   vzoru docs/design/smer-c.html.
+   Kolofon, obrazci in daljša besedila vedno ravni.
+   Pravila so zapisana v CLAUDE.md.
    ------------------------------------------------------------ */
-.bbg-rot-znak    { transform: rotate(-4deg); }
-.bbg-rot-badge   { transform: rotate(2deg); }
-.bbg-rot-nalepka { transform: rotate(-4deg); }  /* po mockupu smer-c.html */
+.bbg-rot-znak     { transform: rotate(-4deg); }
+.bbg-rot-znak-nav { transform: rotate(-3deg); }
+.bbg-rot-badge    { transform: rotate(2deg); }
+.bbg-rot-nalepka  { transform: rotate(-4deg); }
+.bbg-rot-foto     { transform: rotate(2deg); }
 
-/* Gumb znamke — trda senca v akcentni barvi */
+/* Mikrorotacije */
+.bbg-mikro-kartica { transform: rotate(-0.4deg); }
+.bbg-mikro-levo    { transform: rotate(-0.5deg); }
+.bbg-mikro-desno   { transform: rotate(0.5deg); }
+
+/* Gumb znamke — trda senca v akcentni barvi (enak v obeh temah) */
 .bbg-gumb {
   display: inline-block;
   font-family: var(--bbg-font-besedilo);
@@ -86,6 +215,7 @@
 }
 .bbg-gumb:hover,
 .bbg-gumb:focus-visible {
+  color: var(--bbg-ink);
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 var(--bbg-accent);
 }
@@ -94,20 +224,21 @@
   box-shadow: 2px 2px 0 var(--bbg-accent);
 }
 .bbg-gumb:focus-visible {
-  outline: 2px solid var(--bbg-gold-light);
+  outline: 2px solid var(--bbg-obroba-mocna);
   outline-offset: 3px;
 }
 
 /* Obrisna različica — brez sence */
 .bbg-gumb--obris {
   background: transparent;
-  color: var(--bbg-gold-light);
-  border: 2.5px solid var(--bbg-gold);
+  color: var(--bbg-povezava);
+  border: 2.5px solid var(--bbg-obroba-mocna);
   box-shadow: none;
 }
 .bbg-gumb--obris:hover,
 .bbg-gumb--obris:focus-visible {
   box-shadow: none;
+  color: var(--bbg-povezava-hover);
   background: color-mix(in srgb, var(--bbg-gold) 14%, transparent);
 }
 .bbg-gumb--obris:active { box-shadow: none; }
@@ -126,7 +257,7 @@
   .bbg-gumb:active { transform: none; }
 }
 
-/* Badge / nalepka — kratko besedilo, velike črke, akcentna podlaga */
+/* Badge / nalepka — akcentna podlaga, enaka v obeh temah */
 .bbg-badge {
   display: inline-block;
   font-family: var(--bbg-font-naslov);
@@ -140,8 +271,7 @@
 }
 
 /* ------------------------------------------------------------
-   Skupne postavitvene pomožnice (uporabljajo jih vse strani in
-   komponente, zato so globalne in ne v scoped blokih)
+   Skupne postavitvene pomožnice
    ------------------------------------------------------------ */
 .ovoj {
   max-width: var(--bbg-sirina);
@@ -150,7 +280,7 @@
 }
 .sekcija {
   padding: var(--bbg-sekcija) 0;
-  border-top: 1px solid var(--bbg-border-dark);
+  border-top: 1px solid var(--bbg-obroba);
 }
 .nadnaslov {
   margin: 0;
@@ -158,12 +288,16 @@
   text-transform: uppercase;
   font-size: 12.5px;
   font-weight: 800;
-  color: var(--bbg-gold);
+  color: var(--bbg-nadnaslov);
 }
+/* Mikrorotacija naslovov po mockupu; transform-origin na levi, da
+   naslov ne odplava od nadnaslova. */
 .sekcija h2 {
   margin: 10px 0 30px;
   font-size: clamp(26px, 3.4vw, 38px);
-  color: var(--bbg-gold-light);
+  color: var(--bbg-naslov);
+  transform: rotate(-0.6deg);
+  transform-origin: left center;
 }
 .oznaka {
   display: inline-block;
@@ -173,6 +307,25 @@
   text-transform: uppercase;
   opacity: 0.7;
 }
+
+/* Vrnitev na naslovnico — brez okvirja */
+.nazaj {
+  margin: 0 0 22px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.nazaj a,
+.nazaj a:link,
+.nazaj a:visited {
+  color: var(--bbg-povezava);
+  text-decoration: none;
+}
+.nazaj a:hover,
+.nazaj a:focus-visible {
+  color: var(--bbg-povezava-hover);
+  text-decoration: underline;
+}
+
 .vizualno-skrito {
   position: absolute;
   width: 1px;

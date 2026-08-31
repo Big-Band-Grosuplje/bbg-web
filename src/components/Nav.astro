@@ -1,6 +1,4 @@
 ---
-/* Navigacija je hkrati vidna s hero, zato ostane RAVNA — kvoto treh
-   rotacij v heroju porabijo znak, badge in nalepka (glej CLAUDE.md). */
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 
 interface Props {
@@ -15,21 +13,58 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
 <nav class="nav" aria-label="Glavna navigacija">
   <div class="ovoj nav__vrstica">
     <a href="/" class="nav__znak" aria-label="Big Band Grosuplje — naslovnica">
-      <img src={znakZlat.src} alt="" width="120" />
+      <img src={znakZlat.src} alt="" width="120" class="bbg-rot-znak-nav" />
     </a>
     <a href={koncerti}>Koncerti</a>
     <a href="/multimedija">Multimedija</a>
     <a href="/galerija">Galerija</a>
+
+    <button
+      type="button"
+      class="nav__tema"
+      id="preklop-teme"
+      aria-label="Preklopi temo"
+      aria-pressed="false"
+    >
+      <span class="nav__ikona" aria-hidden="true">☾</span>
+    </button>
+
     <a class="nav__cta" href={kontakt}>Najemi band</a>
   </div>
 </nav>
+
+<script>
+  /* Preklop teme. Začetno stanje postavi inline skripta v <head>
+     (Layout.astro), zato tu samo obrnemo in shranimo izbiro. */
+  const gumb = document.querySelector<HTMLButtonElement>('#preklop-teme');
+  const ikona = gumb?.querySelector<HTMLElement>('.nav__ikona');
+
+  function osvezi(tema: string) {
+    if (ikona) ikona.textContent = tema === 'light' ? '☀' : '☾';
+    gumb?.setAttribute('aria-pressed', tema === 'light' ? 'true' : 'false');
+  }
+
+  osvezi(document.documentElement.dataset.theme ?? 'dark');
+
+  gumb?.addEventListener('click', () => {
+    const trenutna = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+    const nova = trenutna === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = nova;
+    try {
+      localStorage.setItem('bbg-tema', nova);
+    } catch (e) {
+      /* zasebni način ipd. — tema deluje do osvežitve strani */
+    }
+    osvezi(nova);
+  });
+</script>
 
 <style>
   .nav {
     position: sticky;
     top: 0;
     z-index: 9;
-    background: var(--bbg-black);
+    background: var(--bbg-nav-bg);
     border-bottom: 3px solid var(--bbg-gold);
   }
   .nav__vrstica {
@@ -48,17 +83,37 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
   .nav a,
   .nav a:link,
   .nav a:visited {
-    color: var(--bbg-paper);
+    color: var(--bbg-nav-povezava);
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
   }
   .nav a:hover,
-  .nav a:focus-visible { color: var(--bbg-gold-light); }
+  .nav a:focus-visible { color: var(--bbg-povezava); }
+
+  .nav__tema {
+    margin-left: auto;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    line-height: 1;
+    background: transparent;
+    color: var(--bbg-nav-povezava);
+    border: 2px solid var(--bbg-obroba-mocna);
+    border-radius: var(--bbg-r-badge);
+    cursor: pointer;
+  }
+  .nav__tema:hover { color: var(--bbg-povezava); }
+  .nav__tema:focus-visible {
+    outline: 2px solid var(--bbg-obroba-mocna);
+    outline-offset: 2px;
+  }
+
   .nav__cta,
   .nav__cta:link,
   .nav__cta:visited {
-    margin-left: auto;
     background: var(--bbg-accent);
     color: var(--bbg-paper);
     padding: 9px 20px;
@@ -71,6 +126,5 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
   @media (max-width: 620px) {
     .nav__vrstica { gap: 14px; }
     .nav__znak img { height: 36px; }
-    .nav__cta { margin-left: 0; }
   }
 </style>

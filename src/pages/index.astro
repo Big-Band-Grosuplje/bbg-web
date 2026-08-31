@@ -200,7 +200,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
       </div>
 
       <div class="hero__foto">
-        <Image src={fotoHero} alt="Dirigent med vodenjem orkestra" width={900} loading="eager" />
+        <Image src={fotoHero} alt="Dirigent med vodenjem orkestra" width={900} loading="eager" class="bbg-rot-foto" />
         <span class="hero__nalepka bbg-rot-nalepka">dirigent, presenetljivo miren</span>
       </div>
     </div>
@@ -220,7 +220,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
       ) : (
         <ul class="kartice">
           {prihajajoci.map((k) => (
-            <li class="kartica">
+            <li class="kartica bbg-mikro-kartica">
               {k.blok ? (
                 <p class="kartica__blok">
                   <span class="kartica__dan">{k.blok.dan}</span>
@@ -302,7 +302,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
       <h2 id="kontakt-naslov">Kontakt</h2>
 
       <div class="dvostolpca">
-        <div class="panel">
+        <div class="panel bbg-mikro-levo">
           <h3>Za organizatorje</h3>
           <p>
             Gala večer, festival ali praznovanje? Big band doda prireditvi blišč
@@ -337,7 +337,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
           </form>
         </div>
 
-        <div class="panel panel--akcent">
+        <div class="panel panel--akcent bbg-mikro-desno">
           <h3>Pridruži se</h3>
           <p>
             Igraš trobento, pozavno, saks ali ritem? Poješ? Te vleče v snemanje
@@ -459,7 +459,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
         color-mix(in srgb, var(--bbg-gold) 16%, transparent) 0%,
         transparent 100%
       ),
-      var(--bbg-black);
+      var(--bbg-bg);
   }
   .hero__mreza {
     display: grid;
@@ -478,7 +478,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     font-size: clamp(18px, 2.2vw, 22px);
     font-weight: 600;
     font-style: italic;
-    color: var(--bbg-gold-light);
+    color: var(--bbg-naslov);
     max-width: 30rem;
   }
   .hero__gumbi {
@@ -501,8 +501,8 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     position: absolute;
     bottom: -16px;
     left: -14px;
-    background: var(--bbg-paper);
-    color: var(--bbg-ink);
+    background: var(--bbg-nalepka-bg);
+    color: var(--bbg-nalepka-besedilo);
     font-family: var(--bbg-font-naslov);
     font-size: 14px;
     padding: 9px 16px;
@@ -521,8 +521,8 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
   .kartica {
     display: flex;
     gap: 26px;
-    background: var(--bbg-paper);
-    color: var(--bbg-ink);
+    background: var(--bbg-kartica-bg);
+    color: var(--bbg-kartica-besedilo);
     border-radius: var(--bbg-r-l);
     padding: 28px;
     box-shadow: var(--bbg-senca-kartica);
@@ -534,8 +534,8 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
-    background: var(--bbg-ink);
-    color: var(--bbg-gold-light);
+    background: var(--bbg-blok-bg);
+    color: var(--bbg-blok-besedilo);
     border-radius: var(--bbg-r-m);
     padding: 16px 20px;
     font-family: var(--bbg-font-naslov);
@@ -554,7 +554,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
   .kartica__naziv { margin: 0 0 6px; font-size: 22px; line-height: 1.2; }
   .kartica__meta {
     margin: 0 0 12px;
-    color: var(--bbg-accent);
+    color: var(--bbg-meta);
     font-weight: 800;
     font-size: 14.5px;
   }
@@ -592,18 +592,23 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     gap: 30px;
   }
   .panel {
-    border: 2.5px solid var(--bbg-gold);
+    border: 2.5px solid var(--bbg-obroba-mocna);
     border-radius: var(--bbg-r-l);
     padding: 32px;
-    background: color-mix(in srgb, var(--bbg-paper) 4%, transparent);
+    background: var(--bbg-panel-bg);
   }
   .panel--akcent { border-color: var(--bbg-accent); }
   .panel h3 {
     margin: 0 0 12px;
     font-size: 23px;
-    color: var(--bbg-gold-light);
+    color: var(--bbg-naslov);
   }
   .panel > p { margin: 0 0 22px; opacity: 0.92; }
+
+  /* Panela sta mikrozarotirana, obrazca v njiju pa morata po pravilu
+     ostati ravna, zato ju protirotiramo. */
+  .bbg-mikro-levo .obrazec { transform: rotate(0.5deg); }
+  .bbg-mikro-desno .obrazec { transform: rotate(-0.5deg); }
 
   .obrazec { display: flex; flex-direction: column; }
   .obrazec label {
@@ -622,8 +627,8 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     font-size: 15px;
     padding: 11px 15px;
     margin-bottom: 16px;
-    background: var(--bbg-paper);
-    color: var(--bbg-ink);
+    background: var(--bbg-vnos-bg);
+    color: var(--bbg-vnos-besedilo);
     border: 0;
     border-radius: var(--bbg-r-s);
   }
@@ -631,7 +636,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
   .obrazec input:focus-visible,
   .obrazec select:focus-visible,
   .obrazec textarea:focus-visible {
-    outline: 2px solid var(--bbg-gold);
+    outline: 2px solid var(--bbg-obroba-mocna);
     outline-offset: 2px;
   }
   .obrazec button { align-self: flex-start; }
@@ -639,7 +644,7 @@ const web3formsVklopljen = WEB3FORMS_KEY !== '';
     margin: 12px 0 0;
     font-size: 13.5px;
     min-height: 1.2em;
-    color: var(--bbg-gold-light);
+    color: var(--bbg-naslov);
   }
   .obrazec__stanje--napaka { color: var(--bbg-accent); }
 

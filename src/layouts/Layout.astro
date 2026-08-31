@@ -31,6 +31,22 @@ const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-gro
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Tema se postavi PRED izrisom, da ni bliska napačne teme.
+        Vrstni red: izbira v localStorage, sicer sistemska nastavitev. */}
+    <script is:inline>
+      (() => {
+        try {
+          const shranjeno = localStorage.getItem('bbg-tema');
+          const svetla = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.dataset.theme =
+            shranjeno === 'light' || shranjeno === 'dark' ? shranjeno : svetla ? 'light' : 'dark';
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
 
@@ -56,14 +72,22 @@ const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-gro
 <style is:global>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
+
+  /* Barvna shema za sistemske gradnike (drsniki, izbirniki, polja) */
+  :root { color-scheme: dark; }
+  :root[data-theme='light'] { color-scheme: light; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']):not([data-theme='light']) { color-scheme: light; }
+  }
+
   body {
     /* Po mockupu smer-c.html: 500 17px/1.62 */
     font-family: var(--bbg-font-besedilo);
     font-weight: 500;
     font-size: 17px;
     line-height: 1.62;
-    background: var(--bbg-black);
-    color: var(--bbg-paper);
+    background: var(--bbg-bg);
+    color: var(--bbg-besedilo);
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3 {
@@ -73,16 +97,17 @@ const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-gro
   }
   strong, b { font-weight: 800; }
 
-  /* Osnova za povezave: stran je temna, zato privzeta modra/vijolična
-     brskalnika ni berljiva. visited je enak kot normal. */
+  /* Osnova za povezave: barva pride iz teme, ker privzeta
+     modra/vijolična brskalnika ni berljiva na nobeni od podlag.
+     visited je enak kot normal. */
   a,
   a:link,
   a:visited,
   a:active {
-    color: var(--bbg-gold-light);
+    color: var(--bbg-povezava);
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
   }
   a:hover,
-  a:focus-visible { color: var(--bbg-gold); }
+  a:focus-visible { color: var(--bbg-povezava-hover); }
 </style>
