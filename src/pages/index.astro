@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 import koncertiData from '../data/koncerti.json';
+import medijiData from '../data/mediji.json';
 
 const SITE = 'https://bigband-grosuplje.com';
 
@@ -18,11 +19,32 @@ type Koncert = {
   naziv: string;
   opis: string;
   gostje: Gost[];
+  opisSeo?: string;
   datumIso: string | null;
   ura: string | null;
   datumOpis: string;
   lokacija: Lokacija;
   vstopniceUrl: string | null;
+};
+
+type Krediti = {
+  kamera?: string;
+  avdio?: string;
+  montaza?: string;
+  posnetek?: string;
+  kanal?: string;
+};
+type Medij = {
+  id: string;
+  naslov: string;
+  avtor_glasbe?: string;
+  zasedba: string;
+  solisti: string[];
+  dogodek: string;
+  leto: number;
+  krediti: Krediti;
+  objavi: boolean;
+  opomba?: string;
 };
 
 const koncerti = koncertiData.koncerti as Koncert[];
@@ -100,7 +122,7 @@ function musicEvent(k: Koncert) {
     '@context': 'https://schema.org',
     '@type': 'MusicEvent',
     name: k.naziv,
-    description: k.opis,
+    description: k.opisSeo ?? k.opis,
     startDate: startDate(k.datumIso, k.ura),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
@@ -139,6 +161,48 @@ const prihajajoci = koncerti
     datumPrikaz: formatDatum(k.datumIso, k.ura) ?? k.datumOpis,
     jsonLd: musicEvent(k),
   }));
+
+/* --- Multimedija --- */
+
+const mediji = (medijiData as Medij[]).filter((m) => m.objavi);
+
+/* Vrstni red kreditov je fiksen; izpišejo se samo tisti, ki v podatkih obstajajo.
+   Polje "opomba" je interno in se na stran nikoli ne izpiše. */
+const KREDIT_OZNAKE: [keyof Krediti, string][] = [
+  ['kamera', 'Kamera'],
+  ['avdio', 'Avdio'],
+  ['montaza', 'Montaža'],
+  ['posnetek', 'Posnetek'],
+  ['kanal', 'Kanal'],
+];
+
+function kreditiVrstica(krediti: Krediti): string | null {
+  const deli = KREDIT_OZNAKE.filter(([klic]) => krediti[klic]).map(
+    ([klic, oznaka]) => `${oznaka}: ${krediti[klic]}`,
+  );
+  return deli.length > 0 ? deli.join(' · ') : null;
+}
+
+/* uploadDate zahteva datum, podatki pa hranijo samo leto — zato 1. januar
+   tega leta. To ni dejanski datum objave posnetka, ampak najboljši približek
+   iz razpoložljivega vira. */
+function videoObject(m: Medij) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: m.naslov,
+    uploadDate: `${m.leto}-01-01`,
+    thumbnailUrl: `https://i.ytimg.com/vi/${m.id}/hqdefault.jpg`,
+    embedUrl: `https://www.youtube.com/embed/${m.id}`,
+  };
+}
+
+const posnetki = mediji.map((m) => ({
+  ...m,
+  slika: `https://i.ytimg.com/vi/${m.id}/hqdefault.jpg`,
+  kreditiPrikaz: kreditiVrstica(m.krediti),
+  jsonLd: videoObject(m),
+}));
 ---
 
 <Layout>
@@ -189,6 +253,45 @@ const prihajajoci = koncerti
     )}
   </section>
 
+  <section class="mediji bbg-dark" id="multimedija" aria-labelledby="mediji-naslov">
+    <p class="nadnaslov">arhiv posnetkov</p>
+    <h2 id="mediji-naslov">Multimedija</h2>
+
+    <ul class="posnetki">
+      {posnetki.map((m) => (
+        <li class="posnetek">
+          <div class="video__ovoj" data-video-id={m.id} data-video-naslov={m.naslov}>
+            <img
+              class="video__slika"
+              src={m.slika}
+              alt={`Sličica posnetka: ${m.naslov}`}
+              width="480"
+              height="360"
+              loading="lazy"
+            />
+            <button class="video__gumb" type="button" aria-label={`Predvajaj posnetek: ${m.naslov}`}>
+              <span class="video__ikona" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <h3 class="posnetek__naslov">{m.naslov}</h3>
+          {m.avtor_glasbe && <p class="posnetek__avtor">{m.avtor_glasbe}</p>}
+          <p class="posnetek__zasedba">{m.zasedba}</p>
+          {m.solisti.length > 0 && (
+            <p class="posnetek__solisti">
+              <span class="oznaka">Solisti</span>
+              {m.solisti.join(', ')}
+            </p>
+          )}
+          <p class="posnetek__dogodek">{m.dogodek}, {m.leto}</p>
+          {m.kreditiPrikaz && <p class="posnetek__krediti">{m.kreditiPrikaz}</p>}
+
+          <script type="application/ld+json" set:html={JSON.stringify(m.jsonLd)} />
+        </li>
+      ))}
+    </ul>
+  </section>
+
   <footer class="bbg-dark noga">
     <p>
       Kulturno društvo Big Band Grosuplje<br />
@@ -198,6 +301,28 @@ const prihajajoci = koncerti
     </p>
   </footer>
 </Layout>
+
+<script>
+  /* Lite-embed: iframe nastane šele ob kliku, zato se ob nalaganju strani
+     ne naloži nič z YouTuba razen sličice. */
+  document.querySelectorAll<HTMLButtonElement>('.video__gumb').forEach((gumb) => {
+    gumb.addEventListener('click', () => {
+      const ovoj = gumb.closest<HTMLElement>('.video__ovoj');
+      if (!ovoj) return;
+      const id = ovoj.dataset.videoId;
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = ovoj.dataset.videoNaslov ?? 'Posnetek Big Banda Grosuplje';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.loading = 'lazy';
+      iframe.className = 'video__iframe';
+      ovoj.replaceChildren(iframe);
+    });
+  });
+</script>
 
 <style>
   .hero {
@@ -318,5 +443,130 @@ const prihajajoci = koncerti
   @media (prefers-reduced-motion: reduce) {
     .kartica { transition: none; }
     .kartica:hover { transform: none; }
+  }
+
+  /* --- Multimedija: temna sekcija --- */
+  .mediji {
+    padding: clamp(3rem, 8vw, 5.5rem) 1.25rem;
+    border-top: 1px solid var(--bbg-border-dark);
+  }
+  .mediji > * {
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+  .mediji h2 {
+    margin: 0.5rem auto 2.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .posnetki {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 2rem 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+  .posnetek {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .video__ovoj {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--bbg-border-dark);
+    margin-bottom: 0.85rem;
+  }
+  .video__slika {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* hqdefault.jpg je 4:3 s črnima pasovoma — obreži na 16:9 */
+    transform: scale(1.35);
+  }
+  .video__iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .video__gumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--bbg-black) 30%, transparent);
+    border: 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .video__gumb:hover,
+  .video__gumb:focus-visible {
+    background: color-mix(in srgb, var(--bbg-black) 12%, transparent);
+  }
+  .video__gumb:focus-visible {
+    outline: 2px solid var(--bbg-gold-light);
+    outline-offset: -4px;
+  }
+  .video__ikona {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--bbg-gold);
+    position: relative;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--bbg-black) 40%, transparent);
+    transition: transform 0.2s ease;
+  }
+  .video__ikona::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 0.7rem 0 0.7rem 1.15rem;
+    border-color: transparent transparent transparent var(--bbg-black);
+  }
+  .video__gumb:hover .video__ikona { transform: scale(1.08); }
+
+  .posnetek__naslov {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .posnetek__avtor,
+  .posnetek__zasedba,
+  .posnetek__solisti,
+  .posnetek__dogodek,
+  .posnetek__krediti {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+  .posnetek__avtor { color: var(--bbg-gold-light); }
+  .posnetek__zasedba { opacity: 0.9; }
+  .posnetek__solisti,
+  .posnetek__dogodek { opacity: 0.75; }
+  .posnetek__krediti {
+    margin-top: 0.35rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--bbg-border-dark);
+    font-size: 0.78rem;
+    opacity: 0.6;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .video__gumb,
+    .video__ikona { transition: none; }
+    .video__gumb:hover .video__ikona { transform: none; }
   }
 </style>
