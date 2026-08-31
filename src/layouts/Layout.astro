@@ -1,4 +1,15 @@
 ---
+/* Pisave so samo-gostovane prek @fontsource — nikoli Google Fonts CDN,
+   ker bi ta prenesel IP obiskovalca tretji osebi (GDPR).
+   Uvozimo samo podnabora latin in latin-ext; latin-ext nosi č, š, ž. */
+import '@fontsource/archivo-black/latin-400.css';
+import '@fontsource/archivo-black/latin-ext-400.css';
+import '@fontsource/archivo/latin-500.css';
+import '@fontsource/archivo/latin-ext-500.css';
+import '@fontsource/archivo/latin-600.css';
+import '@fontsource/archivo/latin-800.css';
+import '@fontsource/archivo/latin-ext-600.css';
+import '@fontsource/archivo/latin-ext-800.css';
 import '../styles/brand.css';
 import Analytics from '@vercel/analytics/astro';
 
@@ -46,8 +57,19 @@ const ogImage = new URL('/og/og-default.png', Astro.site ?? 'https://bigband-gro
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    /* Po mockupu smer-c.html: 500 17px/1.62 */
+    font-family: var(--bbg-font-besedilo);
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.62;
     background: var(--bbg-black);
     color: var(--bbg-paper);
+    -webkit-font-smoothing: antialiased;
   }
+  h1, h2, h3 {
+    font-family: var(--bbg-font-naslov);
+    font-weight: 400;   /* Archivo Black ima samo eno težo */
+    letter-spacing: 0.005em;
+  }
+  strong, b { font-weight: 800; }
 </style>

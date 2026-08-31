@@ -14,9 +14,14 @@ Ključno:
 - Projekt "The Goodwin Legacy" (2027): do odobritve granta NE objavljaj imen gostujočih umetnikov in podrobnosti; nikoli finančnih podatkov. Na strani samo napovednik "jubilejni mednarodni projekt ob 30-letnici"
 
 ## Brand
-- Tokeni v `src/styles/brand.css`: zlata #C9A227 (svetla #D4AF37), topla črna #181512, ink #111111, paper #FAF7F0
+- Vizualna smer **C**, potrjena 31. 8. 2026. Referenčni mockup: `docs/design/smer-c.html` — od tam povzemaj dimenzije, sence, zaobljenosti in razmike (NE rotacij, glej spodaj)
+- Tokeni v `src/styles/brand.css`: zlata #C9A227 (svetla #E8C95C), rdeč akcent #D4553B, topla črna #141110, ink #191512, paper #FAF3E3
+- Tipografija: **Archivo Black** (naslovi) + **Archivo** (besedilo, 500/600/800), samo-gostovano prek `@fontsource` paketov. Google Fonts CDN NIKOLI — prenesel bi IP obiskovalca tretji osebi
 - Znak: `src/assets/brand/bbg-znak.svg` (currentColor) + statične variante; favicon monogram "B"
 - Slog: moderno, minimalistično, črno-zlato; izstopajoči featurji: avdio/video hero, interaktivna postavitev orkestra
+- **Rotacije**: rahle rotacije (−4° do +2°) SAMO za znak, badge in nalepke — nikoli za daljša besedila. Največ dva zarotirana elementa na zaslon
+- **Gumbi**: trda senca `box-shadow: 4px 4px 0 var(--bbg-accent)`
+- Kolofon in poslovni deli strani ostanejo ravni in nevtralni
 - Ton besedil (napovedniki, novice): duhovito in samoironično, a informativno — glej `docs/ton-vzorci.md`. Kolofon, uradni in poslovni deli strani ostanejo nevtralni.
 
 ## Tehnična pravila

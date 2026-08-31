@@ -1,16 +1,45 @@
 /* ============================================================
-   BBG brand tokeni — vir resnice za barve in znak
-   Potrjeno: avg. 2026 (zlata #C9A227 na topli črni #181512)
-   Uporaba: import '../styles/brand.css' v Layout.astro
+   BBG brand tokeni — vir resnice za barve, tipografijo in znak
+   Smer C, potrjena 31. 8. 2026.
+   Geometrija (dimenzije, sence, zaobljenosti, razmiki) je povzeta po
+   referenčnem mockupu docs/design/smer-c.html.
+   Rotacije NISO povzete po mockupu — ta jih uporablja tudi na naslovih
+   in karticah, pravila znamke pa jih dovoljujejo samo na znaku, badgeu
+   in nalepkah (glej CLAUDE.md).
+   Pisave se uvozijo v Layout.astro prek @fontsource paketov
+   (samo-gostovano — nikoli Google Fonts CDN).
    ============================================================ */
 
 :root {
   /* Barve */
   --bbg-gold: #C9A227;        /* primarna zlata */
-  --bbg-gold-light: #D4AF37;  /* hover / poudarki na temnem */
-  --bbg-black: #181512;       /* topla črna — ozadja, hero */
-  --bbg-ink: #111111;         /* besedilo na svetlem */
-  --bbg-paper: #FAF7F0;       /* topla bela — svetle sekcije */
+  --bbg-gold-light: #E8C95C;  /* naslovi, hover, poudarki na temnem */
+  --bbg-accent: #D4553B;      /* rdeč akcent — trde sence, badge, meta */
+  --bbg-black: #141110;       /* topla črna — ozadja, hero */
+  --bbg-ink: #191512;         /* besedilo in bloki na svetlem (po mockupu) */
+  --bbg-paper: #FAF3E3;       /* papirnata podlaga — kartice, vnosna polja */
+
+  /* Tipografija */
+  --bbg-font-naslov: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+  --bbg-font-besedilo: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Postavitev */
+  --bbg-sirina: 1100px;
+  --bbg-rob: 24px;
+  --bbg-sekcija: 74px;
+
+  /* Zaobljenosti */
+  --bbg-r-badge: 6px;
+  --bbg-r-s: 8px;
+  --bbg-r-gumb: 10px;
+  --bbg-r-m: 12px;
+  --bbg-r-l: 16px;
+
+  /* Trde sence */
+  --bbg-senca: 4px 4px 0 var(--bbg-accent);
+  --bbg-senca-mala: 3px 3px 0 var(--bbg-accent);
+  --bbg-senca-kartica: 8px 8px 0 color-mix(in srgb, var(--bbg-gold) 45%, transparent);
+  --bbg-senca-foto: 10px 12px 0 rgba(201, 162, 39, 0.25);
 
   /* Izpeljanke */
   --bbg-gold-30: color-mix(in srgb, var(--bbg-gold) 30%, transparent);
@@ -28,3 +57,83 @@
   color: var(--bbg-paper);
 }
 .bbg-dark a { color: var(--bbg-gold-light); }
+
+/* ------------------------------------------------------------
+   Rotacije — SAMO znak, badge in nalepke. Nikoli daljša besedila.
+   Največ dva zarotirana elementa na zaslon. Kolofon in poslovni
+   deli strani ostanejo ravni. Pravila so zapisana v CLAUDE.md.
+   ------------------------------------------------------------ */
+.bbg-rot-znak    { transform: rotate(-4deg); }
+.bbg-rot-badge   { transform: rotate(2deg); }
+.bbg-rot-nalepka { transform: rotate(-2deg); }
+
+/* Gumb znamke — trda senca v akcentni barvi */
+.bbg-gumb {
+  display: inline-block;
+  font-family: var(--bbg-font-besedilo);
+  font-weight: 800;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 14px 28px;
+  border: 0;
+  border-radius: var(--bbg-r-gumb);
+  background: var(--bbg-gold);
+  color: var(--bbg-ink);
+  box-shadow: var(--bbg-senca);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.bbg-gumb:hover,
+.bbg-gumb:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--bbg-accent);
+}
+.bbg-gumb:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--bbg-accent);
+}
+.bbg-gumb:focus-visible {
+  outline: 2px solid var(--bbg-gold-light);
+  outline-offset: 3px;
+}
+
+/* Obrisna različica — brez sence */
+.bbg-gumb--obris {
+  background: transparent;
+  color: var(--bbg-gold-light);
+  border: 2.5px solid var(--bbg-gold);
+  box-shadow: none;
+}
+.bbg-gumb--obris:hover,
+.bbg-gumb--obris:focus-visible {
+  box-shadow: none;
+  background: color-mix(in srgb, var(--bbg-gold) 14%, transparent);
+}
+.bbg-gumb--obris:active { box-shadow: none; }
+
+/* Manjša različica */
+.bbg-gumb--mali {
+  padding: 9px 18px;
+  font-size: 14px;
+  box-shadow: var(--bbg-senca-mala);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbg-gumb { transition: none; }
+  .bbg-gumb:hover,
+  .bbg-gumb:focus-visible,
+  .bbg-gumb:active { transform: none; }
+}
+
+/* Badge / nalepka — kratko besedilo, velike črke, akcentna podlaga */
+.bbg-badge {
+  display: inline-block;
+  font-family: var(--bbg-font-naslov);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: var(--bbg-r-badge);
+  background: var(--bbg-accent);
+  color: var(--bbg-paper);
+}
