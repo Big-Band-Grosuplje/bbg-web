@@ -51,12 +51,45 @@ komponentah prek `:global(:root[data-skin='a'])`.
 | **Obrobe vnosnih polj** — prosojno polje z zlato obrobo | ✅ |
 | **Svetla tema** | ✅ izmerjena do AA |
 
+### Svetla tema: omiljena hero in svetle kartice
+
+Mockup ima samo temno različico, zato sta ti dve odločitvi naši.
+
+**Hero.** Preliv je v svetli temi omiljen na `0,35 → 0,08 → 0,55` (v temni
+ostane `0,55 → 0,15 → 0,92`). Berljivost je izmerjena na sami fotografiji:
+območja, kjer stojijo znak, slogan in gumbi, so vzorčena iz izrezka, ki ga
+pokaže `background-size: cover`, in za vsako je vzet 95. percentil svetlosti
+— torej najslabši primer, ne povprečje.
+
+| Element | Alfa preliva | Kontrast (najsvetlejših 5 %) |
+|---|---|---|
+| slogan `--bbg-gold-light` | 0,34 | **9,82 :1** |
+| obrisni gumb | 0,44 | 11,70 :1 |
+
+Spodnje postaje zato ni bilo treba potemniti in besedilo ne potrebuje sence.
+Znak leži čez osvetljeni napis KAZINA in ima nizek kontrast **v obeh temah**
+(1,26 :1 pri temnem prelivu, 1,48 :1 pri omiljenem) — je logotip, za katerega
+merilo za besedilo ne velja, in ga ločuje `drop-shadow`.
+
+`filter: brightness()` ni uporabljen: filter na `.hero` bi posvetlil tudi
+besedilo in gumbe v njem.
+
+**Kartice.** V svetli temi so svetle (odtenek panela) z zlato hairline obrobo,
+ne inverzno temne kot pri C. Podlaga kartice od strani odstopa le za 1,09 :1,
+zato mejo nosi obroba — ta gre v svetli temi na 55 % zlate namesto 30 %.
+Datumski blok ostane ločen z navpično črto (kot v mockupu), ne kot temen blok.
+
+Izmerjeno proti podlagi kartice `#EAE2D0`: besedilo `#171310` 14,32 :1,
+meta vrstica in datum `#785F11` 4,73 :1. Letnica je pri A v temni temi
+umirjena na 80 % barve; na svetli kartici nobena stopnja umiritve ne zdrži
+(85 % → 3,58 :1, 90 % → 3,94 :1), zato ostane v polni barvi in hierarhijo
+nosi velikost.
+
 ## ⚠️ Kaj še odstopa
 
 | Element | A po mockupu | Predogled |
 |---|---|---|
 | Besedila | mockup ima svoja | ostanejo besedila smeri C — predogled primerja **videz**, ne vsebine |
-| Tint nad hero fotografijo | temen | temen tudi v svetli temi; besedilo nad fotografijo mora ostati svetlo |
 | Obris fokusa | 1 px prosojna zlata kot pri obrobah | polna zlata — prosojna bi bila na temnem nevidna |
 | Hero fotografija | `<img>` z `object-fit: cover` | CSS ozadje, torej brez `srcset` (razlog spodaj) |
 
@@ -123,3 +156,4 @@ ustrezna vrednost `#7A6212` (4,55 :1 na vseh štirih podlagah).
 | 31. 8. 2026 | Prva različica; dodan predogled `?skin=a` |
 | 31. 8. 2026 | Predogled nadgrajen v zvesto izvedbo: fullbleed hero, svetla tema, datumski blok, obrobe polj; kontrastna revizija štirih kombinacij |
 | 31. 8. 2026 | Popravljene odprte kontrastne napake svetle teme smeri C; vse štiri kombinacije brez napak |
+| 31. 8. 2026 | Svetla tema A omiljena: svetlejša hero fotografija in svetle kartice koncertov |

@@ -800,6 +800,25 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
   }
+  /* V svetli temi je preliv omiljen, da fotografija ostane svetla.
+     Izmerjeno na sami fotografiji (vzorčenje območij, kjer stoji besedilo,
+     95. percentil svetlosti = najslabši primer): slogan v --bbg-gold-light
+     doseže 9,82 :1 tudi pri tej postaji na dnu, zato spodnje postaje ni
+     bilo treba potemniti in besedilo ne potrebuje sence.
+     Znak leži čez osvetljeni napis KAZINA in ima nizek kontrast v obeh
+     temah — je logotip in ne besedilo, ločuje ga drop-shadow spodaj.
+     Filtra brightness ne uporabljamo: filter na .hero bi posvetlil tudi
+     besedilo in gumbe v njem. */
+  :global(:root[data-skin='a'][data-theme='light']) .hero {
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(24, 21, 18, 0.35) 0%,
+        rgba(24, 21, 18, 0.08) 45%,
+        rgba(24, 21, 18, 0.55) 100%
+      ),
+      var(--hero-a);
+  }
   :global(:root[data-skin='a']) .hero__mreza {
     width: 100%;
     grid-template-columns: 1fr;
@@ -837,6 +856,12 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
   :global(:root[data-skin='a']) .kartica {
     border: 1px solid color-mix(in srgb, var(--bbg-gold) 30%, transparent);
   }
+  /* V svetli temi je kartica svetla in od strani odstopa le za 1,09 :1,
+     zato mora obroba nositi mejo — 30 % zlate je na papirju komaj vidnih. */
+  :global(:root[data-skin='a'][data-theme='light']) .kartica,
+  :global(:root[data-skin='a'][data-theme='light']) .kartica__blok {
+    border-color: color-mix(in srgb, var(--bbg-gold) 55%, transparent);
+  }
 
   /* --- Datumski blok kartice po mockupu: navpično zlato ločilo --- */
   :global(:root[data-skin='a']) .kartica__blok {
@@ -854,6 +879,12 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     font-size: 14px;
     opacity: 1;
     color: color-mix(in srgb, var(--bbg-gold-light) 80%, var(--bbg-kartica-bg));
+  }
+  /* Na svetli kartici nobena stopnja umiritve ne zdrži: temna zlata pri
+     85 % pade na 3,58 :1, pri 90 % na 3,94 :1. Letnica zato ostane v polni
+     barvi datumskega bloka, hierarhijo nosi velikost (14 px proti 44 px). */
+  :global(:root[data-skin='a'][data-theme='light']) .kartica__leto {
+    color: var(--bbg-blok-besedilo);
   }
 
   /* --- Vnosna polja po mockupu: prosojna z zlato obrobo --- */
@@ -908,6 +939,9 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
       border-right: 0;
       border-bottom: 1px solid color-mix(in srgb, var(--bbg-gold) 30%, transparent);
       align-self: stretch;
+    }
+    :global(:root[data-skin='a'][data-theme='light']) .kartica__blok {
+      border-bottom-color: color-mix(in srgb, var(--bbg-gold) 55%, transparent);
     }
   }
 </style>

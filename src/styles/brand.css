@@ -478,12 +478,22 @@
   /* Nosi tudi obrise fokusa, zato temna zlata in ne prosojna (4,62 :1). */
   --bbg-obroba-mocna: #806613;
 
-  /* Kartice inverzno temne, enako kot pri svetli temi smeri C. */
-  --bbg-kartica-bg: #171310;
-  --bbg-kartica-besedilo: var(--bbg-paper);
+  /* Kartice so v svetli temi A svetle, ne inverzno temne kot pri C:
+     papirnat odtenek panela in zlata hairline obroba (obrobo nastavi
+     index.astro, ker podlaga kartice od strani odstopa le za 1,09 :1 in
+     mejo nosi obroba). Datumski blok ostane ločen z navpično črto.
+
+     Izmerjeno proti podlagi kartice #EAE2D0 (panel odtenek čez #F3EBD8):
+     - besedilo #171310 .......... 14,32 :1
+     - meta in datum #785F11 .....  4,73 :1
+     Rezerva #7A6212 iz README doseže 4,55 :1, a je le 0,05 nad mejo;
+     podlaga kartice je izpeljana iz dveh tokenov, zato bi jo že majhna
+     sprememba papirja podrla. #785F11 je stopnjo temnejši in to prenese. */
+  --bbg-kartica-bg: var(--bbg-panel-bg);
+  --bbg-kartica-besedilo: var(--bbg-besedilo);
   --bbg-blok-bg: transparent;
-  --bbg-blok-besedilo: var(--bbg-gold);
-  --bbg-meta: var(--bbg-gold-light);
+  --bbg-blok-besedilo: #785F11;
+  --bbg-meta: #785F11;
   /* Rdeča na papirju A: 4,56 :1. */
   --bbg-napaka: #B8432B;
 
