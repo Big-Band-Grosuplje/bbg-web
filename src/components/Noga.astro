@@ -21,12 +21,18 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
 
       <div class="noga__novice">
         <h3 class="noga__naslov">Ne zamudi koncerta</h3>
+        {/* action in method sta tu za primer brez JS: takrat obrazec odda
+            navaden POST na Brevo. Ker gre na tujo domeno, se odpre v novem
+            zavihku, da obiskovalec ne izgubi naše strani. Z JS do tega ne
+            pride — skripta oddajo prestreže in pošlje prek fetch. */}
         <form
           class="novice"
           id="novice"
           data-brevo={BREVO_FORM_URL}
           action={brevoVklopljen ? BREVO_FORM_URL : undefined}
           method="post"
+          target={brevoVklopljen ? '_blank' : undefined}
+          rel={brevoVklopljen ? 'noopener noreferrer' : undefined}
           novalidate
         >
           <div class="novice__vrstica">
@@ -43,13 +49,18 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
             <button class="bbg-gumb bbg-gumb--mali" type="submit">Prijava</button>
           </div>
 
-          {/* Brevov honeypot — robot ga izpolni, človek ga ne vidi */}
+          {/* Brevov honeypot — robot ga izpolni, človek ga ne vidi.
+              Ime polja predpisuje Brevo in ga ne spreminjaj. */}
           <input type="text" name="email_address_check" class="honeypot" tabindex="-1" autocomplete="off" />
-          <input type="hidden" name="locale" value="sl" />
+          <input type="hidden" name="locale" value="en" />
 
+          {/* Potrditev je pogoj za oddajo, Brevu pa je ne pošiljamo: polje
+              nima atributa name, zato ni del oddanih podatkov — niti prek
+              fetch niti pri navadnem POST brez JS. required kljub temu
+              velja, ker ga preverja brskalnik. */}
           <p class="novice__soglasje">
             <label>
-              <input type="checkbox" name="soglasje" required />
+              <input type="checkbox" required />
               Strinjam se s <a href="/zasebnost">politiko zasebnosti</a>.
             </label>
           </p>
@@ -87,30 +98,80 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
 </footer>
 
 <script>
-  /* E-novice: Brevo, dokler URL ni nastavljen — mailto.
-     Stran je statična in brez zaledja, zato je mailto edina pot, ki
-     deluje brez tretje osebe. */
+  /* E-novice.
+
+     IZBRANA POT: fetch. Brevov endpoint sibforms.com/serve dovoljuje CORS —
+     na preflight vrne access-control-allow-origin z odsevanim izvorom in
+     access-control-allow-methods s POST (preverjeno 31. 8. 2026 za
+     produkcijsko domeno, za localhost in za poljuben tretji izvor). Zato je
+     odziv berljiv in obiskovalec ostane na strani. Navadnega POST v novem
+     zavihku ne potrebujemo; ostane samo kot pot brez JS prek action na
+     obrazcu.
+
+     Telo pošljemo kot URLSearchParams in ne kot FormData: Brevov obrazec
+     sicer odda application/x-www-form-urlencoded, ta zapis pa je tudi
+     varen za CORS in ne sproži preflighta. Vira podatkov to ne spremeni —
+     še vedno je FormData obrazca.
+
+     redirect: 'manual' — če Brevo odgovori s preusmeritvijo, je ne
+     sledimo: cilj morda nima CORS glav in bi fetch padel, čeprav je
+     prijava uspela. Tak odziv pride kot type 'opaqueredirect' in ga
+     štejemo za uspeh, enako kot 2xx in 3xx.
+
+     Dokler BREVO_FORM_URL ni nastavljen, obrazec pade na mailto. */
   const EPOSTA = 'info@bigband-grosuplje.com';
   const novice = document.querySelector<HTMLFormElement>('#novice');
 
-  novice?.addEventListener('submit', (dogodek) => {
-    const brevo = novice.dataset.brevo ?? '';
-    if (brevo !== '') return; /* pravi POST na Brevo prepustimo brskalniku */
+  function stanjeNovic(sporocilo: string, napaka = false) {
+    const polje = novice?.querySelector<HTMLElement>('.obrazec__stanje');
+    if (!polje) return;
+    polje.textContent = sporocilo;
+    polje.classList.toggle('obrazec__stanje--napaka', napaka);
+  }
 
+  novice?.addEventListener('submit', async (dogodek) => {
     dogodek.preventDefault();
     if (!novice.reportValidity()) return;
 
     const podatki = new FormData(novice);
-    if (podatki.get('email_address_check')) return; /* honeypot */
+    if (podatki.get('email_address_check')) return; /* honeypot — tiho končamo */
 
     const naslov = String(podatki.get('EMAIL') ?? '').trim();
     if (!naslov) return;
 
-    const telo = `Prijavljam se na e-novice Big Banda Grosuplje.\nE-naslov: ${naslov}\nSoglašam s politiko zasebnosti.\n`;
-    window.location.href = `mailto:${EPOSTA}?subject=${encodeURIComponent('Prijava na e-novice')}&body=${encodeURIComponent(telo)}`;
+    const brevo = novice.dataset.brevo ?? '';
+    if (brevo === '') {
+      const telo = `Prijavljam se na e-novice Big Banda Grosuplje.\nE-naslov: ${naslov}\nSoglašam s politiko zasebnosti.\n`;
+      window.location.href = `mailto:${EPOSTA}?subject=${encodeURIComponent('Prijava na e-novice')}&body=${encodeURIComponent(telo)}`;
+      stanjeNovic('Odpiramo tvoj e-poštni odjemalec s pripravljenim sporočilom.');
+      return;
+    }
 
-    const stanje = novice.querySelector<HTMLElement>('.obrazec__stanje');
-    if (stanje) stanje.textContent = 'Odpiramo tvoj e-poštni odjemalec s pripravljenim sporočilom.';
+    /* Polje soglasja nima atributa name, zato v podatkih ni; sem gredo
+       samo EMAIL, email_address_check in locale. */
+    const telo = new URLSearchParams();
+    podatki.forEach((vrednost, kljuc) => {
+      if (typeof vrednost === 'string') telo.append(kljuc, vrednost);
+    });
+
+    stanjeNovic('Pošiljamo …');
+    try {
+      const odziv = await fetch(brevo, {
+        method: 'POST',
+        body: telo,
+        redirect: 'manual',
+      });
+      const uspeh =
+        odziv.ok || odziv.type === 'opaqueredirect' || (odziv.status >= 300 && odziv.status < 400);
+      if (uspeh) {
+        novice.reset();
+        stanjeNovic('Hvala, prijava je zabeležena.');
+      } else {
+        stanjeNovic(`Prijava ni uspela. Piši nam na ${EPOSTA}.`, true);
+      }
+    } catch {
+      stanjeNovic(`Prijava ni uspela. Piši nam na ${EPOSTA}.`, true);
+    }
   });
 </script>
 
@@ -200,6 +261,9 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
     min-height: 1.2em;
     color: var(--bbg-naslov);
   }
+  /* --bbg-napaka izbere odtenek glede na podlago teme; --bbg-accent bi bil
+     berljiv samo na papirju. Enako kot pri kontaktnih obrazcih. */
+  .obrazec__stanje--napaka { color: var(--bbg-napaka); }
   .kanali__povezave { margin: 0; font-size: 15px; }
   /* V svetli temi je kolofon temen blok, zato barva ne sme biti
      zamegljena z opacity — mutiranje gre prek color-mix. */
