@@ -23,7 +23,8 @@ Ključno:
 - **Rotacije**: Izrazite rotacije (do ±4°) samo za znak, badge in nalepke. Mikrorotacije (do ±0,6°) so dovoljene na naslovih h2, karticah in panelih — po vzoru `docs/design/smer-c.html`. Kolofon, obrazci in daljša besedila vedno ravni
 - **Gumbi**: trda senca `box-shadow: 4px 4px 0 var(--bbg-accent)`
 - Ton besedil (napovedniki, novice): duhovito in samoironično, a informativno — glej `docs/ton-vzorci.md`. Kolofon, uradni in poslovni deli strani ostanejo nevtralni.
-- **Predogled smeri A** je dosegljiv prek `?skin=a` (izbira v `localStorage`, ključ `bbg-skin`); javnega gumba ni. Tokeni so v `brand.css` pod `:root[data-skin='a']`, popravki, ki morajo premagati scoped pravila, pa v komponentah prek `:global(:root[data-skin='a'])`. **Smer C je privzeta in mora ob vsaki spremembi predoglega ostati nespremenjena** — glej `docs/design/README.md`
+- **Predogled smeri A** je dosegljiv prek `?skin=a` (izbira v `localStorage`, ključ `bbg-skin`); javnega gumba ni. Tokeni so v `brand.css` pod `:root[data-skin='a']` in `:root[data-skin='a'][data-theme='light']`, popravki, ki morajo premagati scoped pravila, pa v komponentah prek `:global(:root[data-skin='a'])`. **Smer C je privzeta in mora ob vsaki spremembi predoglega ostati nespremenjena** — glej `docs/design/README.md`
+- Obe smeri imata temno in svetlo temo; štiri kombinacije so kontrastno izmerjene. Odprte ugotovitve za svetlo temo smeri C so v `docs/design/README.md`, razdelek o kontrastni reviziji — pred spreminjanjem zlatih odtenkov ga preberi
 - Pisavi: C uporablja Archivo Black/Archivo, predogled A pa Playfair Display/Source Sans 3. Menjava gre samo prek `--font-display` in `--font-body`; `--bbg-font-naslov`/`--bbg-font-besedilo` sta samo imeni, ki kažeta nanju. Pisav ne navajaj neposredno v komponentah
 
 ## Tehnična pravila

@@ -193,6 +193,9 @@ const POSODOBLJENO = '31. 8. 2026';
     color: var(--bbg-naslov);
     opacity: 0.95;
   }
+  /* V svetli temi smeri A je --bbg-naslov temna zlata pri 4,62 :1;
+     motnost 0,95 jo spusti na 4,21 :1, kar je pod AA za 18 px. */
+  :global(:root[data-skin='a']) .uvod { opacity: 1; }
   p { margin: 0 0 14px; }
   ul { margin: 0 0 14px; padding-left: 1.3rem; }
   li { margin-bottom: 8px; }

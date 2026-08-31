@@ -185,19 +185,23 @@ const mejniki = zgodovinaData.mejniki as {
 
 const web3formsVklopljen = WEB3FORMS_KEY !== '';
 
-/* Hero predoglega A je CSS ozadje, ne <img>. Razlog: skrit <img> Chrome
-   prenese tudi z loading="lazy" (display:none nima okvira, zato odložitev
-   odpade), s čimer bi privzeti skin C plačal 37 kB po nepotrebnem. Ozadje
-   v var(--hero-a) se ne zahteva, dokler pravilo ne velja — izmerjeno.
-   Cena: pri A ni srcset. Za predogled je to sprejemljivo. */
-const heroA = await getImage({ src: fotoHeroA, width: 900, format: 'webp' });
-const heroARazmerje = `${fotoHeroA.width} / ${fotoHeroA.height}`;
+/* Hero smeri A je fullbleed CSS ozadje, ne <img>. Razlog za ozadje: skrit
+   <img> Chrome prenese tudi z loading="lazy" (display:none nima okvira,
+   zato odložitev odpade), s čimer bi privzeti skin C plačal ves ta KB po
+   nepotrebnem. Ozadje v var(--hero-a) se ne zahteva, dokler pravilo ne
+   velja — izmerjeno z resource timingom.
+   Širina 1920: fotografija pokriva celotno širino zaslona, zato je 900 px
+   premalo. Cena je samo v buildu, ker se pri skin=c ne prenese.
+   Cena za A: brez srcset. */
+const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
 ---
 
 <Layout>
   <Nav naslovnica={true} />
 
-  <main class="hero">
+  {/* --hero-a nosi <main>, ker je pri smeri A fotografija ozadje celotnega
+      heroja. Pri skin=c je spremenljivka neuporabljena in se ne prenese. */}
+  <main class="hero" style={`--hero-a: url('${heroA.src}');`}>
     <div class="ovoj hero__mreza">
       <div class="hero__besedilo">
         <p class="bbg-badge bbg-rot-badge hero__badge">Pozor, hud big band!</p>
@@ -216,24 +220,14 @@ const heroARazmerje = `${fotoHeroA.width} / ${fotoHeroA.height}`;
         </p>
       </div>
 
-      <div
-        class="hero__foto"
-        style={`--hero-a: url('${heroA.src}'); --hero-a-razmerje: ${heroARazmerje};`}
-      >
+      <div class="hero__foto">
         <Image
           src={fotoHero}
           alt="Dirigent med vodenjem orkestra"
           width={900}
           loading="eager"
-          class="bbg-rot-foto hero__slika--c"
+          class="bbg-rot-foto"
         />
-        {/* Predogled A: skin se določi šele v brskalniku, zato je element
-            vedno v oznakah, sliko pa nosi CSS ozadje (glej opombo zgoraj). */}
-        <div
-          class="hero__slika--a"
-          role="img"
-          aria-label="Zlati napis Jazz kluba Kazina pred koncertom"
-        ></div>
         <span class="hero__nalepka bbg-rot-nalepka">dirigent, presenetljivo miren</span>
       </div>
     </div>
@@ -781,28 +775,45 @@ const heroARazmerje = `${fotoHeroA.width} / ${fotoHeroA.height}`;
   /* --- Predogled smeri A ---
      :global(), da Astro selektorja :root ne omeji na to komponento;
      pravila so tu, ker morajo premagati scoped pravila zgoraj. */
-  /* Selektor mora vsebovati .hero__foto in img, sicer ga pravilo
-     ".hero__foto img { display: block }" zgoraj premaga po specifičnosti
-     in skrita fotografija vseeno zavzame prostor. */
-  .hero__slika--a { display: none; }
-  :global(:root[data-skin='a']) .hero__foto img.hero__slika--c { display: none; }
-  :global(:root[data-skin='a']) .hero__foto .hero__slika--a {
-    display: block;
-    width: 100%;
-    aspect-ratio: var(--hero-a-razmerje);
-    background-image: var(--hero-a);
-    background-size: cover;
-    background-position: center;
-    border: 1px solid var(--bbg-gold);
-    border-radius: var(--bbg-r-l);
+  /* --- Fullbleed hero smeri A (po docs/design/smer-a.html) ---
+     Fotografija čez celotno širino, prelivni tint nad njo, znak in
+     besedilo spodaj levo. Dvostolpčni hero smeri C ostane nedotaknjen —
+     vse spodaj velja samo pod [data-skin='a'].
+     Preliv in fotografija sta v enem background-image; barvo pod njima
+     še vedno nosi osnovno pravilo, zato ostane vidna, dokler se slika
+     nalaga. Tint je iz mockupa in ostane temen tudi v svetli temi, ker
+     besedilo nad fotografijo mora ostati svetlo. */
+  :global(:root[data-skin='a']) .hero {
+    display: flex;
+    align-items: flex-end;
+    min-height: 88vh;
+    padding: 0 0 72px;
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(24, 21, 18, 0.55) 0%,
+        rgba(24, 21, 18, 0.15) 45%,
+        rgba(24, 21, 18, 0.92) 100%
+      ),
+      var(--hero-a);
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
   }
+  :global(:root[data-skin='a']) .hero__mreza {
+    width: 100%;
+    grid-template-columns: 1fr;
+    align-items: end;
+    gap: 0;
+  }
+  /* Uokvirjena fotografija smeri C v fullbleed postavitvi nima mesta. */
+  :global(:root[data-skin='a']) .hero__foto { display: none; }
   /* A stoji na mirni tipografiji — badge in nalepka odpadeta. */
   :global(:root[data-skin='a']) .hero__badge,
   :global(:root[data-skin='a']) .hero__nalepka { display: none; }
-  :global(:root[data-skin='a']) .hero__foto img {
-    border-width: 1px;
-    border-radius: var(--bbg-r-l);
-    box-shadow: none;
+  :global(:root[data-skin='a']) .hero__znak {
+    width: min(430px, 70vw);
+    filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.5));
   }
   :global(:root[data-skin='a']) .hero__slogan {
     font-family: var(--font-display);
@@ -810,9 +821,56 @@ const heroARazmerje = `${fotoHeroA.width} / ${fotoHeroA.height}`;
     font-style: italic;
     font-size: clamp(19px, 2.6vw, 26px);
     color: var(--bbg-gold-light);
-    max-width: 35rem;
+    max-width: 560px;
+    margin: 18px 0 26px;
   }
-  :global(:root[data-skin='a']) .panel { border-width: 1px; }
+  :global(:root[data-skin='a']) .hero__gumbi { gap: 14px; }
+  /* Obrisni gumb stoji na temnem prelivu tudi v svetli temi, zato ne sme
+     vzeti --bbg-povezava (ta je tam temno zlata #735C11 in bi izginila). */
+  :global(:root[data-skin='a']) .hero .bbg-gumb--obris {
+    color: var(--bbg-gold-light);
+    border-color: var(--bbg-gold);
+  }
+
+  /* --- Kartica po mockupu: prosojna podlaga s tanko zlato obrobo.
+         Podlago nosi --bbg-kartica-bg, obrobe osnovno pravilo nima. --- */
+  :global(:root[data-skin='a']) .kartica {
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 30%, transparent);
+  }
+
+  /* --- Datumski blok kartice po mockupu: navpično zlato ločilo --- */
+  :global(:root[data-skin='a']) .kartica__blok {
+    min-width: 96px;
+    padding: 0 24px 0 0;
+    border-radius: 0;
+    border-right: 1px solid color-mix(in srgb, var(--bbg-gold) 30%, transparent);
+    font-family: var(--font-display);
+  }
+  :global(:root[data-skin='a']) .kartica__dan { font-size: 44px; }
+  :global(:root[data-skin='a']) .kartica__mesec { margin-top: 4px; }
+  /* Mockup ima letnico pri motnosti 0,6; zlata pri tem pade na 3,31 :1,
+     zato jo umirimo s svetlo zlato pri polni motnosti. */
+  :global(:root[data-skin='a']) .kartica__leto {
+    font-size: 14px;
+    opacity: 1;
+    color: color-mix(in srgb, var(--bbg-gold-light) 80%, var(--bbg-kartica-bg));
+  }
+
+  /* --- Vnosna polja po mockupu: prosojna z zlato obrobo --- */
+  :global(:root[data-skin='a']) .obrazec input[type='text'],
+  :global(:root[data-skin='a']) .obrazec input[type='email'],
+  :global(:root[data-skin='a']) .obrazec select,
+  :global(:root[data-skin='a']) .obrazec textarea {
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 45%, transparent);
+    border-radius: var(--bbg-r-s);
+  }
+
+  /* Panel po mockupu: 1 px prosojna zlata. Barvo nastavimo tu in ne prek
+     --bbg-obroba-mocna, ker ta token nosi tudi obrise fokusa. */
+  :global(:root[data-skin='a']) .panel {
+    border-width: 1px;
+    border-color: color-mix(in srgb, var(--bbg-gold) 25%, transparent);
+  }
   /* Panela pri A nista zarotirana, zato protirotacija obrazcev odpade. */
   :global(:root[data-skin='a']) .bbg-mikro-levo .obrazec,
   :global(:root[data-skin='a']) .bbg-mikro-desno .obrazec { transform: none; }
@@ -839,5 +897,17 @@ const heroARazmerje = `${fotoHeroA.width} / ${fotoHeroA.height}`;
     .kartica { flex-direction: column; }
     .kartica__blok { align-self: flex-start; }
     .hero__nalepka { left: 0; }
+
+    /* Pri A gre kartica v stolpec, zato ločilo datuma iz navpičnega v
+       vodoravno — enako kot v mockupu. */
+    :global(:root[data-skin='a']) .kartica__blok {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 10px;
+      padding: 0 0 14px;
+      border-right: 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--bbg-gold) 30%, transparent);
+      align-self: stretch;
+    }
   }
 </style>

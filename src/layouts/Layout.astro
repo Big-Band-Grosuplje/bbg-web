@@ -90,9 +90,8 @@ const musicGroup = {
 
         TEMA: privzeta je TEMNA. Sistemske nastavitve (prefers-color-scheme)
         namenoma ne upoštevamo — svetla velja samo, kadar jo je obiskovalec
-        izbral s preklopnikom. Smer A svetle teme nima, zato je pri skin=a
-        tema vedno temna; shranjene izbire pri tem ne povozimo, da se ob
-        vrnitvi na C spet uveljavi. */}
+        izbral s preklopnikom. Izbira velja v obeh smereh; obe imata svetlo
+        temo. */}
     <script is:inline>
       (() => {
         const html = document.documentElement;
@@ -111,7 +110,7 @@ const musicGroup = {
           /* zasebni način ipd. — ostaneta privzeta skin C in temna tema */
         }
         html.dataset.skin = skin;
-        html.dataset.theme = skin !== 'a' && tema === 'light' ? 'light' : 'dark';
+        html.dataset.theme = tema === 'light' ? 'light' : 'dark';
       })();
     </script>
 
@@ -193,16 +192,12 @@ const musicGroup = {
      atributa. */
   document.querySelector<HTMLButtonElement>('#predogled-skin')?.addEventListener('click', () => {
     const html = document.documentElement;
-    let tema: string | null = null;
     try {
       localStorage.setItem('bbg-skin', 'c');
-      tema = localStorage.getItem('bbg-tema');
     } catch (e) {
       /* zasebni način — vrnitev velja do osvežitve strani */
     }
     html.dataset.skin = 'c';
-    /* Pri skin=a je bila tema prisiljeno temna; zdaj spet velja izbira. */
-    html.dataset.theme = tema === 'light' ? 'light' : 'dark';
 
     /* Brez tega bi osvežitev strani predogled takoj vrnila. */
     const naslov = new URL(window.location.href);

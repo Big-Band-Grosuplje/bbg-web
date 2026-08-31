@@ -186,17 +186,24 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     outline-offset: 2px;
   }
 
-  .nav__cta,
-  .nav__cta:link,
-  .nav__cta:visited {
+  /* Selektor mora vsebovati .nav, sicer ga premaga pravilo ".nav a:link"
+     zgoraj — (0,3,1) proti (0,2,1) — in CTA vzame barvo navadne povezave.
+     V svetli temi je to ink na akcentu, kar da 3,35 :1; s papirnatim
+     besedilom je 4,90 :1. */
+  .nav .nav__cta,
+  .nav .nav__cta:link,
+  .nav .nav__cta:visited {
     background: var(--bbg-accent);
     color: var(--bbg-paper);
     padding: 9px 20px;
     border-radius: var(--bbg-r-badge);
-    font-weight: 800;
+    /* 600 po mockupu smer-c.html. Prej je tu pisalo 800, a se ni uveljavilo,
+       ker je pravilo ".nav a" prevladalo; ob popravku specifičnosti bi se
+       nenadoma uveljavilo in CTA razširilo za 8 px. Izris ostane isti. */
+    font-weight: 600;
   }
-  .nav__cta:hover,
-  .nav__cta:focus-visible { color: var(--bbg-paper); }
+  .nav .nav__cta:hover,
+  .nav .nav__cta:focus-visible { color: var(--bbg-paper); }
 
   /* --- Burger: tri črte iz enega elementa, da ni treba treh praznih span --- */
   .nav__burger {
@@ -245,14 +252,17 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
   }
   :global(:root[data-skin='a']) .nav a { letter-spacing: 0.06em; }
   :global(:root[data-skin='a']) .nav__znak img { height: 44px; }
-  /* Smer A svetle teme nima, zato preklopnika ni. Ker je nosil
-     margin-left: auto, mora CTA odmik prevzeti nase. */
-  :global(:root[data-skin='a']) .nav__tema { display: none; }
-  :global(:root[data-skin='a']) .nav__meni .nav__cta { margin-left: auto; }
-  /* Zlata podlaga zahteva temno besedilo — papirnato bi padlo na 1,9 :1. */
-  :global(:root[data-skin='a']) .nav__cta,
-  :global(:root[data-skin='a']) .nav__cta:link,
-  :global(:root[data-skin='a']) .nav__cta:visited {
+  /* Preklopnik teme je pri A okrogel, brez ostrih vogalov. */
+  :global(:root[data-skin='a']) .nav__tema {
+    border-width: 1.5px;
+    border-radius: 999px;
+  }
+  /* Zlata podlaga zahteva temno besedilo — papirnato pade na 1,9 :1,
+     ink #171310 na zlati #C9A227 doseže 7,64 :1. Tudi tu mora biti .nav
+     v selektorju, da premaga pravilo zgoraj. */
+  :global(:root[data-skin='a']) .nav .nav__cta,
+  :global(:root[data-skin='a']) .nav .nav__cta:link,
+  :global(:root[data-skin='a']) .nav .nav__cta:visited {
     color: var(--bbg-ink);
     font-weight: 600;
   }
@@ -299,8 +309,9 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     /* Zaprt meni skrijemo samo, kadar ga JS lahko spet odpre. */
     :global(html[data-js='da']) .nav[data-meni='zaprt'] .nav__meni { display: none; }
 
-    /* Pri skin=a preklopnika teme ni, zato odmik prevzame burger. */
-    :global(:root[data-skin='a']) .nav__burger { margin-left: auto; }
-    :global(:root[data-skin='a']) .nav__meni .nav__cta { margin-left: 0; }
+    :global(:root[data-skin='a']) .nav__burger {
+      border-width: 1.5px;
+      border-radius: 999px;
+    }
   }
 </style>

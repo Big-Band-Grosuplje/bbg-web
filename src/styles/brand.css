@@ -218,6 +218,15 @@
   outline-offset: 3px;
 }
 
+/* Barva besedila na gumbu, kadar je gumb povezava.
+   Brez tega selektorja povezavni gumbi vzamejo barvo iz osnovnega pravila
+   za povezave: a:link ima specifičnost (0,1,1) in premaga .bbg-gumb (0,1,0).
+   Posledica je bila zlato besedilo na zlati podlagi — izmerjeno 1,49 :1 v
+   temni in 2,34 :1 v svetli temi smeri C. Z --bbg-ink doseže 7,50 :1
+   (v smeri A 7,64 :1). Gumbi iz <button> so imeli barvo ves čas pravilno. */
+.bbg-gumb:link,
+.bbg-gumb:visited { color: var(--bbg-ink); }
+
 /* Obrisna različica — brez sence */
 .bbg-gumb--obris {
   background: transparent;
@@ -225,6 +234,11 @@
   border: 2.5px solid var(--bbg-obroba-mocna);
   box-shadow: none;
 }
+/* Obrisni gumb nima podlage, zato ostane pri barvi povezave. Mora priti
+   za .bbg-gumb:link — enaka specifičnost (0,2,0), odloči vrstni red. */
+.bbg-gumb--obris:link,
+.bbg-gumb--obris:visited { color: var(--bbg-povezava); }
+
 .bbg-gumb--obris:hover,
 .bbg-gumb--obris:focus-visible {
   box-shadow: none;
@@ -335,12 +349,18 @@
    PREDOGLED SMERI A  ([data-skin="a"] na <html>)
    ============================================================
    Namen: da se med smerema A in C primerja na živi strani, ne na
-   mockupu. Ni končna izvedba A — polna A-jeva fullbleed postavitev
-   heroja je strukturna in je predogled ne dela. Glej docs/design/README.md.
+   mockupu. Izvedba sledi docs/design/smer-a.html — vključno s fullbleed
+   herojem, datumskim blokom kartice, obrobami vnosnih polj in svetlo temo.
+   Kaj še odstopa, je popisano v docs/design/README.md.
 
    Aktivacija: samo prek ?skin=a (izbira se shrani v localStorage pod
    bbg-skin). Javnega gumba za preklop ni; iz predoglega se vrneš prek
    plavajoče značke na dnu, ki nastavi skin=c.
+
+   TEMI: A ima obe. Temna je privzeta, svetlo nosi
+   :root[data-skin='a'][data-theme='light'] — ta ima specifičnost (0,3,0)
+   in zato zanesljivo premaga tako :root[data-skin='a'] kot
+   :root[data-theme='light'] (obe (0,2,0)).
 
    Vse spodaj je pod :root[data-skin='a'], da specifičnost zanesljivo
    premaga :root[data-theme='light'] (enaka specifičnost, a ta blok je
@@ -379,8 +399,7 @@
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* --- Semantični tokeni. Smer A je samo temna; svetle teme nima, zato
-         inline skripta pri skin=a data-theme vedno postavi na dark. --- */
+  /* --- Semantični tokeni — TEMNA tema (privzeta tudi pri A) --- */
   --bbg-bg: var(--bbg-black);
   --bbg-besedilo: var(--bbg-paper);
   --bbg-naslov: var(--bbg-gold-light);
@@ -399,10 +418,14 @@
   --bbg-blok-bg: transparent;
   --bbg-blok-besedilo: var(--bbg-gold);
   --bbg-meta: var(--bbg-gold-light);
-  --bbg-napaka: var(--bbg-gold-light);
+  /* Napaka ostane rdeča tudi pri A: zlato sporočilo o napaki se bere kot
+     poudarek, ne kot opozorilo. #E4715C doseže na #181512 5,90 :1. */
+  --bbg-napaka: #E4715C;
 
   --bbg-panel-bg: color-mix(in srgb, var(--bbg-paper) 5%, transparent);
-  --bbg-vnos-bg: color-mix(in srgb, var(--bbg-paper) 8%, transparent);
+  /* Polja so pri A prosojna, obliko jim da zlata obroba (dodana v
+     komponentah pri poljih samih). */
+  --bbg-vnos-bg: transparent;
   --bbg-vnos-besedilo: var(--bbg-paper);
   --bbg-nalepka-bg: var(--bbg-gold);
   --bbg-nalepka-besedilo: var(--bbg-ink);
@@ -414,6 +437,61 @@
 
   --bbg-nav-bg: color-mix(in srgb, var(--bbg-black) 88%, transparent);
   --bbg-nav-povezava: var(--bbg-paper);
+
+  --bbg-border-dark: var(--bbg-obroba);
+}
+
+/* ============================================================
+   SVETLA TEMA SMERI A
+   Paletni tokeni (--bbg-gold, --bbg-gold-light) se NE spreminjajo —
+   fullbleed hero ostane fotografija s temnim prelivom in svetlim
+   besedilom v obeh temah, zato mora svetla zlata ostati svetla.
+   Spreminjajo se samo semantični tokeni.
+
+   Izmerjeno po WCAG 2.1 proti podlagi --bbg-paper #F3EBD8:
+   - besedilo #171310 ............ 15,55 :1
+   - naslovi #806613 .............  4,62 :1  (izhodišče #8A6E14 doseže
+     samo 4,09 :1 — dovolj za velike naslove, premalo za 13,5 px
+     obvestila obrazca, ki isti token uporabljajo)
+   - povezave #735C11 ............  5,41 :1  (stopnjo temneje od C, ki
+     ima #7D6412; ta na tem papirju pade na 4,78 :1)
+   - hover #5C490E ...............  7,33 :1
+   Inverzna kartica #171310 s papirnatim besedilom: 15,55 :1;
+   zlata meta na njej: 11,10 :1.
+   ============================================================ */
+:root[data-skin='a'][data-theme='light'] {
+  --bbg-bg: var(--bbg-paper);
+  --bbg-besedilo: #171310;
+  --bbg-naslov: #806613;
+  --bbg-nadnaslov: #806613;
+  --bbg-povezava: #735C11;
+  --bbg-povezava-hover: #5C490E;
+  --bbg-obroba: color-mix(in srgb, var(--bbg-ink) 18%, var(--bbg-paper));
+  /* Nosi tudi obrise fokusa, zato temna zlata in ne prosojna (4,62 :1). */
+  --bbg-obroba-mocna: #806613;
+
+  /* Kartice inverzno temne, enako kot pri svetli temi smeri C. */
+  --bbg-kartica-bg: #171310;
+  --bbg-kartica-besedilo: var(--bbg-paper);
+  --bbg-blok-bg: transparent;
+  --bbg-blok-besedilo: var(--bbg-gold);
+  --bbg-meta: var(--bbg-gold-light);
+  /* Rdeča na papirju A: 4,56 :1. */
+  --bbg-napaka: #B8432B;
+
+  --bbg-panel-bg: color-mix(in srgb, var(--bbg-ink) 4%, transparent);
+  --bbg-vnos-bg: #ffffff;
+  --bbg-vnos-besedilo: var(--bbg-ink);
+  --bbg-nalepka-bg: var(--bbg-ink);
+  --bbg-nalepka-besedilo: var(--bbg-paper);
+
+  --bbg-noga-bg: var(--bbg-paper);
+  --bbg-kolofon-bg: var(--bbg-ink);
+  --bbg-kolofon-besedilo: var(--bbg-paper);
+  --bbg-kolofon-obroba: transparent;
+
+  --bbg-nav-bg: color-mix(in srgb, var(--bbg-paper) 88%, transparent);
+  --bbg-nav-povezava: var(--bbg-ink);
 
   --bbg-border-dark: var(--bbg-obroba);
 }
@@ -449,12 +527,19 @@
   font-weight: 700;
 }
 
-/* Naslovi h2: Playfair, zlato svetla, brez nagiba. */
+/* Naslovi h2: Playfair, brez nagiba. Barve ne vsiljujemo — --bbg-naslov je
+   v temni temi ravno --bbg-gold-light, v svetli pa temna zlata; trdo
+   vpisana svetla zlata bi na papirju dala 1,4 :1. */
 :root[data-skin='a'] .sekcija h2 {
   transform: none;
-  color: var(--bbg-gold-light);
   letter-spacing: 0.01em;
 }
+
+/* --- Drobno besedilo: motnost zamenjamo z barvo ---
+   Motnost stisne tudi povezave v istem odstavku; pri 0,65 pade zlata
+   povezava v nogi na 2,72 :1. Enakovredna umiritev prek color-mix pusti
+   povezavam polno moč. */
+:root[data-skin='a'] .oznaka { opacity: 1; }
 
 /* --- Gumbi: pilula brez trde sence --- */
 :root[data-skin='a'] .bbg-gumb {

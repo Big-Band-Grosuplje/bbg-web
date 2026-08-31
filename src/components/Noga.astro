@@ -217,8 +217,19 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
   :global(:root[data-skin='a']) .noga {
     border-top: 1px solid color-mix(in srgb, var(--bbg-gold) 30%, transparent);
   }
-  :global(:root[data-skin='a']) .novice__vnos { border-radius: 999px; }
+  :global(:root[data-skin='a']) .novice__vnos {
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 45%, transparent);
+    border-radius: 999px;
+  }
   :global(:root[data-skin='a']) .noga a { font-weight: 600; }
+  /* Motnost 0,65 oz. 0,8 stisne tudi povezave v teh odstavkih — zlata
+     povezava v nogi pade na 2,72 :1. Enak učinek dosežemo z barvo, ki
+     povezav ne prizadene. */
+  :global(:root[data-skin='a']) .noga__drobno,
+  :global(:root[data-skin='a']) .novice__soglasje {
+    opacity: 1;
+    color: color-mix(in srgb, var(--bbg-besedilo) 75%, var(--bbg-noga-bg));
+  }
 
   @media (max-width: 820px) {
     .noga__mreza { grid-template-columns: 1fr; }
