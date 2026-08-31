@@ -77,16 +77,22 @@ const musicGroup = {
 ---
 
 <!doctype html>
-<html lang="sl">
+<html lang="sl" data-skin="a">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {/* Skin in tema se postavita PRED izrisom, da ni bliska napačnega videza.
 
-        SKIN: privzeto "c". ?skin=a ali ?skin=c izbiro shrani v localStorage
-        (bbg-skin) in jo takoj uporabi, sicer velja shranjena. Javnega gumba
-        za preklop ni — predogled se vklopi samo prek parametra.
+        SKIN: privzeta je potrjena smer "a" (Zlati klub). data-skin="a" je
+        zapisan že v oznaki <html> zgoraj, ne šele tu — tako privzeta smer
+        velja tudi brez JS in se pisave smeri A uveljavijo ob prvem izrisu,
+        Archivo pa se ne prenese. Komentarja NE prestavljaj pred <html>:
+        Astro tam izgubi korenski element in z njim lang ter data-skin.
+        Ta skripta atribut samo po potrebi prepiše na "c". ?skin=c ali
+        ?skin=a izbiro shrani v localStorage (bbg-skin) in jo takoj uporabi,
+        sicer velja shranjena. Javnega gumba za preklop ni — predogled
+        smeri C se vklopi samo prek parametra.
 
         TEMA: privzeta je TEMNA. Sistemske nastavitve (prefers-color-scheme)
         namenoma ne upoštevamo — svetla velja samo, kadar jo je obiskovalec
@@ -95,19 +101,19 @@ const musicGroup = {
     <script is:inline>
       (() => {
         const html = document.documentElement;
-        let skin = 'c';
+        let skin = 'a';
         let tema = null;
         try {
           const zahtevan = new URLSearchParams(window.location.search).get('skin');
           if (zahtevan === 'a' || zahtevan === 'c') {
             localStorage.setItem('bbg-skin', zahtevan);
             skin = zahtevan;
-          } else if (localStorage.getItem('bbg-skin') === 'a') {
-            skin = 'a';
+          } else if (localStorage.getItem('bbg-skin') === 'c') {
+            skin = 'c';
           }
           tema = localStorage.getItem('bbg-tema');
         } catch (e) {
-          /* zasebni način ipd. — ostaneta privzeta skin C in temna tema */
+          /* zasebni način ipd. — ostaneta privzeta smer A in temna tema */
         }
         html.dataset.skin = skin;
         html.dataset.theme = tema === 'light' ? 'light' : 'dark';
@@ -135,10 +141,11 @@ const musicGroup = {
   <body>
     <slot />
 
-    {/* Vidna samo pri skin=a (CSS v brand.css) — edina pot nazaj na C brez
-        tipkanja URL-ja. Vedno v oznakah, ker se skin določi šele v brskalniku. */}
+    {/* Vidna samo pri skin=c (CSS v brand.css) — edina pot nazaj na privzeto
+        smer A brez tipkanja URL-ja. Vedno v oznakah, ker se skin lahko
+        spremeni šele v brskalniku. */}
     <button type="button" class="predogled" id="predogled-skin">
-      predogled: smer A · <span class="predogled__nazaj">nazaj</span>
+      predogled: smer C · <span class="predogled__nazaj">nazaj</span>
     </button>
 
     <Analytics />
@@ -187,17 +194,17 @@ const musicGroup = {
 </style>
 
 <script>
-  /* Vrnitev iz predoglega smeri A. Skin se ne osvežuje s ponovnim
-     nalaganjem — vse je vezano na data-skin, zato zadošča zamenjava
+  /* Vrnitev iz predoglega smeri C na privzeto smer A. Strani ni treba
+     naložiti znova — vse je vezano na data-skin, zato zadošča zamenjava
      atributa. */
   document.querySelector<HTMLButtonElement>('#predogled-skin')?.addEventListener('click', () => {
     const html = document.documentElement;
     try {
-      localStorage.setItem('bbg-skin', 'c');
+      localStorage.setItem('bbg-skin', 'a');
     } catch (e) {
       /* zasebni način — vrnitev velja do osvežitve strani */
     }
-    html.dataset.skin = 'c';
+    html.dataset.skin = 'a';
 
     /* Brez tega bi osvežitev strani predogled takoj vrnila. */
     const naslov = new URL(window.location.href);

@@ -1,42 +1,66 @@
-# Vizualne smeri — mockupi in predogled
+# Vizualne smeri — mockupa in izbrana smer
 
-> Stanje: 31. 8. 2026. Namen: kje živita referenčna mockupa, kaj je predogled
-> smeri A na živi strani in kaj v njem še odstopa od mockupa.
+> Stanje: 31. 8. 2026. Namen: kje živita referenčna mockupa, katera smer je
+> izbrana in kako je druga ohranjena kot predogled.
+
+## ✅ Odločitev — 31. 8. 2026
+
+**Potrjena in privzeta je smer A (Zlati klub).** Obiskovalec brez parametra
+in brez shranjene izbire vidi A.
+
+**Smer C (Razigrana medenina) je ohranjena kot predogled** prek `?skin=c`.
+Ni odstranjena: njena pravila, vsebinski elementi (badge, nalepka,
+dvostolpčni hero) in tokeni ostajajo v kodi in so pri A samo skriti oziroma
+prepisani. Odločitev je s tem povratna brez arheologije.
+
+Predhodna odločitev z istega dne, da je potrjena smer C, s tem ne velja več.
+Ostaja zapisana tu, ker je del sledi razmisleka.
 
 ## Datoteki
 
 | Datoteka | Smer | Vloga |
 |---|---|---|
-| `smer-c.html` | C — Razigrana medenina | ✅ **potrjena smer**, referenca za dimenzije, sence, zaobljenosti, razmike in mikrorotacije |
-| `smer-a.html` | A — Zlati klub | referenca za predogled `?skin=a` |
+| `smer-a.html` | A — Zlati klub | ✅ **potrjena smer**, referenca za tipografijo, zaobljenosti, hero in kartice |
+| `smer-c.html` | C — Razigrana medenina | referenca za predogled `?skin=c` (rotacije, trde sence) |
 
 Mockupa sta samostojni HTML datoteki in nista del builda. Pisave vlečeta z
 Google Fonts CDN — to velja **samo zanju**; na strani je CDN prepovedan
 (glej `CLAUDE.md`), pisave so samo-gostovane prek `@fontsource`.
 
-## Predogled smeri A na živi strani
+## Preklop med smerema
 
 Naslov s parametrom, na katerikoli strani:
 
 ```
-https://bigband-grosuplje.com/?skin=a     vklop predoglega
-https://bigband-grosuplje.com/?skin=c     vrnitev na potrjeno smer C
+https://bigband-grosuplje.com/            privzeto: smer A
+https://bigband-grosuplje.com/?skin=c     vklop predoglega smeri C
+https://bigband-grosuplje.com/?skin=a     vrnitev na privzeto smer A
 ```
 
 Izbira se shrani v `localStorage` pod ključem `bbg-skin` in velja, dokler je
 ne zamenjaš. Javnega gumba za preklop **ni** — obiskovalec brez parametra
-predoglega ne more sprožiti. Ob aktivnem predogledu se na dnu prikaže
-plavajoča značka „predogled: smer A · nazaj", ki vrne na C brez tipkanja
+predoglega ne more sprožiti. Ob aktivnem predogledu C se na dnu prikaže
+plavajoča značka „predogled: smer C · nazaj", ki vrne na A brez tipkanja
 naslova.
 
 Obe smeri imata **temno in svetlo temo**; preklopnik v navigaciji deluje v
 obeh. Privzeta je temna.
 
-Mehanizem: inline skripta v `src/layouts/Layout.astro` postavi `data-skin` in
-`data-theme` na `<html>` še pred izrisom. Tokeni so v `src/styles/brand.css`
-pod `:root[data-skin='a']` in `:root[data-skin='a'][data-theme='light']`.
-Popravki, ki morajo premagati scoped pravila komponent, so v samih
-komponentah prek `:global(:root[data-skin='a'])`.
+### Mehanizem in ena past
+
+`<html>` nosi `data-skin="a"` **že iz strežniškega izrisa**, ne šele iz
+skripte. Zato privzeta smer velja tudi brez JS in se pisave smeri A
+uveljavijo ob prvem izrisu — Archivo se ne prenese. Inline skripta v
+`src/layouts/Layout.astro` atribut po potrebi prepiše na `c` (iz parametra
+ali `localStorage`), enako kot postavi `data-theme`.
+
+⚠️ **Past:** v `src/styles/brand.css` blok `:root` nosi vrednosti **smeri C**,
+privzeto smer A pa `:root[data-skin='a']`, ki ga prepiše. Token, dodan samo
+v `:root`, torej velja le za predogled C. Struktura je ob obratu ostala taka
+namenoma: pravila smeri C so v tej obliki izmerjena in preverjena,
+prestavljanje pa bi pomenilo tveganje brez učinka na izris. Popravki, ki
+morajo premagati scoped pravila komponent, so v samih komponentah prek
+`:global(:root[data-skin='a'])`.
 
 ## Kaj je izvedeno po mockupu
 
@@ -96,20 +120,30 @@ nosi velikost.
 ## Zakaj je hero CSS ozadje in ne `<img>`
 
 Skrit `<img>` Chrome prenese tudi z `loading="lazy"` — `display: none` nima
-okvira, zato odložitev odpade. Privzeti skin C bi tako plačal fotografijo, ki
-je nikoli ne pokaže. Ozadje v `var(--hero-a)` se ne zahteva, dokler pravilo ne
-velja; izmerjeno z `performance.getEntriesByType('resource')`.
+okvira, zato odložitev odpade. Ko je bila privzeta smer C, bi ta tako plačala
+fotografijo, ki je nikoli ne pokaže. Ozadje v `var(--hero-a)` se ne zahteva,
+dokler pravilo ne velja; izmerjeno z `performance.getEntriesByType('resource')`.
 
-Isto velja za pisavi: uvoz prek `@fontsource` doda samo `@font-face` pravila,
-`woff2` pa se prenese šele, ko je družina uporabljena. Izmerjeno: pri `skin=c`
-se prenese osem datotek Archivo in nobena A-jeva, pri `skin=a` obratno.
+Zdaj je razmerje obrnjeno: fotografija se prenese pri privzeti smeri A, kjer
+je vidna, pri predogledu C pa ne. Cena ostaja ista — pri A ni `srcset`.
 
-## Vpliv na privzeto smer C
+## Ohranjenost smeri C
 
-Geometrijska primerjava (položaj, velikost, barva, podlaga, pisava, teža,
-transform, zaobljenost, senca vseh elementov) proti stanju pred uvedbo
-predoglega: **na štirih od petih strani identično**. Na naslovnici je ena
-namerna razlika — barva besedila na gumbu „Kdaj igramo?", glej spodaj.
+Smer C je bila do 31. 8. 2026 privzeta in je ves čas razvoja smeri A ostala
+nedotaknjena: geometrijska primerjava (položaj, velikost, barva, podlaga,
+pisava, teža, transform, zaobljenost, senca vseh elementov) proti stanju pred
+uvedbo drugega skina je bila identična, razen namernih popravkov kontrasta,
+ki so našteti spodaj. Ob obratu vlog se izris smeri C ni spremenil — samo
+ni več privzet.
+
+## Zakaj se pisave druge smeri ne prenesejo
+
+Uvoz prek `@fontsource` doda samo `@font-face` pravila; `woff2` se prenese
+šele, ko je družina dejansko uporabljena. Ker `<html>` nosi `data-skin="a"`
+že iz strežniškega izrisa, je uporabljena družina od prvega izrisa Playfair
+Display in Source Sans 3. Izmerjeno z `performance.getEntriesByType('resource')`:
+pri privzeti smeri se prenese osem datotek smeri A in nobena Archivo, pri
+`?skin=c` obratno.
 
 ## Kontrastna revizija (WCAG 2.1 AA)
 
@@ -157,3 +191,4 @@ ustrezna vrednost `#7A6212` (4,55 :1 na vseh štirih podlagah).
 | 31. 8. 2026 | Predogled nadgrajen v zvesto izvedbo: fullbleed hero, svetla tema, datumski blok, obrobe polj; kontrastna revizija štirih kombinacij |
 | 31. 8. 2026 | Popravljene odprte kontrastne napake svetle teme smeri C; vse štiri kombinacije brez napak |
 | 31. 8. 2026 | Svetla tema A omiljena: svetlejša hero fotografija in svetle kartice koncertov |
+| **31. 8. 2026** | **Potrjena smer A kot privzeta; smer C ohranjena kot predogled `?skin=c`.** Prejšnja odločitev z istega dne (potrjena smer C) s tem ne velja več |

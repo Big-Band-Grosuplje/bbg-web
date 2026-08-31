@@ -1,8 +1,20 @@
 /* ============================================================
    BBG brand tokeni — vir resnice za barve, tipografijo in znak
-   Smer C, potrjena 31. 8. 2026.
-   Geometrija (dimenzije, sence, zaobljenosti, razmiki, mikrorotacije)
-   je povzeta po referenčnem mockupu docs/design/smer-c.html.
+
+   ⚠️ PREBERI PRED UREJANJEM TOKENOV
+   Privzeta vizualna smer je **A (Zlati klub)**, potrjena 31. 8. 2026.
+   Ta blok :root pa nosi vrednosti **smeri C** — ta je ohranjena kot
+   predogled prek ?skin=c. Razlog za ta obrat: <html> že v strežniškem
+   izrisu nosi data-skin="a", zato blok :root[data-skin='a'] spodaj
+   prepiše vse, kar je tu, in to velja tudi brez JS. Struktura je ostala
+   taka, ker so pravila smeri C v tej obliki preverjena in bi njihovo
+   prestavljanje pomenilo tveganje brez učinka.
+
+   POSLEDICA: token, ki ga dodaš v :root, velja SAMO za predogled C.
+   Za privzeto smer ga dodaj tudi v :root[data-skin='a'].
+
+   Geometrija smeri C je povzeta po docs/design/smer-c.html, smeri A po
+   docs/design/smer-a.html. Odločitev in razlike so v docs/design/README.md.
    Pisave se uvozijo v Layout.astro prek @fontsource paketov
    (samo-gostovano — nikoli Google Fonts CDN).
 
@@ -174,7 +186,9 @@
 .bbg-dark a { color: var(--bbg-gold-light); }
 
 /* ------------------------------------------------------------
-   Rotacije
+   Rotacije — SAMO smer C (predogled ?skin=c)
+   Privzeta smer A rotacij nima; razred ostane v oznakah, transform pa
+   je pri A razveljavljen v bloku spodaj.
    Izrazite (do ±4°): samo znak, badge in nalepke.
    Mikrorotacije (do ±0,6°): naslovi h2, kartice in paneli — po
    vzoru docs/design/smer-c.html.
@@ -354,16 +368,20 @@
 }
 
 /* ============================================================
-   PREDOGLED SMERI A  ([data-skin="a"] na <html>)
+   PRIVZETA SMER A — Zlati klub  ([data-skin="a"] na <html>)
+   Potrjena 31. 8. 2026.
    ============================================================
-   Namen: da se med smerema A in C primerja na živi strani, ne na
-   mockupu. Izvedba sledi docs/design/smer-a.html — vključno s fullbleed
-   herojem, datumskim blokom kartice, obrobami vnosnih polj in svetlo temo.
-   Kaj še odstopa, je popisano v docs/design/README.md.
+   To je smer, ki jo obiskovalec dejansko vidi. Atribut data-skin="a" je
+   zapisan že v strežniškem izrisu (Layout.astro), zato ta blok velja tudi
+   brez JS in od prvega izrisa — pisave smeri C se nikoli ne prenesejo.
 
-   Aktivacija: samo prek ?skin=a (izbira se shrani v localStorage pod
-   bbg-skin). Javnega gumba za preklop ni; iz predoglega se vrneš prek
-   plavajoče značke na dnu, ki nastavi skin=c.
+   Izvedba sledi docs/design/smer-a.html — fullbleed hero, datumski blok
+   kartice, obrobe vnosnih polj, obe temi. Kaj še odstopa od mockupa, je
+   popisano v docs/design/README.md.
+
+   Preklop: ?skin=c vklopi predogled smeri C, ?skin=a vrne to smer; izbira
+   se shrani v localStorage pod bbg-skin. Javnega gumba za preklop ni; iz
+   predoglega C se vrneš prek plavajoče značke na dnu.
 
    TEMI: A ima obe. Temna je privzeta, svetlo nosi
    :root[data-skin='a'][data-theme='light'] — ta ima specifičnost (0,3,0)
@@ -373,9 +391,6 @@
    Vse spodaj je pod :root[data-skin='a'], da specifičnost zanesljivo
    premaga :root[data-theme='light'] (enaka specifičnost, a ta blok je
    pozneje) in osnovna pravila v tej datoteki.
-
-   Privzeti skin C ostane NEDOTAKNJEN — brez atributa se ne uporabi nič
-   od tega, zato je izris pri skin=c enak kot pred uvedbo predogleda.
    ============================================================ */
 
 :root[data-skin='a'] {
@@ -581,10 +596,11 @@
 }
 
 /* --- Plavajoča značka predoglega ---
-   Edina pot nazaj na C brez tipkanja URL-ja. Pri skin=c je skrita, zato
-   je ni ne na zaslonu ne v drevesu dostopnosti. */
+   Edina pot iz predoglega smeri C nazaj na privzeto smer A brez tipkanja
+   URL-ja. Pri privzetem skin=a je skrita, zato je ni ne na zaslonu ne v
+   drevesu dostopnosti. */
 .predogled { display: none; }
-:root[data-skin='a'] .predogled {
+:root[data-skin='c'] .predogled {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -604,10 +620,10 @@
   backdrop-filter: blur(6px);
   cursor: pointer;
 }
-:root[data-skin='a'] .predogled:hover {
+:root[data-skin='c'] .predogled:hover {
   border-color: var(--bbg-gold);
 }
-:root[data-skin='a'] .predogled:focus-visible {
+:root[data-skin='c'] .predogled:focus-visible {
   outline: 2px solid var(--bbg-gold);
   outline-offset: 2px;
 }
