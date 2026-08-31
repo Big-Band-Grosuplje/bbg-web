@@ -1,15 +1,24 @@
 ---
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
+import { drugiJezik, pot, sidro, slovar, type Jezik, type Stran } from '../i18n';
 
 interface Props {
   /* Na naslovnici kažeta Koncerti in Kontakt na sidri, drugod na naslovnico.
      Zgodovina, Multimedija in Galerija vodijo vedno na podstran — tam je
      celotna vsebina, izsek na naslovnici je samo napovednik. */
-  naslovnica?: boolean;
+  stran: Stran;
+  jezik: Jezik;
 }
-const { naslovnica = false } = Astro.props;
-const koncerti = naslovnica ? '#koncerti' : '/#koncerti';
-const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
+const { stran, jezik } = Astro.props;
+const t = slovar(jezik);
+
+const koncerti = sidro(stran, jezik, 'koncerti');
+const kontakt = sidro(stran, jezik, 'kontakt');
+
+/* Gumb za jezik pelje na isto stran v drugem jeziku — pot pride iz iste
+   tabele kot hreflang, zato se ne moreta raziti. */
+const drugi = drugiJezik(jezik);
+const potDrugega = pot(stran, drugi);
 ---
 
 {/* Zastavica "stran ima JS", postavljena sinhrono PRED navigacijo, torej pred
@@ -20,9 +29,9 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
   document.documentElement.dataset.js = 'da';
 </script>
 
-<nav class="nav" aria-label="Glavna navigacija" data-meni="zaprt">
+<nav class="nav" aria-label={t.nav.oznaka} data-meni="zaprt">
   <div class="ovoj nav__vrstica">
-    <a href="/" class="nav__znak" aria-label="Big Band Grosuplje — naslovnica">
+    <a href={pot('naslovnica', jezik)} class="nav__znak" aria-label={t.nav.znakAlt}>
       <img src={znakZlat.src} alt="" width="120" class="bbg-rot-znak-nav" />
     </a>
 
@@ -32,18 +41,31 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     <div class="nav__meni" id="nav-meni">
       {/* Vrstni red sledi vrstnemu redu sekcij na naslovnici — ob premiku
           sekcije premakni tudi povezavo. */}
-      <a href={koncerti}>Koncerti</a>
-      <a href="/zgodovina">Zgodovina</a>
-      <a href="/galerija">Galerija</a>
-      <a href="/multimedija">Multimedija</a>
-      <a class="nav__cta" href={kontakt}>Najemi band</a>
+      <a href={koncerti}>{t.nav.koncerti}</a>
+      <a href={pot('zgodovina', jezik)}>{t.nav.zgodovina}</a>
+      <a href={pot('galerija', jezik)}>{t.nav.galerija}</a>
+      <a href={pot('multimedija', jezik)}>{t.nav.multimedija}</a>
+      <a class="nav__cta" href={kontakt}>{t.nav.cta}</a>
     </div>
+
+    {/* Preklop jezika je navadna povezava, ne gumb: brez JS deluje enako,
+        pravi cilj pa je viden v vrstici stanja. Skripta ob kliku samo
+        zabeleži izbiro, da samodejna zaznava ne posreduje več. */}
+    <a
+      class="nav__jezik"
+      id="preklop-jezika"
+      href={potDrugega}
+      hreflang={drugi}
+      lang={drugi}
+      data-jezik={drugi}
+      aria-label={t.nav.jezik}
+    >{t.nav.jezikKratko}</a>
 
     <button
       type="button"
       class="nav__tema"
       id="preklop-teme"
-      aria-label="Preklopi temo"
+      aria-label={t.nav.tema}
       aria-pressed="false"
     >
       <span class="nav__ikona" aria-hidden="true">☾</span>
@@ -57,7 +79,7 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
       aria-expanded="false"
     >
       <span class="nav__crte" aria-hidden="true"></span>
-      <span class="vizualno-skrito">Meni</span>
+      <span class="vizualno-skrito">{t.nav.meni}</span>
     </button>
   </div>
 </nav>
@@ -87,6 +109,28 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     }
     osvezi(nova);
   });
+
+  /* --- Preklop jezika ---
+     Povezavi ob nalaganju pripnemo trenutni query in sidro, da preklop
+     ohrani ?skin in mesto na strani; tema je v localStorage in preživi
+     sama. Klik zabeleži izbiro, da samodejna zaznava v <head> ne
+     posreduje več — od tega trenutka velja obiskovalčeva odločitev. */
+  const jezikGumb = document.querySelector<HTMLAnchorElement>('#preklop-jezika');
+
+  if (jezikGumb) {
+    const cilj = new URL(jezikGumb.getAttribute('href') ?? '/', window.location.origin);
+    cilj.search = window.location.search;
+    cilj.hash = window.location.hash;
+    jezikGumb.href = cilj.pathname + cilj.search + cilj.hash;
+
+    jezikGumb.addEventListener('click', () => {
+      try {
+        localStorage.setItem('bbg-lang', jezikGumb.dataset.jezik ?? 'sl');
+      } catch (e) {
+        /* zasebni način — izbira velja samo za to navigacijo */
+      }
+    });
+  }
 
   /* --- Burger meni ---
      Stanje nosi data-meni na <nav>, skrivanje pa velja SAMO znotraj
@@ -142,13 +186,42 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     flex-wrap: wrap;
   }
 
-  /* Vrstni red na širokem zaslonu: znak · povezave · tema · CTA. */
+  /* Vrstni red na širokem zaslonu: znak · povezave · jezik · tema · CTA.
+     Odmik na desno nosi prvi element desne skupine, torej gumb za jezik. */
   .nav__znak { order: 1; line-height: 0; }
   .nav__meni { display: contents; }
   .nav__meni a { order: 2; }
-  .nav__tema { order: 3; margin-left: auto; }
-  .nav__meni .nav__cta { order: 4; }
+  .nav__jezik { order: 3; margin-left: auto; }
+  .nav__tema { order: 4; }
+  .nav__meni .nav__cta { order: 5; }
   .nav__burger { display: none; }
+
+  /* Preklop jezika: besedilo, ne zastavica — zastavica pomeni državo,
+     ne jezika. Oblika sledi gumbu za temo, da desna skupina drži skupaj. */
+  .nav .nav__jezik,
+  .nav .nav__jezik:link,
+  .nav .nav__jezik:visited {
+    display: grid;
+    place-items: center;
+    min-width: 38px;
+    height: 38px;
+    padding: 0 9px;
+    flex: 0 0 auto;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--bbg-nav-povezava);
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid var(--bbg-obroba-mocna);
+    border-radius: var(--bbg-r-badge);
+  }
+  .nav .nav__jezik:hover,
+  .nav .nav__jezik:focus-visible { color: var(--bbg-povezava); }
+  .nav__jezik:focus-visible {
+    outline: 2px solid var(--bbg-obroba-mocna);
+    outline-offset: 2px;
+  }
 
   .nav__znak img {
     height: 46px;
@@ -272,10 +345,11 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     .nav__vrstica { gap: 12px; }
     .nav__znak img { height: 36px; }
 
-    .nav__tema { order: 2; }
+    .nav__jezik { order: 2; margin-left: auto; }
+    .nav__tema { order: 3; }
     .nav__burger {
       display: grid;
-      order: 3;
+      order: 4;
       margin-left: 0;
     }
     /* Brez JS gumb ničesar ne odpre, zato ga ni. Zastavico postavi
@@ -285,7 +359,7 @@ const kontakt = naslovnica ? '#kontakt' : '/#kontakt';
     /* Meni postane pravi blok pod vrstico in se razteza po celotni širini. */
     .nav__meni {
       display: flex;
-      order: 4;
+      order: 5;
       flex: 0 0 100%;
       flex-direction: column;
       align-items: flex-start;

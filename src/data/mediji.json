@@ -13,7 +13,13 @@
       "posnetek": "RTV Slovenija",
       "kanal": "Prifarski muzikanti (objava po dogovoru z RTV)"
     },
-    "objavi": true
+    "objavi": true,
+    "zasedbaEn": "Big Band Grosuplje Combo",
+    "dogodekEn": "Prifarski muzikanti concert, Gallus Hall, Cankarjev dom, Ljubljana",
+    "solistiEn": [
+      "Lidija Kodrič (vocals)",
+      "Klemen Kotar (alto saxophone)"
+    ]
   },
   {
     "id": "fDlabkjj-aU",
@@ -27,7 +33,12 @@
     "krediti": {
       "posnetek": "Peter Zakrajšek"
     },
-    "objavi": true
+    "objavi": true,
+    "zasedbaEn": "Big Band Grosuplje",
+    "dogodekEn": "Public recording session, Studio 14, Radio Slovenija",
+    "solistiEn": [
+      "Blaž Vrbič (vocals)"
+    ]
   },
   {
     "id": "ezsVwZihi7A",
@@ -42,7 +53,12 @@
       "posnetek": "Peter Zakrajšek"
     },
     "objavi": true,
-    "opomba": "Kandidat za zvočno podlago strani (predvajanje na klik)"
+    "opomba": "Kandidat za zvočno podlago strani (predvajanje na klik)",
+    "zasedbaEn": "Big Band Grosuplje",
+    "dogodekEn": "Public recording session, Studio 14, Radio Slovenija",
+    "solistiEn": [
+      "Blaž Vrbič (vocals)"
+    ]
   },
   {
     "id": "IPopglv-lGU",
@@ -58,7 +74,12 @@
       "avdio": "Klemen Kotar",
       "montaza": "Žan Pajek Arambašić"
     },
-    "objavi": true
+    "objavi": true,
+    "zasedbaEn": "Big Band Grosuplje",
+    "dogodekEn": "Concert at Kulturni dom Grosuplje",
+    "solistiEn": [
+      "Peter Savizon (vocals)"
+    ]
   },
   {
     "id": "-PHE4MB_wC0",
@@ -74,7 +95,12 @@
       "avdio": "Klemen Kotar",
       "montaza": "Žan Pajek Arambašić"
     },
-    "objavi": true
+    "objavi": true,
+    "zasedbaEn": "Big Band Grosuplje",
+    "dogodekEn": "Concert at Kulturni dom Grosuplje",
+    "solistiEn": [
+      "Peter Savizon (vocals)"
+    ]
   },
   {
     "id": "4dCOtW7GPBE",
@@ -90,7 +116,12 @@
       "avdio": "Klemen Kotar",
       "montaza": "Žan Pajek Arambašić"
     },
-    "objavi": true
+    "objavi": true,
+    "zasedbaEn": "Big Band Grosuplje Combo",
+    "dogodekEn": "Concert at Kulturni dom Grosuplje",
+    "solistiEn": [
+      "Peter Savizon (vocals)"
+    ]
   },
   {
     "id": "o3BzJywrpvE",
@@ -104,7 +135,12 @@
     "krediti": {
       "posnetek": "Rudi Javornik"
     },
-    "objavi": true
+    "objavi": true,
+    "zasedbaEn": "Big Band Grosuplje Combo",
+    "dogodekEn": "Concert at Kulturni dom Grosuplje (Music Unites project)",
+    "solistiEn": [
+      "Gwen Hughes (vocals, USA)"
+    ]
   },
   {
     "id": "zTD5MJPYciE",
@@ -115,6 +151,9 @@
     "dogodek": "Nishville Jazz Festival, Main Stage, Niš (Srbija)",
     "leto": 2018,
     "krediti": {},
-    "objavi": true
+    "objavi": true,
+    "naslovEn": "Far East Suite (excerpt)",
+    "zasedbaEn": "Big Band Grosuplje",
+    "dogodekEn": "Nishville Jazz Festival, Main Stage, Niš (Serbia)"
   }
 ]

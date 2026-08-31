@@ -1,14 +1,20 @@
 ---
-import { kreditiVrstica, slicicaZa, videoObject, type Medij } from '../lib/mediji';
+import { kreditiVrstica, medijV, slicicaZa, videoObject, type Medij } from '../lib/mediji';
+import { slovar, type Jezik } from '../i18n';
 
 interface Props {
   medij: Medij;
+  jezik: Jezik;
   /* JSON-LD naj bo na strani samo enkrat na posnetek. */
   jsonLd?: boolean;
 }
-const { medij, jsonLd = true } = Astro.props;
+const { medij, jezik, jsonLd = true } = Astro.props;
+const t = slovar(jezik);
 
-const krediti = kreditiVrstica(medij.krediti);
+/* Naslov skladbe, zasedba, dogodek in vloge solistov v izbranem jeziku;
+   imena ljudi so ista v obeh. */
+const besedilo = medijV(medij, jezik);
+const krediti = kreditiVrstica(medij.krediti, t.mediji.krediti);
 const slicica = slicicaZa(medij.id);
 ---
 
@@ -17,7 +23,7 @@ const slicica = slicicaZa(medij.id);
     <img
       class="video__slika"
       src={slicica}
-      alt={`Sličica posnetka: ${medij.naslov}`}
+      alt={`${t.mediji.slicicaAlt}: ${besedilo.naslov}`}
       width="480"
       height="360"
       loading="lazy"
@@ -26,27 +32,27 @@ const slicica = slicicaZa(medij.id);
       class="video__gumb"
       type="button"
       data-video-id={medij.id}
-      data-video-naslov={medij.naslov}
-      aria-label={`Predvajaj posnetek: ${medij.naslov}`}
+      data-video-naslov={besedilo.naslov}
+      aria-label={`${t.mediji.predvajaj}: ${besedilo.naslov}`}
     >
       <span class="video__ikona" aria-hidden="true"></span>
     </button>
   </div>
 
-  <h3 class="posnetek__naslov">{medij.naslov}</h3>
+  <h3 class="posnetek__naslov">{besedilo.naslov}</h3>
   {medij.avtor_glasbe && <p class="posnetek__avtor">{medij.avtor_glasbe}</p>}
-  <p class="posnetek__zasedba">{medij.zasedba}</p>
-  {medij.solisti.length > 0 && (
+  <p class="posnetek__zasedba">{besedilo.zasedba}</p>
+  {besedilo.solisti.length > 0 && (
     <p class="posnetek__solisti">
-      <span class="oznaka">Solisti</span>
-      {medij.solisti.join(', ')}
+      <span class="oznaka">{t.mediji.solisti}</span>
+      {besedilo.solisti.join(', ')}
     </p>
   )}
-  <p class="posnetek__dogodek">{medij.dogodek}, {medij.leto}</p>
+  <p class="posnetek__dogodek">{besedilo.dogodek}, {medij.leto}</p>
   {krediti && <p class="posnetek__krediti">{krediti}</p>}
 
   {jsonLd && (
-    <script type="application/ld+json" set:html={JSON.stringify(videoObject(medij))} />
+    <script type="application/ld+json" set:html={JSON.stringify(videoObject(medij, jezik))} />
   )}
 </li>
 

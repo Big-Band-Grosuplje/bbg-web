@@ -1,33 +1,43 @@
 {
   "posodobljeno": "2026-08-31",
   "vir": "docs/kronika.md (časovnica), docs/bbg-osnova.md (obdobja dirigentov)",
-  "opomba": "Obdobja dirigentov so povzeta po bbg-osnova.md, ki je vir resnice za uradne podatke; kronika.md navaja Lundra kot '2004-~2008' in nato '~2008-2012 manj aktivno obdobje' - to ni drug dirigent, ampak mirnejsi del istega obdobja, zato je tu 2004-2011 z izrecno opombo o mirnejsih letih. Za leto 2027 velja embargo iz bbg-osnova.md: samo napovednik, brez imen gostov in brez podrobnosti. Fotografije so navedene z imenom datoteke iz src/assets/foto/zgodovina; tiste, ki cakajo na potrjeno dovoljenje avtorja, niso v src/data/galerija.json in jih stran samodejno izpusti.",
+  "opomba": "Obdobja dirigentov so povzeta po bbg-osnova.md, ki je vir resnice za uradne podatke; kronika.md navaja Lundra kot '2004-~2008' in nato '~2008-2012 manj aktivno obdobje' - to ni drug dirigent, ampak mirnejsi del istega obdobja, zato je tu 2004-2011 z izrecno opombo o mirnejsih letih. Za leto 2027 velja embargo iz bbg-osnova.md: samo napovednik, brez imen gostov in brez podrobnosti. Fotografije so navedene z imenom datoteke iz src/assets/foto/zgodovina; tiste, ki cakajo na potrjeno dovoljenje avtorja, niso v src/data/galerija.json in jih stran samodejno izpusti. Polja s koncnico En so angleske razlicice. Trdi podatki (obdobja, imena dirigentov, letnice, imena datotek) so skupni. Angleski opisi niso dobesedni prevodi, ampak isto povedo v mirnejsem tonu.",
   "predstavitev": "Big Band Grosuplje je klasična big band zasedba, ki deluje od šolskega leta 1997/98, ko jo je pri Glasbeni šoli Grosuplje ustanovil priznani slovenski glasbenik Braco J. Doblekar skupaj s tedanjim ravnateljem šole Francem Korbarjem. Od leta 2001 orkester deluje kot samostojno kulturno društvo. V treh desetletjih je nastopil na najprestižnejših prizoriščih doma in v tujini, se predstavil na radiu in televiziji ter sodeloval z vrsto priznanih slovenskih in mednarodnih umetnikov. Orkester povezuje izkušene ljubiteljske in profesionalne glasbenike, mladim pa prek comba in saksofonskega kvinteta ponuja razvojno pot v veliki jazzovski orkester. Poleg koncertne dejavnosti redno pripravlja tematske programe in izobraževalne delavnice za glasbenike. Umetniški vodja in dirigent orkestra je Klemen Kotar.",
   "mejniki": [
     {
       "leto": "1997/98",
       "naslov": "Ustanovitev",
-      "besedilo": "Pri Glasbeni šoli Grosuplje orkester ustanovita Braco J. Doblekar in tedanji ravnatelj Franc Korbar."
+      "besedilo": "Pri Glasbeni šoli Grosuplje orkester ustanovita Braco J. Doblekar in tedanji ravnatelj Franc Korbar.",
+      "naslovEn": "Founded",
+      "besediloEn": "Braco J. Doblekar and the then headmaster Franc Korbar found the orchestra at the Grosuplje Music School."
     },
     {
       "leto": "2003",
       "naslov": "Državna proslava",
-      "besedilo": "Osrednja proslava ob dnevu državnosti na Trgu republike; Doblekar prejme zlati znak Občine Grosuplje."
+      "besedilo": "Osrednja proslava ob dnevu državnosti na Trgu republike; Doblekar prejme zlati znak Občine Grosuplje.",
+      "naslovEn": "National ceremony",
+      "besediloEn": "The central Statehood Day ceremony at Trg republike; Doblekar receives the Golden Emblem of the Municipality of Grosuplje."
     },
     {
       "leto": "2012",
       "naslov": "Kotar prevzame",
-      "besedilo": "Dirigent in umetniški vodja postane mag. Klemen Kotar. Začne se obdobje tematskih programov."
+      "besedilo": "Dirigent in umetniški vodja postane mag. Klemen Kotar. Začne se obdobje tematskih programov.",
+      "naslovEn": "Kotar takes over",
+      "besediloEn": "Klemen Kotar becomes conductor and artistic director. The era of themed programmes begins."
     },
     {
       "leto": "2018",
       "naslov": "Nishville",
-      "besedilo": "Ellingtonova Far East Suite na glavnem odru festivala v Nišu, s pohvalami kritikov."
+      "besedilo": "Ellingtonova Far East Suite na glavnem odru festivala v Nišu, s pohvalami kritikov.",
+      "naslovEn": "Nishville",
+      "besediloEn": "Ellington’s Far East Suite on the main stage of the festival in Niš, to critical acclaim."
     },
     {
       "leto": "2027",
       "naslov": "Trideset let",
-      "besedilo": "Jubilejni mednarodni projekt je v pripravi."
+      "besedilo": "Jubilejni mednarodni projekt je v pripravi.",
+      "naslovEn": "Thirty years",
+      "besediloEn": "An international anniversary project is in preparation."
     }
   ],
   "obdobja": [
@@ -40,31 +50,38 @@
       "vnosi": [
         {
           "leto": "1997/98",
-          "besedilo": "Ustanovitev pri Glasbeni šoli Grosuplje. 18. februarja 1998 prvi samostojni koncert v dvorani šole, 26. junija 1998 proslava ob dnevu državnosti na Pogačarjevem trgu v Ljubljani."
+          "besedilo": "Ustanovitev pri Glasbeni šoli Grosuplje. 18. februarja 1998 prvi samostojni koncert v dvorani šole, 26. junija 1998 proslava ob dnevu državnosti na Pogačarjevem trgu v Ljubljani.",
+          "besediloEn": "Founded at the Grosuplje Music School. The first solo concert takes place in the school hall on 18 February 1998, followed on 26 June 1998 by the Statehood Day ceremony at Pogačarjev trg in Ljubljana."
         },
         {
           "leto": "1998",
-          "besedilo": "Prvi poletni seminar v Fiesi. Tradicija se nadaljuje: Čatež 1999, Fiesa 2000–01, Kranjska Gora 2004–06, Kobarid 2007."
+          "besedilo": "Prvi poletni seminar v Fiesi. Tradicija se nadaljuje: Čatež 1999, Fiesa 2000–01, Kranjska Gora 2004–06, Kobarid 2007.",
+          "besediloEn": "The first summer workshop in Fiesa. The tradition continues: Čatež 1999, Fiesa 2000–01, Kranjska Gora 2004–06, Kobarid 2007."
         },
         {
           "leto": "1999",
-          "besedilo": "21. decembra 25. obletnica Glasbene šole Grosuplje z Evo Sršen in Janezom Bončino - Benčem."
+          "besedilo": "21. decembra 25. obletnica Glasbene šole Grosuplje z Evo Sršen in Janezom Bončino - Benčem.",
+          "besediloEn": "On 21 December, the 25th anniversary of the Grosuplje Music School with Eva Sršen and Janez Bončina - Benč."
         },
         {
           "leto": "2000",
-          "besedilo": "21. februarja enourni koncert v Jazz klubu Gajo, ki ga posname TV Slovenija. 22. decembra Športniki Slovenije 2000 v Cankarjevem domu v neposrednem prenosu TVS2."
+          "besedilo": "21. februarja enourni koncert v Jazz klubu Gajo, ki ga posname TV Slovenija. 22. decembra Športniki Slovenije 2000 v Cankarjevem domu v neposrednem prenosu TVS2.",
+          "besediloEn": "On 21 February, an hour-long concert at the Gajo Jazz Club, recorded by TV Slovenija. On 22 December, Slovenian Athletes 2000 at Cankarjev dom, broadcast live on TVS2."
         },
         {
           "leto": "2001",
-          "besedilo": "Zidak dobre volje v neposrednem prenosu TVS1 in snemanje v Studiu 14 Radia Slovenija. Oktobra preimenovanje iz Big Banda GŠ Grosuplje v Big Band Grosuplje in registracija kulturnega društva (uradni vpis 9. novembra 2001) ter včlanitev v ZKD Grosuplje. Nastop v Cankarjevem domu ob deseti obletnici Slovenske nogometne lige, decembra Športnik leta na TVS2 in samostojni koncert na Prešernovem trgu."
+          "besedilo": "Zidak dobre volje v neposrednem prenosu TVS1 in snemanje v Studiu 14 Radia Slovenija. Oktobra preimenovanje iz Big Banda GŠ Grosuplje v Big Band Grosuplje in registracija kulturnega društva (uradni vpis 9. novembra 2001) ter včlanitev v ZKD Grosuplje. Nastop v Cankarjevem domu ob deseti obletnici Slovenske nogometne lige, decembra Športnik leta na TVS2 in samostojni koncert na Prešernovem trgu.",
+          "besediloEn": "Zidak dobre volje broadcast live on TVS1, and a recording session at Studio 14 of Radio Slovenija. In October the ensemble is renamed from Big Band GŠ Grosuplje to Big Band Grosuplje and registered as a cultural association (officially entered on 9 November 2001), joining ZKD Grosuplje. A concert at Cankarjev dom marks ten years of the Slovenian football league; December brings Athlete of the Year on TVS2 and a solo concert at Prešernov trg."
         },
         {
           "leto": "2002",
-          "besedilo": "Predstavitvi poslovenjenih Windows XP in Office XP v Koloseju, poletni program Franka Sinatre s Tuliom Furlaničem po obali, Glasbena ogrlica na TVS in Športnik leta z Ireno Vidic."
+          "besedilo": "Predstavitvi poslovenjenih Windows XP in Office XP v Koloseju, poletni program Franka Sinatre s Tuliom Furlaničem po obali, Glasbena ogrlica na TVS in Športnik leta z Ireno Vidic.",
+          "besediloEn": "Launch events for the Slovenian editions of Windows XP and Office XP at Kolosej, a summer Frank Sinatra programme with Tulio Furlanič along the coast, Glasbena ogrlica on TVS, and Athlete of the Year with Irena Vidic."
         },
         {
           "leto": "2003",
-          "besedilo": "24. junija osrednja državna proslava ob dnevu državnosti na Trgu republike (TVS), 24. julija Braco Doblekar prejme zlati znak Občine Grosuplje. Mednarodni poletni seminar z Rickom Stitzlom (ZDA), gostovanje v Nemčiji (Hirschaid), Microsoftova NT konferenca v Portorožu in zaključna prireditev Slovenskega filmskega festivala z aranžmaji Lojzeta Krajnčana in gostjo Cito Galič."
+          "besedilo": "24. junija osrednja državna proslava ob dnevu državnosti na Trgu republike (TVS), 24. julija Braco Doblekar prejme zlati znak Občine Grosuplje. Mednarodni poletni seminar z Rickom Stitzlom (ZDA), gostovanje v Nemčiji (Hirschaid), Microsoftova NT konferenca v Portorožu in zaključna prireditev Slovenskega filmskega festivala z aranžmaji Lojzeta Krajnčana in gostjo Cito Galič.",
+          "besediloEn": "On 24 June, the central Statehood Day ceremony at Trg republike (TVS); on 24 July, Braco Doblekar receives the Golden Emblem of the Municipality of Grosuplje. Also an international summer workshop with Rick Stitzel (USA), a guest appearance in Hirschaid, Germany, Microsoft’s NT conference in Portorož, and the closing ceremony of the Slovenian Film Festival with arrangements by Lojze Krajnčan and guest singer Cita Galič."
         }
       ],
       "fotografije": [
@@ -74,7 +91,9 @@
         "doblekar-orkester-spomenik-barvna.jpg",
         "doblekar-orkester-spomenik-cb.jpg",
         "doblekar-vibrafon-mentorstvo.jpg"
-      ]
+      ],
+      "vlogaEn": "founder and first conductor",
+      "opisEn": "The orchestra is formed at the initiative of Franc Korbar, headmaster of the Grosuplje Music School, entirely with young musicians from the Grosuplje area. Within six years it grows from a school ensemble into an independent cultural association with regular television appearances."
     },
     {
       "id": "lunder",
@@ -85,30 +104,40 @@
       "vnosi": [
         {
           "leto": "2004",
-          "besedilo": "Snemanje za CD, 30. obletnica Glasbene šole Grosuplje, soorganizacija delavnice The Kelly Johnson Quartet v podpori ameriškega veleposlaništva in projekt »Glasba Glenna Millerja in Counta Basiea« ob stoti obletnici rojstva obeh; samostojni koncert 14. oktobra."
+          "besedilo": "Snemanje za CD, 30. obletnica Glasbene šole Grosuplje, soorganizacija delavnice The Kelly Johnson Quartet v podpori ameriškega veleposlaništva in projekt »Glasba Glenna Millerja in Counta Basiea« ob stoti obletnici rojstva obeh; samostojni koncert 14. oktobra.",
+          "besediloEn": "A CD recording session, the 30th anniversary of the Grosuplje Music School, co-organisation of a workshop with The Kelly Johnson Quartet supported by the U.S. Embassy, and the project „The Music of Glenn Miller and Count Basie“ marking the centenary of both; solo concert on 14 October."
         },
         {
           "leto": "2005",
-          "besedilo": "Sodelovanje z MPZ Corona, otvoritev Vodnega mesta Atlantis in 60. obletnica Mladinske knjige s podelitvijo Levstikovih nagrad v Gallusovi dvorani Cankarjevega doma. Oktobra »Poklon Franku Sinatri« ob 90. obletnici rojstva z Otom Pestnerjem in Adamom Klemmom, decembra Miklavžev dobrodelni koncert na TVS."
+          "besedilo": "Sodelovanje z MPZ Corona, otvoritev Vodnega mesta Atlantis in 60. obletnica Mladinske knjige s podelitvijo Levstikovih nagrad v Gallusovi dvorani Cankarjevega doma. Oktobra »Poklon Franku Sinatri« ob 90. obletnici rojstva z Otom Pestnerjem in Adamom Klemmom, decembra Miklavžev dobrodelni koncert na TVS.",
+          "besediloEn": "Collaboration with the Corona male choir, the opening of the Atlantis water park, and the 60th anniversary of Mladinska knjiga with the Levstik Awards in the Gallus Hall of Cankarjev dom. October brings „A Tribute to Frank Sinatra“ for the 90th anniversary of his birth with Oto Pestner and Adam Klemm; in December, the St Nicholas charity concert on TVS."
         },
         {
           "leto": "2006",
-          "besedilo": "Koncerta z vibrafonistoma Boškom Petrovićem in Vidom Jamnikom z javnim snemanjem, festival big bandov v Bjelovarju (Hrvaška), poletni seminar pod vodstvom dr. Sigija Feigla (Avstrija), jesenski koncert z Nino Pušlar in ustanovitev mladinskega ansambla BiBa."
+          "besedilo": "Koncerta z vibrafonistoma Boškom Petrovićem in Vidom Jamnikom z javnim snemanjem, festival big bandov v Bjelovarju (Hrvaška), poletni seminar pod vodstvom dr. Sigija Feigla (Avstrija), jesenski koncert z Nino Pušlar in ustanovitev mladinskega ansambla BiBa.",
+          "besediloEn": "Concerts with vibraphonists Boško Petrović and Vid Jamnik including a public recording, the big band festival in Bjelovar (Croatia), a summer workshop led by Dr Sigi Feigl (Austria), an autumn concert with Nina Pušlar, and the founding of the youth ensemble BiBa."
         },
         {
           "leto": "2007",
-          "besedilo": "Dobrodelna prireditev »Zlati ključ mesta Grosuplje« z Alenko Godec, Nino Pušlar in Nušo Derendo, praznovanje petih let City Parka z Otom Pestnerjem, Eldo Viler, Aniko Horvat in skupino Pepel in kri, jazzovski koncert in javno snemanje v Studiu 14 z Davorjem Križićem in Sašo Nestorovićem, koncert z ameriškim Western Jazz Quartetom, 2. državno srečanje big bandov v Krškem in jesenski poklon Jožetu Privšku."
+          "besedilo": "Dobrodelna prireditev »Zlati ključ mesta Grosuplje« z Alenko Godec, Nino Pušlar in Nušo Derendo, praznovanje petih let City Parka z Otom Pestnerjem, Eldo Viler, Aniko Horvat in skupino Pepel in kri, jazzovski koncert in javno snemanje v Studiu 14 z Davorjem Križićem in Sašo Nestorovićem, koncert z ameriškim Western Jazz Quartetom, 2. državno srečanje big bandov v Krškem in jesenski poklon Jožetu Privšku.",
+          "besediloEn": "The charity event „The Golden Key of Grosuplje“ with Alenka Godec, Nina Pušlar and Nuša Derenda, five years of City Park with Oto Pestner, Elda Viler, Anika Horvat and Pepel in kri, a jazz concert and public recording at Studio 14 with Davor Križić and Saša Nestorović, a concert with the American Western Jazz Quartet, the 2nd national big band meeting in Krško, and an autumn tribute to Jože Privšek."
         },
         {
           "leto": "2008",
-          "besedilo": "Deseta obletnica orkestra in koncert »American Jazz History«."
+          "besedilo": "Deseta obletnica orkestra in koncert »American Jazz History«.",
+          "besediloEn": "The orchestra’s tenth anniversary and the concert „American Jazz History“."
         },
         {
           "leto": "2010–2011",
-          "besedilo": "Mirnejši leti: sodelovanje ob 50. letnici Jazza na Bledu in projekt »Music Unites« z ameriško pevko Gwen Hughes ob podpori ameriškega veleposlaništva."
+          "besedilo": "Mirnejši leti: sodelovanje ob 50. letnici Jazza na Bledu in projekt »Music Unites« z ameriško pevko Gwen Hughes ob podpori ameriškega veleposlaništva.",
+          "besediloEn": "Two quieter years: taking part in the 50th anniversary of Jazz Festival Bled, and the project „Music Unites“ with American singer Gwen Hughes, supported by the U.S. Embassy."
         }
       ],
-      "fotografije": ["koncert-gros-ozadje-lunder.jpg"]
+      "fotografije": [
+        "koncert-gros-ozadje-lunder.jpg"
+      ],
+      "vlogaEn": "conductor, guitarist and arranger",
+      "opisEn": "At the end of 2003 the association appoints new leadership and Igor Lunder takes the baton. The period brings a series of themed projects, international guests, and a youth ensemble as the first development path for young musicians."
     },
     {
       "id": "kotar-prvo",
@@ -119,38 +148,47 @@
       "vnosi": [
         {
           "leto": "2012",
-          "besedilo": "Koncerti s Prifarskimi muzikanti in delavnice jazzobraževanja. Septembra dirigentsko taktirko prevzame Klemen Kotar, leto sklene novoletni koncert z Nino Pušlar."
+          "besedilo": "Koncerti s Prifarskimi muzikanti in delavnice jazzobraževanja. Septembra dirigentsko taktirko prevzame Klemen Kotar, leto sklene novoletni koncert z Nino Pušlar.",
+          "besediloEn": "Concerts with Prifarski muzikanti and jazz education workshops. Klemen Kotar takes the baton in September, and the year closes with a New Year concert with Nina Pušlar."
         },
         {
           "leto": "2013",
-          "besedilo": "Program glasbe Franka Sinatre »A Swingin' Affair« z Blažem Vrbičem ob podpori ameriškega veleposlaništva, julija nastop ob dnevu neodvisnosti ZDA v Narodni galeriji."
+          "besedilo": "Program glasbe Franka Sinatre »A Swingin' Affair« z Blažem Vrbičem ob podpori ameriškega veleposlaništva, julija nastop ob dnevu neodvisnosti ZDA v Narodni galeriji.",
+          "besediloEn": "The Frank Sinatra programme „A Swingin’ Affair“ with Blaž Vrbič, supported by the U.S. Embassy, and a July performance for U.S. Independence Day at the National Gallery."
         },
         {
           "leto": "2014",
-          "besedilo": "Novoletni koncert z deli Gordona Goodwina — prva izvedba Goodwina v zgodovini orkestra, z gostoma Ireno Vidic in Tomažem Zevnikom."
+          "besedilo": "Novoletni koncert z deli Gordona Goodwina — prva izvedba Goodwina v zgodovini orkestra, z gostoma Ireno Vidic in Tomažem Zevnikom.",
+          "besediloEn": "A New Year concert of Gordon Goodwin’s music — the orchestra’s first Goodwin programme — with guests Irena Vidic and Tomaž Zevnik."
         },
         {
           "leto": "2015",
-          "besedilo": "2. julija »Songs for Swingin' Lovers« (Sinatra in Bennett) ob dnevu neodvisnosti ZDA v Križankah, »Ellingtonia« 1. decembra v Španskih borcih in 19. decembra v KD Grosuplje, turneja s Prifarskimi muzikanti z dvema koncertoma v Cankarjevem domu ter koncert z Ladom Leskovarjem v Festivalni dvorani."
+          "besedilo": "2. julija »Songs for Swingin' Lovers« (Sinatra in Bennett) ob dnevu neodvisnosti ZDA v Križankah, »Ellingtonia« 1. decembra v Španskih borcih in 19. decembra v KD Grosuplje, turneja s Prifarskimi muzikanti z dvema koncertoma v Cankarjevem domu ter koncert z Ladom Leskovarjem v Festivalni dvorani.",
+          "besediloEn": "On 2 July, „Songs for Swingin’ Lovers“ (Sinatra and Bennett) for U.S. Independence Day at Križanke; „Ellingtonia“ on 1 December at Španski borci and on 19 December at KD Grosuplje; a tour with Prifarski muzikanti including two concerts at Cankarjev dom; and a concert with Lado Leskovar at the Festival Hall."
         },
         {
           "leto": "2016",
-          "besedilo": "Januarsko-februarska turneja po Avstriji (Bruck an der Mur, Wiener Neustadt, Gradec – Stefaniesaal, Weiz, Knittelfeld, Celovec), koncerta v Novi Gorici in Rogaški Slatini ter 23. decembra »Jazz in the Coffin« z glasbo Jeffa Coffina."
+          "besedilo": "Januarsko-februarska turneja po Avstriji (Bruck an der Mur, Wiener Neustadt, Gradec – Stefaniesaal, Weiz, Knittelfeld, Celovec), koncerta v Novi Gorici in Rogaški Slatini ter 23. decembra »Jazz in the Coffin« z glasbo Jeffa Coffina.",
+          "besediloEn": "A January–February tour of Austria (Bruck an der Mur, Wiener Neustadt, Graz – Stefaniesaal, Weiz, Knittelfeld, Klagenfurt), concerts in Nova Gorica and Rogaška Slatina, and „Jazz in the Coffin“ with the music of Jeff Coffin on 23 December."
         },
         {
           "leto": "2017",
-          "besedilo": "»The Ella Fitzgerald Songbook« ob stoletnici rojstva z Ano Čop: 20. maja KD Grosuplje, 18. avgusta Jazzinty Novo mesto, 24. avgusta Idrija. 29. junija dan neodvisnosti ZDA v Festivalni dvorani, dvajset let orkestra 15. septembra v KD Grosuplje in 7. oktobra v Španskih borcih, 22. decembra »Crazy Christmas« z Boštjanom Gombačem in božičnimi priredbami Gordona Goodwina."
+          "besedilo": "»The Ella Fitzgerald Songbook« ob stoletnici rojstva z Ano Čop: 20. maja KD Grosuplje, 18. avgusta Jazzinty Novo mesto, 24. avgusta Idrija. 29. junija dan neodvisnosti ZDA v Festivalni dvorani, dvajset let orkestra 15. septembra v KD Grosuplje in 7. oktobra v Španskih borcih, 22. decembra »Crazy Christmas« z Boštjanom Gombačem in božičnimi priredbami Gordona Goodwina.",
+          "besediloEn": "„The Ella Fitzgerald Songbook“ for the centenary of her birth with Ana Čop: 20 May at KD Grosuplje, 18 August at Jazzinty Novo mesto, 24 August in Idrija. On 29 June, U.S. Independence Day at the Festival Hall; the orchestra’s twentieth anniversary on 15 September at KD Grosuplje and 7 October at Španski borci; and „Crazy Christmas“ with Boštjan Gombač and Gordon Goodwin’s Christmas arrangements on 22 December."
         },
         {
           "leto": "2018",
-          "besedilo": "2. februarja »Help! A Beatles Tribute« s combom BBG, spomladi program Buddyja Richa. Septembra Nishville Jazz Festival v Nišu (Srbija): Far East Suite Duka Ellingtona na glavnem odru Earth & Sky, s pohvalami kritikov Davorja Hrvoja in Saše Dracha."
+          "besedilo": "2. februarja »Help! A Beatles Tribute« s combom BBG, spomladi program Buddyja Richa. Septembra Nishville Jazz Festival v Nišu (Srbija): Far East Suite Duka Ellingtona na glavnem odru Earth & Sky, s pohvalami kritikov Davorja Hrvoja in Saše Dracha.",
+          "besediloEn": "On 2 February, „Help! A Beatles Tribute“ with the BBG combo, and in spring a Buddy Rich programme. In September, the Nishville Jazz Festival in Niš (Serbia): Duke Ellington’s Far East Suite on the main Earth & Sky stage, praised by critics Davor Hrvoj and Saša Drach."
         }
       ],
       "fotografije": [
         "vrbic-sinatra-2013.jpg",
         "mejnik-us-embassy-combo-2017.jpg",
         "mejnik-nishville-2018-oder.jpg"
-      ]
+      ],
+      "vlogaEn": "first period",
+      "opisEn": "In September 2012 Klemen Kotar becomes conductor and artistic director. A series of themed programmes follows — the ones the orchestra is still known for — along with its first festival appearance abroad."
     },
     {
       "id": "javornik",
@@ -161,18 +199,25 @@
       "vnosi": [
         {
           "leto": "2019",
-          "besedilo": "Sinatra z Blažem Vrbičem v Grosupljem, na Ljubljanskem gradu, v Plečnikovem avditoriju in v ČinČinu; decembra program Counta Basiea in Diane Schuur z gostom Zanchinnijem."
+          "besedilo": "Sinatra z Blažem Vrbičem v Grosupljem, na Ljubljanskem gradu, v Plečnikovem avditoriju in v ČinČinu; decembra program Counta Basiea in Diane Schuur z gostom Zanchinnijem.",
+          "besediloEn": "Sinatra with Blaž Vrbič in Grosuplje, at Ljubljana Castle, at the Plečnik Auditorium and at ČinČin; in December, a Count Basie and Diane Schuur programme with guest Zanchinni."
         },
         {
           "leto": "2020–2021",
-          "besedilo": "Covidno obdobje: posamezni nastopi comba na otvoritvah in protokolarnih dogodkih ter Sinatra v Portorožu."
+          "besedilo": "Covidno obdobje: posamezni nastopi comba na otvoritvah in protokolarnih dogodkih ter Sinatra v Portorožu.",
+          "besediloEn": "The covid period: occasional combo appearances at openings and protocol events, and Sinatra in Portorož."
         },
         {
           "leto": "2022",
-          "besedilo": "Koncert z Urošem Peričem, Marezijazz s programom Jeffa Coffina in Sinatra v Velenju. Decembra program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem, ki se vrne kot dirigent."
+          "besedilo": "Koncert z Urošem Peričem, Marezijazz s programom Jeffa Coffina in Sinatra v Velenju. Decembra program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem, ki se vrne kot dirigent.",
+          "besediloEn": "A concert with Uroš Perič, Marezijazz with a Jeff Coffin programme, and Sinatra in Velenje. In December, a Charles Mingus programme with Nina Strnad and Klemen Kotar, who returns as conductor."
         }
       ],
-      "fotografije": ["koncert-javornik-obdobje.jpg"]
+      "fotografije": [
+        "koncert-javornik-obdobje.jpg"
+      ],
+      "vlogaEn": "conductor and saxophonist",
+      "opisEn": "The period is marked by the repertoire of the great swing orchestras and by two covid years, when combo appearances take the place of full orchestral concerts."
     },
     {
       "id": "kotar-drugo",
@@ -183,22 +228,28 @@
       "vnosi": [
         {
           "leto": "2023",
-          "besedilo": "Sinatra na Ljubljanskem gradu in na Krki, »Grosuplje v jeseni« z Nino Strnad, 70 let vrtca Brinje ter novoletni koncert z Juretom Puklom, Laro Grbić in Marušo Kos."
+          "besedilo": "Sinatra na Ljubljanskem gradu in na Krki, »Grosuplje v jeseni« z Nino Strnad, 70 let vrtca Brinje ter novoletni koncert z Juretom Puklom, Laro Grbić in Marušo Kos.",
+          "besediloEn": "Sinatra at Ljubljana Castle and at Krka, „Grosuplje in Autumn“ with Nina Strnad, 70 years of the Brinje kindergarten, and a New Year concert with Jure Pukl, Lara Grbić and Maruša Kos."
         },
         {
           "leto": "2024",
-          "besedilo": "»Flying Start« s Tadejem Tomšičem in gosti Petro Vidmar, Erikom Ceboklijem in Žigo Kozarjem; combo na dogodku ameriškega veleposlaništva."
+          "besedilo": "»Flying Start« s Tadejem Tomšičem in gosti Petro Vidmar, Erikom Ceboklijem in Žigo Kozarjem; combo na dogodku ameriškega veleposlaništva.",
+          "besediloEn": "„Flying Start“ with Tadej Tomšič and guests Petra Vidmar, Erik Cebokli and Žiga Kozar; the combo at a U.S. Embassy event."
         },
         {
           "leto": "2025",
-          "besedilo": "Koncerta z Gašperjem Kržmancem, Sinatra v Marezigah, »Images« s Klaro Lavrišo in Žanom Cesarjem ter tradicionalni božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem."
+          "besedilo": "Koncerta z Gašperjem Kržmancem, Sinatra v Marezigah, »Images« s Klaro Lavrišo in Žanom Cesarjem ter tradicionalni božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem.",
+          "besediloEn": "Concerts with Gašper Kržmanc, Sinatra in Marezige, „Images“ with Klara Lavriša and Žan Cesar, and the traditional Christmas and New Year concert with Manca Fekonja and Blaž Vrbič."
         },
         {
           "leto": "2026",
-          "besedilo": "»Poklon Gordonu Goodwinu« s solistom Tomažem Zevnikom: maja na festivalu JSKD v Grosupljem, 5. junija v Jazz klubu Kazina v Ljubljani, 10. julija na MarezziJazzu. Avgusta koncert s HGM Jazz orkestrom Zagreb in ameriškim trobentačem Johnom Thomasom, oktobra delavnica aranžiranja z Lojzetom Krajnčanom, »Grosuplje v jeseni« z Rokom Ferengja in zbori ter BBG x Slon in sadež."
+          "besedilo": "»Poklon Gordonu Goodwinu« s solistom Tomažem Zevnikom: maja na festivalu JSKD v Grosupljem, 5. junija v Jazz klubu Kazina v Ljubljani, 10. julija na MarezziJazzu. Avgusta koncert s HGM Jazz orkestrom Zagreb in ameriškim trobentačem Johnom Thomasom, oktobra delavnica aranžiranja z Lojzetom Krajnčanom, »Grosuplje v jeseni« z Rokom Ferengja in zbori ter BBG x Slon in sadež.",
+          "besediloEn": "„A Tribute to Gordon Goodwin“ with soloist Tomaž Zevnik: in May at the JSKD festival in Grosuplje, on 5 June at the Kazina Jazz Club in Ljubljana, and on 10 July at MarezziJazz. In August, a concert with the HGM Jazz Orchestra Zagreb and American trumpeter John Thomas; in October, an arranging workshop with Lojze Krajnčan, „Grosuplje in Autumn“ with Rok Ferengja and choirs, and BBG x Slon in sadež."
         }
       ],
-      "fotografije": []
+      "fotografije": [],
+      "vlogaEn": "second period",
+      "opisEn": "Kotar returns to the conductor’s stand in December 2022. The orchestra continues with themed programmes, international collaborations and workshops for musicians."
     }
   ],
   "gostujociDirigenti": [
@@ -209,5 +260,15 @@
     "Tadej Tomšič",
     "Gašper Kržmanc"
   ],
-  "jubilej": "V letu 2027 orkester praznuje 30 let — jubilejni mednarodni projekt je v pripravi."
+  "jubilej": "V letu 2027 orkester praznuje 30 let — jubilejni mednarodni projekt je v pripravi.",
+  "predstavitevEn": "Big Band Grosuplje is a classic big band that has been active since the 1997/98 school year, when it was founded at the Grosuplje Music School by the renowned Slovenian musician Braco J. Doblekar together with the school’s then headmaster Franc Korbar. Since 2001 the orchestra has operated as an independent cultural association. Over three decades it has performed at leading venues in Slovenia and abroad, appeared on radio and television, and worked with a long list of distinguished Slovenian and international artists. The orchestra brings together experienced amateur and professional musicians, and offers young players a development path into the full jazz orchestra through its combo and saxophone quintet. Alongside its concert work it regularly prepares themed programmes and educational workshops for musicians. Its artistic director and conductor is Klemen Kotar.",
+  "jubilejEn": "In 2027 the orchestra marks thirty years — an international anniversary project is in preparation.",
+  "gostujociDirigentiEn": [
+    "Rick Stitzel (USA)",
+    "Sigi Feigl (Austria)",
+    "Aleš Suša",
+    "Klara Lavriša",
+    "Tadej Tomšič",
+    "Gašper Kržmanc"
+  ]
 }

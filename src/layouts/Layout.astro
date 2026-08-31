@@ -28,28 +28,55 @@ import '@fontsource/source-sans-3/latin-ext-600.css';
 import '../styles/brand.css';
 import Analytics from '@vercel/analytics/astro';
 
+import {
+  POTI,
+  preslikavaZaSkripto,
+  razlicice,
+  slovar,
+  type Jezik,
+  type Stran,
+} from '../i18n';
+
 interface Props {
+  /* Ključ strani iz POTI — iz njega nastanejo hreflang pari in
+     preusmeritev. Brez njega bi bilo treba poti pisati na vsaki strani
+     posebej in bi se razšle. */
+  stran: Stran;
+  jezik: Jezik;
   title?: string;
   description?: string;
 }
 
-const {
-  title = 'Big Band Grosuplje',
-  description = 'Big Band Grosuplje — klasična big band zasedba, ki deluje od leta 1997/98. Koncerti, tematski programi in izobraževalne delavnice.',
-} = Astro.props;
+const { stran, jezik, title, description } = Astro.props;
+const t = slovar(jezik);
+
+const naslovStrani = title ?? t.naslovnica.naslovStrani;
+const opisStrani = description ?? t.naslovnica.opisStrani;
 
 const SITE = Astro.site ?? new URL('https://bigband-grosuplje.com');
 const ogImage = new URL('/og/og-default.png', SITE);
 
+const kanonicna = new URL(POTI[stran][jezik], SITE);
+const alternative = razlicice(stran).map((r) => ({
+  jezik: r.jezik,
+  url: new URL(r.pot, SITE).href,
+}));
+
 /* MusicGroup je na VSAKI strani, ker je to identiteta orkestra, ne vsebina
    posamezne strani — iskalniki in jeziki modeli tako dobijo dejstva ne glede
    na to, kje pristanejo. Kanali so isti kot v nogi (src/components/Noga.astro).
-   Uradnega naziva ne krajšaj: "Kulturno društvo Big Band Grosuplje". */
+   Uradnega naziva ne krajšaj: "Kulturno društvo Big Band Grosuplje".
+
+   Sam orkester je ista entiteta v obeh jezikih, zato @id ostane isti in se
+   različici ne podvajata kot dva subjekta. Po jeziku se spremenita samo
+   description in inLanguage. */
 const musicGroup = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
   '@id': `${SITE.origin}/#orkester`,
   name: 'Big Band Grosuplje',
+  description: opisStrani,
+  inLanguage: t.htmlLang,
   alternateName: 'Kulturno društvo Big Band Grosuplje',
   foundingDate: '1997',
   genre: ['jazz', 'swing', 'big band'],
@@ -77,7 +104,7 @@ const musicGroup = {
 ---
 
 <!doctype html>
-<html lang="sl" data-skin="a">
+<html lang={t.htmlLang} data-skin="a">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -120,17 +147,56 @@ const musicGroup = {
       })();
     </script>
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    {/* JEZIK: slovenščina je privzeta, angleščina živi pod /en/.
+        Ob PRVEM obisku (ko bbg-lang še ni shranjen) in samo na slovenski
+        strani pogledamo navigator.languages: če noben vpis ne začne s "sl",
+        obiskovalca preusmerimo na angleško različico iste strani. Pot in
+        query se ohranita, zato skin in tema preživita preusmeritev.
+        Vsaka izbira — samodejna ali ročna prek gumba v navigaciji — se
+        shrani v bbg-lang in je nikoli več ne preglasimo.
+        Skripta teče samo na slovenskih straneh; angleške je ne potrebujejo,
+        ker je obisk /en/ že sam po sebi izbira. */}
+    {jezik === 'sl' && (
+      <script is:inline define:vars={{ preslikava: preslikavaZaSkripto() }}>
+        (() => {
+          try {
+            if (localStorage.getItem('bbg-lang')) return;
+            const jeziki = navigator.languages || [navigator.language || ''];
+            if (jeziki.some((j) => String(j).toLowerCase().startsWith('sl'))) return;
+            const cilj = preslikava[window.location.pathname];
+            if (!cilj) return;
+            localStorage.setItem('bbg-lang', 'en');
+            window.location.replace(cilj + window.location.search + window.location.hash);
+          } catch (e) {
+            /* zasebni način ipd. — obiskovalec ostane na slovenski različici */
+          }
+        })();
+      </script>
+    )}
+
+    <title>{naslovStrani}</title>
+    <meta name="description" content={opisStrani} />
+
+    <link rel="canonical" href={kanonicna.href} />
+    {alternative.map((a) => (
+      <link rel="alternate" hreflang={a.jezik} href={a.url} />
+    ))}
+    {/* x-default kaže na slovensko različico — to je izhodiščni jezik strani. */}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={alternative.find((a) => a.jezik === 'sl')?.url}
+    />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <meta property="og:site_name" content="Big Band Grosuplje" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="sl_SI" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:url" content={kanonicna.href} />
+    <meta property="og:title" content={naslovStrani} />
+    <meta property="og:description" content={opisStrani} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -145,7 +211,7 @@ const musicGroup = {
         smer A brez tipkanja URL-ja. Vedno v oznakah, ker se skin lahko
         spremeni šele v brskalniku. */}
     <button type="button" class="predogled" id="predogled-skin">
-      predogled: smer C · <span class="predogled__nazaj">nazaj</span>
+      {t.skupno.predogledC} <span class="predogled__nazaj">{t.skupno.predogledNazaj}</span>
     </button>
 
     <Analytics />

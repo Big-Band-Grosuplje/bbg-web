@@ -1,11 +1,18 @@
 ---
+import { slovar, type Jezik } from '../i18n';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
 /* Skupni modal za vse posnetke — brez listanja (tako je določeno).
    iframe nastane šele ob kliku in se ob zaprtju odstrani iz DOM,
    kar ustavi predvajanje. */
 ---
 
-<dialog id="video-modal" class="modal" aria-label="Predvajalnik posnetka">
-  <button type="button" class="modal__zapri" data-zapri aria-label="Zapri predvajalnik">×</button>
+<dialog id="video-modal" class="modal" aria-label={t.mediji.predvajalnik}>
+  <button type="button" class="modal__zapri" data-zapri aria-label={t.mediji.zapri}>×</button>
   <div class="modal__okvir" id="video-okvir"></div>
 </dialog>
 

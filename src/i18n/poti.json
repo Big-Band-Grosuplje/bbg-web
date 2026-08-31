@@ -1,0 +1,10 @@
+{
+  "opomba": "Vir resnice za preslikavo poti med jezikoma. Bere ga src/i18n/index.ts (navigacija, hreflang, gumb za jezik, preusmeritev) IN astro.config.mjs (alternate zapisi v sitemapu). Zato je JSON in ne TypeScript - konfiguracija Astra .ts ne uvozi. Ob dodajanju strani dopolni tu in nikjer drugje.",
+  "poti": {
+    "naslovnica": { "sl": "/", "en": "/en/" },
+    "zgodovina": { "sl": "/zgodovina/", "en": "/en/history/" },
+    "galerija": { "sl": "/galerija/", "en": "/en/gallery/" },
+    "multimedija": { "sl": "/multimedija/", "en": "/en/media/" },
+    "zasebnost": { "sl": "/zasebnost/", "en": "/en/privacy/" }
+  }
+}

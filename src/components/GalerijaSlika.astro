@@ -1,11 +1,15 @@
 ---
 import { Image, getImage } from 'astro:assets';
-import { slikaZa, type Fotografija } from '../lib/galerija';
+import { podnapisZa, slikaZa, type Fotografija } from '../lib/galerija';
+import { slovar, type Jezik } from '../i18n';
 
 interface Props {
   foto: Fotografija;
+  jezik: Jezik;
 }
-const { foto } = Astro.props;
+const { foto, jezik } = Astro.props;
+const t = slovar(jezik);
+const podnapis = podnapisZa(foto, jezik);
 
 const vir = slikaZa(foto.datoteka);
 /* Za lightbox pripravimo večjo različico iste fotografije. */
@@ -18,12 +22,12 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
       type="button"
       class="slika__gumb"
       data-slika={velika.src}
-      data-opis={foto.podnapis}
-      aria-label={`Povečaj fotografijo: ${foto.podnapis}`}
+      data-opis={podnapis}
+      aria-label={`${t.lightbox.povecaj}: ${podnapis}`}
     >
-      <Image src={vir} alt={foto.podnapis} width={800} loading="lazy" />
+      <Image src={vir} alt={podnapis} width={800} loading="lazy" />
     </button>
-    <figcaption>{foto.podnapis}</figcaption>
+    <figcaption>{podnapis}</figcaption>
   </figure>
 </li>
 

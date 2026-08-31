@@ -1,6 +1,19 @@
 # bbg-web — spletna stran Big Banda Grosuplje
 
-Astro 5 (static) + Vercel. Jezik strani in komunikacije: slovenščina (sl-SI).
+Astro 5 (static) + Vercel. Jezik komunikacije z razvijalcem: slovenščina.
+Stran je **dvojezična**: slovenščina (sl-SI) je privzeta in brez predpone,
+angleščina (en-US) živi pod `/en/`.
+
+## Dvojezičnost
+- **Vir resnice za poti je `src/i18n/poti.json`.** Bere ga `src/i18n/index.ts` (navigacija, hreflang, gumb za jezik, samodejna preusmeritev) **in** `astro.config.mjs` (alternate zapisi v sitemapu). Ob dodajanju strani dopolni samo to datoteko — poti nikoli ne piši drugam
+- Slugi so **prevedeni**, ne prepisani: `/zgodovina` ↔ `/en/history`, `/galerija` ↔ `/en/gallery`, `/multimedija` ↔ `/en/media`, `/zasebnost` ↔ `/en/privacy`
+- **Besedila vmesnika so v `src/i18n/sl.ts` in `en.ts`.** Nizov ne piši neposredno v komponente
+- Ujemanje ključev varujeta dve stvari: `satisfies Slovar` v `en.ts` (opozorilo v urejevalniku) in **preverba ob izvajanju v `src/i18n/index.ts`**, ki ob neujemanju vrže napako z imenom manjkajočega ključa. Samo `satisfies` ne zadošča — Astro prevaja z esbuildom, ki tipe le odstrani in jih ne preverja
+- **Vsebina je v `src/data/*.json` s polji s končnico `En`** (`opisEn`, `naslovEn`, `podnapisEn` …). Trdi podatki — datumi, ure, lastna imena oseb in prizorišč, imena datotek — so **skupni in se ne podvajajo**. Kjer angleškega polja ni, koda pade nazaj na slovensko
+- Angleška besedila **niso dobesedni prevodi**: slovenske besedne igre v angleščini ne delujejo, zato isto povedo v mirnejšem tonu. Hišna samoironija ostane subtilna
+- Vsaka stran je **ena skupna komponenta v `src/components/strani/`** z lastnostjo `jezik`; datoteke v `src/pages/` in `src/pages/en/` so samo tanki ovoji. Označb ne podvajaj
+- Skriptam v komponentah prevodov ne podajaj prek `define:vars` (to jih prisili v inline obliko na vsaki strani) — uporabi `data-` atribute na elementu
+- Pravno besedilo `/zasebnost` je izjema: obe različici sta v `Zasebnost.astro`, ker je dolgo, ima notranje oznake in ga je treba brati kot celoto. **Ob spremembi storitve posodobi obe**
 
 ## Vir resnice
 Uradni podatki društva so v `docs/bbg-osnova.md` — VEDNO uporabljaj te.
@@ -34,17 +47,24 @@ Ključno:
 - **Repo je JAVEN — nikoli ne commitaj bbg-osnova.md, pogodb, financ ali osebnih podatkov.**
 - **Privzeta tema je temna, brezpogojno.** `prefers-color-scheme` se NE upošteva; svetla velja samo, če jo obiskovalec izbere s preklopnikom (`localStorage`, ključ `bbg-tema`). Ne dodajaj medijskih poizvedb za sistemsko temo
 - **Zunanje povezave** (druga domena) vedno `target="_blank" rel="noopener noreferrer"`. Interne povezave in `mailto:` ostanejo v istem oknu
-- SEO in AI-najdljivost: schema.org (MusicGroup v `Layout.astro` na vsaki strani, MusicEvent, VideoObject), Open Graph (og:locale sl_SI), `@astrojs/sitemap`, `public/robots.txt`, `public/llms.txt`
+- SEO in AI-najdljivost: schema.org (MusicGroup v `Layout.astro` na vsaki strani, MusicEvent, VideoObject), Open Graph, `@astrojs/sitemap`, `public/robots.txt`, `public/llms.txt`
+- Vsaka stran nosi `canonical`, par `hreflang` (sl, en) in `x-default` na slovensko različico; `og:locale` sledi jeziku. MusicGroup ima isti `@id` v obeh jezikih (ista entiteta), po jeziku se spremenita `description` in `inLanguage`
+- Sitemap alternate pare sestavlja `serialize` v `astro.config.mjs` iz `poti.json`; vgrajeni i18n sitemapa ne uporabljamo, ker zna spariti samo enake slugove
 - V `llms.txt` samo preverljiva dejstva — brez superlativov brez pokritja. Vrstica Sitemap v `robots.txt` in nastavitev sitemapa v `astro.config.mjs` sta ena spremenljivka v dveh datotekah: ob spremembi popravi obe
-- lang="sl", sl-SI formati datumov (d. M. yyyy)
+- `lang` sledi jeziku strani. Datumi: sl-SI `d. M. yyyy` z uro s piko ("18. 9. 2026 ob 19.00"), en-GB `d Month yyyy` z uro z dvopičjem ("18 September 2026 at 19:00")
+- **Zaznava jezika**: inline skripta v `<head>` samo na slovenskih straneh; ob prvem obisku (ko `bbg-lang` še ni shranjen) prebere `navigator.languages` in ob odsotnosti "sl" preusmeri na ustrezno `/en/` pot, z ohranjenim query in sidrom. Vsaka izbira — samodejna ali ročna prek gumba SL/EN — se zapiše v `bbg-lang` in se **nikoli več ne preglasi**
+- Gumb za jezik je **besedilo, ne zastavica** (zastavica pomeni državo, ne jezika) in je navadna povezava, da deluje tudi brez JS
 - Astro.site = https://bigband-grosuplje.com (astro.config.mjs)
 - DNS je na Hitrost.com: MX/SPF/Microsoftovih zapisov NIKOLI ne predlagaj spreminjati; ob preklopu domene samo A/CNAME
 - Kode ne krajšaj: celotne, ready-to-paste datoteke
 
 ## Struktura
-- `src/layouts/Layout.astro` — head, favicon, OG
-- `src/pages/` — strani; `src/styles/brand.css` — tokeni
-- `src/data/` — strukturirani podatki (koncerti, galerija, mediji, zgodovina). Besedila zgodovine in mejnikov so v `zgodovina.json`, da naslovnica in `/zgodovina` berete isti vir
+- `src/layouts/Layout.astro` — head, favicon, OG, hreflang, inline skripti za skin/temo in za zaznavo jezika
+- `src/i18n/` — `poti.json` (preslikava poti), `sl.ts` in `en.ts` (slovarja), `index.ts` (pomočniki)
+- `src/components/strani/` — telesa strani, ena komponenta na stran, z lastnostjo `jezik`
+- `src/pages/` — slovenski ovoji; `src/pages/en/` — angleški. Oboji so samo nekaj vrstic
+- `src/styles/brand.css` — tokeni
+- `src/data/` — strukturirani podatki (koncerti, galerija, mediji, zgodovina) s polji `…En`. Besedila zgodovine in mejnikov so v `zgodovina.json`, da naslovnica in `/zgodovina` berete isti vir
 - `docs/` — kronika.md, sodelovanja.md, ton-vzorci.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 

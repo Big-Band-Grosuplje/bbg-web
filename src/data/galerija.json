@@ -1,135 +1,156 @@
 {
   "posodobljeno": "2026-08-31",
   "vir": "docs/foto-manifest.md",
-  "opomba": "Fotografije iz src/assets/foto/{orkester,zgodovina}. Mapa hero/ ni tu - je gradivo za naslovnico. Fotografije s TODO dovoljenjem (sinatra-novi-trg-2013-zakrajsek, kotar-publika-2013-zakrajsek, mejnik-nishville-2018-pozrl, koncert-javornik-oder-sirse) so izpuscene, dokler dovoljenja niso potrjena. Polje mesec je vpisano samo tam, kjer je znan; leto null pomeni, da letnica po manifestu ni potrjena. Polje priblizno = letnica je ocena.",
+  "opomba": "Fotografije iz src/assets/foto/{orkester,zgodovina}. Mapa hero/ ni tu - je gradivo za naslovnico. Fotografije s TODO dovoljenjem (sinatra-novi-trg-2013-zakrajsek, kotar-publika-2013-zakrajsek, mejnik-nishville-2018-pozrl, koncert-javornik-oder-sirse) so izpuscene, dokler dovoljenja niso potrjena. Polje mesec je vpisano samo tam, kjer je znan; leto null pomeni, da letnica po manifestu ni potrjena. Polje priblizno = letnica je ocena. Polje podnapisEn je angleski podnapis; imena krajev in oseb ostajajo skupna.",
   "fotografije": [
     {
       "datoteka": "orkester/kotar-napoved-kazina-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, Jazz klub Kazina, Ljubljana, 2026",
       "leto": 2026,
-      "mesec": "2026-06"
+      "mesec": "2026-06",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Kazina Jazz Club, Ljubljana, 2026"
     },
     {
       "datoteka": "orkester/kazina-prazen-oder-2026.jpg",
       "podnapis": "Jazz klub Kazina pred koncertom, 2026",
       "leto": 2026,
-      "mesec": "2026-06"
+      "mesec": "2026-06",
+      "podnapisEn": "Kazina Jazz Club before the concert, 2026"
     },
     {
       "datoteka": "orkester/orkester-igra-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, 2026 — orkester med izvedbo",
       "leto": 2026,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the orchestra mid-performance"
     },
     {
       "datoteka": "orkester/saksofoni-trobente-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, 2026 — saksofonska in trobilna sekcija",
       "leto": 2026,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the saxophone and brass sections"
     },
     {
       "datoteka": "orkester/solista-klarinet-flavta-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, 2026 — solista na klarinetu in flavti",
       "leto": 2026,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — clarinet and flute soloists"
     },
     {
       "datoteka": "orkester/orkester-solistka-alt-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, 2026 — solistka na alt saksofonu",
       "leto": 2026,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — alto saxophone soloist"
     },
     {
       "datoteka": "orkester/orkester-napoved-2026.jpg",
       "podnapis": "Napovednik koncertne sezone, 2026",
       "leto": 2026,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "Concert season announcement, 2026"
     },
     {
       "datoteka": "orkester/orkester-nasmeh-napoved-2026.jpg",
       "podnapis": "Napovednik koncertne sezone, 2026",
       "leto": 2026,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "Concert season announcement, 2026"
     },
     {
       "datoteka": "orkester/vaja-skupinska-2024.jpg",
       "podnapis": "Skupinska vaja orkestra, 2024",
       "leto": 2024,
-      "mesec": "2024-10"
+      "mesec": "2024-10",
+      "podnapisEn": "Full orchestra rehearsal, 2024"
     },
     {
       "datoteka": "zgodovina/mejnik-nishville-2018-oder.jpg",
       "podnapis": "Nishville Jazz Festival, glavni oder, Niš (Srbija), 2018",
       "leto": 2018,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "Nishville Jazz Festival, main stage, Niš (Serbia), 2018"
     },
     {
       "datoteka": "zgodovina/mejnik-us-embassy-combo-2017.jpg",
       "podnapis": "Combo na dogodku ameriškega veleposlaništva, 2017",
       "leto": 2017,
-      "mesec": "2017-06"
+      "mesec": "2017-06",
+      "podnapisEn": "The combo at a U.S. Embassy event, 2017"
     },
     {
       "datoteka": "zgodovina/vrbic-sinatra-2013.jpg",
       "podnapis": "Program Franka Sinatre z Blažem Vrbičem, 2013",
       "leto": 2013,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "The Frank Sinatra programme with Blaž Vrbič, 2013"
     },
     {
       "datoteka": "zgodovina/doblekar-orkester-spomenik-barvna.jpg",
       "podnapis": "Orkester pri konjeniškem spomeniku, okoli 2002",
       "leto": 2002,
       "mesec": null,
-      "priblizno": true
+      "priblizno": true,
+      "podnapisEn": "The orchestra at the equestrian monument, around 2002"
     },
     {
       "datoteka": "zgodovina/doblekar-orkester-spomenik-cb.jpg",
       "podnapis": "Orkester pri konjeniškem spomeniku, okoli 2002 (črno-bela)",
       "leto": 2002,
       "mesec": null,
-      "priblizno": true
+      "priblizno": true,
+      "podnapisEn": "The orchestra at the equestrian monument, around 2002 (black and white)"
     },
     {
       "datoteka": "orkester/kotar-dirigent-energija.jpg",
       "podnapis": "Dirigent Klemen Kotar med vodenjem orkestra",
       "leto": null,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "Conductor Klemen Kotar leading the orchestra"
     },
     {
       "datoteka": "zgodovina/doblekar-vibrafon-mentorstvo.jpg",
       "podnapis": "Delo z mladimi tolkalci pod vodstvom Braca J. Doblekarja",
       "leto": null,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "Working with young percussionists under Braco J. Doblekar"
     },
     {
       "datoteka": "zgodovina/koncert-gros-ozadje-lunder.jpg",
       "podnapis": "Koncert v obdobju Igorja Lundra",
       "leto": null,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A concert from the Igor Lunder years"
     },
     {
       "datoteka": "zgodovina/koncert-javornik-obdobje.jpg",
       "podnapis": "Koncert v obdobju Rudija Javornika",
       "leto": null,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A concert from the Rudi Javornik years"
     },
     {
       "datoteka": "zgodovina/mladi-orkester-dvorana-zgodnja-leta.jpg",
       "podnapis": "Mladi orkester v dvorani, zgodnja leta",
       "leto": null,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "The young orchestra on stage, early years"
     },
     {
       "datoteka": "zgodovina/nastop-bele-srajce-zgodnja-leta.jpg",
       "podnapis": "Nastop v belih srajcah, zgodnja leta",
       "leto": null,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A performance in white shirts, early years"
     },
     {
       "datoteka": "zgodovina/tv-nastop-zgodnja-leta.jpg",
       "podnapis": "Televizijski nastop, zgodnja leta",
       "leto": null,
-      "mesec": null
+      "mesec": null,
+      "podnapisEn": "A television appearance, early years"
     }
   ]
 }

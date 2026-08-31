@@ -11,6 +11,10 @@ export type Krediti = {
 export type Medij = {
   id: string;
   naslov: string;
+  naslovEn?: string;
+  zasedbaEn?: string;
+  dogodekEn?: string;
+  solistiEn?: string[];
   avtor_glasbe?: string;
   zasedba: string;
   solisti: string[];
@@ -22,20 +26,30 @@ export type Medij = {
 };
 
 /* Vrstni red kreditov je fiksen; izpišejo se samo tisti, ki v podatkih
-   obstajajo. Polje "opomba" je interno in se na stran nikoli ne izpiše. */
-const KREDIT_OZNAKE: [keyof Krediti, string][] = [
-  ['kamera', 'Kamera'],
-  ['avdio', 'Avdio'],
-  ['montaza', 'Montaža'],
-  ['posnetek', 'Posnetek'],
-  ['kanal', 'Kanal'],
-];
+   obstajajo. Polje "opomba" je interno in se na stran nikoli ne izpiše.
+   Oznake pridejo iz slovarja, imena avtorjev so skupna obema jezikoma. */
+const KREDIT_ZAPOREDJE: (keyof Krediti)[] = ['kamera', 'avdio', 'montaza', 'posnetek', 'kanal'];
 
-export function kreditiVrstica(krediti: Krediti): string | null {
-  const deli = KREDIT_OZNAKE.filter(([klic]) => krediti[klic]).map(
-    ([klic, oznaka]) => `${oznaka}: ${krediti[klic]}`,
+export function kreditiVrstica(
+  krediti: Krediti,
+  oznake: Record<keyof Krediti, string>,
+): string | null {
+  const deli = KREDIT_ZAPOREDJE.filter((klic) => krediti[klic]).map(
+    (klic) => `${oznake[klic]}: ${krediti[klic]}`,
   );
   return deli.length > 0 ? deli.join(' · ') : null;
+}
+
+/* Besedilna polja v izbranem jeziku; brez angleške različice pade nazaj
+   na slovensko. */
+export function medijV(m: Medij, jezik: 'sl' | 'en') {
+  if (jezik !== 'en') return { naslov: m.naslov, zasedba: m.zasedba, dogodek: m.dogodek, solisti: m.solisti };
+  return {
+    naslov: m.naslovEn ?? m.naslov,
+    zasedba: m.zasedbaEn ?? m.zasedba,
+    dogodek: m.dogodekEn ?? m.dogodek,
+    solisti: m.solistiEn ?? m.solisti,
+  };
 }
 
 export function slicicaZa(id: string): string {
@@ -45,11 +59,11 @@ export function slicicaZa(id: string): string {
 /* uploadDate zahteva datum, podatki pa hranijo samo leto — zato 1. januar
    tega leta. To ni dejanski datum objave posnetka, ampak najboljši približek
    iz razpoložljivega vira. */
-export function videoObject(m: Medij) {
+export function videoObject(m: Medij, jezik: 'sl' | 'en' = 'sl') {
   return {
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
-    name: m.naslov,
+    name: medijV(m, jezik).naslov,
     uploadDate: `${m.leto}-01-01`,
     thumbnailUrl: slicicaZa(m.id),
     embedUrl: `https://www.youtube.com/embed/${m.id}`,

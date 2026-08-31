@@ -1,6 +1,13 @@
 ---
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
 import { BREVO_FORM_URL, KONTAKT_EPOSTA } from '../config';
+import { pot, slovar, type Jezik } from '../i18n';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
 
 const KANALI = {
   facebook: 'https://www.facebook.com/BigBandGrosuplje',
@@ -15,12 +22,12 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
   <div class="ovoj">
     <div class="noga__mreza">
       <div class="noga__znamka">
-        <img src={znakZlat.src} alt="Big Band Grosuplje" width="150" class="noga__znak" />
-        <p class="noga__ton">Prvi grosupeljski big band — od leta 1997/98.</p>
+        <img src={znakZlat.src} alt={t.noga.znakAlt} width="150" class="noga__znak" />
+        <p class="noga__ton">{t.noga.ton}</p>
       </div>
 
       <div class="noga__novice">
-        <h3 class="noga__naslov">Ne zamudi koncerta</h3>
+        <h3 class="noga__naslov">{t.noga.noviceNaslov}</h3>
         {/* action in method sta tu za primer brez JS: takrat obrazec odda
             navaden POST na Brevo. Ker gre na tujo domeno, se odpre v novem
             zavihku, da obiskovalec ne izgubi naše strani. Z JS do tega ne
@@ -29,6 +36,10 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
           class="novice"
           id="novice"
           data-brevo={BREVO_FORM_URL}
+          data-posiljamo={t.noga.novicePosiljamo}
+          data-hvala={t.noga.noviceHvala}
+          data-napaka={t.noga.noviceNapaka}
+          data-nedeluje={t.noga.noviceNedeluje}
           action={brevoVklopljen ? BREVO_FORM_URL : undefined}
           method="post"
           target={brevoVklopljen ? '_blank' : undefined}
@@ -36,17 +47,17 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
           novalidate
         >
           <div class="novice__vrstica">
-            <label class="vizualno-skrito" for="novice-email">Tvoja e-pošta</label>
+            <label class="vizualno-skrito" for="novice-email">{t.noga.noviceOznaka}</label>
             <input
               class="novice__vnos"
               id="novice-email"
               name="EMAIL"
               type="email"
               autocomplete="email"
-              placeholder="tvoj@email.si"
+              placeholder={t.noga.novicePlaceholder}
               required
             />
-            <button class="bbg-gumb bbg-gumb--mali" type="submit">Prijava</button>
+            <button class="bbg-gumb bbg-gumb--mali" type="submit">{t.noga.noviceGumb}</button>
           </div>
 
           {/* Brevov honeypot — robot ga izpolni, človek ga ne vidi.
@@ -61,19 +72,20 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
           <p class="novice__soglasje">
             <label>
               <input type="checkbox" required />
-              Strinjam se s <a href="/zasebnost">politiko zasebnosti</a>.
+              {t.noga.noviceSoglasjePred}{' '}
+              <a href={pot('zasebnost', jezik)}>{t.noga.noviceSoglasjePovezava}</a>{t.noga.noviceSoglasjeZa}
             </label>
           </p>
 
           <p class="obrazec__stanje" role="status" aria-live="polite"></p>
         </form>
         <p class="noga__drobno">
-          Nekaj obvestil na leto, samo o koncertih. Brez spama, častna jazzovska.
+          {t.noga.noviceDrobno}
         </p>
       </div>
 
-      <nav class="noga__kanali" aria-label="Družbena omrežja">
-        <h3 class="noga__naslov">Spremljaj nas</h3>
+      <nav class="noga__kanali" aria-label={t.noga.kanaliOznaka}>
+        <h3 class="noga__naslov">{t.noga.kanaliNaslov}</h3>
         {/* Zunanje domene se odpirajo v novem zavihku; rel prepreči, da bi
             odprta stran prek window.opener segla nazaj v našo. Interne
             povezave ostanejo v istem oknu. */}
@@ -84,14 +96,14 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
         </p>
         <p class="noga__drobno">
           <a href={`mailto:${KONTAKT_EPOSTA}`}>{KONTAKT_EPOSTA}</a><br />
-          <a href="/zasebnost">Politika zasebnosti</a>
+          <a href={pot('zasebnost', jezik)}>{t.noga.zasebnost}</a>
         </p>
       </nav>
     </div>
 
     <p class="kolofon">
-      Kulturno društvo Big Band Grosuplje · Adamičeva cesta 16, 1290 Grosuplje<br />
-      Davčna številka: 12579076 (nismo zavezanci za DDV) · Matična številka: 1179241000 ·
+      {t.noga.kolofonNaziv}<br />
+      {t.noga.kolofonDavek}
       <a href={`mailto:${KONTAKT_EPOSTA}`}>{KONTAKT_EPOSTA}</a>
     </p>
   </div>
@@ -120,6 +132,9 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
 
      Brez BREVO_FORM_URL obrazec javi napako z našim e-naslovom; mailto
      rezerve v vmesniku ni več, enako kot pri kontaktnih obrazcih. */
+  /* Sporočila pridejo iz slovarja prek data atributov: skripta je
+     modul in do frontmatterja nima dostopa, define:vars pa bi jo prisilil
+     v inline obliko na vsaki strani. */
   const EPOSTA = 'info@bigband-grosuplje.com';
   const novice = document.querySelector<HTMLFormElement>('#novice');
 
@@ -144,7 +159,7 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
        enako kot pri kontaktnih obrazcih, mailto rezerve v vmesniku ni več. */
     const brevo = novice.dataset.brevo ?? '';
     if (brevo === '') {
-      stanjeNovic(`Prijava trenutno ne deluje. Piši nam na ${EPOSTA}.`, true);
+      stanjeNovic(`${novice.dataset.nedeluje} ${EPOSTA}.`, true);
       return;
     }
 
@@ -155,7 +170,7 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
       if (typeof vrednost === 'string') telo.append(kljuc, vrednost);
     });
 
-    stanjeNovic('Pošiljamo …');
+    stanjeNovic(novice.dataset.posiljamo ?? '');
     try {
       const odziv = await fetch(brevo, {
         method: 'POST',
@@ -166,12 +181,12 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
         odziv.ok || odziv.type === 'opaqueredirect' || (odziv.status >= 300 && odziv.status < 400);
       if (uspeh) {
         novice.reset();
-        stanjeNovic('Hvala, prijava je zabeležena.');
+        stanjeNovic(novice.dataset.hvala ?? '');
       } else {
-        stanjeNovic(`Prijava ni uspela. Piši nam na ${EPOSTA}.`, true);
+        stanjeNovic(`${novice.dataset.napaka} ${EPOSTA}.`, true);
       }
     } catch {
-      stanjeNovic(`Prijava ni uspela. Piši nam na ${EPOSTA}.`, true);
+      stanjeNovic(`${novice.dataset.napaka} ${EPOSTA}.`, true);
     }
   });
 </script>

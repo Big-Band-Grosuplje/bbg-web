@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Noga from '../Noga.astro';
+import VideoModal from '../VideoModal.astro';
+import Posnetek from '../Posnetek.astro';
+import { razvrsceno } from '../../lib/mediji';
+import { pot, slovar, type Jezik } from '../../i18n';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
+
+/* Vsi objavljeni posnetki, od najnovejšega. */
+const posnetki = razvrsceno();
+---
+
+<Layout
+  stran="multimedija"
+  jezik={jezik}
+  title={t.multimedijaStran.naslovStrani}
+  description={t.multimedijaStran.opisStrani}
+>
+  <Nav stran="multimedija" jezik={jezik} />
+
+  <main class="stran">
+    <div class="ovoj">
+      <p class="nazaj"><a href={pot('naslovnica', jezik)}>{t.skupno.nazaj}</a></p>
+      <p class="nadnaslov">{t.multimedijaStran.nadnaslov}</p>
+      <h1>{t.multimedijaStran.naslov}</h1>
+      <p class="uvod">{posnetki.length} {t.multimedijaStran.uvodPred}</p>
+
+      <ul class="posnetki">
+        {posnetki.map((m) => <Posnetek medij={m} jezik={jezik} />)}
+      </ul>
+
+      <p class="kredit">{t.multimedijaStran.kredit}</p>
+    </div>
+  </main>
+
+  <Noga jezik={jezik} />
+  <VideoModal jezik={jezik} />
+</Layout>
+
+<style>
+  .stran { padding: 52px 0 74px; }
+  h1 {
+    margin: 10px 0 18px;
+    font-size: clamp(28px, 4.4vw, 44px);
+    color: var(--bbg-naslov);
+  }
+  .uvod {
+    margin: 0 0 40px;
+    max-width: 42rem;
+    opacity: 0.9;
+  }
+  .posnetki {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 34px 26px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+  .kredit {
+    margin: 52px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--bbg-border-dark);
+    font-size: 12.5px;
+    line-height: 1.7;
+    opacity: 0.65;
+    max-width: 44rem;
+  }
+</style>

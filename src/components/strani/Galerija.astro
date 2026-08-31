@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Noga from '../Noga.astro';
+import Lightbox from '../Lightbox.astro';
+import GalerijaSlika from '../GalerijaSlika.astro';
+import { poLetih } from '../../lib/galerija';
+import { pot, slovar, type Jezik } from '../../i18n';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
+
+/* Skupine so že razvrščene od najnovejše; nepotrjene letnice pridejo na konec. */
+const skupine = poLetih(t.galerijaStran.letoNiPotrjeno);
+const stevilo = skupine.reduce((vsota, s) => vsota + s.fotografije.length, 0);
+---
+
+<Layout
+  stran="galerija"
+  jezik={jezik}
+  title={t.galerijaStran.naslovStrani}
+  description={t.galerijaStran.opisStrani}
+>
+  <Nav stran="galerija" jezik={jezik} />
+
+  <main class="stran">
+    <div class="ovoj">
+      <p class="nazaj"><a href={pot('naslovnica', jezik)}>{t.skupno.nazaj}</a></p>
+      <p class="nadnaslov">{t.galerijaStran.nadnaslov}</p>
+      <h1>{t.galerijaStran.naslov}</h1>
+      <p class="uvod">{stevilo} {t.galerijaStran.uvodPred}</p>
+    </div>
+
+    {skupine.map((skupina) => (
+      <section class="leto" aria-labelledby={`leto-${skupina.naslov.replace(/\s+/g, '-')}`}>
+        <div class="ovoj">
+          <h2 id={`leto-${skupina.naslov.replace(/\s+/g, '-')}`} class="leto__naslov">
+            {skupina.naslov}
+          </h2>
+          <ul class="slike">
+            {skupina.fotografije.map((f) => <GalerijaSlika foto={f} jezik={jezik} />)}
+          </ul>
+        </div>
+      </section>
+    ))}
+
+    <div class="ovoj">
+      <p class="kredit">{t.galerijaStran.kredit}</p>
+    </div>
+  </main>
+
+  <Noga jezik={jezik} />
+  <Lightbox jezik={jezik} />
+</Layout>
+
+<style>
+  .stran { padding: 52px 0 20px; }
+  h1 {
+    margin: 10px 0 18px;
+    font-size: clamp(28px, 4.4vw, 44px);
+    color: var(--bbg-naslov);
+  }
+  .uvod {
+    margin: 0 0 10px;
+    max-width: 42rem;
+    opacity: 0.9;
+  }
+
+  .leto { padding: 42px 0 0; }
+  .leto__naslov {
+    margin: 0 0 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bbg-border-dark);
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--bbg-nadnaslov);
+  }
+  .slike {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 26px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  }
+  .kredit {
+    margin: 52px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--bbg-border-dark);
+    font-size: 12.5px;
+    line-height: 1.7;
+    opacity: 0.65;
+    max-width: 44rem;
+  }
+</style>

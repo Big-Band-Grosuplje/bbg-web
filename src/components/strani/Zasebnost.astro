@@ -1,0 +1,393 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Noga from '../Noga.astro';
+import znakZlat from '../../assets/brand/bbg-znak-zlat.svg';
+import { pot, slovar, type Jezik } from '../../i18n';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
+
+/* Pravno besedilo ni v slovarju, ampak v dveh vejah tu: je dolgo, ima
+   notranje oznake in povezave, brati pa ga je treba kot celoto. Razdelka se
+   morata ob vsaki spremembi storitve posodobiti oba — to je invarianta, ne
+   podvojitev iz lenobe. */
+const POSODOBLJENO = '31. 8. 2026';
+---
+
+<Layout
+  stran="zasebnost"
+  jezik={jezik}
+  title={jezik === 'en'
+    ? 'Privacy policy — Big Band Grosuplje'
+    : 'Politika zasebnosti — Big Band Grosuplje'}
+  description={jezik === 'en'
+    ? 'How Big Band Grosuplje handles personal data: site visits, embedded recordings, the newsletter and contact forms.'
+    : 'Kako Big Band Grosuplje ravna z osebnimi podatki: obisk strani, vgrajeni posnetki, e-novice in kontaktni obrazci.'}
+>
+  <Nav stran="zasebnost" jezik={jezik} />
+
+  <main class="stran">
+    <div class="ozko">
+      <p class="nazaj"><a href={pot('naslovnica', jezik)}>{t.skupno.nazaj}</a></p>
+
+      {jezik === 'sl' && (
+        <>
+          <h1>Politika zasebnosti</h1>
+
+          <p class="uvod">
+            Big band je glasen po poklicu. Z osebnimi podatki pa smo tihi in
+            varčni: zbiramo samo tisto, kar potrebujemo, da
+            ti povemo, kdaj igramo, in da ti odgovorimo, ko nam pišeš. Nič od tega
+            ne prodajamo — spodaj piše natančno, kaj se zgodi s katerim podatkom.
+          </p>
+
+          <h2>Upravljavec</h2>
+          <p>
+            Kulturno društvo Big Band Grosuplje<br />
+            Adamičeva cesta 16, 1290 Grosuplje, Slovenija<br />
+            Davčna številka: 12579076 (nismo zavezanci za DDV)<br />
+            Matična številka: 1179241000<br />
+            E-pošta: <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>
+          </p>
+          <p>
+            Za vsa vprašanja o osebnih podatkih, popravke ali izbris piši na
+            <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>.
+            Odgovorimo najpozneje v enem mesecu.
+          </p>
+
+          <h2>Obisk spletne strani</h2>
+          <p>
+            Stran uporablja <strong>Vercel Web Analytics</strong> za merjenje obiska.
+            Ta storitev <strong>ne uporablja piškotkov</strong> in ne ustvarja profilov
+            obiskovalcev; podatki so agregirani (število ogledov, država, vrsta
+            naprave, izvor obiska) in ne omogočajo tvoje identifikacije. Obdelovalec
+            je Vercel Inc.
+          </p>
+          <p>
+            Stran gostuje pri Vercelu, ki v strežniških dnevnikih začasno beleži
+            naslov IP zaradi delovanja in varnosti storitve. Pravna podlaga je
+            zakoniti interes delovanja spletne strani.
+          </p>
+          <p>
+            Pisave so <strong>gostovane na naši strani</strong>, ne prek zunanjega
+            omrežja — ob obisku se tvoj naslov IP zato ne prenese nobenemu
+            ponudniku pisav.
+          </p>
+
+          <h2>Piškotki</h2>
+          <p>
+            Stran <strong>ne uporablja piškotkov</strong> — ne svojih ne tujih, ne
+            za merjenje obiska ne za oglaševanje. Zato tudi pasica o piškotkih ni
+            potrebna: privoliti ni v kaj.
+          </p>
+          <p>
+            Edino, kar shranimo v tvoj brskalnik, je <strong>izbira teme</strong>
+            (svetla ali temna) — v lokalnem pomnilniku brskalnika
+            (<code>localStorage</code>, ključ <code>bbg-tema</code>). Ta zapis
+            ostane v tvoji napravi, <strong>ne pošlje se nikamor</strong> in ne
+            omogoča tvoje identifikacije. Odstraniš ga tako, da v brskalniku
+            počistiš podatke te strani.
+          </p>
+          <p>
+            Edina izjema je predvajalnik posnetkov: piškotke lahko postavi YouTube,
+            in to šele, ko posnetek zaženeš. Podrobnosti so v naslednjem razdelku.
+          </p>
+
+          <h2>Vgrajeni posnetki (YouTube)</h2>
+          <p>
+            Posnetki v razdelku Multimedija se ob nalaganju strani
+            <strong>ne naložijo</strong>. Prikaže se le sličica, predvajalnik pa
+            nastane šele, ko klikneš gumb za predvajanje. Uporabljamo način
+            <code>youtube-nocookie.com</code>, ki omeji piškotke za merjenje
+            oglaševanja.
+          </p>
+          <p>
+            Ko posnetek zaženeš, se vzpostavi povezava z Googlovimi strežniki in od
+            tega trenutka veljajo <strong>pogoji in politika zasebnosti družbe
+            Google</strong>; Google lahko obdeluje tvoj naslov IP in podatke o
+            napravi. Če tega ne želiš, posnetka ne zaženi — vse ostalo na strani
+            deluje brez tega.
+          </p>
+
+          <h2>E-novice</h2>
+          <p>
+            Za pošiljanje e-novic uporabljamo <strong>Brevo</strong> (Sendinblue SAS,
+            Francija) kot obdelovalca. Ob prijavi obdelamo <strong>tvoj e-naslov</strong>.
+          </p>
+          <ul>
+            <li>Ob oddaji obrazca se <strong>prijava zabeleži neposredno</strong>.
+              <strong>Dvojna potrditev</strong> (double opt-in), pri kateri bi pred
+              uvrstitvijo na seznam potrdil še povezavo iz e-sporočila, zaenkrat ni
+              vklopljena, ker pošiljanje potrditvenih sporočil pri ponudniku še ni
+              aktivirano. Ko bo, jo vklopimo in ta odstavek posodobimo.</li>
+            <li>Obrazec se odda <strong>neposredno iz tvojega brskalnika</strong> na
+              Brevove strežnike, zato Brevo pri tem vidi tudi tvoj naslov IP.</li>
+            <li>Vsako sporočilo vsebuje <strong>povezavo za odjavo</strong>.
+              Odjava je takojšnja in brezpogojna.</li>
+            <li>E-naslov hranimo <strong>do odjave</strong>, nato ga izbrišemo.</li>
+            <li>Pravna podlaga je tvoje <strong>soglasje</strong>, ki ga podaš s
+              potrditvijo pred oddajo obrazca in ga lahko kadar koli prekličeš.
+              Sama potrditev se Brevu ne pošlje — obdelamo le tvoj e-naslov.</li>
+          </ul>
+
+          <h2>Kontaktni obrazci</h2>
+          <p>
+            Obrazca za organizatorje in za pridružitev orkestru pošiljata sporočila
+            prek storitve <strong>Web3Forms</strong> (Web3Forms LLP), ki deluje kot
+            obdelovalec: sporočilo posreduje na naš naslov
+            <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>
+            in ga ne uporablja za svoje namene.
+          </p>
+          <p>
+            Obdelamo podatke, ki jih vpišeš: <strong>ime, e-naslov, vsebino
+            sporočila</strong> in pri pridružitvi <strong>področje udejstvovanja</strong>
+            (instrumentalist, vokalist, tehnična podpora). Pravna podlaga je izvedba
+            komunikacije na tvojo zahtevo. Sporočila hranimo v e-poštnem predalu,
+            dokler so potrebna za obravnavo povpraševanja, in jih nato izbrišemo.
+          </p>
+          <p>
+            Tudi ta obrazca se oddata <strong>neposredno iz tvojega brskalnika</strong>
+            na strežnike Web3Forms, zato ta pri tem vidi tudi tvoj naslov IP.
+            Sporočilo nam posreduje po e-pošti in ga ne hrani za svoje namene.
+          </p>
+          <p>
+            Obrazca vsebujeta skrito polje za zaznavanje samodejnih oddaj (t. i.
+            honeypot). Vanj ne vpisuj ničesar — namenjeno je robotom.
+          </p>
+
+          <h2>Komu podatkov ne damo</h2>
+          <p>
+            Osebnih podatkov ne prodajamo, ne oddajamo v najem in jih ne posredujemo
+            tretjim osebam za njihove namene. Uporabljamo jih izključno za namene,
+            opisane zgoraj.
+          </p>
+
+          <h2>Tvoje pravice</h2>
+          <p>
+            Kadar koli lahko zahtevaš dostop do svojih podatkov, popravek, izbris,
+            omejitev obdelave ali prenos podatkov, prav tako lahko prekličeš
+            soglasje. Piši na
+            <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>.
+            Če meniš, da s podatki ravnamo narobe, se lahko pritožiš
+            <strong>Informacijskemu pooblaščencu Republike Slovenije</strong>
+            (<a href="https://www.ip-rs.si" target="_blank" rel="noopener noreferrer">ip-rs.si</a>).
+          </p>
+
+          <h2>Spremembe</h2>
+          <p>
+            Politiko posodobimo, kadar dodamo ali odstranimo katero od storitev.
+            Zadnja sprememba: <strong>{POSODOBLJENO}</strong>.
+          </p>
+        </>
+      )}
+
+      {jezik === 'en' && (
+        <>
+    <h1>Privacy policy</h1>
+
+      <p class="uvod">
+        A big band is loud by profession. With personal data we are quiet and
+        frugal: we collect only what we need to tell you when we are playing
+        and to answer you when you write. We sell none of it — below is exactly
+        what happens to each piece of data.
+      </p>
+
+      <h2>Controller</h2>
+      <p>
+        Kulturno društvo Big Band Grosuplje<br />
+        Adamičeva cesta 16, 1290 Grosuplje, Slovenia<br />
+        Tax number: 12579076 (not liable for VAT)<br />
+        Registration number: 1179241000<br />
+        Email: <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>
+      </p>
+      <p>
+        For any question about personal data, corrections or erasure, write to
+        <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>.
+        We reply within one month at the latest.
+      </p>
+
+      <h2>Visiting the website</h2>
+      <p>
+        The site uses <strong>Vercel Web Analytics</strong> to measure traffic.
+        The service <strong>uses no cookies</strong> and builds no visitor
+        profiles; the data is aggregated (page views, country, device type,
+        referrer) and does not identify you. The processor is Vercel Inc.
+      </p>
+      <p>
+        The site is hosted by Vercel, which temporarily records your IP address
+        in server logs for the operation and security of the service. The legal
+        basis is the legitimate interest of running the website.
+      </p>
+      <p>
+        Fonts are <strong>self-hosted</strong> rather than loaded from an
+        external network — your IP address is therefore not passed to any font
+        provider when you visit.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        The site <strong>uses no cookies</strong> — neither its own nor third
+        party, neither for analytics nor for advertising. There is therefore no
+        need for a cookie banner: there is nothing to consent to.
+      </p>
+      <p>
+        The only thing we store in your browser is your <strong>theme and
+        language choice</strong>, in the browser’s local storage
+        (<code>localStorage</code>, keys <code>bbg-tema</code>,
+        <code>bbg-skin</code> and <code>bbg-lang</code>). These entries stay on
+        your device, <strong>are never sent anywhere</strong> and do not
+        identify you. You can remove them by clearing this site’s data in your
+        browser.
+      </p>
+      <p>
+        The only exception is the video player: YouTube may set cookies, and
+        only once you start a recording. Details are in the next section.
+      </p>
+
+      <h2>Embedded recordings (YouTube)</h2>
+      <p>
+        Recordings in the Media section <strong>do not load</strong> when the
+        page loads. Only a thumbnail is shown; the player is created only when
+        you click the play button. We use the
+        <code>youtube-nocookie.com</code> mode, which limits advertising
+        cookies.
+      </p>
+      <p>
+        Once you start a recording, a connection to Google’s servers is
+        established and from that moment the <strong>terms and privacy policy
+        of Google</strong> apply; Google may process your IP address and device
+        data. If you do not want this, do not start the recording — everything
+        else on the site works without it.
+      </p>
+
+      <h2>Newsletter</h2>
+      <p>
+        We use <strong>Brevo</strong> (Sendinblue SAS, France) as a processor
+        for sending the newsletter. On subscription we process
+        <strong>your email address</strong>.
+      </p>
+      <ul>
+        <li>On submitting the form the <strong>subscription is recorded
+          directly</strong>. <strong>Double opt-in</strong>, where you would
+          confirm a link from an email before being added to the list, is not
+          enabled for now, because confirmation emails are not yet activated
+          at the provider. Once they are, we will enable it and update this
+          section.</li>
+        <li>The form is submitted <strong>directly from your browser</strong>
+          to Brevo’s servers, so Brevo also sees your IP address.</li>
+        <li>Every message contains an <strong>unsubscribe link</strong>.
+          Unsubscribing is immediate and unconditional.</li>
+        <li>We keep your address <strong>until you unsubscribe</strong>, after
+          which we delete it.</li>
+        <li>The legal basis is your <strong>consent</strong>, which you give by
+          ticking the box before submitting and may withdraw at any time. The
+          tick itself is not sent to Brevo — we process only your email
+          address.</li>
+      </ul>
+
+      <h2>Contact forms</h2>
+      <p>
+        The forms for organisers and for joining the orchestra send messages
+        through <strong>Web3Forms</strong> (Web3Forms LLP), acting as a
+        processor: it forwards the message to our address
+        <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>
+        and does not use it for its own purposes.
+      </p>
+      <p>
+        We process the data you enter: <strong>name, email address, the
+        message</strong> and, when joining, the <strong>area of
+        involvement</strong> (instrumentalist, vocalist, technical support).
+        The legal basis is carrying out the communication at your request. We
+        keep messages in our mailbox for as long as they are needed to handle
+        the enquiry, and then delete them.
+      </p>
+      <p>
+        These forms are also submitted <strong>directly from your
+        browser</strong> to the Web3Forms servers, so they too see your IP
+        address. The message is forwarded to us by email and not kept for their
+        own purposes.
+      </p>
+      <p>
+        Both forms contain a hidden field for detecting automated submissions
+        (a honeypot). Do not enter anything in it — it is meant for bots.
+      </p>
+
+      <h2>What we never do with your data</h2>
+      <p>
+        We do not sell personal data, we do not rent it out and we do not pass
+        it to third parties for their own purposes. We use it solely for the
+        purposes described above.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        At any time you may request access to your data, its correction,
+        erasure, restriction of processing or portability, and you may withdraw
+        your consent. Write to
+        <a href="mailto:info@bigband-grosuplje.com">info@bigband-grosuplje.com</a>.
+        If you believe we are handling your data wrongly, you may lodge a
+        complaint with the <strong>Information Commissioner of the Republic of
+        Slovenia</strong>
+        (<a href="https://www.ip-rs.si" target="_blank" rel="noopener noreferrer">ip-rs.si</a>).
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        We update this policy whenever we add or remove a service.
+        Last change: <strong>31 August 2026</strong>.
+      </p>
+        </>
+      )}
+
+      <p class="podpis">
+        <img src={znakZlat.src} alt={t.noga.znakAlt} width="120" />
+      </p>
+    </div>
+  </main>
+
+  <Noga jezik={jezik} />
+</Layout>
+
+<style>
+  .ozko {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 var(--bbg-rob);
+  }
+  .stran { padding: 60px 0 80px; }
+  .nazaj { margin: 0 0 30px; font-size: 14px; font-weight: 600; }
+  h1 {
+    margin: 0 0 24px;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--bbg-naslov);
+  }
+  h2 {
+    margin: 40px 0 12px;
+    font-size: 21px;
+    color: var(--bbg-naslov);
+  }
+  /* Brez motnosti: --bbg-naslov je v svetlih temah temna zlata tik nad AA
+     (4,96 :1 v C, 4,62 :1 v A), motnost 0,95 pa jo je spustila na 4,50
+     oz. 4,21 :1. Razlika v videzu je neopazna. */
+  .uvod {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--bbg-naslov);
+  }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 1.3rem; }
+  li { margin-bottom: 8px; }
+  code {
+    font-size: 0.92em;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--bbg-besedilo) 12%, transparent);
+  }
+  .podpis { margin: 48px 0 0; opacity: 0.7; }
+  .podpis img { height: auto; display: block; }
+</style>

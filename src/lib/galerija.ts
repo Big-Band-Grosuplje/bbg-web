@@ -4,6 +4,7 @@ import galerijaData from '../data/galerija.json';
 export type Fotografija = {
   datoteka: string;
   podnapis: string;
+  podnapisEn?: string;
   leto: number | null;
   mesec: string | null;
   priblizno?: boolean;
@@ -43,16 +44,23 @@ export function razvrsceno(): Fotografija[] {
 }
 
 /* Skupine za vmesne naslove na /galerija. Nepotrjene letnice dobijo
-   svojo skupino na koncu. */
-export function poLetih(): { naslov: string; fotografije: Fotografija[] }[] {
+   svojo skupino na koncu. Naslov te skupine je edini prevedljiv niz tu,
+   zato pride od zunaj — knjižnica slovarja ne pozna. */
+export function poLetih(oznakaBrezLetnice: string): { naslov: string; fotografije: Fotografija[] }[] {
   const skupine = new Map<string, Fotografija[]>();
   for (const foto of razvrsceno()) {
-    const naslov = foto.leto === null ? 'Leto ni potrjeno' : String(foto.leto);
+    const naslov = foto.leto === null ? oznakaBrezLetnice : String(foto.leto);
     const obstoj = skupine.get(naslov);
     if (obstoj) obstoj.push(foto);
     else skupine.set(naslov, [foto]);
   }
   return [...skupine.entries()].map(([naslov, fotografije]) => ({ naslov, fotografije }));
+}
+
+/* Podnapis v izbranem jeziku. Če angleškega ni, pade nazaj na slovenskega —
+   bolje podnapis v napačnem jeziku kot prazen alt. */
+export function podnapisZa(foto: Fotografija, jezik: 'sl' | 'en'): string {
+  return jezik === 'en' ? (foto.podnapisEn ?? foto.podnapis) : foto.podnapis;
 }
 
 /* Prvih n najnovejših — za izsek na naslovnici. */

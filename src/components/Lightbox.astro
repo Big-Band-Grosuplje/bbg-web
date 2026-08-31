@@ -1,15 +1,23 @@
 ---
+import { slovar, type Jezik } from '../i18n';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
+
 /* Skupni lightbox za galerijo — nativni <dialog>, brez knjižnic.
    Skript pobere vse gumbe .slika__gumb v vrstnem redu, kot so v DOM,
    in med njimi lista s puščicama, tipkama ← → in kroženjem. */
 ---
 
-<dialog id="lightbox" class="lightbox" aria-label="Povečana fotografija">
+<dialog id="lightbox" class="lightbox" aria-label={t.lightbox.oznaka}>
   <button
     type="button"
     class="lightbox__krmilo lightbox__krmilo--prej"
     data-prej
-    aria-label="Prejšnja fotografija"
+    aria-label={t.lightbox.prej}
   >‹</button>
 
   <img id="lightbox-slika" src="" alt="" />
@@ -19,7 +27,7 @@
     type="button"
     class="lightbox__krmilo lightbox__krmilo--naprej"
     data-naprej
-    aria-label="Naslednja fotografija"
+    aria-label={t.lightbox.naprej}
   >›</button>
 </dialog>
 

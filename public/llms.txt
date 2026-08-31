@@ -130,26 +130,47 @@ dejstva — brez ocen in brez podatkov, ki niso javni.
 
 ## Links / Povezave
 
-- [Concerts / Koncerti](https://bigband-grosuplje.com/#koncerti): upcoming
-  concerts with dates, venues and guests. Napovedani koncerti z datumi,
-  prizorišči in gosti.
-- [History / Zgodovina](https://bigband-grosuplje.com/zgodovina): full
-  timeline by conductor, 1997/98 to today. Celotna časovnica po obdobjih
-  dirigentov.
-- [Multimedia / Multimedija](https://bigband-grosuplje.com/multimedija):
-  video and audio recordings of concerts and festival appearances.
-- [Gallery / Galerija](https://bigband-grosuplje.com/galerija): photo archive
-  of the association.
-- [Contact / Kontakt](https://bigband-grosuplje.com/#kontakt)
-- [Privacy / Zasebnost](https://bigband-grosuplje.com/zasebnost)
+The site is bilingual. Slovenian pages are at the root, English pages under
+/en/. Each page declares its counterpart with a hreflang link.
+Stran je dvojezična: slovenske strani so v korenu, angleške pod /en/.
+
+English:
+
+- [Home](https://bigband-grosuplje.com/en/)
+- [Concerts](https://bigband-grosuplje.com/en/#koncerti): upcoming concerts
+  with dates, venues and guests.
+- [History](https://bigband-grosuplje.com/en/history): full timeline by
+  conductor, 1997/98 to today.
+- [Media](https://bigband-grosuplje.com/en/media): video and audio recordings
+  of concerts and festival appearances.
+- [Gallery](https://bigband-grosuplje.com/en/gallery): photo archive of the
+  association.
+- [Contact](https://bigband-grosuplje.com/en/#kontakt)
+- [Privacy](https://bigband-grosuplje.com/en/privacy)
+
+Slovensko:
+
+- [Naslovnica](https://bigband-grosuplje.com/)
+- [Koncerti](https://bigband-grosuplje.com/#koncerti): napovedani koncerti z
+  datumi, prizorišči in gosti.
+- [Zgodovina](https://bigband-grosuplje.com/zgodovina): celotna časovnica po
+  obdobjih dirigentov.
+- [Multimedija](https://bigband-grosuplje.com/multimedija): video in avdio
+  posnetki koncertov in festivalskih nastopov.
+- [Galerija](https://bigband-grosuplje.com/galerija): fotografski arhiv
+  društva.
+- [Kontakt](https://bigband-grosuplje.com/#kontakt)
+- [Zasebnost](https://bigband-grosuplje.com/zasebnost)
 - Facebook: https://www.facebook.com/BigBandGrosuplje
 - Instagram: https://www.instagram.com/bigbandgrosuplje/
 - YouTube: https://www.youtube.com/@bigbandgrosuplje9236
 
 ## Notes for machine readers
 
-- Site language: Slovenian (sl-SI). Dates on the site use the d. M. yyyy
-  format.
+- Site languages: Slovenian (sl-SI, default, at the root) and English
+  (en-US, under /en/). Slovenian pages use the d. M. yyyy date format,
+  English pages use d Month yyyy. Every page carries hreflang links to its
+  counterpart, and the sitemap lists both versions.
 - Structured data: schema.org MusicGroup on every page; MusicEvent for each
   announced concert whose date and venue are confirmed.
 - Individual orchestra members are not named publicly. Named people are

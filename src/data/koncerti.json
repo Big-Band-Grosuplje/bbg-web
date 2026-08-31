@@ -1,7 +1,7 @@
 {
   "posodobljeno": "2026-08-31",
   "vir": "docs/kronika.md — sekcija 2026",
-  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Delavnica aranziranja z Lojzetom Krajncanom (oktober 2026) ni koncert - sodi v loceno sekcijo Delavnice z EducationEvent. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description.",
+  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Delavnica aranziranja z Lojzetom Krajncanom (oktober 2026) ni koncert - sodi v loceno sekcijo Delavnice z EducationEvent. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description. Polja s koncnico En so angleske razlicice; trdi podatki (datumi, ure, koordinate, lastna imena prizorisc in gostov) so skupni in se ne podvajajo. Angleski opisi niso dobesedni prevodi - slovenske besedne igre v anglescini ne delujejo, zato povedo isto z mirnejsim stavkom.",
   "koncerti": [
     {
       "id": "grosuplje-v-jeseni-2026",
@@ -9,8 +9,14 @@
       "opis": "Otvoritveni večer 14. festivala Grosuplje v jeseni pod (upamo milim) grosupeljskim nebom. Rok Ferengja in združeni pevski zbori iz Grosuplja in okolice bodo moledovali: Ostani še minuto, ponujali Jagode in čokolado, prisegali: Vedno bom le tebe ljubil in postregli še s kupom drugih uspešnic. Vreme nas ne bo ustavilo — v primeru slabše napovedi se koncert prestavi na nadomestno lokacijo.",
       "opisSeo": "Tradicionalni jesenski koncert Big Banda Grosuplje z gostujočimi pevskimi zbori. Otvoritveni večer 14. festivala Grosuplje v jeseni; ob slabem vremenu prestavitev na nadomestno lokacijo.",
       "gostje": [
-        { "naziv": "Rok Ferengja", "tip": "Person" },
-        { "naziv": "pevski zbori", "tip": null }
+        {
+          "naziv": "Rok Ferengja",
+          "tip": "Person"
+        },
+        {
+          "naziv": "pevski zbori",
+          "tip": null
+        }
       ],
       "datumIso": "2026-09-18",
       "ura": "19:00",
@@ -20,9 +26,14 @@
         "ulica": null,
         "postna": "1290",
         "kraj": "Grosuplje",
-        "drzava": "SI"
+        "drzava": "SI",
+        "nazivEn": "Grosuplje (open-air venue)"
       },
-      "vstopniceUrl": null
+      "vstopniceUrl": null,
+      "nazivEn": "Concert Under the Stars — Grosuplje in Autumn",
+      "opisEn": "Opening night of the 14th Grosuplje in Autumn festival, under the (hopefully merciful) open sky. Vocalist Rok Ferengja and joint choirs from Grosuplje bring a night of beloved Slovenian pop classics with big band punch. Weather won't stop us — in case of bad forecast the concert moves to a backup venue.",
+      "opisSeoEn": "The traditional autumn concert of Big Band Grosuplje with guest choirs. Opening night of the 14th Grosuplje in Autumn festival; in bad weather the concert moves to a backup venue.",
+      "datumOpisEn": "September 2026"
     },
     {
       "id": "bbg-x-slon-in-sadez-2026",
@@ -30,7 +41,10 @@
       "opis": "Nenavadna kombinacija: močan arzenal instrumentov Big Banda Grosuplje in aktualna, kot britev ostra besedila, zabeljena z nemalo humorne satire gostov Slona in Sadeža. Tega izjemnega koncerta res ne smete zamuditi!",
       "opisSeo": "Skupni projekt Big Banda Grosuplje in skupine Slon in sadež.",
       "gostje": [
-        { "naziv": "Slon in sadež", "tip": "MusicGroup" }
+        {
+          "naziv": "Slon in sadež",
+          "tip": "MusicGroup"
+        }
       ],
       "datumIso": "2026-12-13",
       "ura": null,
@@ -40,9 +54,14 @@
         "ulica": "Adamičeva cesta 16",
         "postna": "1290",
         "kraj": "Grosuplje",
-        "drzava": "SI"
+        "drzava": "SI",
+        "nazivEn": "Kulturni dom Grosuplje"
       },
-      "vstopniceUrl": null
+      "vstopniceUrl": null,
+      "nazivEn": "BBG x Slon in sadež",
+      "opisEn": "An unlikely pairing: the full instrumental arsenal of Big Band Grosuplje against the razor-sharp, topical lyrics and comic satire of guest duo Slon in sadež. A programme that is easier to enjoy than to categorise.",
+      "opisSeoEn": "A joint project of Big Band Grosuplje and the satirical duo Slon in sadež.",
+      "datumOpisEn": "December 2026"
     }
   ]
 }
