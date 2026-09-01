@@ -1,26 +1,20 @@
 [
-  {
-    "id": "KiAHzrQgL2I",
-    "naslov": "Ne čakaj na maj",
-    "zasedba": "Combo Big Banda Grosuplje",
-    "solisti": [
-      "Lidija Kodrič (vokal)",
-      "Klemen Kotar (alt saksofon)"
-    ],
-    "dogodek": "Koncert Prifarskih muzikantov, Gallusova dvorana Cankarjevega doma, Ljubljana",
-    "leto": 2015,
-    "krediti": {
-      "posnetek": "RTV Slovenija",
-      "kanal": "Prifarski muzikanti (objava po dogovoru z RTV)"
-    },
-    "objavi": true,
-    "zasedbaEn": "Big Band Grosuplje Combo",
-    "dogodekEn": "Prifarski muzikanti concert, Gallus Hall, Cankarjev dom, Ljubljana",
-    "solistiEn": [
-      "Lidija Kodrič (vocals)",
-      "Klemen Kotar (alto saxophone)"
-    ]
+ {
+  "id": "1R-fVvFl-Mc",
+  "naslov": "Après toi",
+  "zasedba": "Combo Big Banda Grosuplje in Prifarski muzikanti",
+  "zasedbaEn": "Big Band Grosuplje Combo with Prifarski muzikanti",
+  "solisti": ["Nuška Drašček (vokal)"],
+  "solistiEn": ["Nuška Drašček (vocals)"],
+  "dogodek": "Koncert Prifarskih muzikantov Pesmi naše mladosti, Gallusova dvorana Cankarjevega doma, Ljubljana",
+  "dogodekEn": "Prifarski muzikanti concert Pesmi naše mladosti, Gallus Hall, Cankarjev dom, Ljubljana",
+  "leto": 2015,
+  "krediti": {
+    "posnetek": "RTV Slovenija",
+    "kanal": "Prifarski muzikanti (objava po dogovoru z RTV)"
   },
+  "objavi": true
+},
   {
     "id": "fDlabkjj-aU",
     "naslov": "Yellow Days",
