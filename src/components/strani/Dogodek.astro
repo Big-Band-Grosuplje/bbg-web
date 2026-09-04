@@ -51,10 +51,12 @@ const k = pripravi(
 
 const naslovStrani = `${k.nazivPrikaz} — Big Band Grosuplje`;
 
-/* Zaprtega dogodka ne delimo. Podstran ostane — povabljeni pridejo nanjo po
-   neposredni povezavi — le gumba za deljenje ni, ker bi javno deljenje
-   vabilo ljudi na dogodek, kamor ne morejo. */
-const seDeli = k.vstop.tip !== 'zaprt';
+/* Zaprtega dogodka ne delimo in ne damo v indeks. Podstran ostane —
+   povabljeni pridejo nanjo po neposredni povezavi — le gumba za deljenje
+   ni, ker bi javno deljenje vabilo ljudi na dogodek, kamor ne morejo,
+   in strani ni v sitemapu (izločitev je v astro.config.mjs). */
+const jeZaprt = k.vstop.tip === 'zaprt';
+const seDeli = !jeZaprt;
 const imaAkcije =
   seDeli ||
   (k.prijava && !k.jeMimo) ||
@@ -67,6 +69,7 @@ const imaAkcije =
   title={naslovStrani}
   description={k.opisSeoPrikaz}
   potiRazlicic={{ sl: potSl, en: potEn }}
+  noindex={jeZaprt}
 >
   <Nav stran="naslovnica" jezik={jezik} />
 

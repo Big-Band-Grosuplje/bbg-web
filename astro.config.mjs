@@ -29,6 +29,22 @@ for (const k of koncerti) {
   dodajPar({ sl: `/dogodki/${k.slug}/`, en: `/en/events/${k.slugEn}/` });
 }
 
+/* Zaprti dogodki iz sitemapa izpadejo — v iskalnik ne sodijo, saj nanje
+   ni mogoče priti. Podstran vseeno nastane in ostane dosegljiva po
+   neposredni povezavi iz vabila, nosi pa <meta name="robots"
+   content="noindex"> (glej Layout.astro). Sitemap sam indeksiranja ne
+   prepove, zato oznaka ni odveč: brez nje bi zunanja povezava zadostovala
+   za uvrstitev v indeks.
+   Pare v PARI puščamo tudi za te poti — nikoli se ne izpišejo, ker jih
+   filter zavrne, hreflang na sami strani pa ostane. */
+const ZAPRTI = new Set();
+for (const k of koncerti) {
+  if (k.vstop?.tip === 'zaprt') {
+    ZAPRTI.add(`/dogodki/${k.slug}/`);
+    ZAPRTI.add(`/en/events/${k.slugEn}/`);
+  }
+}
+
 export default defineConfig({
   site: 'https://bigband-grosuplje.com',
 
@@ -51,6 +67,7 @@ export default defineConfig({
        Vgrajene možnosti i18n ne uporabljamo, ker zna pariti samo enake
        slugove; naši so prevedeni. */
     sitemap({
+      filter: (stran) => !ZAPRTI.has(new URL(stran).pathname),
       serialize(zapis) {
         const pot = new URL(zapis.url).pathname;
         const povezave = PARI.get(pot);

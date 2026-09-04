@@ -49,9 +49,14 @@ interface Props {
      ni znano vnaprej. Te podajo svoj par poti tu; `stran` pri njih pove
      samo, katera pot velja za samodejno preusmeritev jezika. */
   potiRazlicic?: { sl: string; en: string };
+  /* Stran naj se ne indeksira. Uporabljajo jo podstrani zaprtih dogodkov:
+     naslov obstaja za povabljene, ki ga dobijo v vabilu, v iskalnik pa
+     ne sodi. Canonical in hreflang par ostaneta — povezavi med jezikoma
+     se ne odrekamo, ker povabljenec lahko pride na katero koli. */
+  noindex?: boolean;
 }
 
-const { stran, jezik, title, description, potiRazlicic } = Astro.props;
+const { stran, jezik, title, description, potiRazlicic, noindex = false } = Astro.props;
 const t = slovar(jezik);
 
 const naslovStrani = title ?? t.naslovnica.naslovStrani;
@@ -197,6 +202,11 @@ const musicGroup = {
 
     <title>{naslovStrani}</title>
     <meta name="description" content={opisStrani} />
+
+    {/* noindex mora biti berljiv, zato strani ne zapiramo v robots.txt:
+        z Disallow pajek te oznake ne bi videl in bi naslov lahko obdržal
+        v indeksu iz zunanjih povezav. */}
+    {noindex && <meta name="robots" content="noindex" />}
 
     <link rel="canonical" href={kanonicna.href} />
     {alternative.map((a) => (
