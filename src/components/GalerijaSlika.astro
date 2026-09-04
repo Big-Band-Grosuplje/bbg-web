@@ -14,6 +14,12 @@ const podnapis = podnapisZa(foto, jezik);
    zaslonski bralnik bi sicer isto poved slišal dvakrat. */
 const nadomestno = altZa(foto, jezik);
 
+/* Podnapis lahko nosi pravi prelom vrstice (glej figcaption: white-space:
+   pre-line). Tako je dolg napis mogoče prelomiti za pomišljajem, ne da bi
+   se razdelil na dve polji. V atributih prelom ni na mestu — aria-label in
+   data-opis dobita napis v eni vrsti. */
+const podnapisVrstica = podnapis.split('\n').join(' ');
+
 const vir = slikaZa(foto.datoteka);
 /* Za lightbox pripravimo večjo različico iste fotografije. */
 const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
@@ -25,8 +31,8 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
       type="button"
       class="slika__gumb"
       data-slika={velika.src}
-      data-opis={podnapis}
-      aria-label={`${t.lightbox.povecaj}: ${podnapis}`}
+      data-opis={podnapisVrstica}
+      aria-label={`${t.lightbox.povecaj}: ${podnapisVrstica}`}
     >
       <Image src={vir} alt={nadomestno} width={800} loading="lazy" />
     </button>
@@ -64,5 +70,10 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
     font-size: 13.5px;
     line-height: 1.5;
     opacity: 0.78;
+    /* pre-line ohrani prelome vrstic iz galerija.json, zaporedne presledke
+       pa še vedno strne. Uporablja ga samo napis, ki bi mu pomišljaj sredi
+       vrstice pustil dolgo praznino (Flying Start 2024); drugi napisi
+       preloma ne vsebujejo, zato zanje to ni sprememba. */
+    white-space: pre-line;
   }
 </style>
