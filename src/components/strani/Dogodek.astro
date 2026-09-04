@@ -201,11 +201,14 @@ const imaAkcije =
   .dogodek__opis { margin: 0 0 20px; }
   .dogodek__gostje { margin: 0 0 30px; font-size: 15px; }
 
+  /* Enaka vrstica kot na kartici: gumb, desno od njega deljenje, prelom na
+     ozkih zaslonih, navpično po sredini. Vsebnik je <div>, ker Deljenje
+     izpiše <div> — v <p> bi razčlenjevalnik vrstico razbil. */
   .dogodek__akcije {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     margin: 0;
   }
 </style>

@@ -201,9 +201,14 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                     in predizbira deluje tudi brez posebne obravnave. */}
                 {/* Vrstica se izpiše samo, kadar je v njej kaj — pri zaprtem
                     dogodku brez prijave in vstopnic bi ostal prazen odstavek
-                    s praznim prostorom pod opisom. */}
+                    s praznim prostorom pod opisom.
+
+                    Vsebnik je <div> in NE <p>: Deljenje izpiše <div>, tega pa
+                    razčlenjevalnik HTML v odstavku ne dovoli — <p> na tem
+                    mestu tiho zapre, ikona pade iz vrstice in se izriše pod
+                    gumbom. Oznake so bile videti pravilne, DOM pa ne. */}
                 {(k.prijava || (k.vstop.tip === 'vstopnice' && k.vstop.url) || seDeli(k.vstop.tip)) && (
-                  <p class="kartica__cta">
+                  <div class="kartica__cta">
                     {k.prijava && (
                       <a class="bbg-gumb bbg-gumb--mali" href="?prijava=delavnica#kontakt"
                         >{t.koncerti.prijavaGumb}</a>
@@ -225,7 +230,7 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                         kompakt={true}
                       />
                     )}
-                  </p>
+                  </div>
                 )}
               </div>
 
@@ -659,12 +664,15 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     text-underline-offset: 3px;
   }
 
+  /* Gumb akcije in ikona deljenja stojita v isti vrstici, deljenje desno od
+     gumba (vrstni red v oznakah). flex-wrap dovoli prelom na ozkih zaslonih,
+     align-items poravna različno visoka elementa po sredini. */
   .kartica__cta {
     margin: 18px 0 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   /* --- Zgodovina --- */
