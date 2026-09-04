@@ -94,7 +94,19 @@
         "tip": "prost"
       },
       "slug": "koncert-pod-zvezdami-grosuplje-v-jeseni-2026",
-      "slugEn": "concert-under-the-stars-grosuplje-in-autumn-2026"
+      "slugEn": "concert-under-the-stars-grosuplje-in-autumn-2026",
+      "organizator": {
+        "naziv": "Turizem Grosuplje",
+        "nazivEn": "Grosuplje Tourism",
+        "url": "https://visitgrosuplje.si/dogodki/koncert-pod-zvezdami-big-band-grosuplje-rok-ferengja/"
+      },
+      "objave": [
+        {
+          "naziv": "Festival Grosuplje v jeseni 2026 (kultura.si)",
+          "nazivEn": "Grosuplje in Autumn 2026 festival (kultura.si)",
+          "url": "https://kultura.si/festival-grosuplje-v-jeseni-2026/"
+        }
+      ]
     },
     {
       "id": "delavnica-jazz-aranziranje-krajncan-2026",
@@ -129,7 +141,14 @@
         "drzava": "SI"
       },
       "slug": "jazz-aranziranje-delavnica-krajncan-2026",
-      "slugEn": "jazz-arranging-workshop-krajncan-2026"
+      "slugEn": "jazz-arranging-workshop-krajncan-2026",
+      "objave": [
+        {
+          "naziv": "Napoved na kultura.si",
+          "nazivEn": "Announcement on kultura.si",
+          "url": "https://kultura.si/jazz-aranziranje-dvodnevna-delavnica-z-lojzetom-kranjcanom/"
+        }
+      ]
     },
     {
       "id": "bbg-x-slon-in-sadez-2026",

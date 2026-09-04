@@ -15,6 +15,12 @@ import type { Jezik } from '../i18n';
 const SITE = 'https://bigband-grosuplje.com';
 
 export type Gost = { naziv: string; tip: string | null };
+/* Zunanja objava o dogodku — napovednik na tujem mestu. Samo povezava za
+   bralca; v JSON-LD ne gre, ker objava ni ne organizator ne izvajalec. */
+export type Objava = { naziv: string; nazivEn?: string; url: string };
+/* Kadar dogodek organizira kdo drug (festival, občina, veleposlaništvo),
+   smo izvajalec in ne organizator. Brez tega polja velja društvo. */
+export type Organizator = { naziv: string; nazivEn?: string; url?: string | null };
 export type Lokacija = {
   naziv: string;
   nazivEn?: string;
@@ -46,7 +52,16 @@ export type Koncert = {
   vstop: { tip: 'vstopnice' | 'prost' | 'zaprt'; url?: string | null };
   /* true = prost vstop, a z obvezno prijavo prek kontaktnega obrazca. */
   prijava?: boolean;
+  /* Neobvezno; brez njega je organizator društvo (glej DRUSTVO). */
+  organizator?: Organizator;
+  /* Neobvezno; izpiše se samo na podstrani dogodka, ne na kartici. */
+  objave?: Objava[];
 };
+
+/* Privzeti organizator. Ime je zapisano tu in ne v vsakem dogodku: je
+   invarianta, ne spremenljivka — če se razide s pravnim nazivom, je
+   pokvarjeno neodvisno od podatkov. */
+const DRUSTVO = { naziv: 'Kulturno društvo Big Band Grosuplje', url: SITE };
 
 const koncerti = koncertiData.koncerti as Koncert[];
 
@@ -228,10 +243,18 @@ function musicEvent(k: Koncert, jezik: Jezik, url?: string) {
         ? { performer: k.gostje.filter((g) => g.tip).map((g) => ({ '@type': g.tip, name: g.naziv })) }
         : {}
       : { performer: izvajalci }),
+    /* Organizator: kadar je vpisan zunanji, gre v JSON-LD ta, sicer
+       društvo. Pri dogodku, ki ga organizira kdo drug, smo v performer in
+       ne v organizer — trditev, da dogodek organiziramo mi, bi bila
+       napačna, iskalnikom pa jo je nemogoče preklicati. */
     organizer: {
       '@type': 'Organization',
-      name: 'Kulturno društvo Big Band Grosuplje',
-      url: SITE,
+      name: k.organizator
+        ? (en ? (k.organizator.nazivEn ?? k.organizator.naziv) : k.organizator.naziv)
+        : DRUSTVO.naziv,
+      ...(k.organizator
+        ? (k.organizator.url ? { url: k.organizator.url } : {})
+        : { url: DRUSTVO.url }),
     },
     location: {
       '@type': 'Place',
@@ -290,6 +313,18 @@ export function pripravi(
         : formatDatum(k.datumIso, k.ura, jezik, besedila.ob)) ??
       (en ? (k.datumOpisEn ?? k.datumOpis) : k.datumOpis),
     blok: datumBlok(k.datumIso, k.datumKonecIso, jezik),
+    /* Organizator se izpiše samo, kadar ni naš — "Organizator: Kulturno
+       društvo Big Band Grosuplje" na lastni strani ne pove ničesar. */
+    organizatorPrikaz: k.organizator
+      ? {
+          naziv: en ? (k.organizator.nazivEn ?? k.organizator.naziv) : k.organizator.naziv,
+          url: k.organizator.url ?? null,
+        }
+      : null,
+    objavePrikaz: (k.objave ?? []).map((o) => ({
+      naziv: en ? (o.nazivEn ?? o.naziv) : o.naziv,
+      url: o.url,
+    })),
     jsonLd: musicEvent(k, jezik, url),
     /* Pretekli dogodek: podstran ostane (arhivska vrednost), le označimo ga. */
     jeMimo: !jePrihajajoc(k.datumKonecIso ?? k.datumIso),

@@ -58,6 +58,8 @@ export const sl = {
     vsiKoncerti: '← Vsi koncerti',
     gostje: 'Gostje',
     vstopnice: 'Vstopnice',
+    organizator: 'Organizator',
+    objave: 'Več o dogodku:',
   },
 
   zgodovinaSekcija: {

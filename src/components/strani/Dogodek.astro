@@ -103,6 +103,20 @@ const imaAkcije =
         </p>
       )}
 
+      {/* Organizator se izpiše samo pri dogodku, ki ga organizira kdo drug;
+          pri lastnem dogodku vrstice ni. Povezava je zunanja. */}
+      {k.organizatorPrikaz && (
+        <p class="dogodek__organizator">
+          <span class="oznaka">{t.koncerti.organizator}</span>
+          {k.organizatorPrikaz.url ? (
+            <a href={k.organizatorPrikaz.url} target="_blank" rel="noopener noreferrer"
+              >{k.organizatorPrikaz.naziv}</a>
+          ) : (
+            k.organizatorPrikaz.naziv
+          )}
+        </p>
+      )}
+
       {imaAkcije && (
         <div class="dogodek__akcije">
           {k.prijava && !k.jeMimo && (
@@ -125,6 +139,22 @@ const imaAkcije =
               opis={k.opisSeoPrikaz}
             />
           )}
+        </div>
+      )}
+
+      {/* Zunanje objave o dogodku. Stojijo za gumbi, da ne tekmujejo s
+          prijavo oziroma vstopnicami, in samo tu — na kartici naslovnice
+          bi vodile stran od dogodka, še preden bi ga obiskovalec odprl. */}
+      {k.objavePrikaz.length > 0 && (
+        <div class="dogodek__objave">
+          <p class="dogodek__objaveNaslov">{t.koncerti.objave}</p>
+          <ul>
+            {k.objavePrikaz.map((o) => (
+              <li>
+                <a href={o.url} target="_blank" rel="noopener noreferrer">{o.naziv}</a>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
@@ -199,7 +229,12 @@ const imaAkcije =
   }
 
   .dogodek__opis { margin: 0 0 20px; }
-  .dogodek__gostje { margin: 0 0 30px; font-size: 15px; }
+  .dogodek__gostje { margin: 0 0 8px; font-size: 15px; }
+  .dogodek__organizator { margin: 0 0 8px; font-size: 15px; }
+  /* Zadnja vrstica dejstev nosi odmik do gumbov; ker je odvisna od tega,
+     kaj je vpisano, ga da splošno pravilo za zadnjega sorojenca. */
+  .dogodek__gostje:last-of-type,
+  .dogodek__organizator:last-of-type { margin-bottom: 30px; }
 
   /* Enaka vrstica kot na kartici: gumb, desno od njega deljenje, prelom na
      ozkih zaslonih, navpično po sredini. Vsebnik je <div>, ker Deljenje
@@ -211,4 +246,22 @@ const imaAkcije =
     gap: 12px;
     margin: 0;
   }
+
+  .dogodek__objave { margin: 34px 0 0; }
+  .dogodek__objaveNaslov {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    /* Sekundarno besedilo brez opacity — ta bi potegnila tudi povezave
+       v istem poddrevesu pod AA. */
+    color: color-mix(in srgb, var(--bbg-besedilo) 78%, var(--bbg-bg));
+  }
+  .dogodek__objave ul {
+    margin: 0;
+    padding: 0 0 0 1.1em;
+    font-size: 15px;
+  }
+  .dogodek__objave li { margin: 0 0 5px; }
 </style>

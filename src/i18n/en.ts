@@ -61,6 +61,8 @@ export const en = {
     vsiKoncerti: '← All concerts',
     gostje: 'Guests',
     vstopnice: 'Tickets',
+    organizator: 'Organiser',
+    objave: 'More about the event:',
   },
 
   zgodovinaSekcija: {
