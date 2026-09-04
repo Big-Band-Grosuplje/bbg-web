@@ -5,6 +5,13 @@ export type Fotografija = {
   datoteka: string;
   podnapis: string;
   podnapisEn?: string;
+  /* Nadomestno besedilo je ločeno od podnapisa: podnapis pove, kaj je
+     dogodek, alt pa kaj je NA sliki. Bralcu zaslonskega bralnika je
+     podnapis prebran tako ali tako (figcaption), zato bi ga isti niz v
+     altu ponovil. Kjer alt ni vpisan, koda pade nazaj na podnapis —
+     bolje podnapis kot prazen alt. */
+  alt?: string;
+  altEn?: string;
   leto: number | null;
   mesec: string | null;
   priblizno?: boolean;
@@ -36,9 +43,13 @@ export function razvrsceno(): Fotografija[] {
     if (a.leto === null) return 1;
     if (b.leto === null) return -1;
     if (a.leto !== b.leto) return b.leto - a.leto;
+    /* Mesec razvršča samo, kadar je znan pri obeh. Kadar ga ima le ena
+       fotografija, obvelja vrstni red iz galerija.json — ta je uredniški
+       in ga ni mogoče izraziti z meseci, ki jih za vse slike ni.
+       Prej je vsaka fotografija z mesecem prehitela vse brez njega; to je
+       vplivalo samo na leto 2026, edino leto z mešanim zapisom (druga
+       leta imajo mesec pri vseh ali pri nobeni sliki). */
     if (a.mesec && b.mesec) return b.mesec.localeCompare(a.mesec);
-    if (a.mesec) return -1;
-    if (b.mesec) return 1;
     return 0;
   });
 }
@@ -61,6 +72,13 @@ export function poLetih(oznakaBrezLetnice: string): { naslov: string; fotografij
    bolje podnapis v napačnem jeziku kot prazen alt. */
 export function podnapisZa(foto: Fotografija, jezik: 'sl' | 'en'): string {
   return jezik === 'en' ? (foto.podnapisEn ?? foto.podnapis) : foto.podnapis;
+}
+
+/* Nadomestno besedilo v izbranem jeziku, z zaporednim padcem nazaj:
+   altEn → alt → podnapisEn → podnapis. */
+export function altZa(foto: Fotografija, jezik: 'sl' | 'en'): string {
+  if (jezik === 'en') return foto.altEn ?? foto.alt ?? podnapisZa(foto, 'en');
+  return foto.alt ?? foto.podnapis;
 }
 
 /* Prvih n najnovejših — za izsek na naslovnici. */

@@ -1,6 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
-import { podnapisZa, slikaZa, type Fotografija } from '../lib/galerija';
+import { altZa, podnapisZa, slikaZa, type Fotografija } from '../lib/galerija';
 import { slovar, type Jezik } from '../i18n';
 
 interface Props {
@@ -10,6 +10,9 @@ interface Props {
 const { foto, jezik } = Astro.props;
 const t = slovar(jezik);
 const podnapis = podnapisZa(foto, jezik);
+/* Podnapis gre v figcaption in v lightbox, alt pa opisuje sliko samo —
+   zaslonski bralnik bi sicer isto poved slišal dvakrat. */
+const nadomestno = altZa(foto, jezik);
 
 const vir = slikaZa(foto.datoteka);
 /* Za lightbox pripravimo večjo različico iste fotografije. */
@@ -25,7 +28,7 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
       data-opis={podnapis}
       aria-label={`${t.lightbox.povecaj}: ${podnapis}`}
     >
-      <Image src={vir} alt={podnapis} width={800} loading="lazy" />
+      <Image src={vir} alt={nadomestno} width={800} loading="lazy" />
     </button>
     <figcaption>{podnapis}</figcaption>
   </figure>

@@ -4,60 +4,76 @@
   "opomba": "Fotografije iz src/assets/foto/{orkester,zgodovina}. Mapa hero/ ni tu - je gradivo za naslovnico. Fotografije s TODO dovoljenjem (sinatra-novi-trg-2013-zakrajsek, kotar-publika-2013-zakrajsek, mejnik-nishville-2018-pozrl, koncert-javornik-oder-sirse) so izpuscene, dokler dovoljenja niso potrjena. Polje mesec je vpisano samo tam, kjer je znan; leto null pomeni, da letnica po manifestu ni potrjena. Polje priblizno = letnica je ocena. Polje podnapisEn je angleski podnapis; imena krajev in oseb ostajajo skupna.",
   "fotografije": [
     {
-      "datoteka": "orkester/kotar-napoved-kazina-2026.jpg",
-      "podnapis": "Poklon Gordonu Goodwinu, Jazz klub Kazina, Ljubljana, 2026",
+      "datoteka": "orkester/orkester-solistka-alt-2026.jpg",
+      "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026 — celoten orkester",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026 — the full orchestra",
+      "alt": "Big band v celoti na zatemnjenem odru: ritem sekcija s klaviaturami, kontrabasom, kitaro in bobni na levi, pihalne sekcije za pulti na desni, dirigent pred njimi.",
+      "altEn": "The full big band on a darkened stage: rhythm section with keyboard, double bass, guitar and drums on the left, wind sections behind their stands on the right, the conductor in front of them.",
       "leto": 2026,
-      "mesec": "2026-06",
-      "podnapisEn": "A Tribute to Gordon Goodwin, Kazina Jazz Club, Ljubljana, 2026"
+      "mesec": null
+    },
+    {
+      "datoteka": "orkester/kotar-napoved-kazina-2026.jpg",
+      "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026",
+      "alt": "Napoved z odra: govorec z listkom v roki stoji pri mikrofonu na sprednjem robu odra, orkester sedi za njim.",
+      "altEn": "An announcement from the stage: a speaker holding notes stands at a microphone at the front of the stage, the orchestra seated behind.",
+      "leto": 2026,
+      "mesec": "2026-06"
+    },
+    {
+      "datoteka": "orkester/orkester-napoved-2026.jpg",
+      "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026",
+      "alt": "Pihalne sekcije od blizu med igranjem: saksofoni v prvi vrsti, trobente in trombon za njimi, dirigent s hrbtom proti objektivu nad partituro.",
+      "altEn": "The wind sections close up while playing: saxophones in the front row, trumpets and a trombone behind them, the conductor seen from behind over the score.",
+      "leto": 2026,
+      "mesec": null
+    },
+    {
+      "datoteka": "orkester/orkester-nasmeh-napoved-2026.jpg",
+      "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026 — orkester z dirigentom",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026 — orchestra with conductor",
+      "alt": "Sproščen trenutek med skladbama: dirigent z dvignjeno roko pri pultu, nasmejani člani orkestra z inštrumenti v rokah.",
+      "altEn": "A relaxed moment between numbers: the conductor at the stand with a raised arm, smiling players holding their instruments.",
+      "leto": 2026,
+      "mesec": null
     },
     {
       "datoteka": "orkester/kazina-prazen-oder-2026.jpg",
       "podnapis": "Jazz klub Kazina pred koncertom, 2026",
+      "podnapisEn": "Kazina Jazz Club before the concert, 2026",
+      "alt": "Prazen oder pred koncertom: notni pulti, klavir, bobni in odloženi trobili, v ozadju svetleče črke KAZINA.",
+      "altEn": "An empty stage before the concert: music stands, a piano, drums and brass instruments set down, the illuminated KAZINA letters behind.",
       "leto": 2026,
-      "mesec": "2026-06",
-      "podnapisEn": "Kazina Jazz Club before the concert, 2026"
+      "mesec": "2026-06"
     },
     {
       "datoteka": "orkester/orkester-igra-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, 2026 — orkester med izvedbo",
+      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the orchestra mid-performance",
+      "alt": "Orkester med igranjem: saksofoni v prvi vrsti pri mikrofonih, trobente in trombon v drugi, ob desnem robu kadra dirigent nad partituro.",
+      "altEn": "The orchestra playing: saxophones at their microphones in the front row, trumpets and a trombone behind, the conductor over the score at the right edge of the frame.",
       "leto": 2026,
-      "mesec": null,
-      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the orchestra mid-performance"
+      "mesec": null
     },
     {
       "datoteka": "orkester/saksofoni-trobente-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, 2026 — saksofonska in trobilna sekcija",
+      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the saxophone and brass sections",
+      "alt": "Saksofonska in trobilna sekcija med igranjem, dirigent na levem robu kadra s hrbtom proti objektivu.",
+      "altEn": "The saxophone and brass sections playing, the conductor at the left edge of the frame seen from behind.",
       "leto": 2026,
-      "mesec": null,
-      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the saxophone and brass sections"
+      "mesec": null
     },
     {
       "datoteka": "orkester/solista-klarinet-flavta-2026.jpg",
-      "podnapis": "Poklon Gordonu Goodwinu, 2026 — solista na klarinetu in flavti",
+      "podnapis": "Poklon Gordonu Goodwinu, Jazz klub Kazina, 2026 — solista Tomaž Zevnik (klarinet) in Klemen Kotar (flavta)",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Kazina Jazz Club, 2026 — soloists Tomaž Zevnik (clarinet) and Klemen Kotar (flute)",
+      "alt": "Tomaž Zevnik s klarinetom in Klemen Kotar s flavto stojita pred sedečim orkestrom, vsak pri svojem mikrofonu; za njima kitarist in ritem sekcija.",
+      "altEn": "Tomaž Zevnik on clarinet and Klemen Kotar on flute stand in front of the seated orchestra, each at a microphone; the guitarist and rhythm section behind them.",
       "leto": 2026,
-      "mesec": null,
-      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — clarinet and flute soloists"
-    },
-    {
-      "datoteka": "orkester/orkester-solistka-alt-2026.jpg",
-      "podnapis": "Poklon Gordonu Goodwinu, 2026 — solistka na alt saksofonu",
-      "leto": 2026,
-      "mesec": null,
-      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — alto saxophone soloist"
-    },
-    {
-      "datoteka": "orkester/orkester-napoved-2026.jpg",
-      "podnapis": "Napovednik koncertne sezone, 2026",
-      "leto": 2026,
-      "mesec": null,
-      "podnapisEn": "Concert season announcement, 2026"
-    },
-    {
-      "datoteka": "orkester/orkester-nasmeh-napoved-2026.jpg",
-      "podnapis": "Napovednik koncertne sezone, 2026",
-      "leto": 2026,
-      "mesec": null,
-      "podnapisEn": "Concert season announcement, 2026"
+      "mesec": null
     },
     {
       "datoteka": "orkester/vaja-skupinska-2024.jpg",
