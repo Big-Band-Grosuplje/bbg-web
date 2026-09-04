@@ -1,3 +1,4 @@
+import type { ImageMetadata } from 'astro';
 import medijiData from '../data/mediji.json';
 
 export type Krediti = {
@@ -52,20 +53,49 @@ export function medijV(m: Medij, jezik: 'sl' | 'en') {
   };
 }
 
-export function slicicaZa(id: string): string {
-  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+/* Sličice so samo-gostovane v src/assets/mediji-thumbs. Prej so bile
+   vezane na i.ytimg.com in je Google dobil IP obiskovalca že ob nalaganju
+   strani, brez klika na posnetek. Prenese jih `npm run slicice`; build jih
+   namenoma ne prenaša sam, da produkcijski build ne kliče YouTuba.
+   Pot je relativna na to datoteko — isti vzorec kot v galerija.ts. */
+const slicice = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/mediji-thumbs/*.jpg',
+  { eager: true },
+);
+
+export function slicicaZa(id: string): ImageMetadata {
+  const kljuc = Object.keys(slicice).find((pot) => pot.endsWith(`/${id}.jpg`));
+  if (!kljuc) {
+    throw new Error(
+      `Sličice za posnetek "${id}" ni v src/assets/mediji-thumbs. ` +
+        'Zaženi "npm run slicice". Build sličic ne prenaša sam, da ' +
+        'produkcijski build ne kliče YouTuba.',
+    );
+  }
+  return slicice[kljuc].default;
+}
+
+/* hqdefault je 480×360 (4:3) s črnima pasovoma zgoraj in spodaj,
+   maxresdefault pa 16:9 brez njiju. Katera je na disku, ugotovimo iz
+   razmerja stranic in ne iz zapisa v podatkih: dva vira bi se lahko
+   razšla, datoteka pa je edino stanje, ki šteje. */
+export function slicicaImaPasove(slika: ImageMetadata): boolean {
+  return slika.width / slika.height < 1.5;
 }
 
 /* uploadDate zahteva datum, podatki pa hranijo samo leto — zato 1. januar
    tega leta. To ni dejanski datum objave posnetka, ampak najboljši približek
    iz razpoložljivega vira. */
-export function videoObject(m: Medij, jezik: 'sl' | 'en' = 'sl') {
+/* thumbnailUrl mora biti absoluten naslov obdelane sličice na naši
+   domeni, zato ga poda klicatelj: pot izdelka pozna šele astro:assets
+   (getImage) v komponenti, knjižnica pa ne. */
+export function videoObject(m: Medij, jezik: 'sl' | 'en', thumbnailUrl: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
     name: medijV(m, jezik).naslov,
     uploadDate: `${m.leto}-01-01`,
-    thumbnailUrl: slicicaZa(m.id),
+    thumbnailUrl,
     embedUrl: `https://www.youtube.com/embed/${m.id}`,
   };
 }

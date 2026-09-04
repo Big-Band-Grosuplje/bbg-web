@@ -1,5 +1,13 @@
 ---
-import { kreditiVrstica, medijV, slicicaZa, videoObject, type Medij } from '../lib/mediji';
+import { Image, getImage } from 'astro:assets';
+import {
+  kreditiVrstica,
+  medijV,
+  slicicaImaPasove,
+  slicicaZa,
+  videoObject,
+  type Medij,
+} from '../lib/mediji';
 import { slovar, type Jezik } from '../i18n';
 
 interface Props {
@@ -15,17 +23,28 @@ const t = slovar(jezik);
    imena ljudi so ista v obeh. */
 const besedilo = medijV(medij, jezik);
 const krediti = kreditiVrstica(medij.krediti, t.mediji.krediti);
+
+/* Sličica je samo-gostovana; pred klikom ne gre na YouTube noben zahtevek.
+   getImage kličemo z ISTIMI parametri kot <Image> spodaj, da Astro izdela
+   eno samo datoteko in JSON-LD kaže nanjo, ne na drugo različico. */
 const slicica = slicicaZa(medij.id);
+const SIRINA_SLICICE = 480;
+const obdelana = await getImage({ src: slicica, width: SIRINA_SLICICE, format: 'webp' });
+const slicicaAbsolutna = new URL(
+  obdelana.src,
+  Astro.site ?? 'https://bigband-grosuplje.com',
+).href;
+const pasovi = slicicaImaPasove(slicica);
 ---
 
 <li class="posnetek">
   <div class="video__ovoj">
-    <img
-      class="video__slika"
+    <Image
+      class:list={['video__slika', pasovi && 'video__slika--pasovi']}
       src={slicica}
       alt={`${t.mediji.slicicaAlt}: ${besedilo.naslov}`}
-      width="480"
-      height="360"
+      width={SIRINA_SLICICE}
+      format="webp"
       loading="lazy"
     />
     <button
@@ -52,7 +71,10 @@ const slicica = slicicaZa(medij.id);
   {krediti && <p class="posnetek__krediti">{krediti}</p>}
 
   {jsonLd && (
-    <script type="application/ld+json" set:html={JSON.stringify(videoObject(medij, jezik))} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(videoObject(medij, jezik, slicicaAbsolutna))}
+    />
   )}
 </li>
 
@@ -76,9 +98,11 @@ const slicica = slicicaZa(medij.id);
     height: 100%;
     object-fit: cover;
     display: block;
-    /* hqdefault.jpg je 4:3 s črnima pasovoma — obreži na 16:9 */
-    transform: scale(1.35);
   }
+  /* Samo pri hqdefault (4:3 s črnima pasovoma) je treba odrezati pasova;
+     maxresdefault je že 16:9 in bi ga povečava odrezala po robovih.
+     Razred pride iz razmerja stranic datoteke (slicicaImaPasove). */
+  .video__slika--pasovi { transform: scale(1.35); }
   .video__gumb {
     position: absolute;
     inset: 0;
