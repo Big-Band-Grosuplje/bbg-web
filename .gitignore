@@ -7,3 +7,13 @@ dist/
 # Interni dokumenti — repo je javen
 docs/bbg-osnova.md
 docs/interno*
+
+# Bančni in finančni izvozi — repo je JAVEN.
+# Vzorci ciljajo na imena, ki jih dajejo izvozi iz spletne banke (IZP_…)
+# in na karkoli z IBAN v imenu. Pravilo ne odstrani že sledenih datotek,
+# zato docs/brand-arhiv/wordmark-2009.pdf ostane v gitu.
+IZP_*
+*SI56*
+docs/**/izpis*
+docs/**/racun*
+docs/**/pogodba*

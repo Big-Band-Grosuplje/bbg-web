@@ -59,10 +59,37 @@ type Koncert = {
   ura: string | null;
   datumOpis: string;
   lokacija: Lokacija;
-  vstopniceUrl: string | null;
+  zasedba: 'big-band' | 'combo' | 'mladinski' | 'izobrazevalni';
+  vstop: { tip: 'vstopnice' | 'prost' | 'zaprt'; url?: string | null };
 };
 
 const koncerti = koncertiData.koncerti as Koncert[];
+
+/* Prizorišče za meta vrstico. Ime prizorišča kraj pogosto že vsebuje
+   ("Rezidenca ameriškega veleposlaništva, Ljubljana"), zato ga ne
+   pripenjamo dvakrat — brez te preverbe je v vrstici pisalo
+   "…, Ljubljana, Ljubljana". V JSON-LD ostaneta ime in addressLocality
+   ločena, tam podvojitve ni. */
+function krajZaPrikaz(lokacija: NonNullable<Lokacija>, en: boolean): string {
+  const naziv = en ? (lokacija.nazivEn ?? lokacija.naziv) : lokacija.naziv;
+  const kraj = lokacija.kraj;
+  return naziv.includes(kraj) ? naziv : `${naziv}, ${kraj}`;
+}
+
+/* Značke na kartici. Oznaka zasedbe pride iz slovarja po ključu iz podatkov;
+   če bi se v podatkih pojavila neznana zasedba, naj build pade in ne tiho
+   izpiše prazne značke. */
+const OZNAKA_ZASEDBE: Record<Koncert['zasedba'], string> = {
+  'big-band': t.koncerti.zasedbaBigBand,
+  combo: t.koncerti.zasedbaCombo,
+  mladinski: t.koncerti.zasedbaMladinski,
+  izobrazevalni: t.koncerti.zasedbaIzobrazevalni,
+};
+function oznakaZasedbe(zasedba: Koncert['zasedba']): string {
+  const o = OZNAKA_ZASEDBE[zasedba];
+  if (!o) throw new Error(`Neznana zasedba v koncerti.json: ${zasedba}`);
+  return o;
+}
 
 /* Datum v sl-SI zapisu: polni datum kot d. M. yyyy, sam mesec kot "oktober 2026".
    Ob znani uri se doda "ob 19.00" (slovenski zapis ure s piko). */
@@ -173,10 +200,24 @@ function musicEvent(k: Koncert) {
       },
     },
   };
-  if (k.vstopniceUrl) {
+  /* offers po vrsti vstopa:
+     - prost: cena 0 EUR, da iskalniki brezplačen dogodek prepoznajo kot tak;
+     - vstopnice z znanim URL: ponudba s povezavo;
+     - vstopnice brez URL (še ni v prodaji) in zaprt dogodek: offers
+       izpustimo — nepopolna ponudba je za iskalnike slabša od nobene.
+     eventAttendanceMode ostane v vseh primerih, ker se vrsta vstopa ne
+     tiče tega, ali je dogodek v živo. */
+  if (k.vstop.tip === 'prost') {
     dogodek.offers = {
       '@type': 'Offer',
-      url: k.vstopniceUrl,
+      price: 0,
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+    };
+  } else if (k.vstop.tip === 'vstopnice' && k.vstop.url) {
+    dogodek.offers = {
+      '@type': 'Offer',
+      url: k.vstop.url,
       availability: 'https://schema.org/InStock',
     };
   }
@@ -189,11 +230,7 @@ const prihajajoci = koncerti
     ...k,
     nazivPrikaz: en ? (k.nazivEn ?? k.naziv) : k.naziv,
     opisPrikaz: en ? (k.opisEn ?? k.opis) : k.opis,
-    lokacijaPrikaz: k.lokacija
-      ? en
-        ? (k.lokacija.nazivEn ?? k.lokacija.naziv)
-        : k.lokacija.naziv
-      : null,
+    lokacijaPrikaz: k.lokacija ? krajZaPrikaz(k.lokacija, en) : null,
     datumPrikaz:
       formatDatum(k.datumIso, k.ura) ?? (en ? (k.datumOpisEn ?? k.datumOpis) : k.datumOpis),
     blok: datumBlok(k.datumIso),
@@ -306,8 +343,17 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                 <p class="kartica__meta">
                   {k.datumPrikaz}
                   {k.lokacija
-                    ? ` · ${k.lokacijaPrikaz}, ${k.lokacija.kraj}`
+                    ? ` · ${k.lokacijaPrikaz}`
                     : ` · ${t.koncerti.brezPrizorisca}`}
+                </p>
+                <p class="kartica__znacke">
+                  <span class="znacka">{oznakaZasedbe(k.zasedba)}</span>
+                  {k.vstop.tip === 'prost' && (
+                    <span class="znacka">{t.koncerti.vstopProst}</span>
+                  )}
+                  {k.vstop.tip === 'zaprt' && (
+                    <span class="znacka znacka--zaprt">{t.koncerti.vstopZaprt}</span>
+                  )}
                 </p>
                 <p class="kartica__opis">{k.opisPrikaz}</p>
                 {k.gostje.length > 0 && (
@@ -316,12 +362,14 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                     {k.gostje.map((g) => g.naziv).join(', ')}
                   </p>
                 )}
-                {/* Prodaja vstopnic je vedno na tuji domeni — novi zavihek. */}
-                {k.vstopniceUrl && (
+                {/* Gumb samo, kadar je povezava res znana: pri tipu
+                    "vstopnice" z url null (prodaja se še ni odprla) gumba
+                    ne kažemo. Prodaja je vedno na tuji domeni — novi zavihek. */}
+                {k.vstop.tip === 'vstopnice' && k.vstop.url && (
                   <p class="kartica__cta">
                     <a
                       class="bbg-gumb bbg-gumb--mali"
-                      href={k.vstopniceUrl}
+                      href={k.vstop.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >{t.koncerti.vstopnice}</a>
@@ -661,6 +709,33 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     font-weight: 800;
     font-size: 14.5px;
   }
+  /* Značke: drobne pilule z zlato obrobo in verzalkami, brez rotacij —
+     po smeri A. Besedilo vzame barvo kartice, torej v vseh štirih
+     kombinacijah najvišji kontrast na tej podlagi; poudarek nosi obroba. */
+  .kartica__znacke {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 14px;
+  }
+  .znacka {
+    display: inline-block;
+    padding: 4px 11px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bbg-kartica-besedilo);
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 55%, transparent);
+    border-radius: 999px;
+    transform: none;
+  }
+  /* Zaprt dogodek je daljša oznaka in ni vabilo — brez zlate obrobe,
+     da ne tekmuje z zasedbo. */
+  .znacka--zaprt {
+    border-color: color-mix(in srgb, var(--bbg-kartica-besedilo) 30%, transparent);
+  }
+
   .kartica__opis { margin: 0 0 18px; }
   .kartica__gostje { margin: 0; font-size: 15px; opacity: 0.8; }
   .kartica__cta { margin: 18px 0 0; }

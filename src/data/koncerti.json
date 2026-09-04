@@ -1,8 +1,60 @@
 {
   "posodobljeno": "2026-08-31",
   "vir": "docs/kronika.md — sekcija 2026",
-  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Delavnica aranziranja z Lojzetom Krajncanom (oktober 2026) ni koncert - sodi v loceno sekcijo Delavnice z EducationEvent. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description. Polja s koncnico En so angleske razlicice; trdi podatki (datumi, ure, koordinate, lastna imena prizorisc in gostov) so skupni in se ne podvajajo. Angleski opisi niso dobesedni prevodi - slovenske besedne igre v anglescini ne delujejo, zato povedo isto z mirnejsim stavkom.",
+  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Delavnica aranziranja z Lojzetom Krajncanom (oktober 2026) ni koncert - sodi v loceno sekcijo Delavnice z EducationEvent. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description. Polja s koncnico En so angleske razlicice; trdi podatki (datumi, ure, koordinate, lastna imena prizorisc in gostov) so skupni in se ne podvajajo. Angleski opisi niso dobesedni prevodi - slovenske besedne igre v anglescini ne delujejo, zato povedo isto z mirnejsim stavkom. zasedba: big-band | combo | mladinski | izobrazevalni - doloca znacko na kartici. vstop.tip: vstopnice | prost | zaprt. Pri vstopnice sme biti url; dokler je null, se gumb ne izpise (TODO za 13. 12. 2026: povezava na mojekarte). Polje vstopniceUrl je opusceno in preseljeno v vstop.url. TODO preveri: za 18. 9. 2026 je vpisan prost vstop, ker je festival Grosuplje v jeseni brezplacen - ce to ne drzi, popravi na vstopnice.",
   "koncerti": [
+    {
+      "id": "sprejem-veleposlanistvo-zda-rezidenca-2026",
+      "naziv": "Sprejem Veleposlaništva ZDA",
+      "nazivEn": "U.S. Embassy Reception",
+      "opis": "Combo Big Banda Grosuplje na sprejemu Veleposlaništva ZDA v Ljubljani.",
+      "opisEn": "The Big Band Grosuplje Combo performs at a U.S. Embassy reception in Ljubljana.",
+      "opisSeo": "Combo Big Banda Grosuplje na sprejemu Veleposlaništva ZDA v Ljubljani.",
+      "opisSeoEn": "The Big Band Grosuplje Combo performs at a U.S. Embassy reception in Ljubljana.",
+      "gostje": [],
+      "datumIso": "2026-09-09",
+      "ura": null,
+      "datumOpis": "september 2026",
+      "datumOpisEn": "September 2026",
+      "zasedba": "combo",
+      "vstop": {
+        "tip": "zaprt"
+      },
+      "lokacija": {
+        "naziv": "Rezidenca ameriškega veleposlaništva, Ljubljana",
+        "nazivEn": "Residence of the U.S. Ambassador, Ljubljana",
+        "ulica": null,
+        "postna": "1000",
+        "kraj": "Ljubljana",
+        "drzava": "SI"
+      }
+    },
+    {
+      "id": "sprejem-veleposlanistvo-zda-vrt-lili-novy-2026",
+      "naziv": "Sprejem Veleposlaništva ZDA",
+      "nazivEn": "U.S. Embassy Reception",
+      "opis": "Combo Big Banda Grosuplje na sprejemu Veleposlaništva ZDA v Ljubljani.",
+      "opisEn": "The Big Band Grosuplje Combo performs at a U.S. Embassy reception in Ljubljana.",
+      "opisSeo": "Combo Big Banda Grosuplje na sprejemu Veleposlaništva ZDA v Ljubljani.",
+      "opisSeoEn": "The Big Band Grosuplje Combo performs at a U.S. Embassy reception in Ljubljana.",
+      "gostje": [],
+      "datumIso": "2026-09-15",
+      "ura": null,
+      "datumOpis": "september 2026",
+      "datumOpisEn": "September 2026",
+      "zasedba": "combo",
+      "vstop": {
+        "tip": "zaprt"
+      },
+      "lokacija": {
+        "naziv": "Vrt Lili Novy, Ljubljana",
+        "nazivEn": "Lili Novy Garden, Ljubljana",
+        "ulica": null,
+        "postna": "1000",
+        "kraj": "Ljubljana",
+        "drzava": "SI"
+      }
+    },
     {
       "id": "grosuplje-v-jeseni-2026",
       "naziv": "Koncert pod zvezdami — Grosuplje v jeseni",
@@ -29,11 +81,14 @@
         "drzava": "SI",
         "nazivEn": "Grosuplje (open-air venue)"
       },
-      "vstopniceUrl": null,
       "nazivEn": "Concert Under the Stars — Grosuplje in Autumn",
       "opisEn": "Opening night of the 14th Grosuplje in Autumn festival, under the (hopefully merciful) open sky. Vocalist Rok Ferengja and joint choirs from Grosuplje bring a night of beloved Slovenian pop classics with big band punch. Weather won't stop us — in case of bad forecast the concert moves to a backup venue.",
       "opisSeoEn": "The traditional autumn concert of Big Band Grosuplje with guest choirs. Opening night of the 14th Grosuplje in Autumn festival; in bad weather the concert moves to a backup venue.",
-      "datumOpisEn": "September 2026"
+      "datumOpisEn": "September 2026",
+      "zasedba": "big-band",
+      "vstop": {
+        "tip": "prost"
+      }
     },
     {
       "id": "bbg-x-slon-in-sadez-2026",
@@ -57,11 +112,15 @@
         "drzava": "SI",
         "nazivEn": "Kulturni dom Grosuplje"
       },
-      "vstopniceUrl": null,
       "nazivEn": "BBG x Slon in sadež",
       "opisEn": "An unlikely pairing: the full instrumental arsenal of Big Band Grosuplje against the razor-sharp, topical lyrics and comic satire of guest duo Slon in sadež. A programme that is easier to enjoy than to categorise.",
       "opisSeoEn": "A joint project of Big Band Grosuplje and the satirical duo Slon in sadež.",
-      "datumOpisEn": "December 2026"
+      "datumOpisEn": "December 2026",
+      "zasedba": "big-band",
+      "vstop": {
+        "tip": "vstopnice",
+        "url": null
+      }
     }
   ]
 }

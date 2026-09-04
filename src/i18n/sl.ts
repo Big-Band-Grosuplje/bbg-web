@@ -20,7 +20,7 @@ export const sl = {
     zgodovina: 'Zgodovina',
     galerija: 'Galerija',
     multimedija: 'Multimedija',
-    cta: 'Najemi band',
+    cta: 'Spoznajmo se',
     tema: 'Preklopi temo',
     meni: 'Meni',
     jezik: 'Switch to English',
@@ -30,7 +30,7 @@ export const sl = {
   hero: {
     badge: 'Pozor, hud big band!',
     znakAlt: 'Big Band Grosuplje',
-    slogan: 'Od leta 1997/98 igramo bolje. Ali pa hitreje. Nekaj od tega vsekakor.',
+    slogan: 'Od leta 1997/98 igramo bolje. Ali pa hitreje. Nekaj od tega vsekakor. 🙂',
     gumbKoncerti: 'Kdaj igramo?',
     gumbPridruzi: 'Pridruži se',
     fotoAlt: 'Dirigent med vodenjem orkestra',
@@ -45,6 +45,13 @@ export const sl = {
     praznoZa: '.',
     brezPrizorisca: 'prizorišče še ni potrjeno',
     ob: 'ob',
+    /* Značke na kartici — verzalke nastavi CSS, tu so v naravnem zapisu. */
+    zasedbaBigBand: 'Big band',
+    zasedbaCombo: 'Combo',
+    zasedbaMladinski: 'Mladinski ansambel',
+    zasedbaIzobrazevalni: 'Delavnica',
+    vstopProst: 'Prost vstop',
+    vstopZaprt: 'Zaprt dogodek — za povabljence',
     gostje: 'Gostje',
     vstopnice: 'Vstopnice',
   },
@@ -73,12 +80,13 @@ export const sl = {
     naslov: 'Kontakt',
     organizatorNaslov: 'Za organizatorje',
     organizatorOpis:
-      'Gala večer, festival ali praznovanje? Big band doda prireditvi blišč — z repertoarjem od Sinatre do Goodwina, v polni zasedbi ali kot combo.',
+      'Gala večer, festival ali praznovanje? Big band doda prireditvi blišč — z repertoarjem največjih uspešnic zlate dobe big bandov, slovenske popevke, latino ali zahtevnejše jazzovske literature, v polni zasedbi ali kot prilagojena, combo zasedba.',
     organizatorGumb: 'Povprašajte za nastop',
     organizatorZadeva: 'Povpraševanje za nastop — spletna stran',
     pridruzitevNaslov: 'Pridruži se',
+    /* "Te zanima snemanje" brez predloga — tako je v potrjeni predlogi. */
     pridruzitevOpis:
-      'Igraš trobento, pozavno, saks ali ritem? Poješ? Te vleče v snemanje in ozvočenje? Combo in saksofonski kvintet sta odskočna deska v orkester.',
+      'Igraš pozavno, trobento, saksofon, bobne, kontrabas, kitaro ali klavir? Poješ? Te zanima snemanje in ozvočenje? Sprejemamo nove člane v big band in mladinski ansambel, tehnikom pa ponujamo možnost izpopolnjevanja in uporabe naše opreme.',
     pridruzitevGumb: 'Piši nam',
     pridruzitevZadeva: 'Pridružitev orkestru — spletna stran',
     ime: 'Ime in priimek',

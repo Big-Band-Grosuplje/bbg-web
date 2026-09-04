@@ -65,6 +65,8 @@ Ključno:
 - `src/pages/` — slovenski ovoji; `src/pages/en/` — angleški. Oboji so samo nekaj vrstic
 - `src/styles/brand.css` — tokeni
 - `src/data/` — strukturirani podatki (koncerti, galerija, mediji, zgodovina) s polji `…En`. Besedila zgodovine in mejnikov so v `zgodovina.json`, da naslovnica in `/zgodovina` berete isti vir
+- Model koncerta v `koncerti.json`: `zasedba` (big-band | combo | mladinski | izobrazevalni) in `vstop` ({ tip: vstopnice | prost | zaprt, url }). Iz njiju nastaneta znački na kartici in `offers` v JSON-LD. Polje `vstopniceUrl` je opuščeno — preseljeno v `vstop.url`
+- **Prost vstop dobi `offers` s ceno 0 EUR**, vstopnice ponudbo s povezavo, zaprt dogodek in vstopnice brez znane povezave pa `offers` izpustita: nepopolna ponudba je za iskalnike slabša od nobene. Gumb „Vstopnice" se izpiše samo, kadar je `vstop.url` res znan
 - `docs/` — kronika.md, sodelovanja.md, ton-vzorci.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 
