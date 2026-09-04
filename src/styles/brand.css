@@ -485,12 +485,32 @@
 :root[data-skin='a'][data-theme='light'] {
   --bbg-bg: var(--bbg-paper);
   --bbg-besedilo: #171310;
-  --bbg-naslov: #806613;
-  --bbg-nadnaslov: #806613;
+  /* Zlato BESEDILO je ločeno od dekorativne zlate (--bbg-gold), ker
+     mejo postavlja podlaga panela in kartice — color-mix(ink 4%, paper)
+     = #EAE2D0 — in ne papir strani #F3EBD8. Vsak odtenek je na papirju
+     za približno 0,4 boljši kot na panelu, zato je papir prešibko
+     merilo: #806613 doseže na papirju 4,62 :1, na panelu pa 4,26 :1.
+
+     #785F11 zdrži oboje z rezervo: panel 4,73 :1, papir 5,14 :1.
+     Svetlejši odtenki iste zlate padejo — #7F6210 na panelu 4,45 :1,
+     #8A6A0F 3,93 :1, #946E00 3,63 :1. Najsvetlejši zlati pri odtenku in
+     nasičenosti dekorativne zlate, ki panel še prenese, je #786117
+     (4,63 :1) in je od #785F11 praktično nerazločljiv.
+
+     Zlata ostane zlata in ne porjavi: H=45°, S=75 % — bolj nasičeno od
+     dekorativne #C9A227 (H=46°, S=68 %), le za dve stopnji temneje od
+     prejšnjega naslova #806613 (H=46°, S=74 %).
+
+     Velikosti in reza pisave ta popravek ne spreminja. */
+  --bbg-zlato-besedilo: #785F11;
+  --bbg-naslov: var(--bbg-zlato-besedilo);
+  --bbg-nadnaslov: var(--bbg-zlato-besedilo);
   --bbg-povezava: #735C11;
   --bbg-povezava-hover: #5C490E;
   --bbg-obroba: color-mix(in srgb, var(--bbg-ink) 18%, var(--bbg-paper));
-  /* Nosi tudi obrise fokusa, zato temna zlata in ne prosojna (4,62 :1). */
+  /* DEKORATIVNI token: hairline obrobe in obrisi fokusa. Ostaja
+     svetlejši od zlatega besedila, ker zanj velja meja za ne-besedilni
+     kontrast (3 :1), ki jo #806613 na panelu doseže s 4,26 :1. */
   --bbg-obroba-mocna: #806613;
 
   /* Kartice so v svetli temi A svetle, ne inverzno temne kot pri C:
@@ -507,8 +527,10 @@
   --bbg-kartica-bg: var(--bbg-panel-bg);
   --bbg-kartica-besedilo: var(--bbg-besedilo);
   --bbg-blok-bg: transparent;
-  --bbg-blok-besedilo: #785F11;
-  --bbg-meta: #785F11;
+  /* Isti odtenek kot naslovi — ena vrednost na enem mestu; prej je bil
+     #785F11 tu zapisan dvakrat, naslovi pa so imeli svoj, svetlejši. */
+  --bbg-blok-besedilo: var(--bbg-zlato-besedilo);
+  --bbg-meta: var(--bbg-zlato-besedilo);
   /* Rdeča na papirju A: 4,56 :1. */
   --bbg-napaka: #B8432B;
 

@@ -183,6 +183,50 @@ ker so tam naslovi Playfair 700 pri 22–23 px in zanje velja meja 3 :1. Če bi
 kdaj potrebovali AA za normalno besedilo tudi na A-jevem panelu, je najsvetlejša
 ustrezna vrednost `#7A6212` (4,55 :1 na vseh štirih podlagah).
 
+### Zlato besedilo v A-svetli — ločen token, 4. 9. 2026
+
+Zgornji odstavek je za smer C še vedno točen, za smer A pa **ne velja več**.
+Trdil je, da 4,26 :1 na A-jevem panelu zadošča, ker gre za velik tekst. To po
+WCAG drži (Playfair 700 pri 23 px je velik tekst, meja 3 :1) in kontrastna
+revizija tam ni kazala napake — a je bila rezerva ničelna: prvi naslov v
+manjši stopnji ali v lažjem rezu bi padel pod mejo neopazno, ker bi ostal
+videti enak.
+
+Zato ima svetla tema smeri A zdaj **ločen token za zlato besedilo**:
+
+| Token | Vrednost | Vloga |
+|---|---|---|
+| `--bbg-zlato-besedilo` | `#785F11` | naslovi, nadnaslovi, meta, datumski blok |
+| `--bbg-gold` | `#C9A227` | dekorativna zlata: črte, ikone, podlage gumbov |
+| `--bbg-obroba-mocna` | `#806613` | hairline obrobe in obrisi fokusa (meja 3 :1) |
+
+Merilo je **podlaga panela in kartice** `#EAE2D0` (color-mix ink 4 % čez
+papir), ne papir strani `#F3EBD8` — vsak odtenek je na papirju za približno
+0,4 boljši, zato je papir prešibko merilo:
+
+| Odtenek | panel #EAE2D0 | papir #F3EBD8 | H / S |
+|---|---|---|---|
+| `#785F11` ✅ | **4,73 :1** | 5,14 :1 | 45° / 75 % |
+| `#786117` | 4,63 :1 | 5,02 :1 | 46° / 68 % |
+| `#7A6212` | 4,55 :1 | 4,94 :1 | 46° / 74 % |
+| `#7F6210` | 4,45 :1 | 4,84 :1 | 44° / 78 % |
+| `#806613` (prej) | 4,26 :1 | 4,62 :1 | 46° / 74 % |
+| `#8A6A0F` | 3,93 :1 | 4,26 :1 | 44° / 80 % |
+| `#946E00` | 3,63 :1 | 3,94 :1 | 45° / 100 % |
+
+`#785F11` je bil v datoteki že prisoten kot zlato besedilo na kartici
+(`--bbg-meta`, `--bbg-blok-besedilo`); z uvedbo tokena je ista vrednost
+zapisana enkrat namesto dvakrat, naslovi pa se ji pridružijo.
+
+**Zlata ostane zlata:** H=45°, S=75 % je bolj nasičeno od dekorativne
+`#C9A227` (H=46°, S=68 %) in od prejšnjega naslova `#806613` odstopa le za
+dve stopnji svetlosti. Vizualno preverjeno na A-svetli: naslova „Za
+organizatorje" in „Pridruži se" berljivo zlata, brez rjavega zdrsa.
+Nasičenejši `#946E00` ni bil potreben in kontrasta ne bi prenesel.
+
+Velikosti in reza pisave popravek ne spreminja; temne teme in smeri C ne
+zadeva.
+
 ## Zgodovina revizij
 
 | Datum | Sprememba |
@@ -192,3 +236,4 @@ ustrezna vrednost `#7A6212` (4,55 :1 na vseh štirih podlagah).
 | 31. 8. 2026 | Popravljene odprte kontrastne napake svetle teme smeri C; vse štiri kombinacije brez napak |
 | 31. 8. 2026 | Svetla tema A omiljena: svetlejša hero fotografija in svetle kartice koncertov |
 | **31. 8. 2026** | **Potrjena smer A kot privzeta; smer C ohranjena kot predogled `?skin=c`.** Prejšnja odločitev z istega dne (potrjena smer C) s tem ne velja več |
+| 4. 9. 2026 | Zlato besedilo v A-svetli dobi svoj token `--bbg-zlato-besedilo` `#785F11` (panel 4,73 :1); prej so naslovi stali na `#806613` pri 4,26 :1 brez rezerve. Dekorativna zlata in obrobe nespremenjene |
