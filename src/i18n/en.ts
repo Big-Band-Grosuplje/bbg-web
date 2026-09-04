@@ -63,6 +63,9 @@ export const en = {
     vstopnice: 'Tickets',
     organizator: 'Organiser',
     objave: 'More about the event:',
+    /* Vse tri zunanje povezave vodijo na slovenske strani; angleški
+       bralec to izve iz napisa, iskalnik pa iz hreflang na povezavi. */
+    vSlovenscini: ' (in Slovenian)',
   },
 
   zgodovinaSekcija: {

@@ -60,6 +60,11 @@ export const sl = {
     vstopnice: 'Vstopnice',
     organizator: 'Organizator',
     objave: 'Več o dogodku:',
+    /* Pripis o jeziku ciljne strani. Na slovenski strani je prazen: vse
+       tri zunanje povezave vodijo na slovenske strani, torej v isti jezik
+       kot stran, in pripis ne bi povedal ničesar. Ključ mora obstajati v
+       obeh slovarjih (preverba ujemanja v src/i18n/index.ts). */
+    vSlovenscini: '',
   },
 
   zgodovinaSekcija: {

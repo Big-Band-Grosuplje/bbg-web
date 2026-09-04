@@ -104,13 +104,22 @@ const imaAkcije =
       )}
 
       {/* Organizator se izpiše samo pri dogodku, ki ga organizira kdo drug;
-          pri lastnem dogodku vrstice ni. Povezava je zunanja. */}
+          pri lastnem dogodku vrstice ni. Povezava je zunanja.
+
+          hreflang in pripis o jeziku sta vpisana ročno, ker vse tri
+          obstoječe zunanje povezave vodijo na slovenske strani; polja za
+          jezik cilja model nima. Ob dodajanju povezave na stran v drugem
+          jeziku ju je treba ali odstraniti ali uvesti polje. */}
       {k.organizatorPrikaz && (
         <p class="dogodek__organizator">
           <span class="oznaka">{t.koncerti.organizator}</span>
           {k.organizatorPrikaz.url ? (
-            <a href={k.organizatorPrikaz.url} target="_blank" rel="noopener noreferrer"
-              >{k.organizatorPrikaz.naziv}</a>
+            <a
+              href={k.organizatorPrikaz.url}
+              hreflang={jezik === 'en' ? 'sl' : undefined}
+              target="_blank"
+              rel="noopener noreferrer"
+              >{k.organizatorPrikaz.naziv}{t.koncerti.vSlovenscini}</a>
           ) : (
             k.organizatorPrikaz.naziv
           )}
@@ -151,7 +160,12 @@ const imaAkcije =
           <ul>
             {k.objavePrikaz.map((o) => (
               <li>
-                <a href={o.url} target="_blank" rel="noopener noreferrer">{o.naziv}</a>
+                <a
+                  href={o.url}
+                  hreflang={jezik === 'en' ? 'sl' : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer">{o.naziv}{t.koncerti.vSlovenscini}</a
+                >
               </li>
             ))}
           </ul>
