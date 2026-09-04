@@ -1,0 +1,144 @@
+---
+/* ============================================================
+   Stran 404.
+
+   Zakaj je to ENA stran in ne par sl/en kot vse druge: pri statični
+   objavi na Vercelu se za vsako neobstoječo pot izpiše `404.html` iz
+   korena izhoda — tudi za napačen naslov pod /en/. Datoteke
+   `/en/404.html` strežnik ne bi nikoli poiskal, zato bi bila mrtva.
+   Zato sta obe besedili v tej strani; skripta skrije tisto, ki ne velja.
+   Brez JS ostaneta vidni obe — na 404 je to boljše od napačnega jezika.
+
+   Canonical in par hreflang tu ne smeta biti: stran se izpiše na
+   poljubni poti, zato bi trdila, da je stran nekaj drugega. Zato
+   `brezKanonicne`. `noindex` je potreben, ker je datoteka dosegljiva
+   tudi neposredno na /404 in tam vrne 200.
+
+   Smer A ni nastavljena tu — pride iz Layouta (`data-skin="a"`) in
+   brand.css, tako kot na vsaki drugi strani.
+   ============================================================ */
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Noga from '../components/Noga.astro';
+import { pot, slovar } from '../i18n';
+
+const sl = slovar('sl');
+const en = slovar('en');
+
+const razlicice = [
+  {
+    jezik: 'sl' as const,
+    t: sl,
+    naslovnica: pot('naslovnica', 'sl'),
+    koncerti: `${pot('naslovnica', 'sl')}#koncerti`,
+  },
+  {
+    jezik: 'en' as const,
+    t: en,
+    naslovnica: pot('naslovnica', 'en'),
+    koncerti: `${pot('naslovnica', 'en')}#koncerti`,
+  },
+];
+---
+
+<Layout
+  stran="naslovnica"
+  jezik="sl"
+  title={`404 — ${sl.napaka404.naslov} · Big Band Grosuplje`}
+  description={sl.napaka404.opis}
+  noindex={true}
+  brezKanonicne={true}
+>
+  <Nav stran="naslovnica" jezik="sl" />
+
+  <main class="stran">
+    <div class="ozko">
+      {razlicice.map((r) => (
+        <section class="napaka" data-jezik={r.jezik} lang={r.t.htmlLang}>
+          <p class="oznaka">{r.t.napaka404.nadnaslov}</p>
+          <h1>{r.t.napaka404.naslov}</h1>
+          <p class="napaka__opis">{r.t.napaka404.opis}</p>
+          <p class="napaka__gumbi">
+            <a class="bbg-gumb" href={r.naslovnica}>{r.t.napaka404.gumbNaslovnica}</a>
+            <a class="bbg-gumb bbg-gumb--obris" href={r.koncerti}>{r.t.hero.gumbKoncerti}</a>
+          </p>
+        </section>
+      ))}
+    </div>
+  </main>
+
+  <Noga jezik="sl" />
+</Layout>
+
+<script>
+  /* Katera različica velja. Vrstni red je isti kot pri zaznavi jezika v
+     Layoutu, le da je tu na prvem mestu pot: strežnik to datoteko izpiše
+     tudi za napačen naslov pod /en/, in takrat je jezik znan iz naslova. */
+  (function () {
+    var jezik = 'sl';
+    try {
+      if (window.location.pathname.indexOf('/en/') === 0) {
+        jezik = 'en';
+      } else {
+        var shranjen = window.localStorage.getItem('bbg-lang');
+        if (shranjen === 'sl' || shranjen === 'en') {
+          jezik = shranjen;
+        } else {
+          var jeziki = navigator.languages || [navigator.language || 'sl'];
+          var slovensko = false;
+          for (var i = 0; i < jeziki.length; i++) {
+            if (String(jeziki[i]).toLowerCase().indexOf('sl') === 0) slovensko = true;
+          }
+          jezik = slovensko ? 'sl' : 'en';
+        }
+      }
+    } catch (e) {
+      /* zasebni način brez localStorage — ostane slovenščina */
+    }
+    document.querySelectorAll('[data-jezik]').forEach(function (odsek) {
+      if (odsek.getAttribute('data-jezik') !== jezik) odsek.setAttribute('hidden', '');
+    });
+    document.documentElement.lang = jezik;
+  })();
+</script>
+
+<style>
+  .ozko {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 var(--bbg-rob);
+  }
+  .stran { padding: 64px 0 90px; }
+
+  /* Brez JS sta vidni obe različici; druga dobi tanko ločnico, da se
+     bere kot ista vsebina v drugem jeziku in ne kot nova sekcija. */
+  .napaka + .napaka {
+    margin-top: 38px;
+    padding-top: 34px;
+    border-top: 1px solid var(--bbg-obroba);
+  }
+  .napaka[hidden] { display: none; }
+  .napaka[hidden] + .napaka,
+  .napaka:first-of-type + .napaka[hidden] {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  h1 {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 4.4vw, 44px);
+    color: var(--bbg-naslov);
+  }
+  .napaka__opis {
+    margin: 0 0 28px;
+    max-width: 40rem;
+  }
+  .napaka__gumbi {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+</style>

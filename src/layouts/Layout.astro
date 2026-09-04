@@ -54,9 +54,21 @@ interface Props {
      ne sodi. Canonical in hreflang par ostaneta — povezavi med jezikoma
      se ne odrekamo, ker povabljenec lahko pride na katero koli. */
   noindex?: boolean;
+  /* Stran brez ene same kanonične poti. Uporablja jo 404: strežnik jo
+     izpiše na poljubni neobstoječi poti, zato bi canonical trdil, da je
+     stran nekaj drugega, par hreflang pa bi kazal na naslova, ki ju ni. */
+  brezKanonicne?: boolean;
 }
 
-const { stran, jezik, title, description, potiRazlicic, noindex = false } = Astro.props;
+const {
+  stran,
+  jezik,
+  title,
+  description,
+  potiRazlicic,
+  noindex = false,
+  brezKanonicne = false,
+} = Astro.props;
 const t = slovar(jezik);
 
 const naslovStrani = title ?? t.naslovnica.naslovStrani;
@@ -208,16 +220,20 @@ const musicGroup = {
         v indeksu iz zunanjih povezav. */}
     {noindex && <meta name="robots" content="noindex" />}
 
-    <link rel="canonical" href={kanonicna.href} />
-    {alternative.map((a) => (
-      <link rel="alternate" hreflang={a.jezik} href={a.url} />
-    ))}
-    {/* x-default kaže na slovensko različico — to je izhodiščni jezik strani. */}
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={alternative.find((a) => a.jezik === 'sl')?.url}
-    />
+    {!brezKanonicne && (
+      <Fragment>
+        <link rel="canonical" href={kanonicna.href} />
+        {alternative.map((a) => (
+          <link rel="alternate" hreflang={a.jezik} href={a.url} />
+        ))}
+        {/* x-default kaže na slovensko različico — to je izhodiščni jezik strani. */}
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={alternative.find((a) => a.jezik === 'sl')?.url}
+        />
+      </Fragment>
+    )}
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -225,7 +241,7 @@ const musicGroup = {
     <meta property="og:site_name" content="Big Band Grosuplje" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={t.ogLocale} />
-    <meta property="og:url" content={kanonicna.href} />
+    {!brezKanonicne && <meta property="og:url" content={kanonicna.href} />}
     <meta property="og:title" content={naslovStrani} />
     <meta property="og:description" content={opisStrani} />
     <meta property="og:image" content={ogImage} />

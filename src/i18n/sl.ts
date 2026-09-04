@@ -37,6 +37,18 @@ export const sl = {
     nalepka: 'dirigent, presenetljivo miren',
   },
 
+  /* Stran 404. Ton je hišni — lahek, a pove, kaj se je zgodilo.
+     Gumb h koncertom si napis deli s heroom (hero.gumbKoncerti), zato ga
+     tu ni: isti niz na dveh mestih bi se razšel. */
+  napaka404: {
+    nadnaslov: 'napaka 404',
+    naslov: 'Te strani ni',
+    opis:
+      'Povezava je morda napačna ali pa je stran zamenjala naslov. ' +
+      'Zgodi se — tudi mi kdaj zgrešimo vstop.',
+    gumbNaslovnica: 'Na naslovnico',
+  },
+
   koncerti: {
     nadnaslov: 'prihajajoče',
     naslov: 'Kdaj in kje igramo',

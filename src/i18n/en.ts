@@ -41,6 +41,15 @@ export const en = {
     nalepka: 'the conductor, remarkably composed',
   },
 
+  napaka404: {
+    nadnaslov: 'error 404',
+    naslov: 'This page does not exist',
+    opis:
+      'The link may be wrong, or the page has moved. ' +
+      'It happens — we miss an entry now and then, too.',
+    gumbNaslovnica: 'Back to the home page',
+  },
+
   koncerti: {
     nadnaslov: 'upcoming',
     naslov: 'When and where we play',
