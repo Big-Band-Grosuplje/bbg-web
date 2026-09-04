@@ -50,6 +50,15 @@ const k = pripravi(
 );
 
 const naslovStrani = `${k.nazivPrikaz} — Big Band Grosuplje`;
+
+/* Zaprtega dogodka ne delimo. Podstran ostane — povabljeni pridejo nanjo po
+   neposredni povezavi — le gumba za deljenje ni, ker bi javno deljenje
+   vabilo ljudi na dogodek, kamor ne morejo. */
+const seDeli = k.vstop.tip !== 'zaprt';
+const imaAkcije =
+  seDeli ||
+  (k.prijava && !k.jeMimo) ||
+  (k.vstop.tip === 'vstopnice' && !!k.vstop.url && !k.jeMimo);
 ---
 
 <Layout
@@ -94,26 +103,30 @@ const naslovStrani = `${k.nazivPrikaz} — Big Band Grosuplje`;
         </p>
       )}
 
-      <div class="dogodek__akcije">
-        {k.prijava && !k.jeMimo && (
-          <a class="bbg-gumb" href={`${pot('naslovnica', jezik)}?prijava=delavnica#kontakt`}
-            >{t.koncerti.prijavaGumb}</a>
-        )}
-        {k.vstop.tip === 'vstopnice' && k.vstop.url && !k.jeMimo && (
-          <a
-            class="bbg-gumb"
-            href={k.vstop.url}
-            target="_blank"
-            rel="noopener noreferrer">{t.koncerti.vstopnice}</a
-          >
-        )}
-        <Deljenje
-          jezik={jezik}
-          url={absolutni}
-          naslov={k.nazivPrikaz}
-          opis={k.opisSeoPrikaz}
-        />
-      </div>
+      {imaAkcije && (
+        <div class="dogodek__akcije">
+          {k.prijava && !k.jeMimo && (
+            <a class="bbg-gumb" href={`${pot('naslovnica', jezik)}?prijava=delavnica#kontakt`}
+              >{t.koncerti.prijavaGumb}</a>
+          )}
+          {k.vstop.tip === 'vstopnice' && k.vstop.url && !k.jeMimo && (
+            <a
+              class="bbg-gumb"
+              href={k.vstop.url}
+              target="_blank"
+              rel="noopener noreferrer">{t.koncerti.vstopnice}</a
+            >
+          )}
+          {seDeli && (
+            <Deljenje
+              jezik={jezik}
+              url={absolutni}
+              naslov={k.nazivPrikaz}
+              opis={k.opisSeoPrikaz}
+            />
+          )}
+        </div>
+      )}
 
       {k.jsonLd && <script type="application/ld+json" set:html={JSON.stringify(k.jsonLd)} />}
     </div>

@@ -46,6 +46,11 @@ const OZNAKE_ZASEDB: OznakeZasedb = {
 };
 const BESEDILA = { ob: t.koncerti.ob, brezPrizorisca: t.koncerti.brezPrizorisca };
 
+/* Zaprtega dogodka ne delimo. Povezavo dobijo povabljeni neposredno, javno
+   deljenje pa bi vabilo ljudi na dogodek, kamor ne morejo. Podstran zato
+   ostane, gumba za deljenje pa ni. */
+const seDeli = (tip: string) => tip !== 'zaprt';
+
 const prihajajoci = prihajajociKoncerti().map((k) => pripravi(k, jezik, BESEDILA));
 
 /* Izseki na naslovnici — celotna vsebina je na podstranih. */
@@ -194,27 +199,34 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                     predizbere pravo možnost v izbirniku (glej skripto spodaj).
                     Ker gre za navigacijo po isti strani, se stran znova naloži
                     in predizbira deluje tudi brez posebne obravnave. */}
-                <p class="kartica__cta">
-                  {k.prijava && (
-                    <a class="bbg-gumb bbg-gumb--mali" href="?prijava=delavnica#kontakt"
-                      >{t.koncerti.prijavaGumb}</a>
-                  )}
-                  {k.vstop.tip === 'vstopnice' && k.vstop.url && (
-                    <a
-                      class="bbg-gumb bbg-gumb--mali"
-                      href={k.vstop.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >{t.koncerti.vstopnice}</a>
-                  )}
-                  <Deljenje
-                    jezik={jezik}
-                    url={new URL(potDogodka(k.slugPrikaz), SITE_URL).href}
-                    naslov={k.nazivPrikaz}
-                    opis={k.opisSeoPrikaz}
-                    kompakt={true}
-                  />
-                </p>
+                {/* Vrstica se izpiše samo, kadar je v njej kaj — pri zaprtem
+                    dogodku brez prijave in vstopnic bi ostal prazen odstavek
+                    s praznim prostorom pod opisom. */}
+                {(k.prijava || (k.vstop.tip === 'vstopnice' && k.vstop.url) || seDeli(k.vstop.tip)) && (
+                  <p class="kartica__cta">
+                    {k.prijava && (
+                      <a class="bbg-gumb bbg-gumb--mali" href="?prijava=delavnica#kontakt"
+                        >{t.koncerti.prijavaGumb}</a>
+                    )}
+                    {k.vstop.tip === 'vstopnice' && k.vstop.url && (
+                      <a
+                        class="bbg-gumb bbg-gumb--mali"
+                        href={k.vstop.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >{t.koncerti.vstopnice}</a>
+                    )}
+                    {seDeli(k.vstop.tip) && (
+                      <Deljenje
+                        jezik={jezik}
+                        url={new URL(potDogodka(k.slugPrikaz), SITE_URL).href}
+                        naslov={k.nazivPrikaz}
+                        opis={k.opisSeoPrikaz}
+                        kompakt={true}
+                      />
+                    )}
+                  </p>
+                )}
               </div>
 
               {k.jsonLd && (
