@@ -1,0 +1,239 @@
+---
+/* ============================================================
+   Deljenje dogodka — brez zunanjih skript in brez SDK-jev.
+
+   Kje je na voljo, uporabimo navigator.share (na telefonu je to sistemski
+   list, ki ga obiskovalec pozna). Kjer ga ni, odpremo lasten meni s tremi
+   možnostmi: kopiraj povezavo, e-pošta, Facebook.
+
+   Facebook delimo prek sharer.php v novem zavihku. To je namenoma: SDK bi
+   naložil Facebookove skripte in obiskovalčev IP predal tretji osebi še
+   preden bi kdo kliknil deli — sharer se odpre samo ob kliku.
+
+   Podatki pridejo prek data atributov, ker je skripta modul in do
+   frontmatterja nima dostopa.
+   ============================================================ */
+import { slovar, type Jezik } from '../i18n';
+
+interface Props {
+  jezik: Jezik;
+  /* Absoluten URL — potreben za Facebook in za smiselno vsebino e-pošte. */
+  url: string;
+  naslov: string;
+  opis: string;
+  /* Kompaktna različica je samo ikona; uporabimo jo na kartici. */
+  kompakt?: boolean;
+}
+const { jezik, url, naslov, opis, kompakt = false } = Astro.props;
+const t = slovar(jezik);
+
+/* aria-controls potrebuje enolicen id. Naslovnica izpiše to komponento
+   petkrat (po eno na kartico), zato ga izpeljemo iz poti dogodka in ne iz
+   fiksnega niza — sicer bi vseh pet gumbov kazalo na isti meni. */
+const kljuc = new URL(url, 'https://bigband-grosuplje.com').pathname
+  .replace(/[^a-zA-Z0-9]+/g, '-')
+  .replace(/^-|-$/g, '');
+const meniId = `deli-${kompakt ? 'k' : 'p'}-${kljuc}`;
+
+const eposta = `mailto:?subject=${encodeURIComponent(naslov)}&body=${encodeURIComponent(
+  `${opis}\n\n${url}`,
+)}`;
+const facebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+---
+
+<div
+  class:list={['deljenje', kompakt && 'deljenje--kompakt']}
+  data-deljenje
+  data-url={url}
+  data-naslov={naslov}
+  data-opis={opis}
+  data-kopirano={t.deljenje.kopirano}
+>
+  <button
+    type="button"
+    class="deljenje__gumb"
+    data-sprozi
+    aria-label={t.deljenje.oznaka}
+    aria-expanded="false"
+    aria-controls={meniId}
+  >
+    {/* Ikona: tri točke, povezane s črtama — brez zunanje pisave ikon. */}
+    <svg class="deljenje__ikona" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="18" cy="5" r="2.6" />
+      <circle cx="6" cy="12" r="2.6" />
+      <circle cx="18" cy="19" r="2.6" />
+      <path d="M8.3 10.8 15.7 6.6M8.3 13.2 15.7 17.4" />
+    </svg>
+    {!kompakt && <span class="deljenje__napis">{t.deljenje.naslov}</span>}
+  </button>
+
+  <div class="deljenje__meni" id={meniId} data-meni hidden>
+    <button type="button" class="deljenje__moznost" data-kopiraj>{t.deljenje.kopiraj}</button>
+    <a class="deljenje__moznost" href={eposta}>{t.deljenje.eposta}</a>
+    <a
+      class="deljenje__moznost"
+      href={facebook}
+      target="_blank"
+      rel="noopener noreferrer">{t.deljenje.facebook}</a
+    >
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-deljenje]').forEach((ovoj) => {
+    const sprozi = ovoj.querySelector<HTMLButtonElement>('[data-sprozi]');
+    const meni = ovoj.querySelector<HTMLElement>('[data-meni]');
+    const kopiraj = ovoj.querySelector<HTMLButtonElement>('[data-kopiraj]');
+    if (!sprozi || !meni) return;
+
+    const url = ovoj.dataset.url ?? window.location.href;
+    const naslov = ovoj.dataset.naslov ?? document.title;
+    const opis = ovoj.dataset.opis ?? '';
+
+    function odpri(odprt: boolean) {
+      meni!.hidden = !odprt;
+      sprozi!.setAttribute('aria-expanded', odprt ? 'true' : 'false');
+    }
+
+    sprozi.addEventListener('click', async () => {
+      /* Sistemski list, kjer ga brskalnik ponuja. Če ga obiskovalec
+         prekliče, navigator.share zavrne — to ni napaka in menija ne
+         odpiramo, ker bi bilo videti kot da klik ni deloval. */
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: naslov, text: opis, url });
+          return;
+        } catch (e) {
+          return;
+        }
+      }
+      odpri(meni!.hidden);
+    });
+
+    kopiraj?.addEventListener('click', async () => {
+      const prej = kopiraj.textContent;
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch (e) {
+        /* Brez dovoljenja za odložišče povezave ne moremo kopirati;
+           obiskovalcu ostaneta e-pošta in Facebook. */
+        return;
+      }
+      kopiraj.textContent = ovoj.dataset.kopirano ?? '';
+      window.setTimeout(() => {
+        kopiraj.textContent = prej;
+        odpri(false);
+      }, 1600);
+    });
+
+    /* Klik zunaj in Esc zapreta meni. */
+    document.addEventListener('click', (dogodek) => {
+      if (!ovoj.contains(dogodek.target as Node)) odpri(false);
+    });
+    document.addEventListener('keydown', (dogodek) => {
+      if (dogodek.key === 'Escape' && !meni.hidden) {
+        odpri(false);
+        sprozi.focus();
+      }
+    });
+  });
+</script>
+
+<style>
+  .deljenje {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Slog smeri A: diskretno, zlata obroba, brez polnila. */
+  .deljenje__gumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-family: var(--bbg-font-besedilo);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--bbg-povezava);
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 55%, transparent);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .deljenje__gumb:hover,
+  .deljenje__gumb:focus-visible {
+    color: var(--bbg-povezava-hover);
+    border-color: var(--bbg-obroba-mocna);
+  }
+  .deljenje__gumb:focus-visible {
+    outline: 2px solid var(--bbg-obroba-mocna);
+    outline-offset: 2px;
+  }
+
+  .deljenje__ikona {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 1.6;
+  }
+  .deljenje__ikona path { fill: none; }
+
+  /* Kompaktna različica na kartici: samo ikona, barva kartice. */
+  .deljenje--kompakt .deljenje__gumb {
+    gap: 0;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    justify-content: center;
+    color: var(--bbg-kartica-besedilo);
+  }
+  .deljenje--kompakt .deljenje__gumb:hover,
+  .deljenje--kompakt .deljenje__gumb:focus-visible {
+    color: var(--bbg-kartica-besedilo);
+    border-color: var(--bbg-obroba-mocna);
+  }
+
+  .deljenje__meni {
+    position: absolute;
+    z-index: 20;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 11rem;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    background: var(--bbg-bg);
+    border: 1px solid var(--bbg-obroba-mocna);
+    border-radius: var(--bbg-r-m);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  }
+  .deljenje__meni[hidden] { display: none; }
+
+  .deljenje__moznost,
+  .deljenje__moznost:link,
+  .deljenje__moznost:visited {
+    display: block;
+    padding: 9px 12px;
+    font-family: var(--bbg-font-besedilo);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    color: var(--bbg-besedilo);
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    border-radius: var(--bbg-r-s);
+    cursor: pointer;
+  }
+  .deljenje__moznost:hover,
+  .deljenje__moznost:focus-visible {
+    color: var(--bbg-povezava);
+    background: color-mix(in srgb, var(--bbg-gold) 12%, transparent);
+  }
+  .deljenje__moznost:focus-visible {
+    outline: 2px solid var(--bbg-obroba-mocna);
+    outline-offset: -2px;
+  }
+</style>

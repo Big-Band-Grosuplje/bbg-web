@@ -1,0 +1,18 @@
+---
+/* Podstrani dogodkov nastanejo iz koncerti.json. Slug je vpisan v podatkih
+   in se po objavi ne spreminja; pretekli dogodki ostanejo, ker imajo
+   arhivsko vrednost in so povezave nanje lahko že objavljene. */
+import Dogodek from '../../components/strani/Dogodek.astro';
+import { koncertiVsi, type Koncert } from '../../lib/koncerti';
+
+export function getStaticPaths() {
+  return koncertiVsi.map((koncert) => ({
+    params: { slug: koncert.slug },
+    props: { koncert },
+  }));
+}
+
+const { koncert } = Astro.props as { koncert: Koncert };
+---
+
+<Dogodek koncert={koncert} jezik="sl" />

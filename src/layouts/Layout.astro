@@ -45,9 +45,13 @@ interface Props {
   jezik: Jezik;
   title?: string;
   description?: string;
+  /* Dinamične strani (podstrani dogodkov) v POTI ne morejo biti, ker jih
+     ni znano vnaprej. Te podajo svoj par poti tu; `stran` pri njih pove
+     samo, katera pot velja za samodejno preusmeritev jezika. */
+  potiRazlicic?: { sl: string; en: string };
 }
 
-const { stran, jezik, title, description } = Astro.props;
+const { stran, jezik, title, description, potiRazlicic } = Astro.props;
 const t = slovar(jezik);
 
 const naslovStrani = title ?? t.naslovnica.naslovStrani;
@@ -56,8 +60,14 @@ const opisStrani = description ?? t.naslovnica.opisStrani;
 const SITE = Astro.site ?? new URL('https://bigband-grosuplje.com');
 const ogImage = new URL('/og/og-default.png', SITE);
 
-const kanonicna = new URL(POTI[stran][jezik], SITE);
-const alternative = razlicice(stran).map((r) => ({
+const paroma = potiRazlicic
+  ? [
+      { jezik: 'sl' as Jezik, pot: potiRazlicic.sl },
+      { jezik: 'en' as Jezik, pot: potiRazlicic.en },
+    ]
+  : razlicice(stran);
+const kanonicna = new URL(potiRazlicic ? potiRazlicic[jezik] : POTI[stran][jezik], SITE);
+const alternative = paroma.map((r) => ({
   jezik: r.jezik,
   url: new URL(r.pot, SITE).href,
 }));
@@ -157,7 +167,18 @@ const musicGroup = {
         Skripta teče samo na slovenskih straneh; angleške je ne potrebujejo,
         ker je obisk /en/ že sam po sebi izbira. */}
     {jezik === 'sl' && (
-      <script is:inline define:vars={{ preslikava: preslikavaZaSkripto() }}>
+      <script
+        is:inline
+        define:vars={{
+          preslikava: {
+            ...preslikavaZaSkripto(),
+            /* Podstrani dogodkov v POTI ni, zato njen par dodamo tu —
+               brez tega angleško govorečega obiskovalca s podstrani
+               dogodka ne bi preusmerilo. */
+            ...(potiRazlicic ? { [potiRazlicic.sl]: potiRazlicic.en } : {}),
+          },
+        }}
+      >
         (() => {
           try {
             if (localStorage.getItem('bbg-lang')) return;

@@ -57,6 +57,8 @@ export const en = {
     vstopZaprt: 'Private event — by invitation',
     prijavaObvezna: 'registration required',
     prijavaGumb: 'Register',
+    mimo: 'Past event',
+    vsiKoncerti: '← All concerts',
     gostje: 'Guests',
     vstopnice: 'Tickets',
   },
@@ -92,6 +94,9 @@ export const en = {
     pridruzitevOpis:
       'Do you play trombone, trumpet, saxophone, drums, double bass, guitar or piano? Do you sing? Interested in recording and live sound? We welcome new members to the big band and the youth ensemble, and offer technicians opportunities to learn and work with our equipment.',
     pridruzitevGumb: 'Write to us',
+    pridruzitevGumbDelavnica: 'Register',
+    pridruzitevDodatek:
+      'You can also use this form to register for our educational events and workshops.',
     pridruzitevZadeva: 'Joining the orchestra — website',
     ime: 'Full name',
     eposta: 'Email',
@@ -146,6 +151,16 @@ export const en = {
       posnetek: 'Recording',
       kanal: 'Channel',
     },
+  },
+
+  deljenje: {
+    oznaka: 'Share this event',
+    naslov: 'Share',
+    kopiraj: 'Copy link',
+    kopirano: 'Copied!',
+    eposta: 'Email',
+    facebook: 'Facebook',
+    zapri: 'Close share menu',
   },
 
   lightbox: {

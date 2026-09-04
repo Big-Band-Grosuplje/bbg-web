@@ -1,0 +1,15 @@
+---
+import Dogodek from '../../../components/strani/Dogodek.astro';
+import { koncertiVsi, type Koncert } from '../../../lib/koncerti';
+
+export function getStaticPaths() {
+  return koncertiVsi.map((koncert) => ({
+    params: { slug: koncert.slugEn },
+    props: { koncert },
+  }));
+}
+
+const { koncert } = Astro.props as { koncert: Koncert };
+---
+
+<Dogodek koncert={koncert} jezik="en" />

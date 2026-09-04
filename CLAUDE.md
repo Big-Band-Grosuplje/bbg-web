@@ -70,6 +70,11 @@ Ključno:
 - `datumKonecIso` je neobvezno polje za **večdnevne dogodke**: datum se prikaže kot razpon ("10.–11. 10. 2026" / "10–11 October 2026"), dogodek ostane prihajajoč do konca, JSON-LD dobi `endDate`. Razpona **ne sestavljaj sam** — `sl-SI` dnevu piko že doda, kombinacija `month+year` pa vrne "10/2026"; zato se mesec in leto prevzameta iz polnega končnega datuma
 - `prijava: true` pomeni prost vstop z **obvezno prijavo**: ob znački se izpiše opomba in gumb, ki pelje na `?prijava=delavnica#kontakt` — query predizbere možnost v izbirniku, zamenja zadevo sporočila in sprosti obveznost polja Sporočilo (ime in e-pošta ostaneta obvezna)
 - **`zasedba: "izobrazevalni"` gre v JSON-LD kot `EducationEvent`**, ne `MusicEvent`: tam smo organizator in ne izvajalec, `performer` pa je vodja delavnice
+- **Podstrani dogodkov** `/dogodki/<slug>` in `/en/events/<slugEn>` nastanejo iz `koncerti.json`. Sluga sta vpisana v podatkih in se **po objavi ne spreminjata** — objavljena povezava bi se prelomila. Dva sprejema imata enak naslov, zato jih v slugu loči prizorišče
+- **Pretekli dogodki se ne brišejo**: podstran ostane (arhivska vrednost, objavljene povezave), le kartica z naslovnice izpade in stran dobi diskretno oznako „Dogodek je mimo". Gumba za vstopnice in prijavo se pri preteklem dogodku ne izpišeta, deljenje ostane
+- Datumska logika in gradnja JSON-LD sta v `src/lib/koncerti.ts`, ker jih potrebujeta naslovnica (izsek) in podstran (polni zapis). Knjižnica slovarja ne pozna — prevedljive nize prejme kot parametre
+- Dinamične strani v `poti.json` ne morejo biti; svoj par poti podajo prek `potiRazlicic` v `Layout`, ki iz njega naredi `canonical`, `hreflang` **in** vpis v preslikavo za samodejno preusmeritev jezika. Sitemap iste pare zgradi iz `koncerti.json`
+- **Deljenje** (`Deljenje.astro`): `navigator.share`, kjer je na voljo, sicer meni s kopiranjem povezave, e-pošto in Facebookom prek `sharer.php` v novem zavihku. **Brez SDK** — ta bi naložil Facebookove skripte in obiskovalčev IP predal tretji osebi še pred klikom. `aria-controls` potrebuje enoličen `id`, zato ga komponenta izpelje iz poti dogodka
 - `docs/` — kronika.md, sodelovanja.md, ton-vzorci.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 

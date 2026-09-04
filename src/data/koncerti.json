@@ -1,7 +1,7 @@
 {
   "posodobljeno": "2026-08-31",
   "vir": "docs/kronika.md — sekcija 2026",
-  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description. Polja s koncnico En so angleske razlicice; trdi podatki (datumi, ure, koordinate, lastna imena prizorisc in gostov) so skupni in se ne podvajajo. Angleski opisi niso dobesedni prevodi - slovenske besedne igre v anglescini ne delujejo, zato povedo isto z mirnejsim stavkom. zasedba: big-band | combo | mladinski | izobrazevalni - doloca znacko na kartici. vstop.tip: vstopnice | prost | zaprt. Pri vstopnice sme biti url; dokler je null, se gumb ne izpise (TODO za 13. 12. 2026: povezava na mojekarte). Polje vstopniceUrl je opusceno in preseljeno v vstop.url. TODO preveri: za 18. 9. 2026 je vpisan prost vstop, ker je festival Grosuplje v jeseni brezplacen - ce to ne drzi, popravi na vstopnice. datumKonecIso je neobvezno polje za vecdnevne dogodke; kadar je vpisano, se datum prikaze kot razpon in dogodek ostane prihajajoc do konca. prijava: true pomeni obvezno prijavo - ob znacki PROST VSTOP se izpise opomba in gumb, ki pelje na kontaktni obrazec s predizbrano moznostjo. zasedba izobrazevalni gre v JSON-LD kot EducationEvent (ne MusicEvent), z organizatorjem namesto izvajalca.",
+  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description. Polja s koncnico En so angleske razlicice; trdi podatki (datumi, ure, koordinate, lastna imena prizorisc in gostov) so skupni in se ne podvajajo. Angleski opisi niso dobesedni prevodi - slovenske besedne igre v anglescini ne delujejo, zato povedo isto z mirnejsim stavkom. zasedba: big-band | combo | mladinski | izobrazevalni - doloca znacko na kartici. vstop.tip: vstopnice | prost | zaprt. Pri vstopnice sme biti url; dokler je null, se gumb ne izpise (TODO za 13. 12. 2026: povezava na mojekarte). Polje vstopniceUrl je opusceno in preseljeno v vstop.url. TODO preveri: za 18. 9. 2026 je vpisan prost vstop, ker je festival Grosuplje v jeseni brezplacen - ce to ne drzi, popravi na vstopnice. datumKonecIso je neobvezno polje za vecdnevne dogodke; kadar je vpisano, se datum prikaze kot razpon in dogodek ostane prihajajoc do konca. prijava: true pomeni obvezno prijavo - ob znacki PROST VSTOP se izpise opomba in gumb, ki pelje na kontaktni obrazec s predizbrano moznostjo. zasedba izobrazevalni gre v JSON-LD kot EducationEvent (ne MusicEvent), z organizatorjem namesto izvajalca. slug in slugEn sta naslova podstrani /dogodki/<slug> in /en/events/<slugEn>. Vpisana sta rocno (dva sprejema imata enak naslov, loci jih prizorisce) in se po objavi NE spreminjata - stara povezava bi se prelomila. Podstrani preteklih dogodkov se ne brisejo, imajo arhivsko vrednost.",
   "koncerti": [
     {
       "id": "sprejem-veleposlanistvo-zda-rezidenca-2026",
@@ -27,7 +27,9 @@
         "postna": "1000",
         "kraj": "Ljubljana",
         "drzava": "SI"
-      }
+      },
+      "slug": "sprejem-veleposlanistva-zda-rezidenca-2026",
+      "slugEn": "us-embassy-reception-residence-2026"
     },
     {
       "id": "sprejem-veleposlanistvo-zda-vrt-lili-novy-2026",
@@ -53,7 +55,9 @@
         "postna": "1000",
         "kraj": "Ljubljana",
         "drzava": "SI"
-      }
+      },
+      "slug": "sprejem-veleposlanistva-zda-vrt-lili-novy-2026",
+      "slugEn": "us-embassy-reception-lili-novy-garden-2026"
     },
     {
       "id": "grosuplje-v-jeseni-2026",
@@ -88,7 +92,9 @@
       "zasedba": "big-band",
       "vstop": {
         "tip": "prost"
-      }
+      },
+      "slug": "koncert-pod-zvezdami-grosuplje-v-jeseni-2026",
+      "slugEn": "concert-under-the-stars-grosuplje-in-autumn-2026"
     },
     {
       "id": "delavnica-jazz-aranziranje-krajncan-2026",
@@ -121,7 +127,9 @@
         "postna": "1290",
         "kraj": "Grosuplje",
         "drzava": "SI"
-      }
+      },
+      "slug": "jazz-aranziranje-delavnica-krajncan-2026",
+      "slugEn": "jazz-arranging-workshop-krajncan-2026"
     },
     {
       "id": "bbg-x-slon-in-sadez-2026",
@@ -153,7 +161,9 @@
       "vstop": {
         "tip": "vstopnice",
         "url": null
-      }
+      },
+      "slug": "bbg-x-slon-in-sadez-2026",
+      "slugEn": "bbg-x-slon-in-sadez-2026"
     }
   ]
 }

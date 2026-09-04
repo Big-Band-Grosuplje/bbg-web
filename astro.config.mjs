@@ -12,12 +12,21 @@ const JEZIK_OZNAKA = { sl: 'sl-SI', en: 'en-US' };
    poti, ki se po predponi jezika ujemajo (/x in /en/x); naši slugi so
    prevedeni (zgodovina ↔ history), zato pare sestavimo sami. */
 const PARI = new Map();
-for (const razlicice of Object.values(poti)) {
+function dodajPar(razlicice) {
   const povezave = Object.entries(razlicice).map(([jezik, pot]) => ({
     lang: JEZIK_OZNAKA[jezik],
     url: pot,
   }));
   for (const pot of Object.values(razlicice)) PARI.set(pot, povezave);
+}
+for (const razlicice of Object.values(poti)) dodajPar(razlicice);
+
+/* Podstrani dogodkov nastanejo iz podatkov, zato jih v poti.json ni.
+   Pare zgradimo iz istega vira, ki ga uporabljajo strani — slug in slugEn
+   sta v koncerti.json. */
+const { koncerti } = JSON.parse(readFileSync('./src/data/koncerti.json', 'utf8'));
+for (const k of koncerti) {
+  dodajPar({ sl: `/dogodki/${k.slug}/`, en: `/en/events/${k.slugEn}/` });
 }
 
 export default defineConfig({

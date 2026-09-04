@@ -1,0 +1,198 @@
+---
+/* ============================================================
+   Podstran posameznega dogodka.
+
+   Vsebina je isti zapis kot na kartici, le v polni obliki: značke, datum,
+   ura, prizorišče, celoten opis, gostje in gumb glede na vrsto vstopa.
+   Datumsko oblikovanje in JSON-LD prideta iz src/lib/koncerti.ts — ista
+   koda kot na naslovnici, da se zapisa ne moreta raziti.
+
+   Pretekli dogodki se NE brišejo: povezave v arhivih, objavah in e-pošti
+   morajo ostati žive. Namesto brisanja dobi stran diskretno oznako.
+   ============================================================ */
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Noga from '../Noga.astro';
+import Deljenje from '../Deljenje.astro';
+import { pot, slovar, type Jezik } from '../../i18n';
+import {
+  oznakaZasedbe,
+  pripravi,
+  type Koncert,
+  type OznakeZasedb,
+} from '../../lib/koncerti';
+
+interface Props {
+  koncert: Koncert;
+  jezik: Jezik;
+}
+const { koncert, jezik } = Astro.props;
+const t = slovar(jezik);
+
+const OZNAKE_ZASEDB: OznakeZasedb = {
+  'big-band': t.koncerti.zasedbaBigBand,
+  combo: t.koncerti.zasedbaCombo,
+  mladinski: t.koncerti.zasedbaMladinski,
+  izobrazevalni: t.koncerti.zasedbaIzobrazevalni,
+};
+
+const SITE_URL = Astro.site ?? new URL('https://bigband-grosuplje.com');
+const potSl = `/dogodki/${koncert.slug}/`;
+const potEn = `/en/events/${koncert.slugEn}/`;
+const potTe = jezik === 'en' ? potEn : potSl;
+const absolutni = new URL(potTe, SITE_URL).href;
+
+const k = pripravi(
+  koncert,
+  jezik,
+  { ob: t.koncerti.ob, brezPrizorisca: t.koncerti.brezPrizorisca },
+  absolutni,
+);
+
+const naslovStrani = `${k.nazivPrikaz} — Big Band Grosuplje`;
+---
+
+<Layout
+  stran="naslovnica"
+  jezik={jezik}
+  title={naslovStrani}
+  description={k.opisSeoPrikaz}
+  potiRazlicic={{ sl: potSl, en: potEn }}
+>
+  <Nav stran="naslovnica" jezik={jezik} />
+
+  <main class="stran">
+    <div class="ozko">
+      <p class="nazaj">
+        <a href={`${pot('naslovnica', jezik)}#koncerti`}>{t.koncerti.vsiKoncerti}</a>
+      </p>
+
+      {k.jeMimo && <p class="mimo">{t.koncerti.mimo}</p>}
+
+      <h1>{k.nazivPrikaz}</h1>
+
+      <p class="dogodek__meta">
+        {k.datumPrikaz}
+        {k.lokacija ? ` · ${k.lokacijaPrikaz}` : ` · ${t.koncerti.brezPrizorisca}`}
+      </p>
+
+      <p class="dogodek__znacke">
+        <span class="znacka">{oznakaZasedbe(k.zasedba, OZNAKE_ZASEDB)}</span>
+        {k.vstop.tip === 'prost' && <span class="znacka">{t.koncerti.vstopProst}</span>}
+        {k.vstop.tip === 'zaprt' && (
+          <span class="znacka znacka--zaprt">{t.koncerti.vstopZaprt}</span>
+        )}
+        {k.prijava && <span class="znacka__opomba">{t.koncerti.prijavaObvezna}</span>}
+      </p>
+
+      <p class="dogodek__opis">{k.opisPrikaz}</p>
+
+      {k.gostje.length > 0 && (
+        <p class="dogodek__gostje">
+          <span class="oznaka">{t.koncerti.gostje}</span>
+          {k.gostje.map((g) => g.naziv).join(', ')}
+        </p>
+      )}
+
+      <div class="dogodek__akcije">
+        {k.prijava && !k.jeMimo && (
+          <a class="bbg-gumb" href={`${pot('naslovnica', jezik)}?prijava=delavnica#kontakt`}
+            >{t.koncerti.prijavaGumb}</a>
+        )}
+        {k.vstop.tip === 'vstopnice' && k.vstop.url && !k.jeMimo && (
+          <a
+            class="bbg-gumb"
+            href={k.vstop.url}
+            target="_blank"
+            rel="noopener noreferrer">{t.koncerti.vstopnice}</a
+          >
+        )}
+        <Deljenje
+          jezik={jezik}
+          url={absolutni}
+          naslov={k.nazivPrikaz}
+          opis={k.opisSeoPrikaz}
+        />
+      </div>
+
+      {k.jsonLd && <script type="application/ld+json" set:html={JSON.stringify(k.jsonLd)} />}
+    </div>
+  </main>
+
+  <Noga jezik={jezik} />
+</Layout>
+
+<style>
+  .ozko {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 var(--bbg-rob);
+  }
+  .stran { padding: 52px 0 80px; }
+  .nazaj { margin: 0 0 26px; font-size: 14px; font-weight: 600; }
+
+  /* Diskretna oznaka preteklega dogodka — ni opozorilo, samo pojasnilo,
+     zato brez akcentne barve. */
+  .mimo {
+    display: inline-block;
+    margin: 0 0 14px;
+    padding: 4px 12px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bbg-besedilo);
+    border: 1px solid color-mix(in srgb, var(--bbg-besedilo) 30%, transparent);
+    border-radius: 999px;
+  }
+
+  h1 {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 3.8vw, 40px);
+    color: var(--bbg-naslov);
+  }
+  .dogodek__meta {
+    margin: 0 0 18px;
+    color: var(--bbg-nadnaslov);
+    font-weight: 600;
+    font-size: 15.5px;
+  }
+
+  .dogodek__znacke {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 22px;
+  }
+  /* Enak slog kot na kartici, le da tu podlaga ni kartica, ampak stran. */
+  .znacka {
+    display: inline-block;
+    padding: 4px 11px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bbg-besedilo);
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 55%, transparent);
+    border-radius: 999px;
+  }
+  .znacka--zaprt {
+    border-color: color-mix(in srgb, var(--bbg-besedilo) 30%, transparent);
+  }
+  .znacka__opomba {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--bbg-besedilo);
+  }
+
+  .dogodek__opis { margin: 0 0 20px; }
+  .dogodek__gostje { margin: 0 0 30px; font-size: 15px; }
+
+  .dogodek__akcije {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+  }
+</style>

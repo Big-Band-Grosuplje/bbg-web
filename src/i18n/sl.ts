@@ -54,6 +54,8 @@ export const sl = {
     vstopZaprt: 'Zaprt dogodek — za povabljence',
     prijavaObvezna: 'obvezna prijava',
     prijavaGumb: 'Prijava',
+    mimo: 'Dogodek je mimo',
+    vsiKoncerti: '← Vsi koncerti',
     gostje: 'Gostje',
     vstopnice: 'Vstopnice',
   },
@@ -90,6 +92,9 @@ export const sl = {
     pridruzitevOpis:
       'Igraš pozavno, trobento, saksofon, bobne, kontrabas, kitaro ali klavir? Poješ? Te zanima snemanje in ozvočenje? Sprejemamo nove člane v big band in mladinski ansambel, tehnikom pa ponujamo možnost izpopolnjevanja in uporabe naše opreme.',
     pridruzitevGumb: 'Piši nam',
+    pridruzitevGumbDelavnica: 'Prijavljam se',
+    pridruzitevDodatek:
+      'Prek tega obrazca se lahko prijaviš tudi na naše izobraževalne dogodke in delavnice.',
     pridruzitevZadeva: 'Pridružitev orkestru — spletna stran',
     ime: 'Ime in priimek',
     eposta: 'E-pošta',
@@ -144,6 +149,16 @@ export const sl = {
       posnetek: 'Posnetek',
       kanal: 'Kanal',
     },
+  },
+
+  deljenje: {
+    oznaka: 'Deli dogodek',
+    naslov: 'Deli',
+    kopiraj: 'Kopiraj povezavo',
+    kopirano: 'Kopirano!',
+    eposta: 'E-pošta',
+    facebook: 'Facebook',
+    zapri: 'Zapri meni za deljenje',
   },
 
   lightbox: {
