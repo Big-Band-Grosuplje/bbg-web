@@ -67,6 +67,9 @@ Ključno:
 - `src/data/` — strukturirani podatki (koncerti, galerija, mediji, zgodovina) s polji `…En`. Besedila zgodovine in mejnikov so v `zgodovina.json`, da naslovnica in `/zgodovina` berete isti vir
 - Model koncerta v `koncerti.json`: `zasedba` (big-band | combo | mladinski | izobrazevalni) in `vstop` ({ tip: vstopnice | prost | zaprt, url }). Iz njiju nastaneta znački na kartici in `offers` v JSON-LD. Polje `vstopniceUrl` je opuščeno — preseljeno v `vstop.url`
 - **Prost vstop dobi `offers` s ceno 0 EUR**, vstopnice ponudbo s povezavo, zaprt dogodek in vstopnice brez znane povezave pa `offers` izpustita: nepopolna ponudba je za iskalnike slabša od nobene. Gumb „Vstopnice" se izpiše samo, kadar je `vstop.url` res znan
+- `datumKonecIso` je neobvezno polje za **večdnevne dogodke**: datum se prikaže kot razpon ("10.–11. 10. 2026" / "10–11 October 2026"), dogodek ostane prihajajoč do konca, JSON-LD dobi `endDate`. Razpona **ne sestavljaj sam** — `sl-SI` dnevu piko že doda, kombinacija `month+year` pa vrne "10/2026"; zato se mesec in leto prevzameta iz polnega končnega datuma
+- `prijava: true` pomeni prost vstop z **obvezno prijavo**: ob znački se izpiše opomba in gumb, ki pelje na `?prijava=delavnica#kontakt` — query predizbere možnost v izbirniku, zamenja zadevo sporočila in sprosti obveznost polja Sporočilo (ime in e-pošta ostaneta obvezna)
+- **`zasedba: "izobrazevalni"` gre v JSON-LD kot `EducationEvent`**, ne `MusicEvent`: tam smo organizator in ne izvajalec, `performer` pa je vodja delavnice
 - `docs/` — kronika.md, sodelovanja.md, ton-vzorci.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 

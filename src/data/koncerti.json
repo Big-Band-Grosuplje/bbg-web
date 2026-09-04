@@ -1,7 +1,7 @@
 {
   "posodobljeno": "2026-08-31",
   "vir": "docs/kronika.md — sekcija 2026",
-  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Delavnica aranziranja z Lojzetom Krajncanom (oktober 2026) ni koncert - sodi v loceno sekcijo Delavnice z EducationEvent. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description. Polja s koncnico En so angleske razlicice; trdi podatki (datumi, ure, koordinate, lastna imena prizorisc in gostov) so skupni in se ne podvajajo. Angleski opisi niso dobesedni prevodi - slovenske besedne igre v anglescini ne delujejo, zato povedo isto z mirnejsim stavkom. zasedba: big-band | combo | mladinski | izobrazevalni - doloca znacko na kartici. vstop.tip: vstopnice | prost | zaprt. Pri vstopnice sme biti url; dokler je null, se gumb ne izpise (TODO za 13. 12. 2026: povezava na mojekarte). Polje vstopniceUrl je opusceno in preseljeno v vstop.url. TODO preveri: za 18. 9. 2026 je vpisan prost vstop, ker je festival Grosuplje v jeseni brezplacen - ce to ne drzi, popravi na vstopnice.",
+  "opomba": "Samo prihajajoci koncerti. Pretekli koncerti 2026 (maj JSKD Grosuplje, 5. 6. Kazina, 10. 7. MarezziJazz, avgust HGM Jazz orkestar Zagreb) so izpusceni. Polje opis gre na kartico (ton po docs/ton-vzorci.md), opisSeo pa v JSON-LD description. Polja s koncnico En so angleske razlicice; trdi podatki (datumi, ure, koordinate, lastna imena prizorisc in gostov) so skupni in se ne podvajajo. Angleski opisi niso dobesedni prevodi - slovenske besedne igre v anglescini ne delujejo, zato povedo isto z mirnejsim stavkom. zasedba: big-band | combo | mladinski | izobrazevalni - doloca znacko na kartici. vstop.tip: vstopnice | prost | zaprt. Pri vstopnice sme biti url; dokler je null, se gumb ne izpise (TODO za 13. 12. 2026: povezava na mojekarte). Polje vstopniceUrl je opusceno in preseljeno v vstop.url. TODO preveri: za 18. 9. 2026 je vpisan prost vstop, ker je festival Grosuplje v jeseni brezplacen - ce to ne drzi, popravi na vstopnice. datumKonecIso je neobvezno polje za vecdnevne dogodke; kadar je vpisano, se datum prikaze kot razpon in dogodek ostane prihajajoc do konca. prijava: true pomeni obvezno prijavo - ob znacki PROST VSTOP se izpise opomba in gumb, ki pelje na kontaktni obrazec s predizbrano moznostjo. zasedba izobrazevalni gre v JSON-LD kot EducationEvent (ne MusicEvent), z organizatorjem namesto izvajalca.",
   "koncerti": [
     {
       "id": "sprejem-veleposlanistvo-zda-rezidenca-2026",
@@ -88,6 +88,39 @@
       "zasedba": "big-band",
       "vstop": {
         "tip": "prost"
+      }
+    },
+    {
+      "id": "delavnica-jazz-aranziranje-krajncan-2026",
+      "naziv": "Jazz aranžiranje: dvodnevna delavnica z Lojzetom Krajnčanom",
+      "nazivEn": "Jazz Arranging: A Two-Day Workshop with Lojze Krajnčan",
+      "opis": "Za vse aranžerje in aranžerske entuziaste: na konkretnih primerih bomo obravnavali vprašanja udeležencev in skupaj iskali učinkovite rešitve za aranžerske izzive. Vstop je prost, mest pa ni neskončno — hitro se prijavi ali delavnico deli s prijatelji, ki bi jih note od blizu utegnile zanimati. V sodelovanju z JSKD, Občino Grosuplje, ZKD Grosuplje in Glasbeno šolo Grosuplje.",
+      "opisEn": "For arrangers and arranging enthusiasts: working on concrete examples, we'll tackle participants' questions and find practical solutions to arranging challenges. Entry is free, but seats are not endless — register early or share with friends who like their scores up close. In collaboration with JSKD, the Municipality of Grosuplje, ZKD Grosuplje and the Grosuplje Music School.",
+      "opisSeo": "Dvodnevna delavnica jazzovskega aranžiranja z Lojzetom Krajnčanom v dvorani Glasbene šole Grosuplje. Na konkretnih primerih obravnavamo vprašanja udeležencev in rešitve za aranžerske izzive. Prost vstop, obvezna prijava. V sodelovanju z JSKD, Občino Grosuplje, ZKD Grosuplje in Glasbeno šolo Grosuplje.",
+      "opisSeoEn": "A two-day jazz arranging workshop with Lojze Krajnčan at the Grosuplje Music School Hall. Working on concrete examples, we address participants’ questions and practical solutions to arranging challenges. Free entry, registration required. In collaboration with JSKD, the Municipality of Grosuplje, ZKD Grosuplje and the Grosuplje Music School.",
+      "gostje": [
+        {
+          "naziv": "Lojze Krajnčan",
+          "tip": "Person"
+        }
+      ],
+      "datumIso": "2026-10-10",
+      "datumKonecIso": "2026-10-11",
+      "ura": null,
+      "datumOpis": "oktober 2026",
+      "datumOpisEn": "October 2026",
+      "zasedba": "izobrazevalni",
+      "vstop": {
+        "tip": "prost"
+      },
+      "prijava": true,
+      "lokacija": {
+        "naziv": "Dvorana Glasbene šole Grosuplje, Grosuplje",
+        "nazivEn": "Grosuplje Music School Hall, Grosuplje",
+        "ulica": null,
+        "postna": "1290",
+        "kraj": "Grosuplje",
+        "drzava": "SI"
       }
     },
     {

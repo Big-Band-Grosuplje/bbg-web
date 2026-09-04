@@ -52,6 +52,8 @@ export const sl = {
     zasedbaIzobrazevalni: 'Delavnica',
     vstopProst: 'Prost vstop',
     vstopZaprt: 'Zaprt dogodek — za povabljence',
+    prijavaObvezna: 'obvezna prijava',
+    prijavaGumb: 'Prijava',
     gostje: 'Gostje',
     vstopnice: 'Vstopnice',
   },
@@ -96,6 +98,8 @@ export const sl = {
     podrocjeInstrumentalist: 'Instrumentalist',
     podrocjeVokalist: 'Vokalist',
     podrocjeTehnika: 'Tehnična podpora',
+    podrocjeDelavnica: 'Prijava na delavnico (Krajnčan, oktober)',
+    delavnicaZadeva: 'Prijava na delavnico — spletna stran',
   },
 
   obrazec: {

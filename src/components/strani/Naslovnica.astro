@@ -56,11 +56,15 @@ type Koncert = {
   datumOpisEn?: string;
   gostje: Gost[];
   datumIso: string | null;
+  /* Neobvezno; kadar je vpisano, gre za večdnevni dogodek. */
+  datumKonecIso?: string | null;
   ura: string | null;
   datumOpis: string;
   lokacija: Lokacija;
   zasedba: 'big-band' | 'combo' | 'mladinski' | 'izobrazevalni';
   vstop: { tip: 'vstopnice' | 'prost' | 'zaprt'; url?: string | null };
+  /* true = prost vstop, a z obvezno prijavo prek kontaktnega obrazca. */
+  prijava?: boolean;
 };
 
 const koncerti = koncertiData.koncerti as Koncert[];
@@ -116,11 +120,51 @@ function formatDatum(datumIso: string | null, ura: string | null): string | null
   return null;
 }
 
+/* Večdnevni dogodek: "10.–11. 10. 2026" oz. "10–11 October 2026".
+   Razpon čez mesec ali leto zapišemo z obema polnima datumoma, ker bi
+   skrajšani zapis ("10. 10.–2. 11.") bralca lahko zmedel. */
+function formatRazpon(zacetekIso: string, konecIso: string): string {
+  const z1 = new Date(zacetekIso + 'T00:00:00Z');
+  const z2 = new Date(konecIso + 'T00:00:00Z');
+  const istiMesec =
+    z1.getUTCFullYear() === z2.getUTCFullYear() && z1.getUTCMonth() === z2.getUTCMonth();
+  /* Različna meseca zapišemo z obema polnima datumoma, ker bi skrajšani
+     zapis bralca zmedel. */
+  if (!istiMesec) {
+    return `${formatDatum(zacetekIso, null)} – ${formatDatum(konecIso, null)}`;
+  }
+  /* Znotraj meseca sestavimo "dan začetka – polni končni datum". Ločil ne
+     sestavljamo sami: sl-SI dnevu že doda piko ("10."), kombinacija
+     month+year pa bi dala "10/2026" namesto "10. 2026" — zato mesec in leto
+     prevzamemo iz polnega končnega datuma. */
+  const danZacetka = new Intl.DateTimeFormat(LOKALA, {
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(z1);
+  return `${danZacetka}–${formatDatum(konecIso, null)}`;
+}
+
 /* Datum razstavljen za temni blok na kartici: dan, mesec, leto ločeno. */
-function datumBlok(datumIso: string | null) {
+function datumBlok(datumIso: string | null, konecIso?: string | null) {
   if (!datumIso || !/^\d{4}-\d{2}-\d{2}$/.test(datumIso)) return null;
   const d = new Date(datumIso + 'T00:00:00Z');
+  const dan = new Intl.DateTimeFormat(LOKALA, { day: 'numeric', timeZone: 'UTC' }).format(d);
+  /* Pri večdnevnem dogodku bi ena sama številka v bloku zavajala, zato
+     gre vanj razpon dni; CSS ga zmanjša, da se ne razlije. */
+  /* sl-SI dnevu piko že doda sam, zato je ne dodajamo. */
+  let danPrikaz = dan;
+  let razpon = false;
+  if (konecIso && /^\d{4}-\d{2}-\d{2}$/.test(konecIso)) {
+    const k = new Date(konecIso + 'T00:00:00Z');
+    if (k.getUTCMonth() === d.getUTCMonth() && k.getUTCFullYear() === d.getUTCFullYear()) {
+      const danK = new Intl.DateTimeFormat(LOKALA, { day: 'numeric', timeZone: 'UTC' }).format(k);
+      danPrikaz = `${dan}–${danK}`;
+      razpon = true;
+    }
+  }
   return {
+    razpon,
+    danPrikaz,
     dan: new Intl.DateTimeFormat(LOKALA, { day: 'numeric', timeZone: 'UTC' }).format(d),
     mesec: new Intl.DateTimeFormat(LOKALA, { month: 'short', timeZone: 'UTC' }).format(d),
     leto: new Intl.DateTimeFormat(LOKALA, { year: 'numeric', timeZone: 'UTC' }).format(d),
@@ -174,15 +218,24 @@ function musicEvent(k: Koncert) {
   for (const gost of k.gostje) {
     if (gost.tip) izvajalci.push({ '@type': gost.tip, name: gost.naziv });
   }
+  /* Delavnica ni koncert: gre za EducationEvent, kjer smo organizator in
+     ne izvajalec. Vodja delavnice je performer — to je vloga, ki jo
+     schema.org za predavatelja predvideva. */
+  const izobrazevalni = k.zasedba === 'izobrazevalni';
   const dogodek: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': 'MusicEvent',
+    '@type': izobrazevalni ? 'EducationEvent' : 'MusicEvent',
     name: en ? (k.nazivEn ?? k.naziv) : k.naziv,
     description: en ? (k.opisSeoEn ?? k.opisEn ?? k.opis) : (k.opisSeo ?? k.opis),
     startDate: startDate(k.datumIso, k.ura),
+    ...(k.datumKonecIso ? { endDate: k.datumKonecIso } : {}),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    performer: izvajalci,
+    ...(izobrazevalni
+      ? k.gostje.length > 0
+        ? { performer: k.gostje.filter((g) => g.tip).map((g) => ({ '@type': g.tip, name: g.naziv })) }
+        : {}
+      : { performer: izvajalci }),
     organizer: {
       '@type': 'Organization',
       name: 'Kulturno društvo Big Band Grosuplje',
@@ -225,15 +278,19 @@ function musicEvent(k: Koncert) {
 }
 
 const prihajajoci = koncerti
-  .filter((k) => jePrihajajoc(k.datumIso))
+  /* Večdnevni dogodek ostane prihajajoč do konca, ne do začetka. */
+  .filter((k) => jePrihajajoc(k.datumKonecIso ?? k.datumIso))
   .map((k) => ({
     ...k,
     nazivPrikaz: en ? (k.nazivEn ?? k.naziv) : k.naziv,
     opisPrikaz: en ? (k.opisEn ?? k.opis) : k.opis,
     lokacijaPrikaz: k.lokacija ? krajZaPrikaz(k.lokacija, en) : null,
     datumPrikaz:
-      formatDatum(k.datumIso, k.ura) ?? (en ? (k.datumOpisEn ?? k.datumOpis) : k.datumOpis),
-    blok: datumBlok(k.datumIso),
+      (k.datumIso && k.datumKonecIso
+        ? formatRazpon(k.datumIso, k.datumKonecIso)
+        : formatDatum(k.datumIso, k.ura)) ??
+      (en ? (k.datumOpisEn ?? k.datumOpis) : k.datumOpis),
+    blok: datumBlok(k.datumIso, k.datumKonecIso),
     jsonLd: musicEvent(k),
   }));
 
@@ -328,7 +385,9 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
             <li class="kartica bbg-mikro-kartica">
               {k.blok ? (
                 <p class="kartica__blok">
-                  <span class="kartica__dan">{k.blok.dan}</span>
+                  <span class:list={['kartica__dan', k.blok.razpon && 'kartica__dan--razpon']}>
+                    {k.blok.danPrikaz}
+                  </span>
                   <span class="kartica__mesec">{k.blok.mesec}</span>
                   <span class="kartica__leto">{k.blok.leto}</span>
                 </p>
@@ -351,6 +410,9 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                   {k.vstop.tip === 'prost' && (
                     <span class="znacka">{t.koncerti.vstopProst}</span>
                   )}
+                  {k.prijava && (
+                    <span class="znacka__opomba">{t.koncerti.prijavaObvezna}</span>
+                  )}
                   {k.vstop.tip === 'zaprt' && (
                     <span class="znacka znacka--zaprt">{t.koncerti.vstopZaprt}</span>
                   )}
@@ -365,6 +427,16 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                 {/* Gumb samo, kadar je povezava res znana: pri tipu
                     "vstopnice" z url null (prodaja se še ni odprla) gumba
                     ne kažemo. Prodaja je vedno na tuji domeni — novi zavihek. */}
+                {/* Prijava pelje na kontaktni obrazec na tej strani; query
+                    predizbere pravo možnost v izbirniku (glej skripto spodaj).
+                    Ker gre za navigacijo po isti strani, se stran znova naloži
+                    in predizbira deluje tudi brez posebne obravnave. */}
+                {k.prijava && (
+                  <p class="kartica__cta">
+                    <a class="bbg-gumb bbg-gumb--mali" href="?prijava=delavnica#kontakt"
+                      >{t.koncerti.prijavaGumb}</a>
+                  </p>
+                )}
                 {k.vstop.tip === 'vstopnice' && k.vstop.url && (
                   <p class="kartica__cta">
                     <a
@@ -495,6 +567,8 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
             data-oddano={t.obrazec.oddano}
             data-napaka={t.obrazec.napaka}
             data-nedeluje={t.obrazec.nedeluje}
+            data-zadeva-pridruzitev={t.kontakt.pridruzitevZadeva}
+            data-zadeva-delavnica={t.kontakt.delavnicaZadeva}
             action={web3formsVklopljen ? 'https://api.web3forms.com/submit' : undefined}
             method="post"
             novalidate
@@ -517,8 +591,11 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
               <option value="instrumentalist">{t.kontakt.podrocjeInstrumentalist}</option>
               <option value="vokalist">{t.kontakt.podrocjeVokalist}</option>
               <option value="tehnicna-podpora">{t.kontakt.podrocjeTehnika}</option>
+              <option value="delavnica">{t.kontakt.podrocjeDelavnica}</option>
             </select>
 
+            {/* Pri prijavi na delavnico je sporočilo neobvezno — skripta
+                required odstrani ob izbiri te možnosti. */}
             <label for="pri-sporocilo">{t.kontakt.sporocilo}</label>
             <textarea id="pri-sporocilo" name="sporocilo" rows="4" required></textarea>
 
@@ -561,6 +638,33 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     if (!polje) return;
     polje.textContent = sporocilo;
     polje.classList.toggle('obrazec__stanje--napaka', napaka);
+  }
+
+  /* Prijava na delavnico: gumb na kartici pripelje z ?prijava=delavnica,
+     kar predizbere možnost v izbirniku. Ob tej izbiri se zamenja zadeva
+     sporočila in sporočilo ni več obvezno — ime in e-pošta ostaneta.
+     Predizbira se izvede tudi ob ročni menjavi izbirnika. */
+  const pridruzitev = document.querySelector<HTMLFormElement>('[data-obrazec="pridruzitev"]');
+  const podrocje = pridruzitev?.querySelector<HTMLSelectElement>('#pri-podrocje');
+  const zadeva = pridruzitev?.querySelector<HTMLInputElement>('input[name="subject"]');
+  const sporociloPolje = pridruzitev?.querySelector<HTMLTextAreaElement>('#pri-sporocilo');
+
+  function osveziPodrocje() {
+    if (!pridruzitev || !podrocje) return;
+    const delavnica = podrocje.value === 'delavnica';
+    if (zadeva) {
+      zadeva.value = delavnica
+        ? (pridruzitev.dataset.zadevaDelavnica ?? '')
+        : (pridruzitev.dataset.zadevaPridruzitev ?? '');
+    }
+    if (sporociloPolje) sporociloPolje.required = !delavnica;
+  }
+
+  if (podrocje) {
+    const zahtevana = new URLSearchParams(window.location.search).get('prijava');
+    if (zahtevana === 'delavnica') podrocje.value = 'delavnica';
+    osveziPodrocje();
+    podrocje.addEventListener('change', osveziPodrocje);
   }
 
   document.querySelectorAll<HTMLFormElement>('.obrazec').forEach((obrazec) => {
@@ -734,6 +838,16 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
      da ne tekmuje z zasedbo. */
   .znacka--zaprt {
     border-color: color-mix(in srgb, var(--bbg-kartica-besedilo) 30%, transparent);
+  }
+
+  /* Razpon dni je daljši od ene številke, zato manjši, da ne razlije bloka. */
+  .kartica__dan--razpon { font-size: 26px; letter-spacing: -0.01em; }
+  /* Opomba ob znački ni značka — brez obrobe, da ne tekmuje z njo. */
+  .znacka__opomba {
+    align-self: center;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--bbg-kartica-besedilo);
   }
 
   .kartica__opis { margin: 0 0 18px; }
@@ -994,6 +1108,10 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     font-family: var(--font-display);
   }
   :global(:root[data-skin='a']) .kartica__dan { font-size: 44px; }
+  /* Razpon je širši od ene številke; brez tega pravila bi ga prejšnja
+     vrstica pustila pri 44 px in razširila datumski blok. Enaka
+     specifičnost kot zgoraj, zato odloči vrstni red. */
+  :global(:root[data-skin='a']) .kartica__dan--razpon { font-size: 30px; }
   :global(:root[data-skin='a']) .kartica__mesec { margin-top: 4px; }
   /* Mockup ima letnico pri motnosti 0,6; zlata pri tem pade na 3,31 :1,
      zato jo umirimo s svetlo zlato pri polni motnosti. */

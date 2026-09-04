@@ -55,6 +55,8 @@ export const en = {
     zasedbaIzobrazevalni: 'Workshop',
     vstopProst: 'Free entry',
     vstopZaprt: 'Private event — by invitation',
+    prijavaObvezna: 'registration required',
+    prijavaGumb: 'Register',
     gostje: 'Guests',
     vstopnice: 'Tickets',
   },
@@ -98,6 +100,8 @@ export const en = {
     podrocjeInstrumentalist: 'Instrumentalist',
     podrocjeVokalist: 'Vocalist',
     podrocjeTehnika: 'Technical support',
+    podrocjeDelavnica: 'Workshop registration (Krajnčan, October)',
+    delavnicaZadeva: 'Workshop registration — website',
   },
 
   obrazec: {
