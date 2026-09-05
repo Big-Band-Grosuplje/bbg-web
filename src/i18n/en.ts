@@ -81,6 +81,7 @@ export const en = {
     nadnaslov: 'since 1997/98',
     naslov: 'History',
     vec: 'Full history →',
+    aktualno: 'current',
   },
 
   galerijaSekcija: {

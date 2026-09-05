@@ -93,7 +93,17 @@
         "doblekar-vibrafon-mentorstvo.jpg"
       ],
       "vlogaEn": "founder and first conductor",
-      "opisEn": "The orchestra is formed at the initiative of Franc Korbar, headmaster of the Grosuplje Music School, entirely with young musicians from the Grosuplje area. Within six years it grows from a school ensemble into an independent cultural association with regular television appearances."
+      "opisEn": "The orchestra is formed at the initiative of Franc Korbar, headmaster of the Grosuplje Music School, entirely with young musicians from the Grosuplje area. Within six years it grows from a school ensemble into an independent cultural association with regular television appearances.",
+      "dosezki": [
+        "2000 — Športniki Slovenije v Cankarjevem domu v neposrednem prenosu TVS2",
+        "2003 — osrednja državna proslava ob dnevu državnosti na Trgu republike",
+        "2003 — mednarodni poletni seminar z Rickom Stitzlom in gostovanje v Nemčiji"
+      ],
+      "dosezkiEn": [
+        "2000 — Slovenian Athletes at Cankarjev dom, broadcast live on TVS2",
+        "2003 — the central Statehood Day ceremony at Trg republike",
+        "2003 — an international summer workshop with Rick Stitzel and a guest appearance in Germany"
+      ]
     },
     {
       "id": "lunder",
@@ -137,7 +147,17 @@
         "koncert-gros-ozadje-lunder.jpg"
       ],
       "vlogaEn": "conductor, guitarist and arranger",
-      "opisEn": "At the end of 2003 the association appoints new leadership and Igor Lunder takes the baton. The period brings a series of themed projects, international guests, and a youth ensemble as the first development path for young musicians."
+      "opisEn": "At the end of 2003 the association appoints new leadership and Igor Lunder takes the baton. The period brings a series of themed projects, international guests, and a youth ensemble as the first development path for young musicians.",
+      "dosezki": [
+        "2004 — »Glasba Glenna Millerja in Counta Basiea« ob stoti obletnici rojstva obeh",
+        "2006 — ustanovitev mladinskega ansambla BiBa in festival big bandov v Bjelovarju",
+        "2011 — »Music Unites« z ameriško pevko Gwen Hughes ob podpori ameriškega veleposlaništva"
+      ],
+      "dosezkiEn": [
+        "2004 — „The Music of Glenn Miller and Count Basie“ marking the centenary of both",
+        "2006 — the youth ensemble BiBa is founded; the big band festival in Bjelovar",
+        "2011 — „Music Unites“ with American singer Gwen Hughes, supported by the U.S. Embassy"
+      ]
     },
     {
       "id": "kotar-prvo",
@@ -188,7 +208,17 @@
         "mejnik-nishville-2018-oder.jpg"
       ],
       "vlogaEn": "first period",
-      "opisEn": "In September 2012 Klemen Kotar becomes conductor and artistic director. A series of themed programmes follows — the ones the orchestra is still known for — along with its first festival appearance abroad."
+      "opisEn": "In September 2012 Klemen Kotar becomes conductor and artistic director. A series of themed programmes follows — the ones the orchestra is still known for — along with its first festival appearance abroad.",
+      "dosezki": [
+        "2016 — turneja po Avstriji: Bruck an der Mur, Wiener Neustadt, Gradec, Weiz, Knittelfeld in Celovec",
+        "2017 — dvajset let orkestra in »The Ella Fitzgerald Songbook« ob stoletnici rojstva",
+        "2018 — Nishville Jazz Festival v Nišu: Ellingtonova Far East Suite na glavnem odru"
+      ],
+      "dosezkiEn": [
+        "2016 — a tour of Austria: Bruck an der Mur, Wiener Neustadt, Graz, Weiz, Knittelfeld and Klagenfurt",
+        "2017 — twenty years of the orchestra and „The Ella Fitzgerald Songbook“ for the centenary of her birth",
+        "2018 — Nishville Jazz Festival in Niš: Ellington’s Far East Suite on the main stage"
+      ]
     },
     {
       "id": "javornik",
@@ -217,7 +247,17 @@
         "koncert-javornik-obdobje.jpg"
       ],
       "vlogaEn": "conductor and saxophonist",
-      "opisEn": "The period is marked by the repertoire of the great swing orchestras and by two covid years, when combo appearances take the place of full orchestral concerts."
+      "opisEn": "The period is marked by the repertoire of the great swing orchestras and by two covid years, when combo appearances take the place of full orchestral concerts.",
+      "dosezki": [
+        "2019 — Sinatra z Blažem Vrbičem na Ljubljanskem gradu in v Plečnikovem avditoriju",
+        "2019 — decembrski program Counta Basiea in Diane Schuur",
+        "2022 — program Charlesa Mingusa z Nino Strnad"
+      ],
+      "dosezkiEn": [
+        "2019 — Sinatra with Blaž Vrbič at Ljubljana Castle and the Plečnik Auditorium",
+        "2019 — a December programme of Count Basie and Diane Schuur",
+        "2022 — a Charles Mingus programme with Nina Strnad"
+      ]
     },
     {
       "id": "kotar-drugo",
@@ -249,7 +289,18 @@
       ],
       "fotografije": [],
       "vlogaEn": "second period",
-      "opisEn": "Kotar returns to the conductor’s stand in December 2022. The orchestra continues with themed programmes, international collaborations and workshops for musicians."
+      "opisEn": "Kotar returns to the conductor’s stand in December 2022. The orchestra continues with themed programmes, international collaborations and workshops for musicians.",
+      "dosezki": [
+        "2024 — »Flying Start« s Tadejem Tomšičem",
+        "2026 — »Poklon Gordonu Goodwinu« s solistom Tomažem Zevnikom",
+        "2026 — koncert s HGM Jazz orkestrom Zagreb in ameriškim trobentačem Johnom Thomasom"
+      ],
+      "dosezkiEn": [
+        "2024 — „Flying Start“ with Tadej Tomšič",
+        "2026 — „A Tribute to Gordon Goodwin“ with soloist Tomaž Zevnik",
+        "2026 — a concert with the HGM Jazz Orchestra Zagreb and American trumpeter John Thomas"
+      ],
+      "obdobjeEn": "2022–present"
     }
   ],
   "gostujociDirigenti": [
@@ -270,5 +321,22 @@
     "Klara Lavriša",
     "Tadej Tomšič",
     "Gašper Kržmanc"
-  ]
+  ],
+  "ustanovitev": {
+    "naslov": "Ustanovitev",
+    "naslovEn": "Founded",
+    "obdobje": "1997/98",
+    "podnaslov": "Glasbena šola Grosuplje · Braco J. Doblekar in Franc Korbar",
+    "podnaslovEn": "Grosuplje Music School · Braco J. Doblekar and Franc Korbar",
+    "dosezki": [
+      "18. februarja 1998 prvi samostojni koncert v dvorani Glasbene šole Grosuplje",
+      "26. junija 1998 proslava ob dnevu državnosti na Pogačarjevem trgu v Ljubljani",
+      "Oktobra 2001 preimenovanje v Big Band Grosuplje, registracija društva (9. novembra 2001) in včlanitev v ZKD Grosuplje"
+    ],
+    "dosezkiEn": [
+      "First solo concert in the Grosuplje Music School hall on 18 February 1998",
+      "Statehood Day ceremony at Pogačarjev trg in Ljubljana on 26 June 1998",
+      "Renamed Big Band Grosuplje in October 2001, registered as a cultural society on 9 November 2001 and joined ZKD Grosuplje"
+    ]
+  }
 }

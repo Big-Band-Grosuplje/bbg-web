@@ -83,6 +83,8 @@ export const sl = {
     nadnaslov: 'od 1997/98 do danes',
     naslov: 'Zgodovina',
     vec: 'Celotna zgodovina →',
+    /* Značka ob zadnji eri v časovnici. */
+    aktualno: 'aktualno',
   },
 
   galerijaSekcija: {

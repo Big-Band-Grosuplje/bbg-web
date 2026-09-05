@@ -18,6 +18,7 @@ type Vnos = { leto: string; besedilo: string; besediloEn?: string };
 type Obdobje = {
   id: string;
   obdobje: string;
+  obdobjeEn?: string;
   vodstvo: string;
   vloga: string;
   vlogaEn?: string;
@@ -44,6 +45,7 @@ const jubilej = v(zgodovinaData.jubilej, zgodovinaData.jubilejEn);
    Tiste brez potrjenega dovoljenja avtorja pomočnik izpusti sam. */
 const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
   ...o,
+  obdobjePrikaz: v(o.obdobje, o.obdobjeEn),
   vlogaPrikaz: v(o.vloga, o.vlogaEn),
   opisPrikaz: v(o.opis, o.opisEn),
   vnosiPrikaz: o.vnosi.map((x) => ({ leto: x.leto, besedilo: v(x.besedilo, x.besediloEn) })),
@@ -70,7 +72,7 @@ const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
     {obdobja.map((o) => (
       <section class="obdobje" aria-labelledby={`obdobje-${o.id}`}>
         <div class="ovoj">
-          <p class="obdobje__leta">{o.obdobje}</p>
+          <p class="obdobje__leta">{o.obdobjePrikaz}</p>
           <h2 id={`obdobje-${o.id}`} class="obdobje__naslov">{o.vodstvo}</h2>
           <p class="obdobje__vloga">{o.vlogaPrikaz}</p>
           <p class="obdobje__opis">{o.opisPrikaz}</p>
