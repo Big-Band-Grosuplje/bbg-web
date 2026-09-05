@@ -173,6 +173,15 @@
   --bbg-border-dark: var(--bbg-obroba);
 }
 
+/* Sidra ne smejo pristati pod lepljivo navigacijo.
+   Nav je position: sticky in na ozkem zaslonu visoka 69 px, zato je skok
+   na #kontakt ali #koncerti naslov ciljne sekcije skril pod njo. Eno
+   pravilo tu velja za vsa sidra na vseh straneh; scroll-margin-top po
+   posameznih elementih ni potreben in se zato ne more razleteti. */
+html {
+  scroll-padding-top: 88px;
+}
+
 /* Znak (bbg-znak.svg uporablja fill="currentColor") */
 .bbg-znak         { color: var(--bbg-besedilo); }
 .bbg-znak--gold   { color: var(--bbg-gold); }

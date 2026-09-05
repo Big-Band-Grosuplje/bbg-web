@@ -116,7 +116,7 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
         <p class="hero__slogan">{t.hero.slogan}</p>
         <p class="hero__gumbi">
           <a href="#koncerti" class="bbg-gumb">{t.hero.gumbKoncerti}</a>
-          <a href="#kontakt" class="bbg-gumb bbg-gumb--obris">{t.hero.gumbPridruzi}</a>
+          <a href="#pridruzi-se" class="bbg-gumb bbg-gumb--obris">{t.hero.gumbPridruzi}</a>
         </p>
       </div>
 
@@ -210,7 +210,7 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
                 {(k.prijava || (k.vstop.tip === 'vstopnice' && k.vstop.url) || seDeli(k.vstop.tip)) && (
                   <div class="kartica__cta">
                     {k.prijava && (
-                      <a class="bbg-gumb bbg-gumb--mali" href="?prijava=delavnica#kontakt"
+                      <a class="bbg-gumb bbg-gumb--mali" href="#delavnica"
                         >{t.koncerti.prijavaGumb}</a>
                     )}
                     {k.vstop.tip === 'vstopnice' && k.vstop.url && (
@@ -303,8 +303,19 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
       <p class="nadnaslov">{t.kontakt.nadnaslov}</p>
       <h2 id="kontakt-naslov">{t.kontakt.naslov}</h2>
 
+      {/* Vsak obrazec ima svoje sidro. Prej je bilo v celi sekciji eno
+          samo (#kontakt) in vsi gumbi so peljali nanj; na širokem zaslonu
+          sta panela drug ob drugem in tega ni bilo opaziti, na ozkem pa se
+          zložita v en stolpec in obiskovalec je pristal na prvem — torej
+          na obrazcu za organizatorje, medtem ko je bil Pridruži se ~740 px
+          nižje, povsem izven zaslona.
+
+          Sidra so navadna sidra, zato delujejo brez JS. #delavnica je na
+          naslovu panela in ne na njegovem ovoju, ker sta panela celici
+          mreže: dodaten prazen element bi zasedel svojo celico in razdrl
+          dvostolpčno postavitev. */}
       <div class="dvostolpca">
-        <div class="panel bbg-mikro-levo">
+        <div class="panel bbg-mikro-levo" id="organizatorji">
           <h3>{t.kontakt.organizatorNaslov}</h3>
           <p>{t.kontakt.organizatorOpis}</p>
 
@@ -340,8 +351,8 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
           </form>
         </div>
 
-        <div class="panel panel--akcent bbg-mikro-desno">
-          <h3>{t.kontakt.pridruzitevNaslov}</h3>
+        <div class="panel panel--akcent bbg-mikro-desno" id="pridruzi-se">
+          <h3 id="delavnica">{t.kontakt.pridruzitevNaslov}</h3>
           <p>{t.kontakt.pridruzitevOpis} {t.kontakt.pridruzitevDodatek}</p>
 
           <form
@@ -430,10 +441,13 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     polje.classList.toggle('obrazec__stanje--napaka', napaka);
   }
 
-  /* Prijava na delavnico: gumb na kartici pripelje z ?prijava=delavnica,
-     kar predizbere možnost v izbirniku. Ob tej izbiri se zamenja zadeva
-     sporočila in sporočilo ni več obvezno — ime in e-pošta ostaneta.
-     Predizbira se izvede tudi ob ročni menjavi izbirnika. */
+  /* Prijava na delavnico: gumb na kartici pelje na sidro #delavnica, ki
+     pripelje na pravi obrazec tudi brez JS. Skripta ob tem sidru še
+     predizbere možnost v izbirniku — tega hash sam ne zmore. Ob tej
+     izbiri se zamenja zadeva sporočila in sporočilo ni več obvezno; ime
+     in e-pošta ostaneta. Predizbira se izvede tudi ob ročni menjavi
+     izbirnika. Query ?prijava=delavnica ostane podprt, ker je lahko že
+     objavljen v starejših sporočilih. */
   const pridruzitev = document.querySelector<HTMLFormElement>('[data-obrazec="pridruzitev"]');
   const podrocje = pridruzitev?.querySelector<HTMLSelectElement>('#pri-podrocje');
   const zadeva = pridruzitev?.querySelector<HTMLInputElement>('input[name="subject"]');
@@ -457,10 +471,24 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
   }
 
   if (podrocje) {
-    const zahtevana = new URLSearchParams(window.location.search).get('prijava');
-    if (zahtevana === 'delavnica') podrocje.value = 'delavnica';
-    osveziPodrocje();
-    podrocje.addEventListener('change', osveziPodrocje);
+    const izbirnik = podrocje;
+
+    /* Sidro #delavnica ali query ?prijava=delavnica predizbereta možnost.
+       Poslušamo tudi hashchange: skok na sidro na isti strani strani ne
+       naloži znova, zato se predizbira brez tega ne bi zgodila, če je
+       obiskovalec že na naslovnici. */
+    function predizberi() {
+      const izQueryja = new URLSearchParams(window.location.search).get('prijava');
+      const izSidra = window.location.hash.slice(1);
+      if (izQueryja === 'delavnica' || izSidra === 'delavnica') {
+        izbirnik.value = 'delavnica';
+      }
+      osveziPodrocje();
+    }
+
+    predizberi();
+    window.addEventListener('hashchange', predizberi);
+    izbirnik.addEventListener('change', osveziPodrocje);
   }
 
   document.querySelectorAll<HTMLFormElement>('.obrazec').forEach((obrazec) => {

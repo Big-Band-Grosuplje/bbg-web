@@ -132,7 +132,7 @@ const imaAkcije =
       {imaAkcije && (
         <div class="dogodek__akcije">
           {k.prijava && !k.jeMimo && (
-            <a class="bbg-gumb" href={`${pot('naslovnica', jezik)}?prijava=delavnica#kontakt`}
+            <a class="bbg-gumb" href={`${pot('naslovnica', jezik)}#delavnica`}
               >{t.koncerti.prijavaGumb}</a>
           )}
           {k.vstop.tip === 'vstopnice' && k.vstop.url && !k.jeMimo && (
