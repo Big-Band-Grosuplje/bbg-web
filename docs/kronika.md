@@ -60,7 +60,8 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   Sinatri« ob 90. obletnici rojstva z Otom Pestnerjem in Adamom Klemmom (Kongo Hotel
   & Casino); delavnica z Elektrik Jazz Quartetom; Miklavžev dobrodelni koncert (TVS)
 - 2006 — koncerta z vibrafonistoma Boškom Petrovićem in Vidom Jamnikom (maj/junij,
-  z javnim snemanjem); festival big bandov Bjelovar (Hrvaška); poletni seminar
+  z javnim snemanjem); koncert s HGM Jazz orkestrom Zagreb in trobentačem Johnom
+  Thomasom (ZDA); festival big bandov Bjelovar (Hrvaška); poletni seminar
   vodi dr. Sigi Feigl (Avstrija); jesenski koncert z Nino Pušlar; ustanovitev
   Mladinskega ansambla BiBa (razvoj mladih)
 - 2007 — dobrodelna »Zlati ključ mesta Grosuplje« (Alenka Godec, Nina Pušlar,
@@ -118,10 +119,11 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   Lavriša, Žan Cesar); tradicionalni božično-novoletni koncert (Manca Fekonja,
   Blaž Vrbič)
 - 2026 — **Poklon Gordonu Goodwinu** (solist Tomaž Zevnik): maj JSKD festival
-  Grosuplje, 5. 6. Jazz klub Kazina Ljubljana, 10. 7. MarezziJazz; avgust:
-  koncert s HGM Jazz orkestrom Zagreb in trobentačem Johnom Thomasom (ZDA);
+  Grosuplje, 5. 6. Jazz klub Kazina Ljubljana, 10. 7. MarezziJazz;
   oktober: delavnica aranžiranja z Lojzetom Krajnčanom; »Grosuplje v jeseni«
   (Rok Ferengja, zbori); BBG x Slon in sadež
+  (Popravek 5. 9. 2026: koncert s HGM Jazz orkestrom Zagreb in Johnom Thomasom
+  je bil leta 2006, ne 2026 — prestavljen pod 2006.)
 
 ### 2027 — 30 let orkestra
 Jubilejni mednarodni projekt v pripravi (javno samo napovednik — glej pravila
