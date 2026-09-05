@@ -24,6 +24,7 @@ Ključno:
 - TRR se na javni strani NE objavlja
 - Imen članov orkestra NE objavljamo; izjema: dirigenti, umetniško vodstvo, gostujoči umetniki, zgodovinski konteksti
 - Izjema od pravila o imenih članov so avtorske navedbe pri gradivih (foto, video, avdio, montaža) — avtorje gradiv vedno navajamo.
+- **Akademskih nazivov pri imenih ne pišemo** — ne pri dirigentih, ne pri gostih, ne pri pedagogih. Ime stoji samo (Klemen Kotar, Sigi Feigl), tudi v podatkih, kroniki in `llms.txt`, ne le v izpisu na strani. Naziv v podatkovnem polju bi prišel na stran skozi vsak izris, ki ga polje uporabi.
 - Projekt "The Goodwin Legacy" (2027): do odobritve granta NE objavljaj imen gostujočih umetnikov in podrobnosti; nikoli finančnih podatkov. Na strani samo napovednik "jubilejni mednarodni projekt ob 30-letnici"
 
 ## Brand

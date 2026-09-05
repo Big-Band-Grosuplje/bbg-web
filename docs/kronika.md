@@ -62,7 +62,7 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
 - 2006 — koncerta z vibrafonistoma Boškom Petrovićem in Vidom Jamnikom (maj/junij,
   z javnim snemanjem); koncert s HGM Jazz orkestrom Zagreb in trobentačem Johnom
   Thomasom (ZDA); festival big bandov Bjelovar (Hrvaška); poletni seminar
-  vodi dr. Sigi Feigl (Avstrija); jesenski koncert z Nino Pušlar; ustanovitev
+  vodi Sigi Feigl (Avstrija); jesenski koncert z Nino Pušlar; ustanovitev
   Mladinskega ansambla BiBa (razvoj mladih)
 - 2007 — dobrodelna »Zlati ključ mesta Grosuplje« (Alenka Godec, Nina Pušlar,
   Nuša Derenda idr.); 5 let City Parka (Oto Pestner, Elda Viler, Anika Horvat,
@@ -76,7 +76,7 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
 - 2010 — sodelovanje ob 50. letnici Jazza na Bledu
 - 2011 — projekt »Music Unites« z ameriško pevko Gwen Hughes (podpora U.S. Embassy)
 - 2012 — koncerti s Prifarskimi muzikanti; jazzobraževanje (delavnice);
-  **september 2012: dirigent in umetniški vodja postane mag. Klemen Kotar**;
+  **september 2012: dirigent in umetniški vodja postane Klemen Kotar**;
   novoletni koncert z Nino Pušlar
 
 ### 2013–2018 (obdobje tematskih programov)
