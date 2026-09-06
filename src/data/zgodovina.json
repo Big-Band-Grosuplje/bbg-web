@@ -222,7 +222,7 @@
     },
     {
       "id": "javornik",
-      "obdobje": "2019–2022",
+      "obdobje": "2019–2023",
       "vodstvo": "Rudi Javornik",
       "vloga": "dirigent in saksofonist",
       "opis": "Obdobje zaznamujeta program velikih swing orkestrov in dve covidni leti, ko orkestrske koncerte nadomestijo nastopi comba.",
@@ -239,8 +239,13 @@
         },
         {
           "leto": "2022",
-          "besedilo": "Koncert z Urošem Peričem, Marezijazz s programom Jeffa Coffina in Sinatra v Velenju. Decembra program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem, ki se vrne kot dirigent.",
-          "besediloEn": "A concert with Uroš Perič, Marezijazz with a Jeff Coffin programme, and Sinatra in Velenje. In December, a Charles Mingus programme with Nina Strnad and Klemen Kotar, who returns as conductor."
+          "besedilo": "22. aprila koncert z Urošem Perićem in skupino The Pearlettes ob otvoritvi prenovljene dvorane Kulturnega doma Grosuplje, Marezijazz s programom Jeffa Coffina in Sinatra v Velenju. Decembra program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem.",
+          "besediloEn": "On 22 April, a concert with Uroš Perić and The Pearlettes reopening the renovated hall of the Grosuplje Cultural Centre; Marezijazz with a Jeff Coffin programme; and Sinatra in Velenje. In December, a Charles Mingus programme with Nina Strnad and Klemen Kotar."
+        },
+        {
+          "leto": "2023",
+          "besedilo": "Sinatra na Ljubljanskem gradu in na Krki ter prireditev ob 70-letnici VVZ Kekec v Športni dvorani Brinje v Grosupljem.",
+          "besediloEn": "Sinatra at Ljubljana Castle and at Krka, and the 70th anniversary celebration of the Kekec kindergarten at the Brinje Sports Hall in Grosuplje."
         }
       ],
       "fotografije": [
@@ -250,26 +255,26 @@
       "opisEn": "The period is marked by the repertoire of the great swing orchestras and by two covid years, when combo appearances take the place of full orchestral concerts.",
       "dosezki": [
         "2019 — Sinatra z Blažem Vrbičem na Ljubljanskem gradu in v Plečnikovem avditoriju",
-        "2019 — decembrski program Counta Basiea in Diane Schuur",
-        "2022 — program Charlesa Mingusa z Nino Strnad"
+        "2022 — koncert z Urošem Perićem in skupino The Pearlettes ob otvoritvi prenovljene dvorane Kulturnega doma Grosuplje",
+        "2023 — prireditev ob 70-letnici VVZ Kekec v Športni dvorani Brinje"
       ],
       "dosezkiEn": [
         "2019 — Sinatra with Blaž Vrbič at Ljubljana Castle and the Plečnik Auditorium",
-        "2019 — a December programme of Count Basie and Diane Schuur",
-        "2022 — a Charles Mingus programme with Nina Strnad"
+        "2022 — a concert with Uroš Perić and The Pearlettes reopening the renovated hall of the Grosuplje Cultural Centre",
+        "2023 — the 70th anniversary celebration of the Kekec kindergarten at the Brinje Sports Hall"
       ]
     },
     {
       "id": "kotar-drugo",
-      "obdobje": "2022–danes",
+      "obdobje": "2023–danes",
       "vodstvo": "Klemen Kotar",
       "vloga": "drugo obdobje",
-      "opis": "Kotar se decembra 2022 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.",
+      "opis": "Kotar se jeseni 2023 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.",
       "vnosi": [
         {
           "leto": "2023",
-          "besedilo": "Sinatra na Ljubljanskem gradu in na Krki, »Grosuplje v jeseni« z Nino Strnad, 70 let vrtca Brinje ter novoletni koncert z Juretom Puklom, Laro Grbić in Marušo Kos.",
-          "besediloEn": "Sinatra at Ljubljana Castle and at Krka, „Grosuplje in Autumn“ with Nina Strnad, 70 years of the Brinje kindergarten, and a New Year concert with Jure Pukl, Lara Grbić and Maruša Kos."
+          "besedilo": "Jeseni Klemen Kotar znova prevzame dirigentsko taktirko. »Grosuplje v jeseni« z Nino Strnad in novoletni koncert z Juretom Puklom, Laro Grbić in Marušo Kos.",
+          "besediloEn": "In the autumn Klemen Kotar takes the baton again. „Grosuplje in Autumn“ with Nina Strnad, and a New Year concert with Jure Pukl, Lara Grbić and Maruša Kos."
         },
         {
           "leto": "2024",
@@ -289,7 +294,7 @@
       ],
       "fotografije": [],
       "vlogaEn": "second period",
-      "opisEn": "Kotar returns to the conductor’s stand in December 2022. The orchestra continues with themed programmes, international collaborations and workshops for musicians.",
+      "opisEn": "Kotar returns to the conductor’s stand in the autumn of 2023. The orchestra continues with themed programmes, international collaborations and workshops for musicians.",
       "dosezki": [
         "2024 — »Flying Start« s Tadejem Tomšičem",
         "2025 — »Images« s Klaro Lavrišo in Žanom Cesarjem ter koncerta z Gašperjem Kržmancem",
@@ -300,7 +305,7 @@
         "2025 — „Images“ with Klara Lavriša and Žan Cesar, and concerts with Gašper Kržmanc",
         "2026 — „A Tribute to Gordon Goodwin“ with soloist Tomaž Zevnik"
       ],
-      "obdobjeEn": "2022–present"
+      "obdobjeEn": "2023–present"
     }
   ],
   "gostujociDirigenti": [

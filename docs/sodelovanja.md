@@ -17,7 +17,7 @@ Ivan Hudnik, Manca Urbanc Izmajlova, Frenk Nova, Irena Vidic, Kristina Oberžan,
 Iva Stanič, Sandra Zupanc (Sendi), Tina Kadunc - Tiana, Miha Alujevič,
 Klemen Slakonja, Boštjan Korošec, Tanja Ravljen, Eva Sršen, Dani Gregorc,
 Matija Cerar, Nina Rotner, Neža Drobnič Bogataj, Tjaša Fabjančič, Katja Šulc,
-Ana Čop, Ana Bezjak, Karin Zemljič, Nina Strnad, Lado Leskovar, Uroš Perič,
+Ana Čop, Ana Bezjak, Karin Zemljič, Nina Strnad, Lado Leskovar, Uroš Perić,
 Lara Grbić, Maruša Kos, Manca Fekonja, Peter Savizon (UK)
 
 ## Instrumentalni solisti

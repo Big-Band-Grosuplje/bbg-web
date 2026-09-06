@@ -13,8 +13,8 @@
 | 2004–~2008 | Igor Lunder (magister, kitarist, skladatelj, aranžer) |
 | ~2008–2012 | manj aktivno obdobje |
 | sept. 2012–2019 | Klemen Kotar (1. obdobje) |
-| 2019–2022 | Rudi Javornik |
-| 2022–danes | Klemen Kotar (2. obdobje) |
+| 2019–2023 | Rudi Javornik |
+| jesen 2023–danes | Klemen Kotar (2. obdobje) |
 
 Gostujoči dirigenti (izbor): Rick Stitzel, Sigi Feigl, Aleš Suša, Klara Lavriša,
 Tadej Tomšič, Gašper Kržmanc.
@@ -64,9 +64,8 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   njen udeleženec Vid Jamnik je pozneje diplomiral iz vibrafona na Berklee College
   of Music in je danes mednarodno uveljavljen vibrafonist; koncert s HGM Jazz
   orkestrom Zagreb in trobentačem Johnom Thomasom (ZDA); festival big bandov
-  Bjelovar (Hrvaška); poletni seminar
-  vodi Sigi Feigl (Avstrija); jesenski koncert z Nino Pušlar; ustanovitev
-  Mladinskega ansambla BiBa (razvoj mladih)
+  Bjelovar (Hrvaška); poletni seminar vodi Sigi Feigl (Avstrija); jesenski
+  koncert z Nino Pušlar; ustanovitev Mladinskega ansambla BiBa (razvoj mladih)
 - 2007 — dobrodelna »Zlati ključ mesta Grosuplje« (Alenka Godec, Nina Pušlar,
   Nuša Derenda idr.); 5 let City Parka (Oto Pestner, Elda Viler, Anika Horvat,
   Pepel in kri); jazzovski koncert in javno snemanje v Studiu 14 z Davorjem
@@ -106,19 +105,22 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   Ellingtona na glavnem odru Earth & Sky, pohvale kritikov Davorja Hrvoja in
   Saše Dracha
 
-### 2019–2022 (obdobje Rudija Javornika)
+### 2019–2023 (obdobje Rudija Javornika)
 - 2019 — Sinatra z Blažem Vrbičem (Grosuplje, Ljubljanski grad, Plečnikov avditorij,
   ČinČin); december: Count Basie / Diane Schuur program z gostom Zanchinnijem
 - 2020–2021 — covid obdobje; posamezni nastopi comba (otvoritve, protokolarni
   dogodki), Sinatra Portorož, poroka Zemono
-- 2022 — koncert z Urošem Peričem; samostojni koncert v atriju NUK v Ljubljani z
-  gostom Petrom Savizonom; Marezijazz (program Jeffa Coffina); Sinatra
-  Velenje; december: program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem —
-  **Kotar se vrne kot dirigent**
+- 2022 — 22. 4. koncert z Urošem Perićem in skupino The Pearlettes, otvoritev
+  prenovljene dvorane Kulturnega doma Grosuplje, dirigent Rudi Javornik;
+  samostojni koncert v atriju NUK v Ljubljani z gostom Petrom Savizonom;
+  Marezijazz (program Jeffa Coffina); Sinatra Velenje; december: program
+  Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem
+- 2023 — Sinatra na Ljubljanskem gradu in na Krki; 70 let VVZ Kekec, Športna
+  dvorana Brinje, dirigent Rudi Javornik
 
-### 2023–2026 (drugo obdobje Klemna Kotarja)
-- 2023 — Sinatra na Ljubljanskem gradu in na Krki; »Grosuplje v jeseni« z Nino
-  Strnad; 70 let vrtca Brinje; novoletni z Juretom Puklom, Laro Grbić in Marušo Kos
+### jesen 2023–2026 (drugo obdobje Klemna Kotarja)
+- jesen 2023 — **Klemen Kotar znova prevzame dirigentsko taktirko**; »Grosuplje v
+  jeseni« z Nino Strnad; novoletni z Juretom Puklom, Laro Grbić in Marušo Kos
 - 2024 — »Flying Start« s Tadejem Tomšičem (gostje Petra Vidmar, Erik Cebokli,
   Žiga Kozar); combo za ameriško veleposlaništvo (Grand Plaza)
 - 2025 — koncerta z Gašperjem Kržmancem; Sinatra Marezige; »Images« (Klara
