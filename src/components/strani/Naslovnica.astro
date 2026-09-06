@@ -53,6 +53,19 @@ const seDeli = (tip: string) => tip !== 'zaprt';
 
 const prihajajoci = prihajajociKoncerti().map((k) => pripravi(k, jezik, BESEDILA));
 
+/* Izpostavljeni dogodek pod herojem: prvi javni po datumu.
+   Zaprtega ne izpostavljamo — povabljeni povezavo dobijo neposredno, javno
+   vabilo pa bi vabilo ljudi tam, kamor ne morejo. Dogodka brez datumIso ne
+   moremo razvrstiti, zato tudi ta izpade.
+   Razvrstimo izrecno po datumu in se ne zanašamo na zaporedje v datoteki:
+   panel trdi "naslednji", torej mora biti res prvi. Filter vrne novo polje,
+   zato sortiranje ne premeša seznama v sekciji Koncerti — ta ostane v
+   zaporedju iz koncerti.json, z zaprtimi dogodki na njihovem mestu. */
+const izpostavljeni =
+  prihajajoci
+    .filter((k) => k.datumIso && k.vstop.tip !== 'zaprt')
+    .sort((a, b) => (a.datumIso as string).localeCompare(b.datumIso as string))[0] ?? null;
+
 /* Izseki na naslovnici — celotna vsebina je na podstranih. */
 const posnetkiIzsek = najnovejsi(3);
 const fotografijeIzsek = najnovejse(6);
@@ -145,37 +158,89 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
 >
   <Nav stran="naslovnica" jezik={jezik} />
 
-  {/* --hero-a nosi <main>, ker je pri smeri A fotografija ozadje celotnega
-      heroja. Pri skin=c je spremenljivka neuporabljena in se ne prenese. */}
-  <main class="hero" style={`--hero-a: url('${heroA.src}');`}>
-    <div class="ovoj hero__mreza">
-      <div class="hero__besedilo">
-        <p class="bbg-badge bbg-rot-badge hero__badge">{t.hero.badge}</p>
-        <img
-          src={znakZlat.src}
-          alt={t.hero.znakAlt}
-          class="hero__znak bbg-rot-znak"
-          width="420"
-        />
-        <p class="hero__slogan">{t.hero.slogan}</p>
-        <p class="hero__gumbi">
-          <a href="#koncerti" class="bbg-gumb">{t.hero.gumbKoncerti}</a>
-          <a href="#pridruzi-se" class="bbg-gumb bbg-gumb--obris">{t.hero.gumbPridruzi}</a>
-        </p>
-      </div>
+  {/* <main> zajema vse vsebinske sekcije naslovnice, hero pa je njen
+      <header>: prej je bil <main> sam hero, sekcije pa so stale zunaj
+      njega, torej zunaj glavne vsebine strani.
+      --hero-a ostane na .hero, ker je pri smeri A fotografija ozadje
+      prav tega elementa. Pri skin=c je spremenljivka neuporabljena in se
+      ne prenese. */}
+  <main>
+    <header class="hero" style={`--hero-a: url('${heroA.src}');`}>
+      <div class="ovoj hero__mreza">
+        <div class="hero__besedilo">
+          <p class="bbg-badge bbg-rot-badge hero__badge">{t.hero.badge}</p>
+          {/* Ime skupine je H1 strani. Vidni nosilec imena je logotip, ta
+              pa je slika — brez tega naslova naslovnica H1 ne bi imela.
+              Znak ima zato alt="": ime pove naslov in bralnik bi ga sicer
+              slišal dvakrat zapored. */}
+          <h1 class="naslov-za-bralnike">{t.hero.znakAlt}</h1>
+          <img
+            src={znakZlat.src}
+            alt=""
+            class="hero__znak bbg-rot-znak"
+            width="420"
+          />
+          <p class="hero__slogan">{t.hero.slogan}</p>
+          <p class="hero__gumbi">
+            <a href="#organizatorji" class="bbg-gumb">{t.hero.gumbNastop}</a>
+            <a href="#pridruzi-se" class="bbg-gumb bbg-gumb--obris">{t.hero.gumbPridruzi}</a>
+          </p>
+        </div>
 
-      <div class="hero__foto">
-        <Image
-          src={fotoHero}
-          alt={t.hero.fotoAlt}
-          width={900}
-          loading="eager"
-          class="bbg-rot-foto"
-        />
-        <span class="hero__nalepka bbg-rot-nalepka">{t.hero.nalepka}</span>
+        <div class="hero__foto">
+          <Image
+            src={fotoHero}
+            alt={t.hero.fotoAlt}
+            width={900}
+            loading="eager"
+            class="bbg-rot-foto"
+          />
+          <span class="hero__nalepka bbg-rot-nalepka">{t.hero.nalepka}</span>
+        </div>
       </div>
-    </div>
-  </main>
+    </header>
+
+    {/* Izpostavljeni dogodek stoji med herojem in seznamom: najpogostejše
+        vprašanje je "kdaj je naslednji koncert", seznam pa se lahko začne
+        z zaprtim dogodkom, na katerega obiskovalec ne more.
+        <aside> in ne <section>: gre za povzetek vsebine, ki v celoti stoji
+        nižje na strani in na podstrani dogodka. */}
+    {izpostavljeni && (
+      <aside class="izpostavljeni" aria-labelledby="izpostavljeni-naslov">
+        <div class="ovoj">
+          <div class="izpostavljeni__panel">
+            <div class="izpostavljeni__telo">
+              <p class="izpostavljeni__nadnaslov">{t.izpostavljeni.nadnaslov}</p>
+              <h2 id="izpostavljeni-naslov" class="izpostavljeni__naziv">
+                {izpostavljeni.nazivPrikaz}
+              </h2>
+              <p class="izpostavljeni__meta">
+                {izpostavljeni.datumPrikaz}
+                {izpostavljeni.lokacija
+                  ? ` · ${izpostavljeni.lokacijaPrikaz}`
+                  : ` · ${t.koncerti.brezPrizorisca}`}
+              </p>
+              {/* Znački sta ista niza kot na kartici; vrstica se izpiše
+                  samo, kadar je v njej kaj. */}
+              {(izpostavljeni.vstop.tip === 'prost' || izpostavljeni.prijava) && (
+                <p class="izpostavljeni__znacke">
+                  {izpostavljeni.vstop.tip === 'prost' && (
+                    <span class="znacka">{t.koncerti.vstopProst}</span>
+                  )}
+                  {izpostavljeni.prijava && (
+                    <span class="znacka__opomba">{t.koncerti.prijavaObvezna}</span>
+                  )}
+                </p>
+              )}
+            </div>
+            <p class="izpostavljeni__cta">
+              <a class="bbg-gumb" href={potDogodka(izpostavljeni.slugPrikaz)}
+                >{t.izpostavljeni.gumb}</a>
+            </p>
+          </div>
+        </div>
+      </aside>
+    )}
 
   <section class="sekcija" id="koncerti" aria-labelledby="koncerti-naslov">
     <div class="ovoj">
@@ -468,6 +533,7 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
       </div>
     </div>
   </section>
+  </main>
 
   <Noga jezik={jezik} />
   <VideoModal jezik={jezik} />
@@ -607,6 +673,19 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     gap: 44px;
     align-items: center;
   }
+  /* H1 nosi ime skupine za bralnike in iskalnike; vidno ga pove logotip.
+     Enaka tehnika kot .vizualno-skrito v brand.css, a v komponenti, ker
+     mora ta naslov ostati zunaj toka (v .hero__besedilo teče mreža in
+     display: none bi ga vzel tudi iz dostopnostnega drevesa). */
+  .naslov-za-bralnike {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
   .hero__badge { margin: 0 0 20px; }
   .hero__znak {
     width: min(420px, 86%);
@@ -649,6 +728,67 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     border-radius: var(--bbg-r-s);
   }
 
+  /* --- Izpostavljeni dogodek ---
+     Panel stoji v svojem odseku takoj pod herojem. Odmik ni del panela,
+     ampak odseka, da .ovoj ohrani samo vlogo vsebnika širine. */
+  .izpostavljeni { padding: 34px 0 0; }
+  .izpostavljeni__panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 28px;
+    padding: 24px 28px;
+    border: 2px solid var(--bbg-gold);
+    border-radius: 18px;
+    background: var(--bbg-panel-bg);
+  }
+  .izpostavljeni__telo { min-width: 0; }
+  .izpostavljeni__nadnaslov {
+    margin: 0 0 6px;
+    font-family: var(--bbg-font-naslov);
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bbg-nadnaslov);
+  }
+  .izpostavljeni__naziv {
+    margin: 0 0 6px;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.2;
+    color: var(--bbg-naslov);
+  }
+  .izpostavljeni__meta {
+    margin: 0;
+    font-size: 15px;
+    /* Brez opacity: motnost bi stisnila cel poddrevesni izris. */
+    color: color-mix(in srgb, var(--bbg-besedilo) 85%, var(--bbg-bg));
+  }
+  .izpostavljeni__znacke {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0 0;
+  }
+  /* Značka na panelu prevzame barvo besedila strani in ne kartice.
+     --bbg-kartica-besedilo je vezana na --bbg-kartica-bg, ta pa je v
+     smeri C obrnjena glede na stran: na panelu je bila zato "Prost vstop"
+     skoraj nevidna (izmerjeno 1,05 : 1 v c-dark, 1,08 : 1 v c-light).
+     Kartica ostane nedotaknjena — tam je token pravi. */
+  .izpostavljeni .znacka,
+  .izpostavljeni .znacka__opomba {
+    color: var(--bbg-besedilo);
+  }
+  .izpostavljeni__cta { margin: 0; flex: 0 0 auto; }
+  /* Pod 720 px panel v stolpec: gumb v isti vrstici bi ob dolgem nazivu
+     stisnil besedilo v ozek stolpec. */
+  @media (max-width: 720px) {
+    .izpostavljeni__panel {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
   /* --- Koncerti --- */
   .prazno { margin: 0; }
   .kartice {

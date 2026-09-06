@@ -35,15 +35,20 @@ export const sl = {
     badge: 'Pozor, hud big band!',
     znakAlt: 'Big Band Grosuplje',
     slogan: 'Od leta 1997/98 igramo bolje. Ali pa hitreje. Nekaj od tega vsekakor. 🙂',
-    gumbKoncerti: 'Kdaj igramo?',
+    /* Ključ se je prej imenoval gumbKoncerti in je peljal na #koncerti.
+       Zdaj cilja na #organizatorji, zato tudi novo ime — staro bi trdilo
+       napačen cilj. */
+    gumbNastop: 'Povabi nas na nastop',
     gumbPridruzi: 'Pridruži se',
     fotoAlt: 'Dirigent med vodenjem orkestra',
     nalepka: 'dirigent, presenetljivo miren',
   },
 
   /* Stran 404. Ton je hišni — lahek, a pove, kaj se je zgodilo.
-     Gumb h koncertom si napis deli s heroom (hero.gumbKoncerti), zato ga
-     tu ni: isti niz na dveh mestih bi se razšel. */
+     Gumb h koncertom je napis prej delil s heroom (hero.gumbKoncerti).
+     Delitev je odpadla, ko je hero gumb dobil drug cilj (#organizatorji)
+     in drug napis: od tedaj sta to dve neodvisni oznaki dveh različnih
+     dejanj, ne dva izvoda istega niza. */
   napaka404: {
     nadnaslov: 'napaka 404',
     naslov: 'Te strani ni',
@@ -51,6 +56,15 @@ export const sl = {
       'Povezava je morda napačna ali pa je stran zamenjala naslov. ' +
       'Zgodi se — tudi mi kdaj zgrešimo vstop.',
     gumbNaslovnica: 'Na naslovnico',
+    gumbKoncerti: 'Kdaj igramo?',
+  },
+
+  /* Panel pod herojem. Nizov o vstopu in prijavi tu ni — panel uporablja
+     ista niza kot kartica (koncerti.vstopProst, koncerti.prijavaObvezna),
+     ker gre za isto oznako istega dejstva. */
+  izpostavljeni: {
+    nadnaslov: 'Naslednji javni dogodek',
+    gumb: 'Podrobnosti dogodka →',
   },
 
   koncerti: {
