@@ -53,7 +53,13 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
         class:list={[pokoncna && 'slika--pokoncna']}
       />
     </button>
-    <figcaption>{podnapis}<span class="slika__avtor">{avtor}</span></figcaption>
+    {/* Presledek med napisom in avtorjem je nujen v besedilnem toku, ne le
+        vizualno: brez njega textContent zlepi zadnjo besedo napisa z
+        oznako ("orkesterFoto: …") in zaslonski bralnik prebere zlepek.
+        Vizualno ne moti — span je blok, zato se presledek pred njim ne
+        izriše. Vse v eni vrstici izvorne kode, ker figcaption teče v
+        white-space: pre-line in bi vsak prelom v kodi postal viden. */}
+    <figcaption>{podnapis}{' '}<span class="slika__avtor">{avtor}</span></figcaption>
   </figure>
 </li>
 

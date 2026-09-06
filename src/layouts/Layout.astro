@@ -256,8 +256,16 @@ const musicGroup = {
 
     {/* Vidna samo pri skin=c (CSS v brand.css) — edina pot nazaj na privzeto
         smer A brez tipkanja URL-ja. Vedno v oznakah, ker se skin lahko
-        spremeni šele v brskalniku. */}
-    <button type="button" class="predogled" id="predogled-skin">
+        spremeni šele v brskalniku.
+
+        hidden in aria-hidden sta tu, ker sam display: none iz CSS besedila
+        ne odstrani iz izvorne kode: orodja, ki iz strani luščijo besedilo,
+        so „predogled: smer C · nazaj" pobrala tudi pri privzeti smeri A.
+        Oba atributa odstrani skripta spodaj, in samo kadar je smer res C —
+        drugače bi bil viden gumb označen kot skrit. Skin C je dosegljiv
+        samo prek ?skin=c, ki ga nastavi JS, zato je JS takrat zagotovo na
+        voljo in gumb ne more ostati skrit po nesreči. */}
+    <button type="button" class="predogled" id="predogled-skin" hidden aria-hidden="true">
       {t.skupno.predogledC} <span class="predogled__nazaj">{t.skupno.predogledNazaj}</span>
     </button>
 
@@ -307,10 +315,19 @@ const musicGroup = {
 </style>
 
 <script>
+  /* Gumb je v oznakah skrit s hidden in aria-hidden, da ga orodja za
+     luščenje besedila in zaslonski bralniki pri privzeti smeri A ne
+     vidijo. Odkrijemo ga samo, kadar je smer res C. */
+  const predogled = document.querySelector<HTMLButtonElement>('#predogled-skin');
+  if (predogled && document.documentElement.dataset.skin === 'c') {
+    predogled.hidden = false;
+    predogled.removeAttribute('aria-hidden');
+  }
+
   /* Vrnitev iz predoglega smeri C na privzeto smer A. Strani ni treba
      naložiti znova — vse je vezano na data-skin, zato zadošča zamenjava
      atributa. */
-  document.querySelector<HTMLButtonElement>('#predogled-skin')?.addEventListener('click', () => {
+  predogled?.addEventListener('click', () => {
     const html = document.documentElement;
     try {
       localStorage.setItem('bbg-skin', 'a');
@@ -318,6 +335,9 @@ const musicGroup = {
       /* zasebni način — vrnitev velja do osvežitve strani */
     }
     html.dataset.skin = 'a';
+    /* Ob vrnitvi na A gumb spet skrijemo tudi v oznakah, ne le s CSS. */
+    predogled.hidden = true;
+    predogled.setAttribute('aria-hidden', 'true');
 
     /* Brez tega bi osvežitev strani predogled takoj vrnila. */
     const naslov = new URL(window.location.href);

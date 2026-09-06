@@ -107,7 +107,7 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
 
 ### 2019–2023 (obdobje Rudija Javornika)
 - 2019 — Sinatra z Blažem Vrbičem (Grosuplje, Ljubljanski grad, Plečnikov avditorij,
-  ČinČin); december: Count Basie / Diane Schuur program z gostom Zanchinnijem
+  ČinČin); december: Count Basie / Diane Schuur program z gostom Simonejem Zanchinijem
 - 2020–2021 — covid obdobje; posamezni nastopi comba (otvoritve, protokolarni
   dogodki), Sinatra Portorož, poroka Zemono
 - 2022 — 22. 4. koncert z Urošem Perićem in skupino The Pearlettes, otvoritev
@@ -123,13 +123,13 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
 ### jesen 2023–2026 (drugo obdobje Klemna Kotarja)
 - jesen 2023 — **Klemen Kotar znova prevzame dirigentsko taktirko**; »Grosuplje v
   jeseni« z Nino Strnad; novoletni z Juretom Puklom, Laro Grbić in Marušo Kos
-- 2024 — »Flying Start« s Tadejem Tomšičem (gostje Petra Vidmar, Erik Cebokli,
-  Žiga Kozar); combo za ameriško veleposlaništvo (Grand Plaza)
+- 2024 — »Flying Start« s Tadejem Tomšičem (gostje Petra Vidmar, Erik Čebokli,
+  Žiga Kožar); combo za ameriško veleposlaništvo (Grand Plaza)
 - 2025 — koncerta z Gašperjem Kržmancem; Sinatra Marezige; »Images« (Klara
   Lavriša, Žan Cesar); tradicionalni božično-novoletni koncert (Manca Fekonja,
   Blaž Vrbič)
-- 2026 — **Poklon Gordonu Goodwinu** (solist Tomaž Zevnik): maj JSKD festival
-  Grosuplje, 5. 6. Jazz klub Kazina Ljubljana, 10. 7. MarezziJazz;
+- 2026 — **Poklon Gordonu Goodwinu** (solist Tomaž Zevnik): maj festival Mozaik kulture
+  (soorganizator JSKD), Kulturni dom Grosuplje, 5. 6. Jazz klub Kazina Ljubljana, 10. 7. Marezijazz;
   oktober: delavnica aranžiranja z Lojzetom Krajnčanom; »Grosuplje v jeseni«
   (Rok Ferengja, zbori); BBG x Slon in sadež
   (Popravek 5. 9. 2026: koncert s HGM Jazz orkestrom Zagreb in Johnom Thomasom
