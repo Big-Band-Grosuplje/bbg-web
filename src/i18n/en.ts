@@ -11,6 +11,13 @@
 
 import type { Slovar } from './sl';
 
+/* Privzeti avtor fotografij. Ena vrednost za dve mesti — padec nazaj pri
+   posamezni fotografiji in stavek o kreditih pod galerijo — po istem
+   vzorcu kot AVTOR_PRIVZETI v sl.ts. Prej sta bila zapisa dva in sta se
+   razšla: pod fotografijo je pisalo „arhiv KD Big Band Grosuplje",
+   v stavku o kreditih pa „KD Big Band Grosuplje archive". */
+const AVTOR_PRIVZETI = 'KD Big Band Grosuplje archive';
+
 export const en = {
   koda: 'en',
   htmlLang: 'en',
@@ -206,10 +213,9 @@ export const en = {
     uvodPred: 'photographs from the association’s archive, newest first. Click a photograph to enlarge it; use the arrows or the ← and → keys to move between them.',
     letoNiPotrjeno: 'Year not confirmed',
     foto: 'Photo',
-    /* Ime arhiva je lastno ime društva in se ne prevaja; oznaka pred njim se. */
-    avtorPrivzeto: 'arhiv KD Big Band Grosuplje',
+    avtorPrivzeto: AVTOR_PRIVZETI,
     kredit:
-      'Photo: KD Big Band Grosuplje archive. Photographs by outside authors are published only once permission is confirmed, and always with the author credited.',
+      `Photo: ${AVTOR_PRIVZETI}. Photographs by outside authors are published only once permission is confirmed, and always with the author credited.`,
   },
 
   multimedijaStran: {

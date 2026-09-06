@@ -25,6 +25,7 @@ Ključno:
 - Imen članov orkestra NE objavljamo; izjema: dirigenti, umetniško vodstvo, gostujoči umetniki, zgodovinski konteksti
 - Izjema od pravila o imenih članov so avtorske navedbe pri gradivih (foto, video, avdio, montaža) — avtorje gradiv vedno navajamo.
 - Kredit avtorja fotografije (polje `avtor`) je izjema od pravila o imenih članov — avtorja navedemo vedno, tudi če je član orkestra; brez pripisa o članstvu.
+- Privzeti kredit (arhiv društva) je **opisen in se prevaja**; kredit z izrecnim avtorjem ali virom (npr. „arhiv VVZ Kekec Grosuplje") je **ime vira in se ne prevaja**. Prvi je zato v slovarju (`AVTOR_PRIVZETI` v `sl.ts` in `en.ts`), drugi v podatkih (polje `avtor` v `galerija.json`, brez angleške različice).
 - **Akademskih nazivov pri imenih ne pišemo** — ne pri dirigentih, ne pri gostih, ne pri pedagogih. Ime stoji samo (Klemen Kotar, Sigi Feigl), tudi v podatkih, kroniki in `llms.txt`, ne le v izpisu na strani. Naziv v podatkovnem polju bi prišel na stran skozi vsak izris, ki ga polje uporabi.
 - Projekt "The Goodwin Legacy" (2027): do odobritve granta NE objavljaj imen gostujočih umetnikov in podrobnosti; nikoli finančnih podatkov. Na strani samo napovednik "jubilejni mednarodni projekt ob 30-letnici"
 - `docs/design/*.html` so **zamrznjeni mockupi in niso predmet vsebinskih čistk**. Vsaka datoteka to pove v komentarju na prvi vrstici. Ko se vsebinsko pravilo spremeni (imena, nazivi, opuščene zasedbe), mockupov NE popravljaj — so posnetek stanja ob potrditvi smeri in bi s popravki izgubili pomen. Vir resnice je živa stran
