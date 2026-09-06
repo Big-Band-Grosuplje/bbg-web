@@ -1,0 +1,63 @@
+# Dnevni redeploy: prihajajoči dogodki se filtrirajo OB GRADNJI, ne v
+# brskalniku. Statična stran zato po objavi obtiči v času gradnje in bi
+# minuli koncert kazala kot prihajajoč, dokler nekdo ne bi objavil znova.
+# Ta potek enkrat na dan pokliče Vercel Deploy Hook in gradnjo osveži.
+#
+# Deploy Hook se ustvari v Vercel → Settings → Git → Deploy Hooks, URL pa
+# se vpiše v GitHub → Settings → Secrets and variables → Actions kot
+# VERCEL_DEPLOY_HOOK. URL sam je poverilnica — kdorkoli ga ima, lahko
+# sproži objavo, zato ne sme v repozitorij (ta je javen).
+name: Dnevni redeploy
+
+on:
+  schedule:
+    # 02.00 UTC vsak dan. Po ljubljanskem času 03.00 poleti in 04.00 v
+    # zimskem času; ura je namenoma zunaj časa koncertov, da se objava ne
+    # prekriva z obiskom.
+    - cron: '0 2 * * *'
+  # Ročni zagon za preverbo, da hook deluje.
+  workflow_dispatch:
+
+# Potek ne bere in ne spreminja vsebine repozitorija — samo pokliče hook.
+permissions:
+  contents: read
+
+concurrency:
+  group: dnevni-redeploy
+  cancel-in-progress: false
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Preveri, ali je hook nastavljen
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::Skrivnost VERCEL_DEPLOY_HOOK ni nastavljena."
+            echo "Ustvari Deploy Hook v Vercel → Settings → Git → Deploy Hooks"
+            echo "in URL vpiši v GitHub → Settings → Secrets and variables → Actions"
+            echo "kot VERCEL_DEPLOY_HOOK."
+            exit 1
+          fi
+
+      - name: Pokliči Vercel Deploy Hook
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          # --fail-with-body: napako naj vidimo skupaj z odgovorom Vercela.
+          # URL gre prek spremenljivke okolja, da se ne izpiše v dnevnik.
+          koda=$(curl --silent --show-error --fail-with-body \
+            --request POST \
+            --write-out '%{http_code}' \
+            --output /tmp/odgovor.json \
+            --max-time 30 \
+            "$HOOK") || {
+              echo "::error::Klic hooka ni uspel (HTTP $koda)."
+              cat /tmp/odgovor.json || true
+              exit 1
+            }
+          echo "Hook sprejet, HTTP $koda."
+          # Odgovor vsebuje id objave, ne poverilnic — izpis je varen.
+          cat /tmp/odgovor.json

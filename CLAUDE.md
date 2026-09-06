@@ -102,5 +102,12 @@ Oba tečeta **zunaj builda**, ker zahtevata mrežo ali velike izvirnike, ki v gi
   - Cilj mora biti pod `src/assets/foto/`, ker galerija bere slike prek `import.meta.glob('../assets/foto/**/*.jpg')` v `src/lib/galerija.ts`; slika zunaj tega drevesa je za build nevidna in `slikaZa` vrže napako
 - **Avtor fotografije** je polje `avtor` v `galerija.json` (angleške različice ni — imena so v obeh jezikih enaka). Kjer polja ni, izris pokaže privzetega avtorja iz slovarja (`galerijaStran.avtorPrivzeto`); ta vrednost je zapisana **enkrat** in jo uporablja tudi stavek o kreditih pod galerijo. Avtor se izpiše v napisu pod fotografijo in v lightboxu v obliki „Foto: …", v `aria-label` gumba pa ne — tam gre za ime dejanja, ne vsebine
 
+### Dnevni redeploy
+`.github/workflows/dnevni-redeploy.yml`, urnik `0 2 * * *` (UTC), plus ročni `workflow_dispatch`.
+
+**Zakaj obstaja:** prihajajoči dogodki se filtrirajo **ob gradnji** (`prihajajociKoncerti()` v `src/lib/koncerti.ts` primerja datum s časom gradnje), ne v brskalniku. Statična stran zato po objavi obtiči v času gradnje in bi minuli koncert kazala kot prihajajoč — pa tudi izpostavljeni panel na naslovnici bi vabil na dogodek, ki je mimo — dokler nekdo ne bi objavil znova. Potek to opravi enkrat na dan.
+
+**Kje je hook:** URL nastane v Vercel → Settings → Git → Deploy Hooks in se vpiše v GitHub → Settings → Secrets and variables → Actions kot `VERCEL_DEPLOY_HOOK`. **URL je poverilnica** — kdorkoli ga ima, lahko sproži objavo, zato ne sme v repozitorij (ta je javen) in ne v dnevnik poteka. Ob manjkajoči skrivnosti potek pade z jasnim sporočilom in navodilom, ne pa tiho brez učinka.
+
 ## Commit sporočila
 Conventional commits, v slovenščini: `feat: ...`, `fix: ...`, `docs: ...`
