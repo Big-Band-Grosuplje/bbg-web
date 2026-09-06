@@ -12,6 +12,11 @@ export type Fotografija = {
      bolje podnapis kot prazen alt. */
   alt?: string;
   altEn?: string;
+  /* Avtor fotografije. Imena avtorjev so v obeh jezikih enaka, zato
+     angleške različice ni. Kjer polja ni, izris pokaže arhiv društva —
+     privzeta vrednost je v slovarju (galerijaStran.avtorPrivzeto), da
+     ni zapisana v vsakem vnosu. */
+  avtor?: string;
   leto: number | null;
   mesec: string | null;
   priblizno?: boolean;
@@ -72,6 +77,12 @@ export function poLetih(oznakaBrezLetnice: string): { naslov: string; fotografij
    bolje podnapis v napačnem jeziku kot prazen alt. */
 export function podnapisZa(foto: Fotografija, jezik: 'sl' | 'en'): string {
   return jezik === 'en' ? (foto.podnapisEn ?? foto.podnapis) : foto.podnapis;
+}
+
+/* Avtor fotografije; brez vpisanega polja obvelja privzeta vrednost, ki
+   jo poda klicatelj iz slovarja. */
+export function avtorZa(foto: Fotografija, privzeti: string): string {
+  return foto.avtor ?? privzeti;
 }
 
 /* Nadomestno besedilo v izbranem jeziku, z zaporednim padcem nazaj:

@@ -1,6 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
-import { altZa, podnapisZa, slikaZa, type Fotografija } from '../lib/galerija';
+import { altZa, avtorZa, podnapisZa, slikaZa, type Fotografija } from '../lib/galerija';
 import { slovar, type Jezik } from '../i18n';
 
 interface Props {
@@ -20,6 +20,11 @@ const nadomestno = altZa(foto, jezik);
    data-opis dobita napis v eni vrsti. */
 const podnapisVrstica = podnapis.split('\n').join(' ');
 
+/* Avtor: vpisano polje ali arhiv društva. Napis ga pokaže v svoji vrstici,
+   lightbox pa pripetega k opisu; v aria-label gumba ne gre, ker ta
+   poimenuje dejanje in ne vsebine. */
+const avtor = `${t.galerijaStran.foto}: ${avtorZa(foto, t.galerijaStran.avtorPrivzeto)}`;
+
 const vir = slikaZa(foto.datoteka);
 /* Pokončna fotografija bi v mreži postala dvakrat višja od sosed, zato jo
    kartica obreže na isto razmerje kot večina (3 : 2). Orientacijo beremo iz
@@ -37,7 +42,7 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
       type="button"
       class="slika__gumb"
       data-slika={velika.src}
-      data-opis={podnapisVrstica}
+      data-opis={`${podnapisVrstica} · ${avtor}`}
       aria-label={`${t.lightbox.povecaj}: ${podnapisVrstica}`}
     >
       <Image
@@ -48,7 +53,7 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
         class:list={[pokoncna && 'slika--pokoncna']}
       />
     </button>
-    <figcaption>{podnapis}</figcaption>
+    <figcaption>{podnapis}<span class="slika__avtor">{avtor}</span></figcaption>
   </figure>
 </li>
 
@@ -85,6 +90,15 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
     aspect-ratio: 3 / 2;
     object-fit: cover;
     object-position: 50% 25%;
+  }
+  /* Avtor v svoji vrstici pod napisom. display: block in ne prelom v
+     oznakah, ker figcaption teče v white-space: pre-line in bi vsak
+     prelom v izvorni kodi postal viden. */
+  .slika__avtor {
+    display: block;
+    margin-top: 3px;
+    font-size: 12px;
+    color: color-mix(in srgb, var(--bbg-besedilo) 62%, var(--bbg-bg));
   }
   .slika figcaption {
     font-size: 13.5px;

@@ -7,6 +7,10 @@
    TypeScript to preverja prek `satisfies Slovar` v en.ts.
    ============================================================ */
 
+/* Privzeti avtor fotografij. Ena vrednost za dve mesti: padec nazaj pri
+   posamezni fotografiji in stavek o kreditih pod galerijo. */
+const AVTOR_PRIVZETI = 'arhiv KD Big Band Grosuplje';
+
 export const sl = {
   koda: 'sl',
   htmlLang: 'sl',
@@ -203,8 +207,11 @@ export const sl = {
     naslov: 'Galerija',
     uvodPred: 'fotografij iz arhiva društva, od najnovejših do najstarejših. Klikni fotografijo za povečavo; med njimi listaš s puščicama ali s tipkama ← in →.',
     letoNiPotrjeno: 'Leto ni potrjeno',
+    /* Oznaka pred avtorjem pri posamezni fotografiji. */
+    foto: 'Foto',
+    avtorPrivzeto: AVTOR_PRIVZETI,
     kredit:
-      'Foto: arhiv KD Big Band Grosuplje. Fotografije zunanjih avtorjev so objavljene šele po potrjenem dovoljenju in vedno s podpisom avtorja.',
+      `Foto: ${AVTOR_PRIVZETI}. Fotografije zunanjih avtorjev so objavljene šele po potrjenem dovoljenju in vedno s podpisom avtorja.`,
   },
 
   multimedijaStran: {

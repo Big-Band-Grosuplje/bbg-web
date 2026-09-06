@@ -199,6 +199,9 @@ export const en = {
     naslov: 'Gallery',
     uvodPred: 'photographs from the association’s archive, newest first. Click a photograph to enlarge it; use the arrows or the ← and → keys to move between them.',
     letoNiPotrjeno: 'Year not confirmed',
+    foto: 'Photo',
+    /* Ime arhiva je lastno ime društva in se ne prevaja; oznaka pred njim se. */
+    avtorPrivzeto: 'arhiv KD Big Band Grosuplje',
     kredit:
       'Photo: KD Big Band Grosuplje archive. Photographs by outside authors are published only once permission is confirmed, and always with the author credited.',
   },
