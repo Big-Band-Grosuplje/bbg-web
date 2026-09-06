@@ -26,6 +26,8 @@ Ključno:
 - Izjema od pravila o imenih članov so avtorske navedbe pri gradivih (foto, video, avdio, montaža) — avtorje gradiv vedno navajamo.
 - **Akademskih nazivov pri imenih ne pišemo** — ne pri dirigentih, ne pri gostih, ne pri pedagogih. Ime stoji samo (Klemen Kotar, Sigi Feigl), tudi v podatkih, kroniki in `llms.txt`, ne le v izpisu na strani. Naziv v podatkovnem polju bi prišel na stran skozi vsak izris, ki ga polje uporabi.
 - Projekt "The Goodwin Legacy" (2027): do odobritve granta NE objavljaj imen gostujočih umetnikov in podrobnosti; nikoli finančnih podatkov. Na strani samo napovednik "jubilejni mednarodni projekt ob 30-letnici"
+- `docs/design/*.html` so **zamrznjeni mockupi in niso predmet vsebinskih čistk**. Vsaka datoteka to pove v komentarju na prvi vrstici. Ko se vsebinsko pravilo spremeni (imena, nazivi, opuščene zasedbe), mockupov NE popravljaj — so posnetek stanja ob potrditvi smeri in bi s popravki izgubili pomen. Vir resnice je živa stran
+- `docs/bbg-osnova.md` **ni v repozitoriju**, ureja jo Rok ročno — ne preverjaj je in ne javljaj, da je zastarela
 
 ## Brand
 - **Privzeta vizualna smer je A (Zlati klub)**: Playfair Display + Source Sans 3, elegantna, brez rotacij in trdih senc; referenčni mockup `docs/design/smer-a.html`. Potrjena 31. 8. 2026
@@ -72,7 +74,7 @@ Ključno:
 - `src/components/strani/` — telesa strani, ena komponenta na stran, z lastnostjo `jezik`
 - `src/pages/` — slovenski ovoji; `src/pages/en/` — angleški. Oboji so samo nekaj vrstic
 - `src/styles/brand.css` — tokeni
-- `src/data/` — strukturirani podatki (koncerti, galerija, mediji, zgodovina) s polji `…En`. Besedila zgodovine in mejnikov so v `zgodovina.json`, da naslovnica in `/zgodovina` berete isti vir
+- `src/data/` — strukturirani podatki (koncerti, galerija, mediji, zgodovina) s polji `…En`. Besedila zgodovine so v `zgodovina.json`, da naslovnica in `/zgodovina` berete isti vir: predstavitev je skupna obema, `uvodSmer` je samo za `/zgodovina`, ere pa nosita polji `obdobja[].vnosi` (leta) in `obdobja[].dosezki` (izsek za naslovnico). Ločenega polja za mejnike ni več — mini-časovnico je nadomestila časovnica po erah in polje `mejniki` je ostalo brez odjemalca
 - Model koncerta v `koncerti.json`: `zasedba` (big-band | combo | mladinski | izobrazevalni) in `vstop` ({ tip: vstopnice | prost | zaprt, url }). Iz njiju nastaneta znački na kartici in `offers` v JSON-LD. Polje `vstopniceUrl` je opuščeno — preseljeno v `vstop.url`
 - **Prost vstop dobi `offers` s ceno 0 EUR**, vstopnice ponudbo s povezavo, zaprt dogodek in vstopnice brez znane povezave pa `offers` izpustita: nepopolna ponudba je za iskalnike slabša od nobene. Gumb „Vstopnice" se izpiše samo, kadar je `vstop.url` res znan
 - `datumKonecIso` je neobvezno polje za **večdnevne dogodke**: datum se prikaže kot razpon ("10.–11. 10. 2026" / "10–11 October 2026"), dogodek ostane prihajajoč do konca, JSON-LD dobi `endDate`. Razpona **ne sestavljaj sam** — `sl-SI` dnevu piko že doda, kombinacija `month+year` pa vrne "10/2026"; zato se mesec in leto prevzameta iz polnega končnega datuma
