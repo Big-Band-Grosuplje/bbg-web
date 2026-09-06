@@ -738,6 +738,11 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
     align-items: center;
     justify-content: space-between;
     gap: 20px 28px;
+    /* Spodnji odmik je enak zgornji vrzeli odseka (34 px, izmerjeno na
+       izrisu): brez njega zlata obroba stoji natanko na ločilni črti
+       sekcije Koncerti in panel je videti kot njen del. Odmik nosi panel
+       in ne odsek, ker je vrzel do črte lastnost obrobe panela. */
+    margin-block-end: 34px;
     padding: 24px 28px;
     border: 2px solid var(--bbg-gold);
     border-radius: 18px;
