@@ -46,6 +46,16 @@ for (const k of koncerti) {
 }
 
 export default defineConfig({
+  /* Stiskanja HTML ne uporabljamo. Stiskalnik v Astru 7 pobere presledek
+     med dvema elementoma tudi tam, kjer je pomenski, in ga v izvorni kodi
+     nosi prelom vrstice — v Astru 5 je tam ostal en presledek. Posledica
+     je bila „Facebook ·Instagram", „GOSTJERok Ferengja" in po vsem
+     pravnem besedilu „Piši nainfo@bigband-grosuplje.com".
+     Alternativa bi bila vpisati {' '} na vsako tako mesto (bilo jih je
+     nad trideset, večina v /zasebnost), a bi bila prva pozabljena
+     vrinjena vrstica spet tiha napaka. Cena izklopa je 1,7 % gzip
+     oziroma približno 0,2 kB na stran — izmerjeno na vseh 21 straneh. */
+  compressHTML: false,
   site: 'https://bigband-grosuplje.com',
 
   /* Slovenščina je privzeta in ostane brez predpone, angleščina živi pod
