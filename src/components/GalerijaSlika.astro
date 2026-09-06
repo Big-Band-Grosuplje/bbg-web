@@ -21,6 +21,12 @@ const nadomestno = altZa(foto, jezik);
 const podnapisVrstica = podnapis.split('\n').join(' ');
 
 const vir = slikaZa(foto.datoteka);
+/* Pokončna fotografija bi v mreži postala dvakrat višja od sosed, zato jo
+   kartica obreže na isto razmerje kot večina (3 : 2). Orientacijo beremo iz
+   same datoteke in ne iz zastavice v podatkih, ki bi ob zamenjavi slike
+   ostala pri starem. Lightbox prikaže celo sliko — ta pravila nanj ne
+   sežejo, ker ima svoj element. */
+const pokoncna = vir.width < vir.height;
 /* Za lightbox pripravimo večjo različico iste fotografije. */
 const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
 ---
@@ -34,7 +40,13 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
       data-opis={podnapisVrstica}
       aria-label={`${t.lightbox.povecaj}: ${podnapisVrstica}`}
     >
-      <Image src={vir} alt={nadomestno} width={800} loading="lazy" />
+      <Image
+        src={vir}
+        alt={nadomestno}
+        width={800}
+        loading="lazy"
+        class:list={[pokoncna && 'slika--pokoncna']}
+      />
     </button>
     <figcaption>{podnapis}</figcaption>
   </figure>
@@ -65,6 +77,14 @@ const velika = await getImage({ src: vir, width: 1600, format: 'webp' });
     display: block;
     border-radius: var(--bbg-r-l);
     border: 2.5px solid var(--bbg-gold);
+  }
+  /* Pokončna slika v kartici: obrez na razmerje večine (3 : 2), fokus v
+     zgornji tretjini, kjer je pri portretu obraz. Lightbox ima svoj
+     element in prikaže celo sliko. */
+  .slika img.slika--pokoncna {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: 50% 25%;
   }
   .slika figcaption {
     font-size: 13.5px;

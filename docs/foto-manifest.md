@@ -32,8 +32,8 @@ za sekcijo o društvu / vabilo novim članom)
 ## zgodovina/ — mejniki in obdobja (za časovnico)
 - Doblekar: doblekar-orkester-spomenik-{barvna,cb}.jpg (~2002, konjeniški
   spomenik), doblekar-vibrafon-mentorstvo.jpg (z mladim tolkalcem — razvoj mladih!),
-  mladi-orkester-dvorana-zgodnja-leta.jpg, nastop-bele-srajce-zgodnja-leta.jpg,
-  tv-nastop-zgodnja-leta.jpg (TODO: potrdi dogodek/leto)
+  orkester-po-vaji-kd-2004.jpg, mladinska-knjiga-gallus-2005.jpg,
+  sinatra-pestner-kongo-2005.jpg (TODO: potrdi dogodek/leto)
 - Lunder: koncert-gros-ozadje-lunder.jpg (TODO: potrdi leto)
 - Kotar 1. obdobje: vrbic-sinatra-2013.jpg, sinatra-novi-trg-2013-zakrajsek.jpg,
   kotar-publika-2013-zakrajsek.jpg, mejnik-us-embassy-combo-2017.jpg,
