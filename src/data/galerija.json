@@ -85,11 +85,22 @@
       "mesec": "2024-10"
     },
     {
+      "datoteka": "orkester/kotar-dirigent-energija.jpg",
+      "podnapis": "Klemen Kotar na samostojnem koncertu v atriju NUK, Ljubljana, 2022 — gost vokalni solist Peter Savizon",
+      "leto": 2022,
+      "mesec": null,
+      "podnapisEn": "Klemen Kotar at the orchestra’s concert in the atrium of the National and University Library (NUK), Ljubljana, 2022 — guest vocalist Peter Savizon",
+      "alt": "Enobarvna fotografija od blizu: dirigent s kodrastimi lasmi z obema rokama visoko dvignjenima med vodenjem, v majici Big Banda Grosuplje; v ozadju zamegljena publika.",
+      "altEn": "A monochrome close-up: the conductor, curly-haired, both arms raised high while conducting, in a Big Band Grosuplje T-shirt; the audience blurred behind him."
+    },
+    {
       "datoteka": "zgodovina/mejnik-nishville-2018-oder.jpg",
       "podnapis": "Nishville Jazz Festival, glavni oder, Niš (Srbija), 2018",
+      "podnapisEn": "Nishville Jazz Festival, main stage, Niš (Serbia), 2018",
+      "alt": "Festivalski oder v modri svetlobi: dirigent s hrbtom proti objektivu z razprtima rokama, na levi stoji saksofonist med solom, orkester sedi za pulti z napisi Big Band Grosuplje; v ozadju velika kulisa festivala.",
+      "altEn": "A festival stage in blue light: the conductor seen from behind with arms spread, a saxophonist standing and soloing at the left, the orchestra seated behind stands marked Big Band Grosuplje; the large festival backdrop behind them.",
       "leto": 2018,
-      "mesec": null,
-      "podnapisEn": "Nishville Jazz Festival, main stage, Niš (Serbia), 2018"
+      "mesec": null
     },
     {
       "datoteka": "zgodovina/mejnik-us-embassy-combo-2017.jpg",
@@ -102,75 +113,76 @@
     },
     {
       "datoteka": "zgodovina/vrbic-sinatra-2013.jpg",
-      "podnapis": "Program Franka Sinatre z Blažem Vrbičem, 2013",
+      "podnapis": "Program Franka Sinatre »A Swinging Affair« z Blažem Vrbičem, 2013",
       "leto": 2013,
       "mesec": null,
-      "podnapisEn": "The Frank Sinatra programme with Blaž Vrbič, 2013"
-    },
-    {
-      "datoteka": "zgodovina/doblekar-orkester-spomenik-barvna.jpg",
-      "podnapis": "Orkester pri konjeniškem spomeniku, okoli 2002",
-      "leto": 2002,
-      "mesec": null,
-      "priblizno": true,
-      "podnapisEn": "The orchestra at the equestrian monument, around 2002"
-    },
-    {
-      "datoteka": "zgodovina/doblekar-orkester-spomenik-cb.jpg",
-      "podnapis": "Orkester pri konjeniškem spomeniku, okoli 2002 (črno-bela)",
-      "leto": 2002,
-      "mesec": null,
-      "priblizno": true,
-      "podnapisEn": "The orchestra at the equestrian monument, around 2002 (black and white)"
-    },
-    {
-      "datoteka": "orkester/kotar-dirigent-energija.jpg",
-      "podnapis": "Dirigent Klemen Kotar med vodenjem orkestra",
-      "leto": null,
-      "mesec": null,
-      "podnapisEn": "Conductor Klemen Kotar leading the orchestra"
-    },
-    {
-      "datoteka": "zgodovina/doblekar-vibrafon-mentorstvo.jpg",
-      "podnapis": "Delo z mladimi tolkalci pod vodstvom Braca J. Doblekarja",
-      "leto": null,
-      "mesec": null,
-      "podnapisEn": "Working with young percussionists under Braco J. Doblekar"
-    },
-    {
-      "datoteka": "zgodovina/koncert-gros-ozadje-lunder.jpg",
-      "podnapis": "Koncert v obdobju Igorja Lundra",
-      "leto": null,
-      "mesec": null,
-      "podnapisEn": "A concert from the Igor Lunder years"
+      "podnapisEn": "Frank Sinatra programme “A Swinging Affair” with Blaž Vrbič, 2013",
+      "alt": "Črno-bela: pevec v temni obleki z metuljčkom poje v ročni mikrofon; za njim igrajo saksofonisti, v ozadju trobila in kitarist s polakustično kitaro.",
+      "altEn": "Black and white: a singer in a dark suit and bow tie sings into a hand-held microphone; saxophonists play behind him, with brass and a guitarist on a hollow-body guitar further back."
     },
     {
       "datoteka": "zgodovina/koncert-javornik-obdobje.jpg",
-      "podnapis": "Koncert v obdobju Rudija Javornika",
-      "leto": null,
-      "mesec": null,
-      "podnapisEn": "A concert from the Rudi Javornik years"
+      "podnapis": "Slavnostni koncert ob 50-letnici jazza na Bledu, Festivalna dvorana Bled, 17. 7. 2010 — dirigent Igor Lunder",
+      "leto": 2010,
+      "mesec": "2010-07",
+      "podnapisEn": "Gala concert marking 50 years of jazz at Bled, Bled Festival Hall, 17 July 2010 — conductor Igor Lunder",
+      "alt": "Koncert na zatemnjenem odru: dirigent s hrbtom proti objektivu z dvignjeno roko, pred njim vrsta saksofonistov za osvetljenimi pulti, v ozadju trobila.",
+      "altEn": "A concert on a darkened stage: the conductor seen from behind with a raised arm, a row of saxophonists at lit music stands in front of him, brass behind."
     },
     {
-      "datoteka": "zgodovina/mladi-orkester-dvorana-zgodnja-leta.jpg",
-      "podnapis": "Mladi orkester v dvorani, zgodnja leta",
-      "leto": null,
+      "datoteka": "zgodovina/doblekar-vibrafon-mentorstvo.jpg",
+      "podnapis": "Koncert z Boškom Petrovićem (vibrafon), 2006 — ob njem mladi Vid Jamnik, udeleženec spremljajoče delavnice; dirigent Igor Lunder",
+      "leto": 2006,
       "mesec": null,
-      "podnapisEn": "The young orchestra on stage, early years"
-    },
-    {
-      "datoteka": "zgodovina/nastop-bele-srajce-zgodnja-leta.jpg",
-      "podnapis": "Nastop v belih srajcah, zgodnja leta",
-      "leto": null,
-      "mesec": null,
-      "podnapisEn": "A performance in white shirts, early years"
+      "podnapisEn": "Concert with Boško Petrović (vibraphone), 2006 — beside him young Vid Jamnik, a participant in the accompanying workshop; conductor Igor Lunder",
+      "alt": "Črno-bela: vibrafonist s kladivci igra na vibrafon, ob njem stoji deček s kladivcem v roki in ga opazuje; za njima saksofonska sekcija in bobni.",
+      "altEn": "Black and white: a vibraphonist plays with mallets while a boy stands beside him holding a mallet and watching; the saxophone section and drums behind them."
     },
     {
       "datoteka": "zgodovina/tv-nastop-zgodnja-leta.jpg",
-      "podnapis": "Televizijski nastop, zgodnja leta",
-      "leto": null,
+      "podnapis": "Koncert ob 90. obletnici rojstva Franka Sinatre s solistom Otom Pestnerjem, Kongo Casino Grosuplje, 2005 — dirigent Igor Lunder",
+      "leto": 2005,
       "mesec": null,
-      "podnapisEn": "A television appearance, early years"
+      "podnapisEn": "Concert marking the 90th anniversary of Frank Sinatra’s birth with vocalist Oto Pestner, Kongo Casino Grosuplje, 2005 — conductor Igor Lunder",
+      "alt": "Črno-bela: pevec z mikrofonom v roki poje na sprednjem robu odra, pred orkestrom stoji dirigent s hrbtom proti objektivu; orkester v svečanih oblekah za pulti, na levi klaviature in kitara.",
+      "altEn": "Black and white: a vocalist sings into a hand-held microphone at the front of the stage, the conductor standing before the orchestra seen from behind; the orchestra in formal dress at their stands, keyboards and guitar on the left."
+    },
+    {
+      "datoteka": "zgodovina/nastop-bele-srajce-zgodnja-leta.jpg",
+      "podnapis": "Koncert ob 60-letnici Mladinske knjige, Gallusova dvorana Cankarjevega doma, 2005 — dirigent Igor Lunder",
+      "leto": 2005,
+      "mesec": null,
+      "podnapisEn": "Concert for the 60th anniversary of Mladinska knjiga, Gallus Hall, Cankarjev dom, 2005 — conductor Igor Lunder",
+      "alt": "Črno-bela panorama velikega odra: orkester v belih srajcah z metuljčki, klavir na levi, kitarist in bobnar v ozadju, pihala in trobila za pulti; ob desnem robu stoji dirigent.",
+      "altEn": "A black-and-white wide shot of a large stage: the orchestra in white shirts and bow ties, a grand piano at the left, guitarist and drummer behind, winds and brass at their stands; the conductor standing at the right edge."
+    },
+    {
+      "datoteka": "zgodovina/koncert-gros-ozadje-lunder.jpg",
+      "podnapis": "»Glasba Glenna Millerja in Counta Basiea« ob stoti obletnici rojstva obeh, samostojni koncert, 2004 — dirigent Igor Lunder",
+      "leto": 2004,
+      "mesec": null,
+      "podnapisEn": "“The Music of Glenn Miller and Count Basie”, centenary concert, 2004 — conductor Igor Lunder",
+      "alt": "Črno-bela: dirigent s hrbtom proti objektivu z dvignjeno taktirko, pred njim sedeča vrsta saksofonistov, za njimi trobentači; v ozadju poslikana kulisa s krogom in napisom Grosuplje.",
+      "altEn": "Black and white: the conductor seen from behind with a raised baton, a seated row of saxophonists in front of him and trumpeters behind; a painted backdrop with a circle and the word Grosuplje."
+    },
+    {
+      "datoteka": "zgodovina/mladi-orkester-dvorana-zgodnja-leta.jpg",
+      "podnapis": "Orkester z dirigentom Igorjem Lundrom po vaji v Kulturnem domu Grosuplje, 2004",
+      "leto": 2004,
+      "mesec": null,
+      "podnapisEn": "The orchestra with conductor Igor Lunder after a rehearsal at Grosuplje Cultural Centre, 2004",
+      "alt": "Skupinska fotografija med sedeži v dvorani: mladi glasbeniki v vsakdanjih oblačilih držijo inštrumente — pozavno, trobente, saksofone in palice za bobne.",
+      "altEn": "A group photo among the auditorium seats: young musicians in everyday clothes holding their instruments — trombone, trumpets, saxophones and drumsticks."
+    },
+    {
+      "datoteka": "zgodovina/doblekar-orkester-spomenik-barvna.jpg",
+      "podnapis": "Člani Big Banda Grosuplje s prvim dirigentom Bracom J. Doblekarjem pri spomeniku s simbolom občine na tržnici v Grosupljem, okoli 2002",
+      "leto": 2002,
+      "mesec": null,
+      "priblizno": true,
+      "podnapisEn": "Big Band Grosuplje members with first conductor Braco J. Doblekar at the monument bearing the municipal symbol on Grosuplje market square, c. 2002",
+      "alt": "Barvna skupinska fotografija na prostem: mladi glasbeniki z inštrumenti — kontrabasom, klaviaturo, saksofoni, trobentami in pozavno — stojijo na stopnicah kamnitega spomenika, v ozadju vrbe in stojnice tržnice; v sredini čepi starejši moški v sončnih očalih.",
+      "altEn": "A colour group photo outdoors: young musicians with their instruments — double bass, keyboard, saxophones, trumpets and trombone — standing on the steps of a stone monument, willow trees and market stalls behind them; an older man in sunglasses crouches in the middle."
     }
   ]
 }
