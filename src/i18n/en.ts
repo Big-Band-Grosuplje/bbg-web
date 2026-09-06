@@ -11,11 +11,13 @@
 
 import type { Slovar } from './sl';
 
-/* Privzeti avtor fotografij. Ena vrednost za dve mesti — padec nazaj pri
-   posamezni fotografiji in stavek o kreditih pod galerijo — po istem
-   vzorcu kot AVTOR_PRIVZETI v sl.ts. Prej sta bila zapisa dva in sta se
-   razšla: pod fotografijo je pisalo „arhiv KD Big Band Grosuplje",
-   v stavku o kreditih pa „KD Big Band Grosuplje archive". */
+/* Privzeti avtor fotografij, po istem vzorcu kot AVTOR_PRIVZETI v sl.ts:
+   ime arhiva stoji dobesedno samo tu, berejo ga štirje odjemalci — padec
+   nazaj pri posamezni fotografiji in trije stavki o kreditih (izsek
+   galerije na naslovnici, /galerija, /zgodovina).
+   Zapisov je bilo prej več in so se razšli: pod fotografijo je pisalo
+   „arhiv KD Big Band Grosuplje", v stavkih o kreditih pa
+   „KD Big Band Grosuplje archive". */
 const AVTOR_PRIVZETI = 'KD Big Band Grosuplje archive';
 
 export const en = {
@@ -101,7 +103,7 @@ export const en = {
     nadnaslov: 'from the archive',
     naslov: 'Gallery',
     vec: 'Full gallery →',
-    kredit: 'Photo: KD Big Band Grosuplje archive',
+    kredit: `Photo: ${AVTOR_PRIVZETI}`,
   },
 
   multimedijaSekcija: {
@@ -240,7 +242,7 @@ export const en = {
     napovedZnacka: 'looking ahead',
     gostujociNaslov: 'Guest conductors',
     kredit:
-      'Photo: KD Big Band Grosuplje archive. Photographs by outside authors are published only once permission is confirmed, and always with the author credited. We do not publish the names of orchestra members; conductors, artistic directors and guest artists are credited.',
+      `Photo: ${AVTOR_PRIVZETI}. Photographs by outside authors are published only once permission is confirmed, and always with the author credited. We do not publish the names of orchestra members; conductors, artistic directors and guest artists are credited.`,
   },
 
   naslovnica: {
