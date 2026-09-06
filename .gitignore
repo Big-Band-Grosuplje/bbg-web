@@ -17,3 +17,6 @@ IZP_*
 docs/**/izpis*
 docs/**/racun*
 docs/**/pogodba*
+
+# Neobdelane slike za obdelavo (v repo gredo samo obdelane)
+_vhod/
