@@ -62,10 +62,15 @@ const predstavitev = en
 /* Časovnica po erah dirigentov. Vir je isti kot na /zgodovina — polje
    obdobja v zgodovina.json — da se zapisa ne moreta raziti; dosežki so
    povzeti iz docs/kronika.md. Ustanovitev ni dirigentska era in ima svoj
-   zapis, zato je pred obdobji.
+   zapis, zato je v naraščajočem zaporedju pred obdobji.
 
-   Aktualna era je zadnja v seznamu; tega ne beremo iz zastavice v
-   podatkih, ki bi ob menjavi dirigenta ostala pri starem. */
+   Izpis je padajoč (najnovejše zgoraj), obrat pa je tu in ne v podatkih:
+   zgodovina.json ostane urejen naraščajoče, ker ga bere tudi /zgodovina.
+   Obrneta se ere in dosežki znotraj ere.
+
+   Aktualna era je zadnja v naraščajočem zaporedju, po obratu torej prva;
+   tega ne beremo iz zastavice v podatkih, ki bi ob menjavi dirigenta
+   ostala pri starem. */
 type Era = {
   kljuc: string;
   obdobje: string;
@@ -98,16 +103,16 @@ const ere: Era[] = [
     obdobje: u.obdobje,
     naslov: en ? (u.naslovEn ?? u.naslov) : u.naslov,
     podnaslov: en ? (u.podnaslovEn ?? u.podnaslov) : u.podnaslov,
-    dosezki: en ? (u.dosezkiEn ?? u.dosezki) : u.dosezki,
+    dosezki: [...(en ? (u.dosezkiEn ?? u.dosezki) : u.dosezki)].reverse(),
   },
   ...obdobjaVir.map((o) => ({
     kljuc: o.id,
     obdobje: en ? (o.obdobjeEn ?? o.obdobje) : o.obdobje,
     naslov: o.vodstvo,
     podnaslov: en ? (o.vlogaEn ?? o.vloga) : o.vloga,
-    dosezki: en ? (o.dosezkiEn ?? o.dosezki) : o.dosezki,
+    dosezki: [...(en ? (o.dosezkiEn ?? o.dosezki) : o.dosezki)].reverse(),
   })),
-];
+].reverse();
 const jubilej = en
   ? ((zgodovinaData as { jubilejEn?: string }).jubilejEn ?? zgodovinaData.jubilej)
   : zgodovinaData.jubilej;
@@ -290,17 +295,23 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
 
       <p class="zgodovina__uvod">{predstavitev}</p>
 
+      {/* Napovednik jubileja stoji nad osjo: 2027 je v padajočem redu prvo
+          po vrsti, pod povedjo pa se os začne pri aktualni eri. Besedilo je
+          isto polje kot na /zgodovina. */}
+      <p class="ere__jubilej">{jubilej}</p>
+
       {/* Navpična časovnica: šest er ne gre v vodoravne stolpce, ker vsaka
           nosi do tri dosežke. Pika in spojnica sta enaki kot pri prejšnji
-          mini-časovnici, le da os teče navzdol pri vseh širinah. */}
-      <ol class="ere">
+          mini-časovnici, le da os teče navzdol pri vseh širinah.
+
+          ul in ne ol: ere tečejo padajoče, zato bi zaporedne številke od 1
+          do 6 trdile obratno od tega, kar bralec vidi. */}
+      <ul class="ere">
         {ere.map((e, i) => (
-          <li class:list={['era', i === ere.length - 1 && 'era--aktualna']}>
+          <li class:list={['era', i === 0 && 'era--aktualna']}>
             <p class="era__obdobje">
               {e.obdobje}
-              {i === ere.length - 1 && (
-                <span class="era__znacka">{t.zgodovinaSekcija.aktualno}</span>
-              )}
+              {i === 0 && <span class="era__znacka">{t.zgodovinaSekcija.aktualno}</span>}
             </p>
             <h3 class="era__naslov">{e.naslov}</h3>
             {e.podnaslov && <p class="era__vloga">{e.podnaslov}</p>}
@@ -309,11 +320,7 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
             </ul>
           </li>
         ))}
-      </ol>
-
-      {/* Napovednik jubileja: prej je stal kot zadnji mejnik, ki ga časovnica
-          po erah ne pozna več. Besedilo je isto polje kot na /zgodovina. */}
-      <p class="ere__jubilej">{jubilej}</p>
+      </ul>
 
       <p class="vec">
         <a class="bbg-gumb bbg-gumb--obris" href={pot('zgodovina', jezik)}>{t.zgodovinaSekcija.vec}</a>
@@ -847,10 +854,14 @@ const heroA = await getImage({ src: fotoHeroA, width: 1920, format: 'webp' });
   .era__dosezki li { margin: 0 0 4px; }
   .era__dosezki li:last-child { margin-bottom: 0; }
   .ere__jubilej {
-    margin: 26px 0 0;
+    margin: 22px 0 0;
+    max-width: 46rem;
     font-size: 14.5px;
     color: color-mix(in srgb, var(--bbg-besedilo) 78%, var(--bbg-bg));
   }
+  /* Napovednik zdaj stoji nad osjo, zato je odmik prve pike manjši od
+     prvotnih 40 px — sicer bi med povedjo in začetkom osi nastala vrzel. */
+  .ere__jubilej + .ere { margin-top: 26px; }
 
   /* Os ostane en sam navpični niz pri vseh širinah: dva stolpca bi
      zaporedje er prelomila (bralec ne ve, ali se nadaljuje desno ali

@@ -33,6 +33,9 @@ const en = jezik === 'en';
 const v = (slovensko: string, angleško?: string) => (en ? (angleško ?? slovensko) : slovensko);
 
 const predstavitev = v(zgodovinaData.predstavitev, zgodovinaData.predstavitevEn);
+/* Stavek o smeri branja stoji samo tu: predstavitev bere tudi naslovnica,
+   kjer je časovnica krajša in pojasnila ne potrebuje. */
+const uvodSmer = v(zgodovinaData.uvodSmer, zgodovinaData.uvodSmerEn);
 const gostujociDirigenti = (
   en
     ? ((zgodovinaData.gostujociDirigentiEn ?? zgodovinaData.gostujociDirigenti) as string[])
@@ -44,15 +47,55 @@ const jubilej = v(zgodovinaData.jubilej, zgodovinaData.jubilejEn);
    src/lib/galerija.ts) — statičnega seznama imen v zgodovina.json ni več,
    ker se je z letnicami razšel. Razrešimo jih že tu, da so ere brez slik
    prepoznane pred izrisom. Fotografije brez potrjenega dovoljenja avtorja
-   v galerija.json niso vpisane, zato se tu ne morejo pojaviti. */
-const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
-  ...o,
-  obdobjePrikaz: v(o.obdobje, o.obdobjeEn),
-  vlogaPrikaz: v(o.vloga, o.vlogaEn),
-  opisPrikaz: v(o.opis, o.opisEn),
-  vnosiPrikaz: o.vnosi.map((x) => ({ leto: x.leto, besedilo: v(x.besedilo, x.besediloEn) })),
-  fotke: fotografijeEre(o.id as EraId),
-}));
+   v galerija.json niso vpisane, zato se tu ne morejo pojaviti.
+
+   Kronologija se izpisuje padajoče (najnovejše zgoraj), obrat pa je tu in
+   ne v podatkih: zgodovina.json ostane urejen naraščajoče, ker ga bere
+   tudi naslovnica in ker bi obrnjen vir zavajal urednika ob dopisovanju.
+   Obrne se troje — ere, leta znotraj ere in dosežki znotraj ere. Dodelitve
+   fotografij obrat ne zadeva: eraFotografije bere leto in napis, ne
+   položaja v seznamu.
+
+   Aktualna era je zadnja v izvornem zaporedju; zastavice v podatkih ne
+   beremo, ker bi ob menjavi dirigenta ostala pri starem. */
+const obdobjaVir = zgodovinaData.obdobja as Obdobje[];
+const obdobja = obdobjaVir
+  .map((o, i) => ({
+    ...o,
+    aktualna: i === obdobjaVir.length - 1,
+    obdobjePrikaz: v(o.obdobje, o.obdobjeEn),
+    vlogaPrikaz: v(o.vloga, o.vlogaEn),
+    opisPrikaz: v(o.opis, o.opisEn),
+    vnosiPrikaz: o.vnosi
+      .map((x) => ({ leto: x.leto, besedilo: v(x.besedilo, x.besediloEn) }))
+      .reverse(),
+    fotke: fotografijeEre(o.id as EraId),
+  }))
+  .reverse();
+
+/* Vrstica sidr pod uvodom. Oznaka je priimek dirigenta, pri ponovljenem
+   priimku pa priimek z obdobjem — sicer bi bili Kotarjevi eri v vrstici
+   nerazločljivi. Oboje bere ista polja kot naslovi odsekov, zato se
+   zapisa ne moreta raziti. */
+function priimek(ime: string): string {
+  const deli = ime.trim().split(' ').filter(Boolean);
+  return deli[deli.length - 1];
+}
+const kolikokrat = new Map<string, number>();
+for (const o of obdobjaVir) {
+  const p = priimek(o.vodstvo);
+  kolikokrat.set(p, (kolikokrat.get(p) ?? 0) + 1);
+}
+const navigacija = [
+  { sidro: 'era-jubilej', oznaka: '2027' },
+  ...obdobja.map((o) => {
+    const p = priimek(o.vodstvo);
+    return {
+      sidro: `era-${o.id}`,
+      oznaka: (kolikokrat.get(p) ?? 0) > 1 ? `${p} ${o.obdobjePrikaz}` : p,
+    };
+  }),
+];
 ---
 
 <Layout
@@ -69,24 +112,65 @@ const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
       <p class="nadnaslov">{t.zgodovinaStran.nadnaslov}</p>
       <h1>{t.zgodovinaStran.naslov}</h1>
       <p class="uvod">{predstavitev}</p>
+      <p class="smer">{uvodSmer}</p>
+
+      {/* Oznaka je vidna in hkrati ime navigacije; vidni izvod je skrit
+          dostopnosti, da bralnik iste besede ne prebere dvakrat. Sidra
+          kažejo na odseke, ne na naslove — scroll-padding-top v brand.css
+          poskrbi, da cilj ne pade pod lepljivo navigacijo. */}
+      <nav class="smer-nav" aria-label={t.zgodovinaStran.naviNaslov}>
+        <span class="smer-nav__oznaka" aria-hidden="true">{t.zgodovinaStran.naviNaslov}</span>
+        <ul class="smer-nav__seznam">
+          {navigacija.map((n) => (
+            <li><a href={`#${n.sidro}`}>{n.oznaka}</a></li>
+          ))}
+        </ul>
+      </nav>
     </div>
 
+    {/* 2027 ni zgodovina, ampak napoved: v padajočem redu stoji na vrhu,
+        loči pa ga črtkana obroba in značka. Projekt je pod embargom —
+        samo napovednik, brez imen gostov, podrobnosti in finančnih
+        podatkov. Pravilo je v CLAUDE.md. */}
+    <section class="obdobje" id="era-jubilej" aria-labelledby="obdobje-jubilej">
+      <div class="ovoj">
+        <div class="napoved">
+          <p class="obdobje__leta">
+            2027
+            <span class="obdobje__znacka">{t.zgodovinaStran.napovedZnacka}</span>
+          </p>
+          <h2 id="obdobje-jubilej" class="obdobje__naslov">{t.zgodovinaStran.jubilejNaslov}</h2>
+          <p class="obdobje__opis obdobje__opis--sam">{jubilej}</p>
+        </div>
+      </div>
+    </section>
+
     {obdobja.map((o) => (
-      <section class="obdobje" aria-labelledby={`obdobje-${o.id}`}>
+      <section class="obdobje" id={`era-${o.id}`} aria-labelledby={`obdobje-${o.id}`}>
         <div class="ovoj">
-          <p class="obdobje__leta">{o.obdobjePrikaz}</p>
+          <p class="obdobje__leta">
+            {o.obdobjePrikaz}
+            {/* Ista značka kot v časovnici na naslovnici, zato tudi isti
+                niz slovarja — dva zapisa iste besede bi se lahko razšla. */}
+            {o.aktualna && (
+              <span class="obdobje__znacka">{t.zgodovinaSekcija.aktualno}</span>
+            )}
+          </p>
           <h2 id={`obdobje-${o.id}`} class="obdobje__naslov">{o.vodstvo}</h2>
           <p class="obdobje__vloga">{o.vlogaPrikaz}</p>
           <p class="obdobje__opis">{o.opisPrikaz}</p>
 
-          <ol class="vnosi">
+          {/* ul in ne ol: leta tečejo padajoče, zato bi zaporedne številke
+              1, 2, 3 … trdile obratno od tega, kar bralec vidi. Zlata pika
+              in spojnica ostajata — časovnico nosita ti, ne števci. */}
+          <ul class="vnosi">
             {o.vnosiPrikaz.map((v) => (
               <li class="vnos">
                 <p class="vnos__leto">{v.leto}</p>
                 <p class="vnos__besedilo">{v.besedilo}</p>
               </li>
             ))}
-          </ol>
+          </ul>
 
           {o.fotke.length > 0 && (
             <ul class="slike">
@@ -96,16 +180,6 @@ const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
         </div>
       </section>
     ))}
-
-    {/* Projekt 2027 je pod embargom: samo napovednik, brez imen gostov,
-        podrobnosti in finančnih podatkov. Pravilo je v CLAUDE.md. */}
-    <section class="obdobje" aria-labelledby="obdobje-jubilej">
-      <div class="ovoj">
-        <p class="obdobje__leta">2027</p>
-        <h2 id="obdobje-jubilej" class="obdobje__naslov">{t.zgodovinaStran.jubilejNaslov}</h2>
-        <p class="obdobje__opis obdobje__opis--sam">{jubilej}</p>
-      </div>
-    </section>
 
     <div class="ovoj">
       <div class="panel bbg-mikro-desno">
@@ -133,6 +207,70 @@ const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
     max-width: 46rem;
     opacity: 0.9;
   }
+  /* Stavek o smeri branja. Polna moč barve in ležeči rez: navodilo mora
+     biti berljivo, umirja ga oblika in ne kontrast. */
+  .smer {
+    margin: 14px 0 0;
+    max-width: 46rem;
+    font-style: italic;
+    color: var(--bbg-besedilo);
+  }
+
+  /* --- Vrstica sidr po erah --- */
+  .smer-nav {
+    margin: 22px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+  }
+  .smer-nav__oznaka {
+    font-family: var(--bbg-font-naslov);
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bbg-nadnaslov);
+  }
+  .smer-nav__seznam {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    row-gap: 6px;
+  }
+  /* Ločilo je pseudoelement in ne znak v besedilu: v besedilnem toku bi
+     pika postala del napisa povezave.
+
+     ::after za vsakim razen zadnjim in ne ::before pred vsakim razen
+     prvim: vrstica se pod približno 560 px prelomi v dve, pri ::before pa
+     je pika obvisela na začetku druge vrstice, kar je videti kot napaka.
+     Zdaj obvisi na koncu prve, kjer se bere kot znak, da se nadaljuje.
+     Rešitev ni vezana na prelomno točko, zato zdrži tudi, če se oznake
+     podaljšajo ali era doda.
+
+     Delež 66 % in ne 55 %: pri 55 % je pika v obeh svetlih temah dosegla
+     le 3,89 : 1 oziroma 3,91 : 1. V temnih temah višji delež kontrast le
+     poveča, ker se meša proti svetlemu besedilu. */
+  .smer-nav__seznam li:not(:last-child)::after {
+    content: '·';
+    margin: 0 9px;
+    color: color-mix(in srgb, var(--bbg-besedilo) 66%, var(--bbg-bg));
+  }
+  .smer-nav a,
+  .smer-nav a:link,
+  .smer-nav a:visited {
+    font-size: 14.5px;
+    color: var(--bbg-povezava);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--bbg-povezava) 45%, transparent);
+  }
+  .smer-nav a:hover,
+  .smer-nav a:focus-visible {
+    color: var(--bbg-povezava-hover);
+    border-bottom-color: var(--bbg-povezava-hover);
+  }
 
   /* --- Obdobje --- */
   .obdobje {
@@ -142,11 +280,39 @@ const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
   }
   .obdobje__leta {
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
     font-family: var(--bbg-font-naslov);
     letter-spacing: 0.16em;
     font-size: 13px;
     color: var(--bbg-nadnaslov);
   }
+  /* Značka "aktualno" oz. "napoved". Enak videz kot v časovnici na
+     naslovnici; besedilo v polni barvi, obroba je nosilec poudarka. */
+  .obdobje__znacka {
+    padding: 2px 10px;
+    font-family: var(--bbg-font-besedilo);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bbg-besedilo);
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 55%, transparent);
+    border-radius: 999px;
+  }
+  /* Napoved 2027: črtkana obroba jo loči od zaključenih obdobij, ki jih
+     riše navpična os. Panel ima svojo podlago, zato je zlato besedilo v
+     svetli temi izmerjeno prav na njej (glej docs/design/README.md). */
+  .napoved {
+    max-width: 46rem;
+    padding: 24px 26px;
+    border: 1px dashed color-mix(in srgb, var(--bbg-gold) 55%, transparent);
+    border-radius: var(--bbg-r-l);
+    background: var(--bbg-panel-bg);
+  }
+  .napoved .obdobje__naslov { margin-bottom: 8px; }
   /* Mikrorotacija naslova po mockupu smer-c.html, kot pri .sekcija h2. */
   .obdobje__naslov {
     margin: 8px 0 4px;

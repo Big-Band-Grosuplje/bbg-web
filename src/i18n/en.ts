@@ -224,6 +224,8 @@ export const en = {
     nadnaslov: 'since 1997/98',
     naslov: 'History',
     jubilejNaslov: 'Thirty years',
+    naviNaslov: 'Jump to',
+    napovedZnacka: 'looking ahead',
     gostujociNaslov: 'Guest conductors',
     kredit:
       'Photo: KD Big Band Grosuplje archive. Photographs by outside authors are published only once permission is confirmed, and always with the author credited. We do not publish the names of orchestra members; conductors, artistic directors and guest artists are credited.',

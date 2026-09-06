@@ -232,6 +232,10 @@ export const sl = {
     nadnaslov: 'od 1997/98 do danes',
     naslov: 'Zgodovina',
     jubilejNaslov: 'Trideset let',
+    /* Oznaka pred vrstico sidr po erah. Kratka, ker stoji v isti vrstici. */
+    naviNaslov: 'Na obdobje',
+    /* Značka ob odseku 2027: ta ni zgodovina, ampak napoved. */
+    napovedZnacka: 'napoved',
     gostujociNaslov: 'Gostujoči dirigenti',
     kredit:
       'Foto: arhiv KD Big Band Grosuplje. Fotografije zunanjih avtorjev so objavljene šele po potrjenem dovoljenju in vedno s podpisom avtorja. Imen članov orkestra ne objavljamo; podpisujejo se dirigenti, umetniško vodstvo in gostujoči umetniki.',
