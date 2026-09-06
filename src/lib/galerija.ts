@@ -12,6 +12,8 @@ export type Fotografija = {
      bolje podnapis kot prazen alt. */
   alt?: string;
   altEn?: string;
+  /* Izbrana za izpis pri eri na /zgodovina. Galerija prikaže vse. */
+  poudarek?: boolean;
   /* Avtor fotografije. Imena avtorjev so v obeh jezikih enaka, zato
      angleške različice ni. Kjer polja ni, izris pokaže arhiv društva —
      privzeta vrednost je v slovarju (galerijaStran.avtorPrivzeto), da
@@ -97,23 +99,67 @@ export function najnovejse(n: number): Fotografija[] {
   return razvrsceno().slice(0, n);
 }
 
-/* Fotografije za obdobje na /zgodovina, navedene z imenom datoteke iz
-   src/assets/foto/zgodovina.
+/* ============================================================
+   Fotografije po erah dirigentov na /zgodovina.
 
-   Dve različni napaki, dva različna izida:
-   - imena datoteke ni na disku → slikaZa vrže napako in build pade
-     (tipkarska napaka v zgodovina.json ne sme priti do produkcije),
-   - datoteka je na disku, a je ni v galerija.json → tiho izpuščena,
-     ker čaka na potrjeno dovoljenje avtorja. Pravilo o dovoljenjih je
-     zapisano na enem mestu (galerija.json) in velja tudi tu. */
-export function zgodovinske(imena: string[]): Fotografija[] {
-  const seznam = galerijaData.fotografije as Fotografija[];
-  const izbor: Fotografija[] = [];
-  for (const ime of imena) {
-    const pot = `zgodovina/${ime}`;
-    slikaZa(pot);
-    const foto = seznam.find((f) => f.datoteka === pot);
-    if (foto) izbor.push(foto);
-  }
-  return izbor;
+   Prej je vsaka era nosila statičen seznam imen datotek v zgodovina.json.
+   Ta seznam je nastal, ko fotografije še niso imele potrjenih letnic, in
+   se po datiranju ni popravil sam: Lundrove slike (2004, 2005, 2006) so
+   ostale pod Doblekarjem, blejski koncert 2010 pa pod Javornikom. Zato je
+   dodelitev zdaj IZPELJANA iz podatkov same fotografije — seznama, ki bi
+   se lahko razšel z letnico, ni več.
+
+   Vrstni red pravil:
+   1. Če je v slovenskem napisu imenovan eden od erinih dirigentov, odloči
+      ta — ne glede na leto. Tako pripade koncert v atriju NUK 2022, kjer
+      je dirigiral Kotar, njegovi drugi eri, čeprav je 2022 Javornikovo
+      leto. Kotar vodi dve eri, zato pri njem izbere še leto.
+   2. Sicer odloči leto. Meji 2019 in 2023 sta deljeni; brez imenovanega
+      dirigenta pripade slika eri, ki se v tem letu KONČUJE.
+   Napis beremo slovenski, ker je izhodiščni — dodelitev mora biti v obeh
+   jezikih enaka.
+   ============================================================ */
+export type EraId =
+  | 'ustanovitev'
+  | 'doblekar'
+  | 'lunder'
+  | 'kotar-prvo'
+  | 'javornik'
+  | 'kotar-drugo';
+
+/* Vzorci so na koren imena, ne na celo ime: slovenska sklanjatev pri
+   Lundru izpusti e ("z dirigentom Igorjem Lundrom"), zato iskanje po
+   "Lunder" tega zapisa ne bi našlo. */
+const DIRIGENTI: { vzorec: RegExp; era: (leto: number) => EraId }[] = [
+  { vzorec: /Doblekar/, era: () => 'doblekar' },
+  { vzorec: /Lundr|Lunder/, era: () => 'lunder' },
+  { vzorec: /Javornik/, era: () => 'javornik' },
+  { vzorec: /Kotar/, era: (leto) => (leto <= 2019 ? 'kotar-prvo' : 'kotar-drugo') },
+];
+
+function eraPoLetu(leto: number): EraId {
+  if (leto <= 1998) return 'ustanovitev';
+  if (leto <= 2003) return 'doblekar';
+  if (leto <= 2011) return 'lunder';
+  if (leto <= 2019) return 'kotar-prvo';
+  if (leto <= 2023) return 'javornik';
+  return 'kotar-drugo';
+}
+
+export function eraFotografije(foto: Fotografija): EraId | null {
+  if (foto.leto === null) return null;
+  const zadetki = DIRIGENTI.filter((d) => d.vzorec.test(foto.podnapis));
+  /* Dva imenovana dirigenta na isti fotografiji sta dvoumna; takrat naj
+     odloči leto, da izbira ni odvisna od vrstnega reda v seznamu. */
+  if (zadetki.length === 1) return zadetki[0].era(foto.leto);
+  return eraPoLetu(foto.leto);
+}
+
+/* Fotografije ere za izpis na /zgodovina: največ tri, izbrane po polju
+   poudarek. Kadar poudarkov ni, gredo prve tri po letu — galerija ostane
+   popolna, omejena je samo ta stran. */
+export function fotografijeEre(era: EraId, najvec = 3): Fotografija[] {
+  const vse = razvrsceno().filter((f) => eraFotografije(f) === era);
+  const poudarjene = vse.filter((f) => f.poudarek);
+  return (poudarjene.length > 0 ? poudarjene : vse).slice(0, najvec);
 }

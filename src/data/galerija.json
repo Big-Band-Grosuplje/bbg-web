@@ -10,7 +10,8 @@
       "alt": "Big band v celoti na zatemnjenem odru: ritem sekcija s klaviaturami, kontrabasom, kitaro in bobni na levi, pihalne sekcije za pulti na desni, dirigent pred njimi.",
       "altEn": "The full big band on a darkened stage: rhythm section with keyboard, double bass, guitar and drums on the left, wind sections behind their stands on the right, the conductor in front of them.",
       "leto": 2026,
-      "mesec": null
+      "mesec": null,
+      "poudarek": true
     },
     {
       "datoteka": "orkester/kotar-napoved-mozaik-2026.jpg",
@@ -82,7 +83,8 @@
       "alt": "Črno-bela skupinska fotografija po vaji: orkester in gostujoči glasbeniki stojijo na odru z dvignjenimi inštrumenti — trombonami, trobentami in saksofoni; na desni vibrafon, na sredini sedi dirigent za pultom.",
       "altEn": "A black-and-white group photo after the rehearsal: the orchestra and guest musicians stand on stage with their instruments raised — trombones, trumpets and saxophones; a vibraphone on the right, the conductor seated at the stand in the middle.",
       "leto": 2024,
-      "mesec": "2024-10"
+      "mesec": "2024-10",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/javornik-kekec-brinje-2023.jpg",
@@ -91,7 +93,8 @@
       "alt": "Dirigent z očali za notnim pultom med nastopom, z iztegnjeno roko; v ozadju polne tribune športne dvorane.",
       "altEn": "The conductor in glasses at the music stand during the performance, one arm outstretched; the full bleachers of a sports hall behind him.",
       "leto": 2023,
-      "mesec": null
+      "mesec": null,
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/javornik-generalka-peric-2022.jpg",
@@ -100,7 +103,8 @@
       "alt": "Pogled z odra: dirigent z obema dvignjenima rokama za pultom, v ospredju hrbti sedečih glasbenikov in notni pulti.",
       "altEn": "A view from within the orchestra: the conductor with both hands raised at the stand, the backs of seated players and music stands in the foreground.",
       "leto": 2022,
-      "mesec": "2022-04"
+      "mesec": "2022-04",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/javornik-oder-peric-2022.jpg",
@@ -109,7 +113,8 @@
       "alt": "Dirigent za notnim pultom pod odrskimi reflektorji z dvignjeno roko; v ospredju tenor saksofon na stojalu in glava glasbenika, v ozadju prazna dvorana.",
       "altEn": "The conductor at the music stand under stage spotlights with a raised hand; a tenor saxophone on its stand and a player’s head in the foreground, the empty auditorium behind.",
       "leto": 2022,
-      "mesec": "2022-04"
+      "mesec": "2022-04",
+      "poudarek": true
     },
     {
       "datoteka": "orkester/kotar-dirigent-energija.jpg",
@@ -118,7 +123,8 @@
       "mesec": null,
       "podnapisEn": "Klemen Kotar at the orchestra’s concert in the atrium of the National and University Library (NUK), Ljubljana, 2022 — guest vocalist Peter Savizon",
       "alt": "Enobarvna fotografija od blizu: dirigent s kodrastimi lasmi z obema rokama visoko dvignjenima med vodenjem, v majici Big Banda Grosuplje; v ozadju zamegljena publika.",
-      "altEn": "A monochrome close-up: the conductor, curly-haired, both arms raised high while conducting, in a Big Band Grosuplje T-shirt; the audience blurred behind him."
+      "altEn": "A monochrome close-up: the conductor, curly-haired, both arms raised high while conducting, in a Big Band Grosuplje T-shirt; the audience blurred behind him.",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/mejnik-nishville-2018-oder.jpg",
@@ -127,7 +133,8 @@
       "alt": "Festivalski oder v modri svetlobi: dirigent s hrbtom proti objektivu z razprtima rokama, na levi stoji saksofonist med solom, orkester sedi za pulti z napisi Big Band Grosuplje; v ozadju velika kulisa festivala.",
       "altEn": "A festival stage in blue light: the conductor seen from behind with arms spread, a saxophonist standing and soloing at the left, the orchestra seated behind stands marked Big Band Grosuplje; the large festival backdrop behind them.",
       "leto": 2018,
-      "mesec": null
+      "mesec": null,
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/mejnik-us-embassy-combo-2017.jpg",
@@ -136,7 +143,8 @@
       "alt": "Skupinska fotografija combo zasedbe na odru z inštrumenti v rokah — kitaro, pozavno, saksofonom, trobento in kontrabasom — pred osvetljenim napisom U.S. Embassy Ljubljana.",
       "altEn": "A group photo of the combo on stage holding their instruments — guitar, trombone, saxophone, trumpet and double bass — in front of the illuminated U.S. Embassy Ljubljana sign.",
       "leto": 2017,
-      "mesec": "2017-06"
+      "mesec": "2017-06",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/vrbic-sinatra-2013.jpg",
@@ -145,7 +153,8 @@
       "mesec": null,
       "podnapisEn": "Frank Sinatra programme “A Swingin’ Affair” with Blaž Vrbič, 2013",
       "alt": "Črno-bela: pevec v temni obleki z metuljčkom poje v ročni mikrofon; za njim igrajo saksofonisti, v ozadju trobila in kitarist s polakustično kitaro.",
-      "altEn": "Black and white: a singer in a dark suit and bow tie sings into a hand-held microphone; saxophonists play behind him, with brass and a guitarist on a hollow-body guitar further back."
+      "altEn": "Black and white: a singer in a dark suit and bow tie sings into a hand-held microphone; saxophonists play behind him, with brass and a guitarist on a hollow-body guitar further back.",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/koncert-javornik-obdobje.jpg",
@@ -163,7 +172,8 @@
       "mesec": null,
       "podnapisEn": "Concert with Boško Petrović (vibraphone), 2006 — beside him young Vid Jamnik, a participant in the accompanying workshop; conductor Igor Lunder",
       "alt": "Črno-bela: vibrafonist s kladivci igra na vibrafon, ob njem stoji deček s kladivcem v roki in ga opazuje; za njima saksofonska sekcija in bobni.",
-      "altEn": "Black and white: a vibraphonist plays with mallets while a boy stands beside him holding a mallet and watching; the saxophone section and drums behind them."
+      "altEn": "Black and white: a vibraphonist plays with mallets while a boy stands beside him holding a mallet and watching; the saxophone section and drums behind them.",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/sinatra-pestner-kongo-2005.jpg",
@@ -172,7 +182,8 @@
       "mesec": null,
       "podnapisEn": "Concert marking the 90th anniversary of Frank Sinatra’s birth with vocalist Oto Pestner, Kongo Hotel & Casino, Grosuplje, 2005 — conductor Igor Lunder",
       "alt": "Črno-bela: pevec z mikrofonom v roki poje na sprednjem robu odra, pred orkestrom stoji dirigent s hrbtom proti objektivu; orkester v svečanih oblekah za pulti, na levi klaviature in kitara.",
-      "altEn": "Black and white: a vocalist sings into a hand-held microphone at the front of the stage, the conductor standing before the orchestra seen from behind; the orchestra in formal dress at their stands, keyboards and guitar on the left."
+      "altEn": "Black and white: a vocalist sings into a hand-held microphone at the front of the stage, the conductor standing before the orchestra seen from behind; the orchestra in formal dress at their stands, keyboards and guitar on the left.",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/mladinska-knjiga-gallus-2005.jpg",
@@ -190,7 +201,8 @@
       "mesec": null,
       "podnapisEn": "“The Music of Glenn Miller and Count Basie”, centenary concert, 2004 — conductor Igor Lunder",
       "alt": "Črno-bela: dirigent s hrbtom proti objektivu z dvignjeno taktirko, pred njim sedeča vrsta saksofonistov, za njimi trobentači; v ozadju poslikana kulisa s krogom in napisom Grosuplje.",
-      "altEn": "Black and white: the conductor seen from behind with a raised baton, a seated row of saxophonists in front of him and trumpeters behind; a painted backdrop with a circle and the word Grosuplje."
+      "altEn": "Black and white: the conductor seen from behind with a raised baton, a seated row of saxophonists in front of him and trumpeters behind; a painted backdrop with a circle and the word Grosuplje.",
+      "poudarek": true
     },
     {
       "datoteka": "zgodovina/orkester-po-vaji-kd-2004.jpg",
@@ -209,7 +221,8 @@
       "priblizno": true,
       "podnapisEn": "Big Band Grosuplje members with first conductor Braco J. Doblekar at the monument bearing the municipal symbol on Grosuplje market square, c. 2002",
       "alt": "Barvna skupinska fotografija na prostem: mladi glasbeniki z inštrumenti — kontrabasom, klaviaturo, saksofoni, trobentami in pozavno — stojijo na stopnicah kamnitega spomenika, v ozadju vrbe in stojnice tržnice; v sredini čepi starejši moški v sončnih očalih.",
-      "altEn": "A colour group photo outdoors: young musicians with their instruments — double bass, keyboard, saxophones, trumpets and trombone — standing on the steps of a stone monument, willow trees and market stalls behind them; an older man in sunglasses crouches in the middle."
+      "altEn": "A colour group photo outdoors: young musicians with their instruments — double bass, keyboard, saxophones, trumpets and trombone — standing on the steps of a stone monument, willow trees and market stalls behind them; an older man in sunglasses crouches in the middle.",
+      "poudarek": true
     }
   ]
 }

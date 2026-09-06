@@ -4,7 +4,7 @@ import Nav from '../Nav.astro';
 import Noga from '../Noga.astro';
 import Lightbox from '../Lightbox.astro';
 import GalerijaSlika from '../GalerijaSlika.astro';
-import { zgodovinske } from '../../lib/galerija';
+import { fotografijeEre, type EraId } from '../../lib/galerija';
 import zgodovinaData from '../../data/zgodovina.json';
 import { pot, slovar, type Jezik } from '../../i18n';
 
@@ -25,7 +25,6 @@ type Obdobje = {
   opis: string;
   opisEn?: string;
   vnosi: Vnos[];
-  fotografije: string[];
 };
 
 /* Angleška različica z zasilnim vračilom na slovensko: manjkajoč prevod
@@ -41,15 +40,18 @@ const gostujociDirigenti = (
 );
 const jubilej = v(zgodovinaData.jubilej, zgodovinaData.jubilejEn);
 
-/* Fotografije razrešimo že tu, da so obdobja brez slik prepoznana pred izrisom.
-   Tiste brez potrjenega dovoljenja avtorja pomočnik izpusti sam. */
+/* Fotografije se eram dodelijo po letu in dirigentu iz napisa (glej
+   src/lib/galerija.ts) — statičnega seznama imen v zgodovina.json ni več,
+   ker se je z letnicami razšel. Razrešimo jih že tu, da so ere brez slik
+   prepoznane pred izrisom. Fotografije brez potrjenega dovoljenja avtorja
+   v galerija.json niso vpisane, zato se tu ne morejo pojaviti. */
 const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
   ...o,
   obdobjePrikaz: v(o.obdobje, o.obdobjeEn),
   vlogaPrikaz: v(o.vloga, o.vlogaEn),
   opisPrikaz: v(o.opis, o.opisEn),
   vnosiPrikaz: o.vnosi.map((x) => ({ leto: x.leto, besedilo: v(x.besedilo, x.besediloEn) })),
-  fotke: zgodovinske(o.fotografije),
+  fotke: fotografijeEre(o.id as EraId),
 }));
 ---
 
@@ -212,14 +214,20 @@ const obdobja = (zgodovinaData.obdobja as Obdobje[]).map((o) => ({
     font-size: 16px;
   }
 
-  /* --- Fotografije obdobja --- */
+  /* --- Fotografije obdobja ---
+     Do treh kolon: vsak stolpec je široko vsaj 28 % vsebnika, zato se v
+     vrsto ne more uvrstiti četrti, ne glede na širino zaslona. 14rem je
+     spodnja meja, da se na ozkem zaslonu mreža zloži v en stolpec.
+     Slike dveh er se v isto vrsto ne morejo pomešati, ker ima vsaka era
+     svojo mrežo znotraj svojega odseka. Pokončne slike obreže
+     GalerijaSlika enako kot v galeriji. */
   .slike {
     list-style: none;
     margin: 34px 0 0;
     padding: 0;
     display: grid;
     gap: 26px;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(max(28%, 14rem), 1fr));
   }
 
   /* --- Gostujoči dirigenti --- */
