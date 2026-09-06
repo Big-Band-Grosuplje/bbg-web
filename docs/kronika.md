@@ -112,9 +112,11 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   dogodki), Sinatra Portorož, poroka Zemono
 - 2022 — 22. 4. koncert z Urošem Perićem in skupino The Pearlettes, otvoritev
   prenovljene dvorane Kulturnega doma Grosuplje, dirigent Rudi Javornik;
-  samostojni koncert v atriju NUK v Ljubljani z gostom Petrom Savizonom;
-  Marezijazz (program Jeffa Coffina); Sinatra Velenje; december: program
-  Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem
+  samostojni koncert v atriju NUK v Ljubljani z gostom Petrom Savizonom,
+  dirigent Klemen Kotar; Marezijazz (program Jeffa Coffina); Sinatra Velenje;
+  december: program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem.
+  V letih 2022 in 2023 sta si Rudi Javornik in Klemen Kotar dirigentsko
+  vodenje delila po programih; formalni prevzem je sledil jeseni 2023.
 - 2023 — Sinatra na Ljubljanskem gradu in na Krki; 70 let VVZ Kekec, Športna
   dvorana Brinje, dirigent Rudi Javornik
 
