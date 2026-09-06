@@ -60,8 +60,11 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   Sinatri« ob 90. obletnici rojstva z Otom Pestnerjem in Adamom Klemmom (Kongo Hotel
   & Casino); delavnica z Elektrik Jazz Quartetom; Miklavžev dobrodelni koncert (TVS)
 - 2006 — koncerta z vibrafonistoma Boškom Petrovićem in Vidom Jamnikom (maj/junij,
-  z javnim snemanjem); koncert s HGM Jazz orkestrom Zagreb in trobentačem Johnom
-  Thomasom (ZDA); festival big bandov Bjelovar (Hrvaška); poletni seminar
+  z javnim snemanjem); sodelovanje z Boškom Petrovićem je vključevalo delavnico —
+  njen udeleženec Vid Jamnik je pozneje diplomiral iz vibrafona na Berklee College
+  of Music in je danes mednarodno uveljavljen vibrafonist; koncert s HGM Jazz
+  orkestrom Zagreb in trobentačem Johnom Thomasom (ZDA); festival big bandov
+  Bjelovar (Hrvaška); poletni seminar
   vodi Sigi Feigl (Avstrija); jesenski koncert z Nino Pušlar; ustanovitev
   Mladinskega ansambla BiBa (razvoj mladih)
 - 2007 — dobrodelna »Zlati ključ mesta Grosuplje« (Alenka Godec, Nina Pušlar,
@@ -73,7 +76,9 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
 - 2008 — 10. obletnica orkestra; koncert »American Jazz History«
 
 ### 2009–2012 (zatišje in ponovni zagon)
-- 2010 — sodelovanje ob 50. letnici Jazza na Bledu
+- 2010 — 17. 7. slavnostni koncert ob 50. letnici Jazza na Bledu, Festivalna dvorana
+  Bled; dirigent Igor Lunder, gostje Gašper Bertoncelj, Peter Mihelič, Irena Vidic,
+  Robert Jukič in Igor Matkovič (vir: RTV SLO, 29. 6. 2010)
 - 2011 — projekt »Music Unites« z ameriško pevko Gwen Hughes (podpora U.S. Embassy)
 - 2012 — koncerti s Prifarskimi muzikanti; jazzobraževanje (delavnice);
   **september 2012: dirigent in umetniški vodja postane Klemen Kotar**;
@@ -106,7 +111,8 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   ČinČin); december: Count Basie / Diane Schuur program z gostom Zanchinnijem
 - 2020–2021 — covid obdobje; posamezni nastopi comba (otvoritve, protokolarni
   dogodki), Sinatra Portorož, poroka Zemono
-- 2022 — koncert z Urošem Peričem; Marezijazz (program Jeffa Coffina); Sinatra
+- 2022 — koncert z Urošem Peričem; samostojni koncert v atriju NUK v Ljubljani z
+  gostom Petrom Savizonom; Marezijazz (program Jeffa Coffina); Sinatra
   Velenje; december: program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem —
   **Kotar se vrne kot dirigent**
 
