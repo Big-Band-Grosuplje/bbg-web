@@ -24,7 +24,7 @@ Pravilo za objavo: pri fotografijah zunanjih avtorjev vedno podpis
 
 ## orkester/ — o nas, vzdušje, sodobna zasedba (2013–2026)
 kotar-dirigent-energija.jpg (ikonična, BBG majica), orkester-nasmeh-napoved-2026,
-orkester-napoved-2026, kotar-napoved-kazina-2026, orkester-solistka-alt-2026,
+orkester-napoved-2026, kotar-napoved-mozaik-2026, orkester-celoten-2026,
 orkester-igra-2026, saksofoni-trobente-2026, solista-klarinet-flavta-2026,
 kazina-prazen-oder-2026 (za novice/ozadja), vaja-skupinska-2024 (razigrana,
 za sekcijo o društvu / vabilo novim članom)

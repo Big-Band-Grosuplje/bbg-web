@@ -4,7 +4,7 @@
   "opomba": "Fotografije iz src/assets/foto/{orkester,zgodovina}. Mapa hero/ ni tu - je gradivo za naslovnico. Fotografije s TODO dovoljenjem (sinatra-novi-trg-2013-zakrajsek, kotar-publika-2013-zakrajsek, mejnik-nishville-2018-pozrl, koncert-javornik-oder-sirse) so izpuscene, dokler dovoljenja niso potrjena. Polje mesec je vpisano samo tam, kjer je znan; leto null pomeni, da letnica po manifestu ni potrjena. Polje priblizno = letnica je ocena. Polje podnapisEn je angleski podnapis; imena krajev in oseb ostajajo skupna.",
   "fotografije": [
     {
-      "datoteka": "orkester/orkester-solistka-alt-2026.jpg",
+      "datoteka": "orkester/orkester-celoten-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026 — celoten orkester",
       "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026 — the full orchestra",
       "alt": "Big band v celoti na zatemnjenem odru: ritem sekcija s klaviaturami, kontrabasom, kitaro in bobni na levi, pihalne sekcije za pulti na desni, dirigent pred njimi.",
@@ -13,7 +13,7 @@
       "mesec": null
     },
     {
-      "datoteka": "orkester/kotar-napoved-kazina-2026.jpg",
+      "datoteka": "orkester/kotar-napoved-mozaik-2026.jpg",
       "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026",
       "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026",
       "alt": "Napoved z odra: govorec z listkom v roki stoji pri mikrofonu na sprednjem robu odra, orkester sedi za njim.",
@@ -40,6 +40,33 @@
       "mesec": null
     },
     {
+      "datoteka": "orkester/orkester-igra-2026.jpg",
+      "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026 — orkester med izvedbo",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026 — the orchestra in performance",
+      "alt": "Kader z odra med skladbo: v prvi vrsti saksofoni pri mikrofonih, za njimi trobente in trombon, ob desnem robu kadra dirigent nad partituro.",
+      "altEn": "A view of the stage during a number: saxophones at their microphones in the front row, trumpets and a trombone behind them, the conductor over the score at the right edge of the frame.",
+      "leto": 2026,
+      "mesec": null
+    },
+    {
+      "datoteka": "orkester/saksofoni-trobente-2026.jpg",
+      "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026 — saksofonska in trobilna sekcija",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026 — saxophone and brass sections",
+      "alt": "Od blizu: v prvi vrsti igrajo saksofonisti, za njimi trobentači, ob levem robu kadra dirigent s hrbtom proti objektivu.",
+      "altEn": "Close up: saxophonists playing in the front row, trumpeters behind them, and the conductor at the left edge of the frame seen from behind.",
+      "leto": 2026,
+      "mesec": null
+    },
+    {
+      "datoteka": "orkester/solista-klarinet-flavta-2026.jpg",
+      "podnapis": "Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026 — solista Tomaž Zevnik (klarinet) in Klemen Kotar (flavta)",
+      "podnapisEn": "A Tribute to Gordon Goodwin, Mozaik kulture festival, Grosuplje Cultural Centre, 2026 — soloists Tomaž Zevnik (clarinet) and Klemen Kotar (flute)",
+      "alt": "Tomaž Zevnik s klarinetom in Klemen Kotar s flavto stojita pred sedečim orkestrom, vsak pri svojem mikrofonu; za njima kitarist in ritem sekcija.",
+      "altEn": "Tomaž Zevnik on clarinet and Klemen Kotar on flute stand in front of the seated orchestra, each at a microphone; the guitarist and rhythm section behind them.",
+      "leto": 2026,
+      "mesec": null
+    },
+    {
       "datoteka": "orkester/kazina-prazen-oder-2026.jpg",
       "podnapis": "Jazz klub Kazina pred koncertom, 2026",
       "podnapisEn": "Kazina Jazz Club before the concert, 2026",
@@ -47,33 +74,6 @@
       "altEn": "An empty stage before the concert: music stands, a piano, drums and brass instruments set down, the illuminated KAZINA letters behind.",
       "leto": 2026,
       "mesec": "2026-06"
-    },
-    {
-      "datoteka": "orkester/orkester-igra-2026.jpg",
-      "podnapis": "Poklon Gordonu Goodwinu, 2026 — orkester med izvedbo",
-      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the orchestra mid-performance",
-      "alt": "Orkester med igranjem: saksofoni v prvi vrsti pri mikrofonih, trobente in trombon v drugi, ob desnem robu kadra dirigent nad partituro.",
-      "altEn": "The orchestra playing: saxophones at their microphones in the front row, trumpets and a trombone behind, the conductor over the score at the right edge of the frame.",
-      "leto": 2026,
-      "mesec": null
-    },
-    {
-      "datoteka": "orkester/saksofoni-trobente-2026.jpg",
-      "podnapis": "Poklon Gordonu Goodwinu, 2026 — saksofonska in trobilna sekcija",
-      "podnapisEn": "A Tribute to Gordon Goodwin, 2026 — the saxophone and brass sections",
-      "alt": "Saksofonska in trobilna sekcija med igranjem, dirigent na levem robu kadra s hrbtom proti objektivu.",
-      "altEn": "The saxophone and brass sections playing, the conductor at the left edge of the frame seen from behind.",
-      "leto": 2026,
-      "mesec": null
-    },
-    {
-      "datoteka": "orkester/solista-klarinet-flavta-2026.jpg",
-      "podnapis": "Poklon Gordonu Goodwinu, Jazz klub Kazina, 2026 — solista Tomaž Zevnik (klarinet) in Klemen Kotar (flavta)",
-      "podnapisEn": "A Tribute to Gordon Goodwin, Kazina Jazz Club, 2026 — soloists Tomaž Zevnik (clarinet) and Klemen Kotar (flute)",
-      "alt": "Tomaž Zevnik s klarinetom in Klemen Kotar s flavto stojita pred sedečim orkestrom, vsak pri svojem mikrofonu; za njima kitarist in ritem sekcija.",
-      "altEn": "Tomaž Zevnik on clarinet and Klemen Kotar on flute stand in front of the seated orchestra, each at a microphone; the guitarist and rhythm section behind them.",
-      "leto": 2026,
-      "mesec": null
     },
     {
       "datoteka": "orkester/vaja-skupinska-2024.jpg",
@@ -93,10 +93,12 @@
     },
     {
       "datoteka": "zgodovina/mejnik-us-embassy-combo-2017.jpg",
-      "podnapis": "Combo na dogodku ameriškega veleposlaništva, 2017",
+      "podnapis": "Combo zasedba Big Banda Grosuplje na dogodku ameriškega veleposlaništva v Ljubljani, 2017 —\nna sliki tudi vokalni solist Peter Savizon in tedanji ameriški veleposlanik v Sloveniji Brent Hartley",
+      "podnapisEn": "The Big Band Grosuplje combo at a U.S. Embassy event in Ljubljana, 2017 —\npictured with vocalist Peter Savizon and Brent Hartley, then U.S. Ambassador to Slovenia",
+      "alt": "Skupinska fotografija combo zasedbe na odru z inštrumenti v rokah — kitaro, pozavno, saksofonom, trobento in kontrabasom — pred osvetljenim napisom U.S. Embassy Ljubljana.",
+      "altEn": "A group photo of the combo on stage holding their instruments — guitar, trombone, saxophone, trumpet and double bass — in front of the illuminated U.S. Embassy Ljubljana sign.",
       "leto": 2017,
-      "mesec": "2017-06",
-      "podnapisEn": "The combo at a U.S. Embassy event, 2017"
+      "mesec": "2017-06"
     },
     {
       "datoteka": "zgodovina/vrbic-sinatra-2013.jpg",
