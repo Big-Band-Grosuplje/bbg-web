@@ -14,6 +14,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Noga from '../Noga.astro';
 import Deljenje from '../Deljenje.astro';
+import LogoZid from '../LogoZid.astro';
 import { pot, slovar, type Jezik } from '../../i18n';
 import {
   oznakaZasedbe,
@@ -50,6 +51,10 @@ const k = pripravi(
 );
 
 const naslovStrani = `${k.nazivPrikaz} — Big Band Grosuplje`;
+
+/* Naslov nad zidom logotipov: lasten iz koncerti.json, sicer privzeti iz
+   slovarja. Knjižnica slovarja ne pozna, zato rezerva ni v pripravi(). */
+const podpornikiNaslov = k.podpornikiNaslovPrikaz ?? t.koncerti.podpornikiNaslov;
 
 /* Zaprtega dogodka ne delimo in ne damo v indeks. Podstran ostane —
    povabljeni pridejo nanjo po neposredni povezavi — le gumba za deljenje
@@ -174,6 +179,18 @@ const imaAkcije =
           </ul>
         </div>
       )}
+
+      {/* Zid podpornikov stoji na koncu vsebine: je pripis k dogodku in ne
+          njegova vsebina, hkrati pa mora ostati na strani in ne v nogi,
+          ker velja za ta dogodek in ne za društvo. Brez vpisanih
+          podpornikov se komponenta ne izriše. */}
+      <LogoZid
+        vnosi={k.podpornikiPrikaz}
+        naslov={podpornikiNaslov}
+        prikaziRavni
+        jezik={jezik}
+        id="podporniki-dogodka"
+      />
 
       {k.jsonLd && <script type="application/ld+json" set:html={JSON.stringify(k.jsonLd)} />}
     </div>

@@ -10,6 +10,17 @@
    zasedb) prejme kot parametre.
    ============================================================ */
 import koncertiData from '../data/koncerti.json';
+import {
+  PRESLIKAVA_JSONLD,
+  imePodpornika,
+  opozoriNaGloboko,
+  preveriVnosePodpornikov,
+  resiPodpornika,
+  type KljucPodpornika,
+  type LastnostJsonLd,
+  type Raven,
+  type VnosPodpornika,
+} from '../data/podporniki';
 import type { Jezik } from '../i18n';
 
 const SITE = 'https://bigband-grosuplje.com';
@@ -29,6 +40,12 @@ export type Lokacija = {
   kraj: string;
   drzava?: string | null;
 } | null;
+/* Vnos podpornika, kot se zapiše v koncerti.json. Od VnosPodpornika iz
+   registra se loči po tem, da je raven neobvezna: pri dogodku je pogosto
+   samoumevna in privzeta vrednost ('sponzor') zadošča. Vnose z izpolnjeno
+   ravnijo vrne podpornikiDogodka(). */
+export type VnosPodpornikaDogodka = { kljuc: KljucPodpornika; raven?: Raven };
+
 export type Koncert = {
   id: string;
   /* Naslov podstrani; vpisan v koncerti.json in po objavi nespremenljiv. */
@@ -56,6 +73,13 @@ export type Koncert = {
   organizator?: Organizator;
   /* Neobvezno; izpiše se samo na podstrani dogodka, ne na kartici. */
   objave?: Objava[];
+  /* Podporniki dogodka: ključi v register src/data/podporniki.ts.
+     Brez polja zidu logotipov ni. Raven je neobvezna — privzeto 'sponzor'. */
+  podporniki?: VnosPodpornikaDogodka[];
+  /* Neobvezen lasten naslov nad zidom logotipov; brez njega velja
+     privzeto besedilo iz slovarja. */
+  podpornikiNaslov?: string;
+  podpornikiNaslovEn?: string;
 };
 
 /* Privzeti organizator. Ime je zapisano tu in ne v vsakem dogodku: je
@@ -64,6 +88,38 @@ export type Koncert = {
 const DRUSTVO = { naziv: 'Kulturno društvo Big Band Grosuplje', url: SITE };
 
 const koncerti = koncertiData.koncerti as Koncert[];
+
+/* Vnosi podpornikov iz koncerti.json. Datoteka je uvožena s pretvorbo
+   (as Koncert[]), zato tipi vpisa ne preverijo — tipkarska napaka bi ostala
+   neopažena do trenutka, ko bi logotip tiho izginil s strani.
+
+   Preverjanje samo je v registru (preveriVnosePodpornikov), ker so ključ,
+   raven in dovoljenje za objavo njegove invariante; tu ostane le, kar je
+   lastno temu viru — sprehod čez dogodke in navedba, v katerem je napaka.
+
+   Privzeta raven je 'sponzor': vpis brez ravni je veljaven. */
+const PRIVZETA_RAVEN: Raven = 'sponzor';
+
+for (const k of koncerti) {
+  preveriVnosePodpornikov(k.podporniki ?? [], `dogodek "${k.slug}" v koncerti.json`);
+  /* Organizator gre v JSON-LD kot Organization.url, zato zanj velja isto
+     merilo kot za podpornike. Polja objave ne pregledujemo — objava je po
+     definiciji stran o dogodku in v JSON-LD sploh ne pride; enako vstop.url,
+     ki postane Offer.url in tam globoka pot je pravilna. */
+  if (k.organizator) {
+    opozoriNaGloboko(
+      k.organizator.url,
+      k.organizator.naziv,
+      `organizator dogodka "${k.slug}" v koncerti.json`,
+    );
+  }
+}
+
+/* Vnosi dogodka z izpolnjeno privzeto ravnijo. Uporabljata jo izris zidu in
+   gradnja JSON-LD, da se ne moreta raziti. */
+function podpornikiDogodka(k: Koncert): VnosPodpornika[] {
+  return (k.podporniki ?? []).map((v) => ({ kljuc: v.kljuc, raven: v.raven ?? PRIVZETA_RAVEN }));
+}
 
 /* Prizorišče za meta vrstico. Ime prizorišča kraj pogosto že vsebuje
    ("Rezidenca ameriškega veleposlaništva, Ljubljana"), zato ga ne
@@ -236,6 +292,15 @@ function musicEvent(k: Koncert, jezik: Jezik, url?: string) {
        ga iskalnik lahko naveže na svojo stran. Na naslovnici polja ni,
        ker so tam dogodki samo izsek. */
     ...(url ? { url } : {}),
+    /* sameAs: naslovi, ki opisujejo ISTI dogodek drugje. Polje objave je
+       natanko to, zato gre vanj — v organizer, sponsor ali funder pa ne,
+       ker objava ni ne organizator ne podpornik. Vidnega izpisa objav to
+       ne spremeni.
+
+       Seznam je enak v obeh jezikih: sameAs govori o naslovih, ne o
+       besedilu, in objave slovenske ter angleške različice ne ločijo.
+       Prazno polje izpustimo, enako kot pri vseh drugih lastnostih. */
+    ...(k.objave?.length ? { sameAs: k.objave.map((o) => o.url) } : {}),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     ...(izobrazevalni
@@ -289,6 +354,50 @@ function musicEvent(k: Koncert, jezik: Jezik, url?: string) {
       availability: 'https://schema.org/InStock',
     };
   }
+  /* Podporniki. Katera lastnost schema.org pripada kateri ravni, pove
+     PRESLIKAVA_JSONLD v registru — tu ni nobenega seznama ravni, zato nova
+     raven ne zahteva posega v to funkcijo. Prazne lastnosti ne dodajamo:
+     "sponsor": [] iskalniku ne pove ničesar, pove pa, da smo polje pozabili
+     izpolniti.
+
+     logo je absoluten, ker relativna pot v strukturiranih podatkih nima
+     izhodišča. Sestavimo ga iz SITE, iste konstante kot url društva. */
+  const skupine = new Map<LastnostJsonLd, Record<string, string>[]>();
+  for (const v of podpornikiDogodka(k)) {
+    const p = resiPodpornika(v.kljuc);
+    if (!p) continue;
+    const lastnost = PRESLIKAVA_JSONLD[v.raven];
+    const zapis = {
+      '@type': 'Organization',
+      name: imePodpornika(p, jezik),
+      /* url izpustimo, kadar povezava ni domača stran organizacije
+         (urlJeUradnaStran: false). Organization.url je trditev o identiteti
+         in ne priročna povezava — krovni portal bi tu trdil nekaj, kar ne
+         drži, iskalniki in jezikovni modeli pa to povzemajo naprej. Vidna
+         povezava na logotipu ostane. */
+      ...(p.url && p.urlJeUradnaStran !== false ? { url: p.url } : {}),
+      ...(p.logo ? { logo: new URL(p.logo, SITE).href } : {}),
+    };
+    const obstojece = skupine.get(lastnost);
+    if (obstojece) obstojece.push(zapis);
+    else skupine.set(lastnost, [zapis]);
+  }
+
+  for (const [lastnost, organizacije] of skupine) {
+    if (organizacije.length === 0) continue;
+    /* organizer je edina lastnost, ki je na dogodku že zasedena: zgoraj
+       vanjo zapišemo društvo oziroma zunanjega organizatorja. Soorganizatorji
+       se ji zato PRIDRUŽIJO — zapis bi sicer izbrisal organizatorja dogodka,
+       kar je hujša napaka od manjkajočega soorganizatorja. Obstoječo vrednost
+       najprej pretvorimo v polje, ker je doslej vedno en sam objekt. */
+    if (lastnost === 'organizer') {
+      const doslej = dogodek.organizer;
+      const kotPolje = Array.isArray(doslej) ? doslej : doslej ? [doslej] : [];
+      dogodek.organizer = [...kotPolje, ...organizacije];
+      continue;
+    }
+    dogodek[lastnost] = organizacije;
+  }
   return dogodek;
 }
 
@@ -325,6 +434,13 @@ export function pripravi(
       naziv: en ? (o.nazivEn ?? o.naziv) : o.naziv,
       url: o.url,
     })),
+    /* Vnosi z izpolnjeno privzeto ravnijo; prazno polje pomeni, da zidu
+       logotipov ni. */
+    podpornikiPrikaz: podpornikiDogodka(k),
+    /* Lasten naslov nad zidom; null pomeni, da velja privzeto besedilo iz
+       slovarja — knjižnica slovarja ne pozna. */
+    podpornikiNaslovPrikaz:
+      (en ? (k.podpornikiNaslovEn ?? k.podpornikiNaslov) : k.podpornikiNaslov) ?? null,
     jsonLd: musicEvent(k, jezik, url),
     /* Pretekli dogodek: podstran ostane (arhivska vrednost), le označimo ga. */
     jeMimo: !jePrihajajoc(k.datumKonecIso ?? k.datumIso),

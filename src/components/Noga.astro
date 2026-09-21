@@ -1,6 +1,8 @@
 ---
 import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
+import LogoZid from './LogoZid.astro';
 import { BREVO_FORM_URL, KONTAKT_EPOSTA } from '../config';
+import { PODPORNIKI_DRUSTVA } from '../data/podporniki';
 import { pot, slovar, type Jezik } from '../i18n';
 
 interface Props {
@@ -100,6 +102,18 @@ const brevoVklopljen = BREVO_FORM_URL !== '';
         </p>
       </nav>
     </div>
+
+    {/* Stalni podporniki društva — nad kolofonom in ne pod njim: kolofon
+        je zaključek strani z uradnimi podatki in za njim bralec ne
+        pričakuje več vsebine. Projektni podporniki posameznega dogodka
+        so na podstrani dogodka, ne tu. */}
+    <LogoZid
+      vnosi={PODPORNIKI_DRUSTVA}
+      naslov={t.noga.podpornikiNaslov}
+      varianta="kompaktno"
+      jezik={jezik}
+      id="podporniki-drustva"
+    />
 
     <p class="kolofon">
       {t.noga.kolofonNaziv}<br />
