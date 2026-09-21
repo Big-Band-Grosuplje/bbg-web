@@ -38,14 +38,47 @@ Za uradne datoteke zaprosi na:
 ## Pravila uporabe
 
 - **Logotipov ne barvamo, ne popačimo, ne rotiramo in ne dodajamo učinkov.**
-  Zato v `LogoZid.astro` ni sivinskega filtra: na temni podlagi večbarvni
-  logotipi dobijo belo ploskev (`temnaStrategija: 'podlaga'`), enobarvni pa
-  ločeno belo različico (`'belo'`).
+  Zato v `LogoZid.astro` ni sivinskega filtra. V temni temi stoji cel zid na
+  eni skupni svetli ploskvi (papir `#F3EBD8`), logotipi pa so povsod v
+  izvirnih barvah — glej *Knockout različice* spodaj.
 - Logotip objavimo šele, ko imamo **pisno potrditev** dajalca za konkretni
   dogodek oziroma za stalno navajanje.
 - Sofinancerji praviloma zahtevajo navedbo v vseh materialih projekta
   (vabila, plakati, program, spletna stran, družbena omrežja) — preveri pogodbo
   ali sklep o sofinanciranju.
+
+### Knockout različice
+
+Knockout različica je logotip, prerisan v eno samo svetlo barvo (pri nas belo),
+namenjen postavitvi **neposredno na temno podlago**. Ni prebarvan izvirnik, ampak
+ločena datoteka, ki jo praviloma pripravi ali odobri dajalec.
+
+**Pri trenutni zasnovi jih ne potrebujemo.** `LogoZid.astro` v temni temi postavi
+cel zid na skupno svetlo ploskev, zato je podlaga pod logotipom papirnata v obeh
+temah in vsak logotip lahko ostane v izvirnih barvah. Prejšnja rešitev — kartica
+pod večbarvnim logotipom in knockout pri enobarvnem sosedu — je bila drugi ob
+drugem videti kot napaka.
+
+Zato v `src/data/podporniki.ts` **ni več polj `temnaStrategija` in `logoTemno`**
+(odstranjeni 21. 9. 2026). Polje, ki ga nobena komponenta ne bere, ob vsakem novem
+vnosu terja odločitev brez posledic; podatek je pri peščici vnosov poceni obnoviti,
+past pa ostane, dokler je polje v tipu.
+
+Obstoječe datoteke:
+
+| Ključ | Knockout datoteka | Opomba |
+|---|---|---|
+| `zkd-grosuplje` | `zkd-grosuplje-belo.svg` | V repozitoriju ostaja, čeprav je nič ne izrisuje |
+
+**Knockout je smiseln samo pri enobarvnih logotipih** — tam je prerisana ena barva
+in oblika ostane nedotaknjena. Večbarvnega logotipa (JSKD, Občina Grosuplje,
+Glasbena šola) v eno barvo **ne prevajamo**: to je poseg v znak, ki ga CGP dajalcev
+prepovedujejo. Če bi tak logotip kdaj moral na temno podlago, sta edini pošteni poti
+ploskev pod njim ali knockout različica, ki jo pošlje dajalec sam.
+
+Prišle bi prav, če bi kdaj nastal **zid brez ploskve** — logotipi neposredno na temni
+podlagi, npr. ozek pas v nogi ali gradivo za družbena omrežja. Takrat je treba polji
+vrniti in ju izpolniti pri vseh vnosih, ne le pri novih.
 
 ### Veleposlaništvo ZDA — posebna previdnost
 
@@ -61,8 +94,7 @@ nič javno do odobritve granta in podpisa pogodb.
 ## Dodajanje novega podpornika
 
 1. Datoteko daj v `public/podporniki/<kljuc>.svg` (ali `.webp`, če vektorja ni).
-2. V `src/data/podporniki.ts` dodaj zapis z `ime`, `url`, `logo`,
-   `temnaStrategija` in `utez`.
+2. V `src/data/podporniki.ts` dodaj zapis z `ime`, `url`, `logo` in `utez`.
 3. `utez` določi po optični teži: širok in masiven logotip dobi manj (0,7),
    ozek in visok več (1,4). Preveri v obeh temah, preden commitaš.
 4. Pri dogodku ga navedi v frontmatterju (`podporniki: [{ kljuc, raven }]`),

@@ -16,16 +16,6 @@ export type Raven =
   | 'soorganizator' // dogodek pripravlja z nami, ne le podpira
   | 'gostitelj';    // prispeva prostor
 
-/**
- * Kako logotip prikažemo na temni podlagi:
- *  - 'belo'    → uporabi ločeno belo (knockout) različico iz `logoTemno`
- *  - 'podlaga' → logotip ostane nespremenjen, komponenta pod njega postavi
- *                belo zaobljeno ploskev (edina CGP-skladna rešitev za
- *                večbarvne logotipe s črno tipografijo)
- *  - 'brez'    → logotip je berljiv na obeh podlagah, nič posebnega
- */
-export type TemnaStrategija = 'belo' | 'podlaga' | 'brez';
-
 export interface Podpornik {
   /** Uradno ime, kot ga zahteva dajalec; uporabi se tudi kot alt besedilo. */
   ime: string;
@@ -44,9 +34,6 @@ export interface Podpornik {
   urlJeUradnaStran?: boolean;
   /** Primarna datoteka (pot znotraj /public). */
   logo: string;
-  /** Bela knockout različica — samo pri temnaStrategija: 'belo'. */
-  logoTemno?: string;
-  temnaStrategija: TemnaStrategija;
   /** Optična utež 0.7–1.5: izenači vizualno težo logotipov različnih formatov. */
   utez: number;
   /**
@@ -66,7 +53,6 @@ export const PODPORNIKI = {
     ime: 'Občina Grosuplje',
     url: 'https://www.grosuplje.si/',
     logo: '/podporniki/obcina-grosuplje.svg',
-    temnaStrategija: 'podlaga',
     utez: 1.4,
     opomba:
       'Vektoriziran iz rastrske predloge. Na voljo tudi sam grb brez napisa: '
@@ -78,8 +64,6 @@ export const PODPORNIKI = {
     url: 'https://www.kultura.si/',
     urlJeUradnaStran: false,
     logo: '/podporniki/zkd-grosuplje.svg',
-    logoTemno: '/podporniki/zkd-grosuplje-belo.svg',
-    temnaStrategija: 'belo',
     utez: 1.45,
     opomba:
       'kultura.si je krovni portal ljubiteljske kulture, ne stran ZKD Grosuplje. '
@@ -94,7 +78,6 @@ export const PODPORNIKI = {
     imeEn: 'Public Fund for Cultural Activities of the Republic of Slovenia',
     url: 'https://www.jskd.si/',
     logo: '/podporniki/jskd.webp',
-    temnaStrategija: 'podlaga',
     utez: 1.25,
     opomba:
       'Samo rastrski vir (295 px). Mozaik ni primeren za avtomatsko vektorizacijo — '
@@ -104,14 +87,12 @@ export const PODPORNIKI = {
     ime: 'Glasbena šola Grosuplje',
     url: 'https://www.gsg.si/',
     logo: '/podporniki/gs-grosuplje.svg',
-    temnaStrategija: 'podlaga',
     utez: 1.1,
   },
   'turizem-grosuplje': {
     ime: 'Turizem Grosuplje',
     url: 'https://visitgrosuplje.si/',
     logo: '/podporniki/turizem-grosuplje.svg',
-    temnaStrategija: 'brez',
     utez: 0.7,
     opomba: 'Enobarvni oranžni logotip — berljiv na svetli in temni podlagi.',
   },
@@ -121,7 +102,6 @@ export const PODPORNIKI = {
     url: 'https://si.usembassy.gov/',
     logo: '/podporniki/us-embassy.webp',
     objavaDovoljena: false,
-    temnaStrategija: 'podlaga',
     utez: 1.3,
     opomba:
       'NE OBJAVLJAJ brez izrecnega pisnega dovoljenja veleposlaništva. Gre za uradni '
@@ -144,7 +124,7 @@ export const OZNAKA_RAVNI: Record<Raven, { sl: string; en: string }> = {
   partner: { sl: 'Partner', en: 'Partner' },
   medijski: { sl: 'Medijski pokrovitelj', en: 'Media partner' },
   soorganizator: { sl: 'Soorganizator', en: 'Co-organiser' },
-  gostitelj: { sl: 'Gostitelj prostora', en: 'Venue host' },
+  gostitelj: { sl: 'Gostitelj', en: 'Host' },
 };
 
 /**

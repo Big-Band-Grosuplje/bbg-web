@@ -79,30 +79,20 @@ const NaslovElement = varianta === 'kompaktno' ? 'p' : 'h2';
     <ul class="logo-zid__seznam" role="list">
       {razreseni.map(({ p, raven }) => {
         const ime = imePodpornika(p, jezik);
-        const jeBelo = p.temnaStrategija === 'belo' && p.logoTemno;
-        const jePodlaga = p.temnaStrategija === 'podlaga';
 
+        /* Ena sama slika v izvirnih barvah. Prilagajanja temni podlagi tu ni:
+           v temni temi stoji cel zid na svetli ploskvi (glej CSS), zato je
+           podlaga pod logotipom vedno papirnata. */
         const slike = (
-          <span class:list={['logo-zid__okvir', jePodlaga && 'logo-zid__okvir--podlaga']}>
+          <span class="logo-zid__okvir">
             <img
               src={p.logo}
               alt={ime}
               loading="lazy"
               decoding="async"
-              class:list={['logo-zid__slika', jeBelo && 'logo-zid__slika--svetlo']}
+              class="logo-zid__slika"
               style={`--utez:${p.utez}`}
             />
-            {jeBelo && (
-              <img
-                src={p.logoTemno}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-                class="logo-zid__slika logo-zid__slika--temno"
-                style={`--utez:${p.utez}`}
-              />
-            )}
           </span>
         );
 
@@ -194,8 +184,13 @@ const NaslovElement = varianta === 'kompaktno' ? 'p' : 'h2';
     padding: 0.25rem;
   }
 
+  /* Obroč je temno zlat v OBEH temah, ne --bbg-obroba-mocna: logotipi stojijo
+     na papirju tudi v temni temi (tam na ploskvi), svetla zlata #C9A227 pa na
+     papirju doseže le 2,04 :1 in kot fokusni indikator pade (zahteva je 3,0).
+     #806613 da 4,62 :1 (A) oziroma 4,96 :1 (C). V svetli temi je to ista
+     vrednost, kot jo ima --bbg-obroba-mocna, zato delitve po temah ni. */
   .logo-zid__povezava:focus-visible {
-    outline: 2px solid var(--bbg-obroba-mocna);
+    outline: 2px solid var(--bbg-gold-dark);
     outline-offset: 4px;
   }
 
@@ -203,8 +198,6 @@ const NaslovElement = varianta === 'kompaktno' ? 'p' : 'h2';
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.5rem;
-    transition: background-color 200ms ease, padding 200ms ease;
   }
 
   .logo-zid__slika {
@@ -228,14 +221,20 @@ const NaslovElement = varianta === 'kompaktno' ? 'p' : 'h2';
     transform: translateY(-2px);
   }
 
-  /* Oznaka ravni stoji znotraj povezave, zato barvo določimo izrecno —
-     sicer bi podedovala barvo povezave. 60 % da najmanj 4,58 :1. */
+  /* Oznaka ravni stoji znotraj povezave, zato barvo določimo izrecno — sicer
+     bi podedovala barvo povezave.
+
+     Mešamo ink s PAPIRJEM in ne --bbg-besedilo z --bbg-bg: oznaka je znotraj
+     seznama, ta pa je v temni temi na svetli ploskvi. Prejšnji zapis bi tam
+     dal svetlo sivo na papirju (2,51 :1). Ker je podlaga papirnata v obeh
+     temah — v temni ploskev, v svetli stran — velja ena vrednost za obe:
+     60 % da 4,58 :1 pri A in C. */
   .logo-zid__raven {
     font-family: var(--bbg-font-besedilo);
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.03em;
-    color: color-mix(in srgb, var(--bbg-besedilo) 60%, var(--bbg-bg));
+    color: color-mix(in srgb, var(--bbg-ink) 60%, var(--bbg-paper));
     text-align: center;
   }
 
@@ -244,28 +243,42 @@ const NaslovElement = varianta === 'kompaktno' ? 'p' : 'h2';
      'dark' in 'light' (nastavi ga inline skripta v Layout.astro, obrne pa
      gumb v Nav.astro). Temna je privzeta brezpogojno.
 
-     Zato so pravila za temno podlago zapisana kot privzeta, svetla pa jih
-     razveljavi. Obratni zapis bi bil krhek: dokler skripta ne steče ali
-     če ne steče nikoli, atributa ni in bela knockout različica ZKD se ne
-     bi izrisala — logotip bi ostal črn na črnem. */
+     Zato je pravilo za temno podlago zapisano kot privzeto, svetla tema pa
+     ga razveljavi. Obratni zapis bi bil krhek: dokler skripta ne steče ali
+     če ne steče nikoli, atributa ni — in logotipi s temno tipografijo bi
+     obviseli na temni podlagi.
 
-  .logo-zid__slika--svetlo { display: none; }
-  .logo-zid__slika--temno { display: block; }
+     TEMNA TEMA: cel zid stoji na ENI skupni svetli ploskvi, logotipi pa
+     ostanejo v izvirnih barvah. Prej je vsak večbarvni logotip dobil svojo
+     belo kartico, enobarvni pa belo knockout različico brez kartice; drug
+     ob drugem sta brala kot napaka. Ena ploskev odpravi oboje — in logotipov
+     še vedno ne prebarvamo, kar CGP dajalcev prepovedujejo. Razlaga knockout
+     različic in pogoji, pod katerimi bi se vrnile, so v docs/PODPORNIKI.md.
 
-  /* Večbarvni logotipi s črno tipografijo dobijo belo ploskev — logotipa
-     ne smemo prebarvati, lahko pa mu podložimo predpisano belo podlago. */
-  .logo-zid__okvir--podlaga {
-    background-color: #ffffff;
-    padding: 0.7rem 0.9rem;
+     Ploskev je na seznamu in ne na <section>, da naslov ostane zunaj nje:
+     naslov nagovarja bralca strani in ne pripada zidu. */
+  .logo-zid__seznam {
+    background-color: var(--bbg-paper);
+    /* Polmer po .kolofon v nogi (--bbg-r-m), ki je najbližja ploskev na
+       strani. Polmera vnosnih polj v nogi namenoma ne prevzemamo: v smeri A
+       so pilula (999px), kar je na široki ploskvi videti kot napaka. */
+    border-radius: var(--bbg-r-m);
+    padding: clamp(1.15rem, 3.5vw, 1.75rem) clamp(0.9rem, 3vw, 1.5rem);
+    /* Ploskev se oprime logotipov in ne razpotegne čez ves stolpec: v nogi
+       sta stalna podpornika samo dva in ploskev čez vso širino strani je
+       videti kot prazna plošča z dvema znakoma v sredini. fit-content se pri
+       ožjem zaslonu sam omeji na razpoložljivo širino, zato prelom v dve
+       vrsti deluje naprej. */
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
   }
 
-  /* Svetla tema: na papirju je izvirni logotip berljiv sam po sebi, zato
-     bela ploskev odpade in knockout različica se umakne. */
-  :global(:root[data-theme='light']) .logo-zid__slika--svetlo { display: block; }
-  :global(:root[data-theme='light']) .logo-zid__slika--temno { display: none; }
-
-  :global(:root[data-theme='light']) .logo-zid__okvir--podlaga {
+  /* SVETLA TEMA: stran je že papirnata, zato bi bila ploskev le ploskev na
+     ploskvi — dodaten odmik brez pomena. Logotipi ostanejo, kot so. */
+  :global(:root[data-theme='light']) .logo-zid__seznam {
     background-color: transparent;
+    border-radius: 0;
     padding: 0;
   }
 
