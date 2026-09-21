@@ -98,9 +98,14 @@
       "organizator": {
         "naziv": "Turizem Grosuplje",
         "nazivEn": "Grosuplje Tourism",
-        "url": "https://visitgrosuplje.si/dogodki/koncert-pod-zvezdami-big-band-grosuplje-rok-ferengja/"
+        "url": "https://visitgrosuplje.si/"
       },
       "objave": [
+        {
+          "naziv": "Koncert pod zvezdami (visitgrosuplje.si)",
+          "nazivEn": "Concert Under the Stars on visitgrosuplje.si",
+          "url": "https://visitgrosuplje.si/dogodki/koncert-pod-zvezdami-big-band-grosuplje-rok-ferengja/"
+        },
         {
           "naziv": "Festival Grosuplje v jeseni 2026 (kultura.si)",
           "nazivEn": "Grosuplje in Autumn 2026 festival on kultura.si",
@@ -142,6 +147,12 @@
       },
       "slug": "jazz-aranziranje-delavnica-krajncan-2026",
       "slugEn": "jazz-arranging-workshop-krajncan-2026",
+      "podporniki": [
+        { "kljuc": "jskd", "raven": "sofinancer" },
+        { "kljuc": "obcina-grosuplje", "raven": "sofinancer" },
+        { "kljuc": "zkd-grosuplje", "raven": "partner" },
+        { "kljuc": "gs-grosuplje", "raven": "gostitelj" }
+      ],
       "objave": [
         {
           "naziv": "Napoved na kultura.si",

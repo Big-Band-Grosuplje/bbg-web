@@ -90,6 +90,7 @@ export const en = {
     /* Vse tri zunanje povezave vodijo na slovenske strani; angleški
        bralec to izve iz napisa, iskalnik pa iz hreflang na povezavi. */
     vSlovenscini: ' (in Slovenian)',
+    podpornikiNaslov: 'This event was made possible by',
   },
 
   zgodovinaSekcija: {
@@ -164,6 +165,7 @@ export const en = {
     kanaliOznaka: 'Social media',
     kanaliNaslov: 'Follow us',
     zasebnost: 'Privacy policy',
+    podpornikiNaslov: 'Our work is supported by',
     kolofonNaziv: 'Kulturno društvo Big Band Grosuplje · Adamičeva cesta 16, 1290 Grosuplje, Slovenia',
     kolofonDavek: 'Tax number: 12579076 (not liable for VAT) · Registration number: 1179241000 ·',
   },

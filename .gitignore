@@ -20,3 +20,6 @@ docs/**/pogodba*
 
 # Neobdelane slike za obdelavo (v repo gredo samo obdelane)
 _vhod/
+
+# Lokalne varnostne kopije — ne gredo v repozitorij
+.backup/

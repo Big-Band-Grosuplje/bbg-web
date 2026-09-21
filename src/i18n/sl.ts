@@ -97,6 +97,9 @@ export const sl = {
        kot stran, in pripis ne bi povedal ničesar. Ključ mora obstajati v
        obeh slovarjih (preverba ujemanja v src/i18n/index.ts). */
     vSlovenscini: '',
+    /* Naslov nad zidom logotipov na podstrani dogodka. Posamezen dogodek
+       ga lahko prepiše s poljem podpornikiNaslov v koncerti.json. */
+    podpornikiNaslov: 'Dogodek so omogočili',
   },
 
   zgodovinaSekcija: {
@@ -173,6 +176,8 @@ export const sl = {
     kanaliOznaka: 'Družbena omrežja',
     kanaliNaslov: 'Spremljaj nas',
     zasebnost: 'Politika zasebnosti',
+    /* Naslov nad zidom stalnih podpornikov društva; stoji nad kolofonom. */
+    podpornikiNaslov: 'Naša prizadevanja podpirajo',
     kolofonNaziv: 'Kulturno društvo Big Band Grosuplje · Adamičeva cesta 16, 1290 Grosuplje',
     kolofonDavek: 'Davčna številka: 12579076 (nismo zavezanci za DDV) · Matična številka: 1179241000 ·',
   },

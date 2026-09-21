@@ -1,0 +1,281 @@
+---
+// src/components/LogoZid.astro
+// Univerzalni zid logotipov: za posamezen dogodek in za stalne podpornike društva.
+//
+// Uporaba pri dogodku:
+//   <LogoZid vnosi={entry.data.podporniki} naslov="Dogodek so omogočili" prikaziRavni />
+// Uporaba v nogi:
+//   <LogoZid vnosi={PODPORNIKI_DRUSTVA} naslov="Naša prizadevanja podpirajo" varianta="kompaktno" />
+
+import { resiPodpornika, imePodpornika, OZNAKA_RAVNI, type Raven } from '../data/podporniki';
+
+interface Vnos {
+  kljuc: string;
+  raven?: Raven;
+}
+
+interface Props {
+  vnosi: Vnos[];
+  naslov?: string;
+  /** 'polno' = z naslovom in oznakami ravni; 'kompaktno' = manjši logotipi za nogo. */
+  varianta?: 'polno' | 'kompaktno';
+  prikaziRavni?: boolean;
+  jezik?: 'sl' | 'en';
+  /** Neobvezen id za aria-labelledby, kadar je na strani več zidov. */
+  id?: string;
+}
+
+const {
+  vnosi,
+  naslov,
+  varianta = 'polno',
+  prikaziRavni = false,
+  jezik = 'sl',
+  id = 'logo-zid',
+} = Astro.props;
+
+/* Dovoljenje za objavo preverja tudi preveriVnosePodpornikov() v registru
+   in tam napaka ustavi build. Ta vrstica ni podvojitev, ampak druga raven
+   obrambe: preverba pokriva znana vira vnosov (koncerti.json in
+   PODPORNIKI_DRUSTVA), zid logotipov s kakim prihodnjim lastnim virom pa bi
+   šel mimo nje. Tu zato samo izpustimo in opozorimo — komponenta izrisa ni
+   pravo mesto za ustavljanje builda. */
+const razreseni = vnosi
+  .map((v) => ({ raven: v.raven, p: resiPodpornika(v.kljuc) }))
+  .filter((v): v is { raven?: Raven; p: NonNullable<ReturnType<typeof resiPodpornika>> } =>
+    v.p !== null,
+  )
+  .filter(({ p }) => {
+    if (p.objavaDovoljena === false) {
+      console.warn(
+        `[podporniki] "${p.ime}" je izpuščen iz zidu logotipov: v registru ima ` +
+          `objavaDovoljena: false — pisnega dovoljenja dajalca za objavo logotipa ` +
+          `še nimamo. Vir vnosov popravi ali pridobi dovoljenje.`,
+      );
+      return false;
+    }
+    return true;
+  });
+
+const naslovIzpis = naslov ?? (jezik === 'en' ? 'Supported by' : 'Podporniki');
+const naslovId = `${id}-naslov`;
+
+/* Kompaktna varianta stoji v nogi, med naslovi h3 (Ne zamudi koncerta,
+   Spremljaj nas). Naslov h2 bi tam podrl vrstni red ravni, zato je v tej
+   varianti navaden odstavek — ime razdelka ostane, ker ga aria-labelledby
+   prebere z elementa ne glede na to, ali je naslov. */
+const NaslovElement = varianta === 'kompaktno' ? 'p' : 'h2';
+---
+
+{razreseni.length > 0 && (
+  <section class:list={['logo-zid', `logo-zid--${varianta}`]} aria-labelledby={naslovId}>
+    <NaslovElement
+      id={naslovId}
+      class:list={['logo-zid__naslov', varianta === 'kompaktno' && 'logo-zid__naslov--drobno']}
+    >
+      {naslovIzpis}
+    </NaslovElement>
+
+    <ul class="logo-zid__seznam" role="list">
+      {razreseni.map(({ p, raven }) => {
+        const ime = imePodpornika(p, jezik);
+        const jeBelo = p.temnaStrategija === 'belo' && p.logoTemno;
+        const jePodlaga = p.temnaStrategija === 'podlaga';
+
+        const slike = (
+          <span class:list={['logo-zid__okvir', jePodlaga && 'logo-zid__okvir--podlaga']}>
+            <img
+              src={p.logo}
+              alt={ime}
+              loading="lazy"
+              decoding="async"
+              class:list={['logo-zid__slika', jeBelo && 'logo-zid__slika--svetlo']}
+              style={`--utez:${p.utez}`}
+            />
+            {jeBelo && (
+              <img
+                src={p.logoTemno}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                class="logo-zid__slika logo-zid__slika--temno"
+                style={`--utez:${p.utez}`}
+              />
+            )}
+          </span>
+        );
+
+        const vsebina = (
+          <>
+            {slike}
+            {prikaziRavni && raven && (
+              <span class="logo-zid__raven">{OZNAKA_RAVNI[raven][jezik]}</span>
+            )}
+          </>
+        );
+
+        return (
+          <li class="logo-zid__vnos">
+            {p.url ? (
+              <a
+                href={p.url}
+                rel="noopener noreferrer external"
+                target="_blank"
+                class="logo-zid__povezava"
+                aria-label={jezik === 'en'
+                  ? `${ime} (opens in a new tab)`
+                  : `${ime} — odpre se v novem zavihku`}
+              >
+                {vsebina}
+              </a>
+            ) : (
+              <span class="logo-zid__povezava logo-zid__povezava--brez">{vsebina}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+)}
+
+<style>
+  /* Tokeni so iz brand.css (--bbg-*); lastne pisave in barve komponenta ne
+     določa — menjava smeri A/C mora veljati tudi zanjo. Razmiki so
+     številke, ker repozitorij lestvice razmikov nima. */
+  .logo-zid {
+    margin-block: 3rem;
+    padding-block-start: 2rem;
+    border-block-start: 1px solid color-mix(in srgb, var(--bbg-gold) 28%, transparent);
+  }
+
+  .logo-zid__naslov {
+    font-family: var(--bbg-font-naslov);
+    font-size: clamp(1.05rem, 0.9rem + 0.7vw, 1.5rem);
+    font-weight: 500;
+    margin: 0 0 1.75rem;
+    color: var(--bbg-naslov);
+  }
+
+  /* Drobni naslov v nogi: mala začetnica in rahel razmik med črkami, da se
+     ujame z obstoječimi uvodnimi oznakami na strani ("prihajajoče", "iz arhiva").
+     Umirjen je prek barve in ne prek motnosti (hišno pravilo): 72-odstotna
+     mešava z ozadjem da v vseh štirih kombinacijah smeri in teme najmanj
+     6,8 :1, videz odstavka pa je enak kot pri opacity 0,72. */
+  .logo-zid__naslov--drobno {
+    font-family: var(--bbg-font-besedilo);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: color-mix(in srgb, var(--bbg-besedilo) 72%, var(--bbg-bg));
+    text-align: center;
+  }
+
+  .logo-zid__seznam {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.75rem);
+  }
+
+  .logo-zid__vnos { display: flex; }
+
+  .logo-zid__povezava {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+  }
+
+  .logo-zid__povezava:focus-visible {
+    outline: 2px solid var(--bbg-obroba-mocna);
+    outline-offset: 4px;
+  }
+
+  .logo-zid__okvir {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: background-color 200ms ease, padding 200ms ease;
+  }
+
+  .logo-zid__slika {
+    /* --osnova = višina logotipa pri uteži 1 */
+    --osnova: clamp(2.5rem, 1.8rem + 2vw, 3.75rem);
+    height: calc(var(--osnova) * var(--utez, 1));
+    width: auto;
+    max-width: min(14rem, 40vw);
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 220ms ease, transform 220ms ease;
+  }
+
+  .logo-zid--kompaktno .logo-zid__slika {
+    --osnova: clamp(1.9rem, 1.5rem + 1.2vw, 2.6rem);
+  }
+
+  .logo-zid__povezava:hover .logo-zid__slika,
+  .logo-zid__povezava:focus-visible .logo-zid__slika {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  /* Oznaka ravni stoji znotraj povezave, zato barvo določimo izrecno —
+     sicer bi podedovala barvo povezave. 60 % da najmanj 4,58 :1. */
+  .logo-zid__raven {
+    font-family: var(--bbg-font-besedilo);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, var(--bbg-besedilo) 60%, var(--bbg-bg));
+    text-align: center;
+  }
+
+  /* ---- Teme -----------------------------------------------------------
+     Tema se preklaplja z atributom data-theme na <html>, z vrednostma
+     'dark' in 'light' (nastavi ga inline skripta v Layout.astro, obrne pa
+     gumb v Nav.astro). Temna je privzeta brezpogojno.
+
+     Zato so pravila za temno podlago zapisana kot privzeta, svetla pa jih
+     razveljavi. Obratni zapis bi bil krhek: dokler skripta ne steče ali
+     če ne steče nikoli, atributa ni in bela knockout različica ZKD se ne
+     bi izrisala — logotip bi ostal črn na črnem. */
+
+  .logo-zid__slika--svetlo { display: none; }
+  .logo-zid__slika--temno { display: block; }
+
+  /* Večbarvni logotipi s črno tipografijo dobijo belo ploskev — logotipa
+     ne smemo prebarvati, lahko pa mu podložimo predpisano belo podlago. */
+  .logo-zid__okvir--podlaga {
+    background-color: #ffffff;
+    padding: 0.7rem 0.9rem;
+  }
+
+  /* Svetla tema: na papirju je izvirni logotip berljiv sam po sebi, zato
+     bela ploskev odpade in knockout različica se umakne. */
+  :global(:root[data-theme='light']) .logo-zid__slika--svetlo { display: block; }
+  :global(:root[data-theme='light']) .logo-zid__slika--temno { display: none; }
+
+  :global(:root[data-theme='light']) .logo-zid__okvir--podlaga {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-zid__slika,
+    .logo-zid__okvir { transition: none; }
+    .logo-zid__povezava:hover .logo-zid__slika { transform: none; }
+  }
+
+  @media (hover: none) {
+    .logo-zid__slika { opacity: 1; }
+  }
+</style>
