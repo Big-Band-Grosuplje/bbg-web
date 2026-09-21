@@ -114,4 +114,17 @@ Oba tečeta **zunaj builda**, ker zahtevata mrežo ali velike izvirnike, ki v gi
 **Kje je hook:** URL nastane v Vercel → Settings → Git → Deploy Hooks in se vpiše v GitHub → Settings → Secrets and variables → Actions kot `VERCEL_DEPLOY_HOOK`. **URL je poverilnica** — kdorkoli ga ima, lahko sproži objavo, zato ne sme v repozitorij (ta je javen) in ne v dnevnik poteka. Ob manjkajoči skrivnosti potek pade z jasnim sporočilom in navodilom, ne pa tiho brez učinka.
 
 ## Commit sporočila
-Conventional commits, v slovenščini: `feat: ...`, `fix: ...`, `docs: ...`
+Predpona je **področje spremembe**, v slovenščini, z malo začetnico, nato dvopičje in presledek:
+`galerija: prizorišča 2026, preimenovanje, napis 2017`.
+
+V rabi so med drugim `galerija`, `zgodovina`, `vsebina`, `kronika`, `i18n`, `deps`,
+`naslovnica`, `vzdrževanje`, `podporniki`. **Seznam ni zaprt** — nova vsebinska celota dobi
+svoje ime, ko nastane.
+
+Tudi sprememba brez vsebinskega področja (orodja, odvisnosti, konfiguracija, CI) se poimenuje
+po svojem področju in ne po vrsti spremembe: `deps:`, `ci:`, `vzdrževanje:`. Predpone `feat:`,
+`fix:` in `chore:` ne uporabljaj — presoja, ali je nekaj koda ali vsebina, je natanko tisto,
+kar je pravilo prej razklalo na dvoje.
+
+> Commiti pred septembrom 2026 uporabljajo conventional tipe (`feat`, `fix`, `docs`, `chore`,
+> `ci`). Preteklosti ne popravljamo — pravilo velja naprej.
