@@ -454,6 +454,31 @@ export function prihajajociKoncerti(): Koncert[] {
   return koncerti.filter((k) => jePrihajajoc(k.datumKonecIso ?? k.datumIso));
 }
 
+/**
+ * Naslednji javni dogodek z znanim datumom.
+ *
+ * Zaprtega ne izpostavljamo — povabljeni povezavo dobijo neposredno, javno
+ * vabilo pa bi vabilo ljudi tam, kamor ne morejo. Dogodek brez datumIso ni
+ * razvrstljiv in zato izpade.
+ *
+ * Razvrstimo izrecno po datumu in se ne zanašamo na zaporedje v
+ * koncerti.json: klicalec trdi "naslednji", torej mora biti res prvi.
+ * Filter vrne novo polje, zato vhodni seznam ostane nespremenjen.
+ *
+ * Funkcija je tu in ne pri klicalcu: izbiro potrebuje napovednik v heroju,
+ * pred njim pa jo je imel panel pod herojem. Tu ostaja, ker je vprašanje
+ * "kateri je naslednji" lastnost podatkov in ne enega izrisa.
+ */
+export function naslednjiJavni<T extends { datumIso: string | null; vstop: { tip: string } }>(
+  koncerti: T[],
+): T | null {
+  return (
+    koncerti
+      .filter((k) => k.datumIso && k.vstop.tip !== 'zaprt')
+      .sort((a, b) => (a.datumIso as string).localeCompare(b.datumIso as string))[0] ?? null
+  );
+}
+
 export function najdiPoSlugu(slug: string, jezik: Jezik): Koncert | undefined {
   return koncerti.find((k) => (jezik === 'en' ? k.slugEn : k.slug) === slug);
 }

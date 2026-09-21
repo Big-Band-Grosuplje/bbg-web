@@ -44,6 +44,14 @@ export const sl = {
     gumbPridruzi: 'Pridruži se',
     fotoAlt: 'Dirigent med vodenjem orkestra',
     nalepka: 'dirigent, presenetljivo miren',
+    /* Smer b: napovednik naslednjega koncerta v heroju. */
+    naslednjic: 'naslednjič',
+    naslednjicGumb: 'Podrobnosti →',
+    /* Medijska plošča. Alt velja za fotografijo in za plakat posnetka —
+       kader je isti, zato je isti tudi opis. */
+    medijAlt: 'Saksofonska in trobentna sekcija orkestra med igranjem',
+    zvokVklopi: 'vklopi zvok',
+    zvokUtisaj: 'utišaj',
   },
 
   /* Stran 404. Ton je hišni — lahek, a pove, kaj se je zgodilo.
@@ -64,11 +72,6 @@ export const sl = {
   /* Panel pod herojem. Nizov o vstopu in prijavi tu ni — panel uporablja
      ista niza kot kartica (koncerti.vstopProst, koncerti.prijavaObvezna),
      ker gre za isto oznako istega dejstva. */
-  izpostavljeni: {
-    nadnaslov: 'Naslednji javni dogodek',
-    gumb: 'Podrobnosti dogodka →',
-  },
-
   koncerti: {
     nadnaslov: 'prihajajoče',
     naslov: 'Kdaj in kje igramo',

@@ -48,6 +48,11 @@ export const en = {
     gumbPridruzi: 'Join us',
     fotoAlt: 'The conductor leading the orchestra',
     nalepka: 'the conductor, remarkably composed',
+    naslednjic: 'up next',
+    naslednjicGumb: 'Details →',
+    medijAlt: 'The saxophone and trumpet sections of the orchestra playing',
+    zvokVklopi: 'turn on sound',
+    zvokUtisaj: 'mute',
   },
 
   napaka404: {
@@ -58,11 +63,6 @@ export const en = {
       'It happens — we miss an entry now and then, too.',
     gumbNaslovnica: 'Back to the home page',
     gumbKoncerti: 'When do we play?',
-  },
-
-  izpostavljeni: {
-    nadnaslov: 'Next public event',
-    gumb: 'Event details →',
   },
 
   koncerti: {

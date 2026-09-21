@@ -1,0 +1,266 @@
+---
+/* ============================================================
+   Hero sekcija — smer b (razdeljeno z napovednikom).
+   Potrjena 21. 9. 2026; zapis odločitve je v docs/design/hero-smer-b.md.
+
+   Levo kdo smo, desno medijska plošča, pod besedilom napovednik
+   naslednjega koncerta. Razdeljena postavitev je bila prej element smeri
+   C, medtem ko je A stala na fullbleed fotografiji v ozadju; z izbiro
+   smeri b je razdelitev prešla v obe smeri.
+
+   Kaj ostaja od prej: badge, nalepka in uokvirjena fotografija smeri C so
+   še v oznakah in pri A samo skriti — so del predogleda C in se ne
+   brišejo (pravilo iz CLAUDE.md). Nova medijska plošča je obratno: v
+   oznakah vedno, vidna pri A, skrita pri C, ki ima svojo fotografijo.
+
+   Napovednik jemlje dogodek prek naslednjiJavni() iz src/lib/koncerti.ts.
+   Panel "Naslednji javni dogodek", ki je to nalogo opravljal pod herojem,
+   je s tem odpadel — glej docs/design/hero-smer-b.md.
+   ============================================================ */
+import { Image } from 'astro:assets';
+import HeroMedij from './HeroMedij.astro';
+import znakZlat from '../assets/brand/bbg-znak-zlat.svg';
+import fotoHero from '../assets/foto/orkester/kotar-dirigent-energija.jpg';
+import fotoMedij from '../assets/foto/orkester/saksofoni-trobente-2026.jpg';
+import { slovar, type Jezik } from '../i18n';
+import { naslednjiJavni, prihajajociKoncerti, pripravi } from '../lib/koncerti';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
+
+const naslednji = naslednjiJavni(
+  prihajajociKoncerti().map((k) =>
+    pripravi(k, jezik, { ob: t.koncerti.ob, brezPrizorisca: t.koncerti.brezPrizorisca }),
+  ),
+);
+
+function potDogodka(slug: string): string {
+  return jezik === 'en' ? `/en/events/${slug}/` : `/dogodki/${slug}/`;
+}
+---
+
+<header class="hero">
+  <div class="ovoj hero__mreza">
+    <div class="hero__besedilo">
+      <p class="bbg-badge bbg-rot-badge hero__badge">{t.hero.badge}</p>
+      {/* Ime skupine je H1 strani. Vidni nosilec imena je logotip, ta pa je
+          slika — brez tega naslova naslovnica H1 ne bi imela. Znak ima zato
+          alt="": ime pove naslov in bralnik bi ga sicer slišal dvakrat. */}
+      <h1 class="naslov-za-bralnike">{t.hero.znakAlt}</h1>
+      <img src={znakZlat.src} alt="" class="hero__znak bbg-rot-znak" width="420" />
+      <p class="hero__slogan">{t.hero.slogan}</p>
+      <p class="hero__gumbi">
+        <a href="#organizatorji" class="bbg-gumb">{t.hero.gumbNastop}</a>
+        <a href="#pridruzi-se" class="bbg-gumb bbg-gumb--obris">{t.hero.gumbPridruzi}</a>
+      </p>
+
+      {/* Napovednik: edina stvar v heroju, ki odgovori na vprašanje, s
+          katerim obiskovalec najpogosteje pride. Kadar prihajajočega
+          javnega dogodka ni, panela ni — prazen okvir z "ni napovedanih
+          koncertov" bi bil slabši od ničesar, zato gre ta stavek v
+          sekcijo Koncerti, kjer je doma. */}
+      {naslednji && (
+        <div class="napovednik">
+          <p class="napovednik__oznaka">{t.hero.naslednjic}</p>
+          <p class="napovednik__datum">{naslednji.datumPrikaz}</p>
+          <p class="napovednik__kaj">
+            {naslednji.nazivPrikaz}
+            {naslednji.lokacija && <span>{naslednji.lokacijaPrikaz}</span>}
+          </p>
+          <p class="napovednik__cta">
+            <a class="bbg-gumb bbg-gumb--mali" href={potDogodka(naslednji.slugPrikaz)}>
+              {t.hero.naslednjicGumb}
+            </a>
+          </p>
+        </div>
+      )}
+    </div>
+
+    {/* Uokvirjena fotografija smeri C. Pri A je skrita — glej CLAUDE.md. */}
+    <div class="hero__foto">
+      <Image src={fotoHero} alt={t.hero.fotoAlt} width={900} loading="eager" class="bbg-rot-foto" />
+      <span class="hero__nalepka bbg-rot-nalepka">{t.hero.nalepka}</span>
+    </div>
+
+    {/* Medijska plošča smeri b. Ali izriše mirujočo fotografijo ali tiho
+        zanko, odloči src/data/hero-video.ts — tu ni pogojev. */}
+    <div class="hero__medij">
+      <HeroMedij slika={fotoMedij} alt={t.hero.medijAlt} jezik={jezik} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    /* Spodnji odmik je --bbg-sekcija in ne svoja vrednost: hero se konča
+       tik nad prvo sekcijo, zato mora vrzel do nje ustrezati ritmu med
+       sekcijami (74 + 74 = 149 px z ločilno črto). Prejšnjih 90 px je bilo
+       naravnanih na panel "Naslednji javni dogodek", ki je stal vmes; brez
+       njega je vrzel narasla na 165 px in izpadla kot luknja.
+       Zgornji odmik ostane 70 px — tam je omejitev lepljiva navigacija in
+       ne ritem sekcij. */
+    padding: 70px 0 var(--bbg-sekcija);
+    background:
+      radial-gradient(
+        60% 55% at 78% 30%,
+        color-mix(in srgb, var(--bbg-gold) 16%, transparent) 0%,
+        transparent 100%
+      ),
+      var(--bbg-bg);
+  }
+  .hero__mreza {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 44px;
+    align-items: center;
+  }
+  /* H1 nosi ime skupine za bralnike in iskalnike; vidno ga pove logotip.
+     Enaka tehnika kot .vizualno-skrito v brand.css, a v komponenti, ker
+     mora ta naslov ostati zunaj toka (v .hero__besedilo teče mreža in
+     display: none bi ga vzel tudi iz dostopnostnega drevesa). */
+  .naslov-za-bralnike {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .hero__badge { margin: 0 0 20px; }
+  .hero__znak {
+    width: min(420px, 86%);
+    height: auto;
+    display: block;
+  }
+  .hero__slogan {
+    margin: 22px 0 30px;
+    font-size: clamp(18px, 2.2vw, 22px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--bbg-naslov);
+    max-width: 30rem;
+  }
+  .hero__gumbi {
+    margin: 0;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  /* Okvir fotografije ostane raven; zarotirana je samo nalepka. */
+  .hero__foto { position: relative; }
+  .hero__foto img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--bbg-r-l);
+    border: 3px solid var(--bbg-gold);
+    box-shadow: var(--bbg-senca-foto);
+  }
+  .hero__nalepka {
+    position: absolute;
+    bottom: -16px;
+    left: -14px;
+    background: var(--bbg-nalepka-bg);
+    color: var(--bbg-nalepka-besedilo);
+    font-family: var(--bbg-font-naslov);
+    font-size: 14px;
+    padding: 9px 16px;
+    border-radius: var(--bbg-r-s);
+  }
+
+  /* Smer C obdrži svojo uokvirjeno fotografijo, zato je medijska plošča
+     privzeto skrita in jo prižge šele smer A. */
+  .hero__medij { display: none; }
+
+  /* --- Napovednik naslednjega koncerta ------------------------------- */
+  .napovednik {
+    margin: 30px 0 0;
+    padding: 18px 20px;
+    border-radius: var(--bbg-r-m);
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 34%, transparent);
+    background: color-mix(in srgb, var(--bbg-gold) 7%, transparent);
+    max-width: 30rem;
+  }
+  /* Drobna oznaka z malo začetnico — enako kot nadnaslovi sekcij. */
+  .napovednik__oznaka {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--bbg-nadnaslov);
+  }
+  .napovednik__datum {
+    margin: 6px 0 0;
+    font-family: var(--bbg-font-naslov);
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.1;
+    color: var(--bbg-naslov);
+    font-variant-numeric: tabular-nums;
+  }
+  .napovednik__kaj {
+    margin: 8px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .napovednik__kaj span {
+    display: block;
+    font-weight: 400;
+    color: color-mix(in srgb, var(--bbg-besedilo) 72%, var(--bbg-bg));
+  }
+  .napovednik__cta { margin: 14px 0 0; }
+
+  /* --- Predogled smeri A: razdelitev z medijsko ploščo ---------------- */
+  /* Do 21. 9. 2026 je A stala na fullbleed fotografiji v ozadju z enim
+     stolpcem. Z izbiro smeri b je postala razdeljena, ozadje pa je
+     odpadlo — fotografija je zdaj vsebina plošče in ne tapeta. */
+  :global(:root[data-skin='a']) .hero__mreza {
+    grid-template-columns: 1.02fr 0.98fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  /* Uokvirjena fotografija smeri C v razdelitvi z medijsko ploščo nima
+     mesta; plošča prevzame njeno vlogo. */
+  :global(:root[data-skin='a']) .hero__foto { display: none; }
+  :global(:root[data-skin='a']) .hero__medij { display: block; }
+  /* A stoji na mirni tipografiji — badge in nalepka odpadeta. */
+  :global(:root[data-skin='a']) .hero__badge,
+  :global(:root[data-skin='a']) .hero__nalepka { display: none; }
+  /* Znak zdaj stoji na podlagi strani in ne na temni fotografiji, zato
+     senca, ki ga je ločevala od nje, odpade. */
+  :global(:root[data-skin='a']) .hero__znak {
+    width: min(380px, 80%);
+  }
+  :global(:root[data-skin='a']) .hero__slogan {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(19px, 2.6vw, 26px);
+    /* --bbg-naslov in ne --bbg-gold-light: slogan ne leži več na temnem
+       prelivu, ampak na podlagi strani. Svetla zlata bi bila na papirju
+       neberljiva; --bbg-naslov je v obeh temah izmerjen. */
+    color: var(--bbg-naslov);
+    max-width: 560px;
+    margin: 18px 0 26px;
+  }
+  :global(:root[data-skin='a']) .hero__gumbi { gap: 14px; }
+
+  @media (max-width: 820px) {
+    .hero { padding: 48px 0 var(--bbg-sekcija); }
+    .hero__mreza,
+    :global(:root[data-skin='a']) .hero__mreza {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+    .hero__nalepka { left: 0; }
+    .napovednik { max-width: none; }
+    /* Plošča gre nad besedilo: v enem stolpcu je posnetek prva stvar, ki
+       jo obiskovalec vidi, in gumb za zvok ostane na njej. */
+    :global(:root[data-skin='a']) .hero__medij { order: -1; }
+  }
+</style>

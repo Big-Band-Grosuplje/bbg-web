@@ -2,6 +2,10 @@
 
 > Stanje: 31. 8. 2026. Namen: kje živita referenčna mockupa, katera smer je
 > izbrana in kako je druga ohranjena kot predogled.
+>
+> ⚠️ **Hero sekcija je od 21. 9. 2026 drugačna, kot jo opisuje ta dokument.**
+> Potrjena je smer b (razdeljeno z napovednikom) in fullbleed fotografija v
+> ozadju je odpadla — glej `hero-smer-b.md`. Vse drugo tu velja naprej.
 
 ## ✅ Odločitev — 31. 8. 2026
 
@@ -117,7 +121,14 @@ nosi velikost.
 | Obris fokusa | 1 px prosojna zlata kot pri obrobah | polna zlata — prosojna bi bila na temnem nevidna |
 | Hero fotografija | `<img>` z `object-fit: cover` | CSS ozadje, torej brez `srcset` (razlog spodaj) |
 
-## Zakaj je hero CSS ozadje in ne `<img>`
+## Zakaj je bil hero CSS ozadje in ne `<img>`
+
+> ⚠️ **Ne velja od 21. 9. 2026.** S potrditvijo smeri b je hero razdeljen in
+> fotografije v ozadju nima več; fotografija je zdaj vsebina medijske plošče
+> in gre skozi `<Image>`. `--hero-a` in `getImage()` sta odpadla. Spodnje
+> besedilo ostaja, ker pojasnjuje, zakaj je bila prejšnja rešitev pravilna,
+> dokler je bil hero fullbleed — in ker bi bila ista past spet aktualna, če
+> bi kdaj vrnili fotografijo v ozadje. Glej `hero-smer-b.md`.
 
 Skrit `<img>` Chrome prenese tudi z `loading="lazy"` — `display: none` nima
 okvira, zato odložitev odpade. Ko je bila privzeta smer C, bi ta tako plačala
