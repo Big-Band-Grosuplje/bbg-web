@@ -857,3 +857,118 @@ console.log(
     + `prireditev ${prireditve.length} imen / ${sPrireditvijo.size} vnosov · `
     + `oboje ${oboje.length} · skupaj ${pokriti.size} od ${arhiv.length}`,
 );
+
+/* ---------- opisi, ki se ponavljajo -----------------------------------
+   Znakovno identičen opis pri več dogodkih iz istega vira pomeni, da
+   stolpec ni beležil dogodka, ampak delovno oznako — repertoar, gosta,
+   vrsto nastopa. Interna preglednica 2019–2026 ima devet vnosov z nizom
+   „Sinatra; gost Blaž Vrbič" na zelo različnih prizoriščih, med njimi
+   poroko na Zemonu z isto oznako; poroka pač ni koncert z naslovom
+   Sinatra.
+
+   Skripta tega NE popravlja — iz vira ni mogoče vedeti, kaj je bilo v
+   resnici. Zapiše samo seznam za človeka, ki je bil zraven.
+
+   Zajeti so tudi zapisi z isto oznako in predpono („poroka — Sinatra;
+   …"): niz se konča enako, torej gre za isto delovno oznako.
+
+   Vnosi, ki imajo že svoj popravek v arhiv-rocno.json, so iz seznama
+   izpuščeni — a prešteti, da ni videti, kot da jih ni bilo. */
+
+const PONOVLJENI = path.join(KOREN, '_vhod', 'preveri-opise.md');
+
+const zeRoceni = new Set(
+  imamoRocno ? Object.keys(JSON.parse(fs.readFileSync(ROCNO, 'utf8')).vnosi ?? {}) : [],
+);
+
+const poOpisu = new Map();
+for (const v of arhiv) {
+  if (!v.opis) continue;
+  const k = `${v.vir}||${v.opis}`;
+  if (!poOpisu.has(k)) poOpisu.set(k, []);
+  poOpisu.get(k).push(v);
+}
+
+let izpuscenihRocnih = 0;
+const skupine = [];
+for (const [k, clani] of poOpisu) {
+  if (clani.length < 2) continue;
+  const [vir, opis] = k.split('||');
+  /* Isti niz s predpono je ista delovna oznaka — a samo, kadar je
+     predpona pripis in ne vezava. „poroka — Sinatra; …" je ista oznaka z
+     opombo, „Prifarski muzikanti & Combo BBG" pa drug dogodek, ki se
+     slučajno konča enako. Ločnica je ločilo na koncu predpone. */
+  const PRIPIS = /[—–:;]\s*$/;
+  const spredpono = arhiv.filter(
+    (v) =>
+      v.vir === vir
+      && v.opis
+      && v.opis !== opis
+      && v.opis.endsWith(opis)
+      && PRIPIS.test(v.opis.slice(0, v.opis.length - opis.length)),
+  );
+  const vsi = [...clani, ...spredpono].sort((a, b) => b.datumIso.localeCompare(a.datumIso));
+  const zaPregled = vsi.filter((v) => !zeRoceni.has(v.id));
+  izpuscenihRocnih += vsi.length - zaPregled.length;
+  if (zaPregled.length > 0) skupine.push({ opis, vir, vsi, zaPregled });
+}
+skupine.sort((x, y) => y.zaPregled.length - x.zaPregled.length || x.opis.localeCompare(y.opis, 'sl'));
+
+const vrsticOpisov = skupine.reduce((n, sk) => n + sk.zaPregled.length, 0);
+
+const opisiMd = [
+  '# Opisi, ki se ponavljajo — za pregled',
+  '',
+  `Nastalo z \`npm run arhiv\` iz ${arhiv.length} arhivskih zapisov.`,
+  '',
+  '**Zakaj ta seznam.** Znakovno identičen opis pri več dogodkih iz istega vira',
+  'pomeni, da stolpec ni beležil dogodka, ampak **delovno oznako** — repertoar,',
+  'gosta, vrsto nastopa. Interna preglednica 2019–2026 ima devet vnosov z nizom',
+  '„Sinatra; gost Blaž Vrbič" na zelo različnih prizoriščih, med njimi poroko na',
+  'Zemonu z isto oznako. Poroka ni koncert z naslovom Sinatra — torej oznaka ne',
+  'opisuje dogodka.',
+  '',
+  '**Iz vira ni mogoče vedeti, kaj je bilo v resnici.** Ve tisti, ki je bil zraven.',
+  'Skripta zato ničesar ne popravlja, samo našteje.',
+  '',
+  '**Kako potrjuješ:** v stolpcu ✓ zamenjaj ☐ z ✅ (opis drži) ali ✗ (ne drži), pri',
+  '✗ pa v vrstico *Popravek* zapiši, kaj je bilo v resnici. Popravki gredo nato v',
+  '`src/data/arhiv-rocno.json` (polji `opis` in `opomba`). Datoteka je tvoja —',
+  'skripta je ne prepiše, dokler obstaja.',
+  '',
+  `Skupin: ${skupine.length} · vrstic za pregled: ${vrsticOpisov}`
+    + (izpuscenihRocnih > 0
+      ? ` · že popravljenih in zato izpuščenih: ${izpuscenihRocnih}`
+      : ''),
+  '',
+];
+
+for (const sk of skupine) {
+  opisiMd.push(`## ${sk.opis} (${sk.zaPregled.length})`);
+  opisiMd.push('');
+  opisiMd.push(`Vir: \`${sk.vir}\``);
+  if (sk.vsi.length !== sk.zaPregled.length) {
+    const ze = sk.vsi.filter((v) => zeRoceni.has(v.id)).map((v) => v.datumIso);
+    opisiMd.push('');
+    opisiMd.push(`Že popravljeno in izpuščeno iz preglednice: ${ze.join(', ')}`);
+  }
+  opisiMd.push('');
+  opisiMd.push('| ✓ | datum | kraj | prizorišče | besedilo iz vira |');
+  opisiMd.push('|---|---|---|---|---|');
+  for (const v of sk.zaPregled) {
+    const b = (v.opis ?? '').replace(/\|/g, '\\|');
+    opisiMd.push(`| ☐ | ${v.datumIso} | ${v.kraj ?? '—'} | ${v.prizorisce ?? '—'} | ${b} |`);
+  }
+  opisiMd.push('');
+  opisiMd.push('**Popravek:** (opis drži / v resnici je bilo: …)');
+  opisiMd.push('');
+}
+
+if (fs.existsSync(PONOVLJENI)) {
+  console.log(`  ponovljeni opisi: ${path.relative(KOREN, PONOVLJENI)} že obstaja — NE prepisujem.`);
+} else {
+  fs.mkdirSync(path.dirname(PONOVLJENI), { recursive: true });
+  fs.writeFileSync(PONOVLJENI, opisiMd.join(String.fromCharCode(10)) + String.fromCharCode(10));
+  console.log(`  ponovljeni opisi zapisani: ${path.relative(KOREN, PONOVLJENI)}`);
+}
+console.log(`     ${skupine.length} skupin / ${vrsticOpisov} vrstic za pregled`);

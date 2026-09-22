@@ -432,6 +432,39 @@ zajel **register programov** (glej „Predlogi za program in prireditev"). Ko
 nastane, se te vrednosti preselijo iz `naziv` v `program` — dotlej naziv pove
 več kot prazno polje.
 
+## Opisi, ki se ponavljajo
+
+Znakovno **identičen opis pri več dogodkih iz istega vira** pomeni, da stolpec ni
+beležil dogodka, ampak **delovno oznako** — repertoar, gosta, vrsto nastopa.
+
+Dokaz je v podatkih samih: interna preglednica 2019–2026 ima devet vnosov z
+nizom „Sinatra; gost Blaž Vrbič" na prizoriščih od Ljubljanskega gradu prek
+kluba ČinČin do Portoroža in Marezig — med njimi **poroko na dvorcu Zemono z
+isto oznako**. Poroka ni koncert z naslovom Sinatra, torej oznaka ne opisuje
+dogodka.
+
+Prvi potrjen primer: **`2020-01-01` Portorož**. Vir pravi „Sinatra; gost Blaž
+Vrbič", po pričevanju udeleženca (september 2026) pa je šlo za novoletno
+prireditev z ognjemetom, program je bil pretežno popevke in poleg Blaža Vrbiča je
+nastopila Anika Horvat. Popravek je v `arhiv-rocno.json`, z razlogom v `opomba`.
+
+⚠️ **Iz vira ni mogoče vedeti, kaj je bilo v resnici.** Skripta zato ničesar ne
+popravlja — zapiše samo seznam za človeka, ki je bil zraven, v
+**`_vhod/preveri-opise.md`**. Datoteke ne prepiše, dokler obstaja, iz istega
+razloga kot pri `predlogi.md`.
+
+**Kaj pride na seznam:** skupine z istim opisom znotraj istega vira, plus zapisi
+z isto oznako in **pripisom** — „poroka — Sinatra; …" je ista oznaka z opombo.
+Ločnica je ločilo na koncu predpone (`—`, `–`, `:`, `;`). Brez tega bi se
+„Prifarski muzikanti & Combo BBG" zlil s skupino „Combo BBG", čeprav gre za drug
+dogodek, ki se le konča enako. Vnosi, ki imajo že svoj popravek v
+`arhiv-rocno.json`, so izpuščeni — a prešteti, da ni videti, kot da jih ni bilo.
+
+Danes: **14 skupin, 41 vrstic za pregled.** Največje so „Sinatra; gost Blaž
+Vrbič" (9), „Prifarski muzikanti & Combo BBG" (5), „županov sprejem" (3).
+Ponovitev sama po sebi ni napaka — „županov sprejem" je res ponavljajoč se
+dogodek. Napaka je, kadar oznaka opisuje repertoar in ne dogodka.
+
 ## Preverbe ob uvozu
 
 Vse tečejo pred zapisom; ob padcu se **ne zapiše nič**, da datoteka nikoli ne
@@ -828,6 +861,7 @@ narobe.
 |---|---|
 | 22. 9. 2026 | Prvi zapis. Predlog preslikave po pregledu 320 zapisov; popravljenih 13 vnosov v viru (ura izluščena iz kraja). |
 | 22. 9. 2026 | Izvedba: 291 vnosov v `arhiv.json`, stran `/arhiv`, filtri, `CollectionPage`, postopek prestavitve. |
+| 23. 9. 2026 | Popravljen zapis za `2020-01-01` Portorož po pričevanju udeleženca (vir beleži repertoar, ne dogodka). Nov seznam `_vhod/preveri-opise.md` s ponovljenimi opisi. |
 | 23. 9. 2026 | Šest od osmih zasebnih dogodkov vključenih (`ZASEBNI_VKLJUCENI`); izpuščena ostaneta poroka članice in Medana. Nova tabela `POPRAVKI_PRIZORISCA`, pravilo `ZDRUZI` za `2007-05-19`. 292 vrstic → 298. |
 | 22. 9. 2026 | Pretekli dogodki iz `koncerti.json` se ob gradnji zlijejo v arhiv (292 vrstic). Merilo prehoda je `jePrihajajoc` in velja tudi za arhivske vnose. Zaprti dogodki so v arhivu, a brez povezave na podstran. |
 | 22. 9. 2026 | Vodilna ponovitev naziva odrezana ob izrisu (3 vnosi); podatki nedotaknjeni. Poenoteno črkovanje Marezijazz. Predlogi za program in prireditev v `_vhod/predlogi.md`. |
