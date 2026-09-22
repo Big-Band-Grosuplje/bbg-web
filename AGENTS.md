@@ -136,6 +136,28 @@ kar je pravilo prej razklalo na dvoje.
 > Commiti pred septembrom 2026 uporabljajo conventional tipe (`feat`, `fix`, `docs`, `chore`,
 > `ci`). Preteklosti ne popravljamo — pravilo velja naprej.
 
+**Sporočilo sme trditi samo tisto, kar je v diffu.** Če navaja spremembo, ki je v
+commitu ni, je to napaka — tudi kadar je bila sprememba mišljena in tudi kadar je
+opisana pravilno. Sporočilo je trditev o vsebini commita, ne o namenu; bralec ga
+čez leto dni ne bo preveril, ampak mu bo verjel.
+
+Primer iz zgodovine: `09e6570` je navajal zapis v `docs/PODPORNIKI.md`, ki ga v
+commitu ni bilo; dodal ga je šele `866022e`. Pred commitom preberi sporočilo ob
+`git diff --cached` in preveri, da vsaka trditev ustreza kakšni vrstici v njem.
+
+## Preverbe
+
+**Preverba, ki ne zna pasti, ni preverba.** Vsako novo preverbo — skripto, ki vrne
+izhodno kodo, korak v poteku, izjemo ob nalaganju modula — preizkusi tudi v smeri
+neuspeha: začasno pokvari vhod, poglej, da res pade, in šele nato povrni. Zelena
+preverba brez tega pove samo, da se je izvedla.
+
+V commit sporočilu povej, **kako** si to storil. Brez tega naslednji bralec ne ve,
+ali je bila preverba preizkušena ali le napisana.
+
+Primer: `scripts/kontrast-hero.mjs` je bil preizkušen z začasno oslabljeno zaveso —
+vrednosti so padle pod prag, skripta je naštela padce in vrnila izhodno kodo 1.
+
 ## Dev strežnik
 
 ```

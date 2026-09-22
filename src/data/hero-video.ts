@@ -29,7 +29,7 @@
    ⚠️ Posnetek stoji na Vercelu, poleg strani — nikoli na YouTubu ali
    drugem tujem gostitelju. Vgrajen predvajalnik bi obiskovalčev IP predal
    tretji osebi še pred klikom, kar pravila strani prepovedujejo
-   (glej CLAUDE.md in /zasebnost).
+   (glej AGENTS.md in /zasebnost).
    ============================================================ */
 
 export interface HeroPosnetek {

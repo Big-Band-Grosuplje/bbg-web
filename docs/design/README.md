@@ -29,7 +29,7 @@ Ostaja zapisana tu, ker je del sledi razmisleka.
 
 Mockupa sta samostojni HTML datoteki in nista del builda. Pisave vlečeta z
 Google Fonts CDN — to velja **samo zanju**; na strani je CDN prepovedan
-(glej `CLAUDE.md`), pisave so samo-gostovane prek `@fontsource`.
+(glej `AGENTS.md`), pisave so samo-gostovane prek `@fontsource`.
 
 ## Preklop med smerema
 

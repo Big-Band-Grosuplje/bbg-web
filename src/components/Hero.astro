@@ -16,7 +16,7 @@
 
    Elementi smeri C (badge, nalepka pod fotografijo, uokvirjena
    fotografija) ostajajo v oznakah in so pri A skriti — pravilo iz
-   CLAUDE.md.
+   AGENTS.md.
    ============================================================ */
 import { Image } from 'astro:assets';
 import HeroMedij from './HeroMedij.astro';
@@ -109,7 +109,7 @@ const sneznice = Array.from({ length: KOSOV }, (_, i) => ({
       </p>
     </div>
 
-    {/* Uokvirjena fotografija smeri C. Pri A je skrita — glej CLAUDE.md. */}
+    {/* Uokvirjena fotografija smeri C. Pri A je skrita — glej AGENTS.md. */}
     <div class="hero__foto">
       <Image src={fotoHero} alt={t.hero.fotoAlt} width={900} loading="lazy" class="bbg-rot-foto" />
       <span class="hero__nalepka bbg-rot-nalepka">{t.hero.nalepka}</span>

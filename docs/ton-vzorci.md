@@ -1,6 +1,6 @@
 # Vzorci tona — arhivski napovedniki BBG
 
-> Referenca za pravilo o tonu v CLAUDE.md. Napovedniki koncertov in novice:
+> Referenca za pravilo o tonu v AGENTS.md. Napovedniki koncertov in novice:
 > duhovito, samoironično, a informativno. Kolofon, uradni in poslovni deli
 > strani ostanejo nevtralni. Spodnja vzorca sta avtentični besedili društva.
 

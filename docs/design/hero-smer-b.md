@@ -104,7 +104,7 @@ znajo; H.264 stoji v `<source>` za njim kot rezerva.
 
 ⚠️ **Posnetek stoji na Vercelu, poleg strani — nikoli na YouTubu.** Vgrajen
 predvajalnik bi obiskovalčev IP predal tretji osebi še pred klikom, kar
-pravila strani prepovedujejo (glej `CLAUDE.md` in `/zasebnost`).
+pravila strani prepovedujejo (glej `AGENTS.md` in `/zasebnost`).
 
 ## ⛔ Zakaj je bila smer b opuščena (22. 9. 2026)
 
@@ -171,7 +171,7 @@ Ob tem sta bili nujni dve popravki, ki sta bili prej skriti v ozadju:
 - znak je izgubil `drop-shadow`, ki ga je ločeval od fotografije.
 
 Elementi smeri C (badge, nalepka, uokvirjena fotografija) ostajajo v oznakah
-in so pri A samo skriti — pravilo iz `CLAUDE.md`.
+in so pri A samo skriti — pravilo iz `AGENTS.md`.
 
 ## Odprto
 
