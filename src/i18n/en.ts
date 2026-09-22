@@ -115,6 +115,8 @@ export const en = {
     vse: 'all',
     bigBand: 'big band',
     combo: 'combo',
+    mladinski: 'youth ensemble',
+    izobrazevalni: 'workshop',
     grosuplje: 'Grosuplje',
     ljubljana: 'Ljubljana',
     drugje: 'elsewhere',

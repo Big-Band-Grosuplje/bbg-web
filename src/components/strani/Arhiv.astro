@@ -15,7 +15,17 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Noga from '../Noga.astro';
 import { pot, slovar, type Jezik } from '../../i18n';
-import { poLetih, stevci, kljucKraja, datumZaIzpis, opisZaIzpis } from '../../lib/arhiv';
+import {
+  poLetih,
+  stevci,
+  kljucKraja,
+  datumZaIzpis,
+  opisZaIzpis,
+  nazivZaIzpis,
+  prizorisceZaIzpis,
+  potVnosa,
+  type ZasedbaArhiva,
+} from '../../lib/arhiv';
 
 interface Props {
   jezik: Jezik;
@@ -25,7 +35,25 @@ const t = slovar(jezik);
 const leta = poLetih();
 const n = stevci();
 
-const oznakaZasedbe = (z: string) => (z === 'big-band' ? t.arhiv.bigBand : t.arhiv.combo);
+/* Oznake so v arhivu z malo začetnico (drobna oznaka, ne naslov), zato
+   svoje in ne `t.koncerti.zasedba*`, ki so stavčne. */
+const OZNAKE: Record<ZasedbaArhiva, string> = {
+  'big-band': t.arhiv.bigBand,
+  combo: t.arhiv.combo,
+  mladinski: t.arhiv.mladinski,
+  izobrazevalni: t.arhiv.izobrazevalni,
+};
+const oznakaZasedbe = (z: ZasedbaArhiva) => OZNAKE[z];
+
+/* Izbire filtra po zasedbi. Zadnji dve pozna samo koncerti.json in se
+   izpišeta šele, ko je v arhivu res kak tak dogodek — gumb s številom 0
+   bi obljubljal vsebino, ki je ni. */
+const izbireZasedbe = [
+  { kljuc: 'big-band', oznaka: t.arhiv.bigBand, stevilo: n.zasedba.bigBand },
+  { kljuc: 'combo', oznaka: t.arhiv.combo, stevilo: n.zasedba.combo },
+  { kljuc: 'mladinski', oznaka: t.arhiv.mladinski, stevilo: n.zasedba.mladinski },
+  { kljuc: 'izobrazevalni', oznaka: t.arhiv.izobrazevalni, stevilo: n.zasedba.izobrazevalni },
+].filter((i) => i.stevilo > 0);
 
 /* CollectionPage in ne seznam dogodkov: posamezen zapis nima dovolj polj
    za Event (ni naziva, ni naslova prizorišča, ni ponudbe). Stran sama pa
@@ -75,12 +103,11 @@ const jsonLd = {
           <button type="button" data-zasedba="vse" aria-pressed="true">
             {t.arhiv.vse} <span>{n.zasedba.vse}</span>
           </button>
-          <button type="button" data-zasedba="big-band" aria-pressed="false">
-            {t.arhiv.bigBand} <span>{n.zasedba.bigBand}</span>
-          </button>
-          <button type="button" data-zasedba="combo" aria-pressed="false">
-            {t.arhiv.combo} <span>{n.zasedba.combo}</span>
-          </button>
+          {izbireZasedbe.map((i) => (
+            <button type="button" data-zasedba={i.kljuc} aria-pressed="false">
+              {i.oznaka} <span>{i.stevilo}</span>
+            </button>
+          ))}
           {/* Vsota izbir presega število vseh vnosov, kadar je kak dogodek
               štet pri obeh. Vrstica to pove na mestu, kjer se pozna — in
               se izpiše samo, kadar takih dogodkov res je. */}
@@ -138,19 +165,27 @@ const jsonLd = {
                 </p>
                 <div class="vnos__telo">
                   <p class="vnos__kje">
-                    {v.prizorisce && <strong>{v.prizorisce}</strong>}
-                    {v.prizorisce && v.kraj && <span aria-hidden="true"> · </span>}
+                    {prizorisceZaIzpis(v, jezik) && <strong>{prizorisceZaIzpis(v, jezik)}</strong>}
+                    {prizorisceZaIzpis(v, jezik) && v.kraj && <span aria-hidden="true"> · </span>}
                     {v.kraj}
                     {v.zasedba.map((z) => <span class="znacka">{oznakaZasedbe(z)}</span>)}
                   </p>
-                  {v.naziv && <p class="vnos__naziv">{v.naziv}</p>}
+                  {nazivZaIzpis(v, jezik) && (
+                    <p class="vnos__naziv">
+                      {/* Vnos iz koncerti.json ima podstran; arhivski vnos je
+                          vrstica in ne stran, zato ostane brez povezave. */}
+                      {potVnosa(v, jezik)
+                        ? <a href={potVnosa(v, jezik)}>{nazivZaIzpis(v, jezik)}</a>
+                        : nazivZaIzpis(v, jezik)}
+                    </p>
+                  )}
                   {/* `opisZaIzpis` odreže vodilno ponovitev naziva; podatki
                       ostanejo celi. Kadar od opisa ne ostane nič, se ne izpiše
                       nič — „zapis brez opisa" velja le za vnose, ki ga res
                       nimajo, in tam ni naziva, ki bi ga nadomestil. */}
-                  {opisZaIzpis(v)
-                    ? <p class="vnos__opis">{opisZaIzpis(v)}</p>
-                    : !v.naziv && <p class="vnos__opis vnos__opis--prazno">{t.arhiv.brezOpisa}</p>}
+                  {opisZaIzpis(v, jezik)
+                    ? <p class="vnos__opis">{opisZaIzpis(v, jezik)}</p>
+                    : !nazivZaIzpis(v, jezik) && <p class="vnos__opis vnos__opis--prazno">{t.arhiv.brezOpisa}</p>}
                 </div>
               </li>
             ))}

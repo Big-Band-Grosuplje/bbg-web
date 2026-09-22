@@ -140,6 +140,8 @@ export const sl = {
     vse: 'vse',
     bigBand: 'big band',
     combo: 'combo',
+    mladinski: 'mladinski ansambel',
+    izobrazevalni: 'delavnica',
     grosuplje: 'Grosuplje',
     ljubljana: 'Ljubljana',
     drugje: 'drugje',

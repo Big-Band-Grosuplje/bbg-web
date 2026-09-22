@@ -484,6 +484,17 @@ export function pripravi(
 
 export const koncertiVsi = koncerti;
 
+/**
+ * Pot do podstrani dogodka.
+ *
+ * Obliko poti pozna tudi Hero.astro, Naslovnica.astro in Dogodek.astro —
+ * vsak s svojim zapisom. Tu je zaradi src/lib/arhiv.ts, ki bi bil peti;
+ * obstoječih treh ta sprememba ne dotika.
+ */
+export function potDogodka(slug: string, jezik: Jezik): string {
+  return jezik === 'en' ? `/en/events/${slug}/` : `/dogodki/${slug}/`;
+}
+
 export function prihajajociKoncerti(): Koncert[] {
   return koncerti.filter((k) => jePrihajajoc(k.datumKonecIso ?? k.datumIso));
 }

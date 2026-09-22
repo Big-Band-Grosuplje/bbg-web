@@ -492,6 +492,80 @@ pod uvodom ena vrstica, ki pove, koliko jih je izpeljanih in po kakšnem pravilu
 Prej je število 247 stalo ob izbiri filtra, kjer je bilo videti kot podatek o
 dogodkih; zdaj stoji ob razlagi, kjer je podatek o zanesljivosti.
 
+## Pretekli dogodki iz koncerti.json
+
+Dogodek, ki preteče, izpade iz napovednika. Če ga ni tudi v arhivskem viru, ni
+**nikjer** — in arhivski vir je strojni prepis stare strani, ki o novih dogodkih
+ne ve ničesar in nikoli ne bo. Zgodilo se je 22. 9. 2026 pri obeh sprejemih
+veleposlaništva ZDA (9. in 15. 9. 2026).
+
+**Zlivanje teče ob gradnji, v `src/lib/arhiv.ts`.** Ne z vpisovanjem v
+`arhiv-uvoz.json`: tista datoteka je izhod `npm run arhiv` in `koncerti.json` ni
+njen vir — vsak vpis bi naslednji zagon pobrisal.
+
+### Merilo za prehod
+
+Isto kot za napovednik: `jePrihajajoc(datumKonecIso ?? datumIso)` iz
+`src/lib/datumi.mjs`. Ista funkcija in isti argument pomenita, da dogodek ne more
+biti hkrati v obeh ali za en dan v nobenem.
+
+⚠️ **Merilo velja tudi za arhivske vnose.** Preglednica 2019–2026 je v vir
+prinesla tudi še nenastopljene datume — `2026-12-13` je bil pred to spremembo
+hkrati kartica na naslovnici in vrstica v arhivu. Ko preteče, se vrne sam: iz
+`koncerti.json`, če ga ima, sicer iz uvoza.
+
+### Kateri vir prevlada
+
+Ujemanje je po **datumu in kraju** — po istem ključu, po katerem je `id` arhiva
+že zdaj enoličen. Ob ujemanju prevlada **`koncerti.json`**: ima naziv, opis, uro,
+prizorišče, prevode in podstran, arhivski vir pa skopo vrstico.
+
+⚠️ Dva **različna** dogodka istega dne v istem kraju bi se zlila v enega. To je
+ista omejitev, kot jo ima `id` arhiva, in zaenkrat brez primera v podatkih.
+
+### Povezava na podstran
+
+Vnos iz `koncerti.json` je v arhivu povezan na svojo podstran; arhivski vnos
+ostane brez povezave, ker je vrstica in ne stran.
+
+⚠️ **Zaprt dogodek povezave NE dobi.** Njegova podstran nosi `noindex` in je
+izločena iz sitemapa prav zato, da je ne najde nekdo, ki ni bil povabljen; javna
+povezava iz arhiva bi to razveljavila. **Vrstica sama ostane** — dogodek se je
+zgodil in v kroniki mu je mesto; arhiv že zdaj navaja nastope na rezidenci
+veleposlanika ZDA (npr. `2010-07-08`) in izpuščanje novih bi bilo nedosledno.
+Pravilo je v `potVnosa()` in ga je mogoče obrniti na enem mestu.
+
+### Kaj to spremeni
+
+| | Prej | Zdaj |
+|---|---|---|
+| vrstic na `/arhiv` | 291 | 292 |
+| big band | 236 | 235 |
+| combo | 55 | 57 |
+| Ljubljana | 80 | 82 |
+| Grosuplje | 91 | 90 |
+| strani v buildu | 23 | 23 |
+
+Izračun: 291 − 1 (`2026-12-13`, še prihajajoč) − 1 (`2026-09-18`, prevzet iz
+`koncerti.json`) + 3 pretekli dogodki = 292.
+
+Števci filtrov, kazalo let in JSON-LD se ne podrejo: vsi so izpeljani iz
+`ARHIV`, torej iz že združenega seznama. Strani v buildu je enako — `/arhiv` je
+ena stran, podstrani dogodkov pa so obstajale že prej (pretekli dogodek podstran
+obdrži).
+
+**Zasedba:** `koncerti.json` pozna še `mladinski` in `izobrazevalni`, zato je tip
+`ZasedbaArhiva` razširjen na štiri vrednosti. Izbiri filtra se izpišeta **šele,
+ko je v arhivu res kak tak dogodek** — gumb s številom 0 bi obljubljal vsebino,
+ki je ni. Danes takega dogodka ni (delavnica 10. 10. 2026 je še prihajajoča).
+Zasedba iz `koncerti.json` je `zasedbaVir: 'zapisano'` — vpisana je in ne
+izpeljana; da je vpisana v drugi datoteki, na njeno zanesljivost ne vpliva.
+
+**Prevodi:** vnos iz `koncerti.json` prinese `nazivEn`, `opisEn` in
+`lokacija.nazivEn`, zato ima `ArhivVnos` polja s končnico `En`. Arhivski vir je
+slovenski in prevodov nima — tam koda pade nazaj na slovensko, enako kot povsod
+drugod v podatkih.
+
 ## Naziv v opisu: odrez ob izrisu
 
 Kjer je naziv izluščen iz opisa, ga opis še vedno nosi. Obliki sta dve:
@@ -637,6 +711,7 @@ narobe.
 |---|---|
 | 22. 9. 2026 | Prvi zapis. Predlog preslikave po pregledu 320 zapisov; popravljenih 13 vnosov v viru (ura izluščena iz kraja). |
 | 22. 9. 2026 | Izvedba: 291 vnosov v `arhiv.json`, stran `/arhiv`, filtri, `CollectionPage`, postopek prestavitve. |
+| 22. 9. 2026 | Pretekli dogodki iz `koncerti.json` se ob gradnji zlijejo v arhiv (292 vrstic). Merilo prehoda je `jePrihajajoc` in velja tudi za arhivske vnose. Zaprti dogodki so v arhivu, a brez povezave na podstran. |
 | 22. 9. 2026 | Vodilna ponovitev naziva odrezana ob izrisu (3 vnosi); podatki nedotaknjeni. Poenoteno črkovanje Marezijazz. Predlogi za program in prireditev v `_vhod/predlogi.md`. |
 | 22. 9. 2026 | Kraj povrnjen v ime prireditve pri treh zapisih („Grosuplje v jeseni"), z varovalom na predlog. Ugotovljeno, da odreza ne dela skripta, ampak vir. |
 | 22. 9. 2026 | Zasedba izpeljana za vseh 291 vnosov (44 zapisano, 247 izpeljano), model spremenjen v množico, dodano polje `zasedbaVir`. Filter po vsebovanosti; izbira „ni zapisano" odpade. |
