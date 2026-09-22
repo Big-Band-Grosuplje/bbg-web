@@ -115,6 +115,41 @@ export const sl = {
     aktualno: 'aktualno',
   },
 
+  /* Arhiv dogodkov. Stran je seznam in ne zbirka podstrani — glej
+     docs/uvoz-zgodovine.md. */
+  arhiv: {
+    nadnaslov: 'od 1998 do danes',
+    naslov: 'Arhiv dogodkov',
+    naslovStrani: 'Arhiv dogodkov — Big Band Grosuplje',
+    opisStrani: 'Kronološki seznam nastopov Big Banda Grosuplje od leta 1998. Datumi, prizorišča in kratki opisi iz arhiva društva.',
+    uvod: 'Kar smo uspeli zbrati iz arhiva stare strani in internih seznamov. Zapisi so različno podrobni — ponekod ostane samo datum in kraj. Dopolnjujemo jih sproti.',
+    /* Zasedba je pri večini vnosov izpeljana iz besedila in ne zapisana v
+       viru. Stran to pove v eni vrstici pod uvodom: brez nje bi značka
+       „big band" trdila več, kot vemo. {n} je število izpeljanih. */
+    izpeljanaZasedba:
+      'Zasedbo ima zapisano manjšina vnosov; pri {n} je izpeljana — kjer zapis ne omenja comba ali male zasedbe, je igral big band.',
+    /* Dogodek, na katerem sta nastopili obe zasedbi, se šteje pri obeh
+       izbirah, zato je vsota večja od števila vseh. Vrstica se izpiše
+       samo, kadar takih dogodkov res je. */
+    obeZasedbi: 'Pri {n} dogodkih sta nastopili obe zasedbi in se štejejo pri obeh izbirah.',
+    /* Ednina ima drug sklon ("pri enem dogodku") — zamenjava samo števila
+       bi dala "pri 1 dogodkih". */
+    obeZasedbiEna: 'Pri enem dogodku sta nastopili obe zasedbi in se šteje pri obeh izbirah.',
+    filterZasedba: 'zasedba',
+    filterKraj: 'kraj',
+    vse: 'vse',
+    bigBand: 'big band',
+    combo: 'combo',
+    grosuplje: 'Grosuplje',
+    ljubljana: 'Ljubljana',
+    drugje: 'drugje',
+    skoci: 'skoči na leto',
+    brezOpisa: 'zapis brez opisa',
+    prazno: 'Ni zadetkov. Poskusi z drugo izbiro.',
+    stevilo: 'zapisov',
+    nazajNaZgodovino: '← Zgodovina',
+  },
+
   galerijaSekcija: {
     nadnaslov: 'iz arhiva',
     naslov: 'Galerija',
@@ -263,6 +298,7 @@ export const sl = {
     /* Značka ob odseku 2027: ta ni zgodovina, ampak napoved. */
     napovedZnacka: 'napoved',
     gostujociNaslov: 'Gostujoči dirigenti',
+    arhivGumb: 'Arhiv vseh dogodkov →',
     kredit:
       `Foto: ${AVTOR_PRIVZETI}. Fotografije zunanjih avtorjev so objavljene šele po potrjenem dovoljenju in vedno s podpisom avtorja. Imen članov orkestra ne objavljamo; podpisujejo se dirigenti, umetniško vodstvo in gostujoči umetniki.`,
   },

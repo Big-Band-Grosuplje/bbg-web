@@ -163,8 +163,10 @@ export function oznakaZasedbe(zasedba: Koncert['zasedba'], oznake: OznakeZasedb)
 }
 
 /* Datum v sl-SI zapisu: polni datum kot d. M. yyyy, sam mesec kot "oktober 2026".
+   Izvožena, ker isto oblikovanje potrebuje arhiv (src/lib/arhiv.ts) — dve kopiji
+   bi pomenili dva zapisa istega datuma na isti strani.
    Ob znani uri se doda "ob 19.00" (slovenski zapis ure s piko). */
-function formatDatum(
+export function formatDatum(
   datumIso: string | null,
   ura: string | null,
   jezik: Jezik,

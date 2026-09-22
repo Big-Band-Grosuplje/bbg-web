@@ -100,6 +100,31 @@ export const en = {
     aktualno: 'current',
   },
 
+  arhiv: {
+    nadnaslov: 'since 1998',
+    naslov: 'Event archive',
+    naslovStrani: 'Event archive — Big Band Grosuplje',
+    opisStrani: 'A chronological list of Big Band Grosuplje performances since 1998. Dates, venues and short notes from the society archive.',
+    uvod: 'What we managed to gather from the old site and internal lists. The records vary in detail — for some, only a date and a place remain. We add to them as we go.',
+    izpeljanaZasedba:
+      'Only a minority of records state the line-up; for {n} it is inferred — where a record does not mention the combo or a small group, the big band played.',
+    obeZasedbi: 'At {n} events both line-ups played, so those events are counted under both.',
+    obeZasedbiEna: 'At one event both line-ups played, so that event is counted under both.',
+    filterZasedba: 'line-up',
+    filterKraj: 'place',
+    vse: 'all',
+    bigBand: 'big band',
+    combo: 'combo',
+    grosuplje: 'Grosuplje',
+    ljubljana: 'Ljubljana',
+    drugje: 'elsewhere',
+    skoci: 'jump to year',
+    brezOpisa: 'record without a description',
+    prazno: 'No matches. Try another selection.',
+    stevilo: 'records',
+    nazajNaZgodovino: '← History',
+  },
+
   galerijaSekcija: {
     nadnaslov: 'from the archive',
     naslov: 'Gallery',
@@ -243,6 +268,7 @@ export const en = {
     naviNaslov: 'Jump to',
     napovedZnacka: 'looking ahead',
     gostujociNaslov: 'Guest conductors',
+    arhivGumb: 'Full event archive →',
     kredit:
       `Photo: ${AVTOR_PRIVZETI}. Photographs by outside authors are published only once permission is confirmed, and always with the author credited. We do not publish the names of orchestra members; conductors, artistic directors and guest artists are credited.`,
   },

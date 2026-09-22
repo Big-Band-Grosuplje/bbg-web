@@ -1,0 +1,4382 @@
+[
+ {
+  "id": "2026-12-13-grosuplje",
+  "datumIso": "2026-12-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "BBG x Slon in sadež; gost Slon in sadež",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2026-09-18-grosuplje",
+  "datumIso": "2026-09-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Grosuplje v jeseni; gost Rok Ferengja, zbori",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2026-07-10-marezige",
+  "datumIso": "2026-07-10",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Marezige",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Marezijazz (Goodwin); gost Tomaž Zevnik",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2026-06-05-ljubljana",
+  "datumIso": "2026-06-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Jazz klub Kazina",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Samostojni koncert (Goodwin); gost Tomaž Zevnik",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2026-05-16-grosuplje",
+  "datumIso": "2026-05-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "JSKD festival (Goodwin); gost Tomaž Zevnik",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2026-04-17-grosuplje",
+  "datumIso": "2026-04-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Pogovorni večer ob izdaji knjige Orel in korenine",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2025-12-13-grosuplje",
+  "datumIso": "2025-12-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Tradicionalni božično-novoletni koncert 2025; gostje Manca Fekonja, Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2025-12-grosuplje",
+  "datumIso": "2025-12",
+  "natancnost": "mesec",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "županov sprejem",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2025-10-18-grosuplje",
+  "datumIso": "2025-10-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": "Images",
+  "opis": "\"Images\"; gostje Klara Lavriša, Žan Cesar",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2025-09-17-grosuplje",
+  "datumIso": "2025-09-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Otvoritev prenovljenega nogometnega parka",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2025-08-10-ugljan",
+  "datumIso": "2025-08-10",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ugljan",
+  "prizorisce": "Kali",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Tunuara 2025",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2025-07-11-marezige",
+  "datumIso": "2025-07-11",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Marezige",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2025-05-16-spodnja-slivnica",
+  "datumIso": "2025-05-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "koncert z Gašperjem Kržmancem",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2024-12-14-grosuplje",
+  "datumIso": "2024-12-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "koncert z Gašperjem Kržmancem",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2024-10-05-grosuplje",
+  "datumIso": "2024-10-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": "Flying Start",
+  "opis": "\"Flying Start\"; gostje Tadej Tomšič, Petra Vidmar, Erik Čebokli, Žiga Kožar",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2024-09-24-ljubljana",
+  "datumIso": "2024-09-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Grand Plaza Hotel",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "sprejem ameriškega veleposlaništva",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2024-02-07-grosuplje",
+  "datumIso": "2024-02-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Prešernov dan",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2023-12-16-grosuplje",
+  "datumIso": "2023-12-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Božično-novoletni koncert; gostje Jure Pukl, Lara Grbić, Maruša Kos",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2023-09-28-krka",
+  "datumIso": "2023-09-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Krka",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2023-09-15-grosuplje",
+  "datumIso": "2023-09-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Grosuplje v jeseni; gostja Nina Strnad",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2023-05-25-grosuplje",
+  "datumIso": "2023-05-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "70 let vrtca Brinje",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2023-04-20-grosuplje",
+  "datumIso": "2023-04-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Knjižnica Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Noč knjige",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2023-03-24-ljubljana",
+  "datumIso": "2023-03-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Ljubljanski grad",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2023-01-05-grosuplje",
+  "datumIso": "2023-01-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "županov sprejem",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2022-12-18-grosuplje",
+  "datumIso": "2022-12-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Božično-novoletni koncert, program Charlesa Mingusa; gostja Nina Strnad, Klemen Kotar",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2022-10-15-velenje",
+  "datumIso": "2022-10-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Velenje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2022-10-07-ljubljana",
+  "datumIso": "2022-10-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Combo Mango",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2022-06-27-brdo-pri-kranju",
+  "datumIso": "2022-06-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Brdo pri Kranju",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Mladinski svet Slovenije – Prostovoljec leta",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2022-06-09-marezige",
+  "datumIso": "2022-06-09",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Marezige",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Marezijazz – Coffin",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2022-05-03-ivancna-gorica",
+  "datumIso": "2022-05-03",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ivančna Gorica",
+  "prizorisce": "Občina",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Žalna seja za Franceta Slano",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2022-04-22-grosuplje",
+  "datumIso": "2022-04-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Koncert Uroš Perić; gostje Uroš Perić in pevke",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2021-11-04-grosuplje",
+  "datumIso": "2021-11-04",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Slovesnost ob priključitvi zemeljskega plina in ob 10. letnici mestne linije 3G",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2021-07-07-mala-racna",
+  "datumIso": "2021-07-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Mala Račna",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Otvoritev Žabje hiše",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2020-09-18-grosuplje",
+  "datumIso": "2020-09-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Otvoritev parkirne hiše",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2020-01-01-portoroz",
+  "datumIso": "2020-01-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-12-28-ljubljana",
+  "datumIso": "2019-12-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "ČinČin",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-12-14-grosuplje",
+  "datumIso": "2019-12-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Count / Schuur / Zanchini; gost Simone Zanchini",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-12-12-grosuplje",
+  "datumIso": "2019-12-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "županov sprejem",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-12-05-ljubljana",
+  "datumIso": "2019-12-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Plečnik",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-10-11-ljubljana",
+  "datumIso": "2019-10-11",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Ljubljanski grad",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-10-06-grosuplje",
+  "datumIso": "2019-10-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Sinatra; gost Blaž Vrbič",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-03-14-grosuplje",
+  "datumIso": "2019-03-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "prevod knjige Louisa Adamiča",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-03-07-ljubljana",
+  "datumIso": "2019-03-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Gospodarsko razstavišče",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Kasaška akademija",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2019-02-06-grosuplje",
+  "datumIso": "2019-02-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "podelitev nagrad ZKD Grosuplje",
+  "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
+ },
+ {
+  "id": "2018-02-02-grosuplje",
+  "datumIso": "2018-02-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Help! A Beatles Tribute Band & Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-12-22-grosuplje",
+  "datumIso": "2017-12-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "BBG & Boštjan Gombač. Posnetek: https://www.youtube.com/watch?v=HnvAJSuHFtU",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-10-07-ljubljana",
+  "datumIso": "2017-10-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Španski borci",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "20 let BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-09-15-grosuplje",
+  "datumIso": "2017-09-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "20 let BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-09-09-grosuplje",
+  "datumIso": "2017-09-09",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Knjižnica Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-09-02-grosuplje",
+  "datumIso": "2017-09-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Knjižnica Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-08-24-idrija",
+  "datumIso": "2017-08-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Idrija",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Ella Fitzgerald Songbook",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-08-18-novo-mesto",
+  "datumIso": "2017-08-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Novo mesto",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Ella Fitzgerald Songbook",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-06-29-ljubljana",
+  "datumIso": "2017-06-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Festivalna dvorana",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Dan neodvisnosti ZDA",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-05-20-grosuplje",
+  "datumIso": "2017-05-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Ella Fitzgerald Songbook",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2017-03-16-spodnja-slivnica",
+  "datumIso": "2017-03-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert za zaljubljene",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2016-12-23-grosuplje",
+  "datumIso": "2016-12-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Jazz in the Coffin (glasba Jeffa Coffina z gosti)",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2016-12-20-ljubljana",
+  "datumIso": "2016-12-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Novi trg",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Big band Grosuplje & Blaž Vrbič",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2016-08-26-rogaska-slatina",
+  "datumIso": "2016-08-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Rogaška Slatina",
+  "prizorisce": "Zdraviliški trg",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-07-02-nova-gorica",
+  "datumIso": "2016-07-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Nova Gorica",
+  "prizorisce": "Glavni trg",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-05-29-krka",
+  "datumIso": "2016-05-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Krka",
+  "prizorisce": "Krška jama",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-02-27-celovec-avstrija",
+  "datumIso": "2016-02-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Celovec (Avstrija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-02-25-knittelfeld-avstrija",
+  "datumIso": "2016-02-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Knittelfeld (Avstrija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-02-24-weiz-avstrija",
+  "datumIso": "2016-02-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Weiz (Avstrija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-01-14-gradec-avstrija",
+  "datumIso": "2016-01-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Gradec  (Avstrija)",
+  "prizorisce": "Stefaniensaal",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-01-13-wiener-neustadt-avstrija",
+  "datumIso": "2016-01-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Wiener Neustadt (Avstrija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2016-01-12-bruck-an-der-mur-avstrija",
+  "datumIso": "2016-01-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Bruck an der Mur (Avstrija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2015-12-19-grosuplje",
+  "datumIso": "2015-12-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Ellingtonia",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-12-12-ljubljana",
+  "datumIso": "2015-12-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Festivalna dvorana",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Big band Grosuplje & Lado Leskovar",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-12-01-ljubljana",
+  "datumIso": "2015-12-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Španski borci",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Ellingtonia",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-11-30-ljubljana",
+  "datumIso": "2015-11-30",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Cankarjev dom",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Prifarski muzikanti & Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-11-29-ljubljana",
+  "datumIso": "2015-11-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Cankarjev dom",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Prifarski muzikanti & Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-11-27-vojnik",
+  "datumIso": "2015-11-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Vojnik",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Prifarski muzikanti & Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-11-22-slovenj-gradec",
+  "datumIso": "2015-11-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Slovenj Gradec",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Prifarski muzikanti & Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-11-21-hrastnik",
+  "datumIso": "2015-11-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Hrastnik",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Prifarski muzikanti & Combo BBG",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-09-26-ljubljana",
+  "datumIso": "2015-09-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Festivalna dvorana",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2015-09-19-grosuplje",
+  "datumIso": "2015-09-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Grosuplje v jeseni",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-09-13-grosuplje",
+  "datumIso": "2015-09-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "dobrodelni koncert",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-09-06-ljubljana",
+  "datumIso": "2015-09-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Hipodrom Stožice",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Big band Grosuplje & Blaž Vrbič",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-08-13-kocevje",
+  "datumIso": "2015-08-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Kočevje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2015-07-21-gradec-avstrija",
+  "datumIso": "2015-07-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Gradec (Avstrija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2015-07-04-marezige",
+  "datumIso": "2015-07-04",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Marezige",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Marezijazz",
+  "vir": "seznam 2015–2018 (kratki zapisi)"
+ },
+ {
+  "id": "2015-07-02-ljubljana",
+  "datumIso": "2015-07-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Križanke",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2015-03-26-ljubljana",
+  "datumIso": "2015-03-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija, Studio 14",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2015-02-13-grosuplje",
+  "datumIso": "2015-02-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": null,
+  "vir": "seznam 2015–2018 (kratki zapisi)",
+  "zaDopolnitev": true
+ },
+ {
+  "id": "2014-12-20-grosuplje",
+  "datumIso": "2014-12-20",
+  "natancnost": "dan",
+  "ura": "19:00",
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Predbožično divjanje z Big bandom Grosuplje",
+  "opis": "\"Predbožično divjanje z Big bandom Grosuplje\". Jazz koncert christmas special pod vodstvom Klemna Kotarja. Glasba Gordona Goodwina, jazz komadi Counta Basieja, Mozart v novi preobleki in božične skladbe. Gosta Tomaž Zevnik (klarinet) in Irena Vidic (vokal). Vstopnina 10 EUR, znižana 5 EUR.",
+  "vir": "najdba 2014 (drevored.si)"
+ },
+ {
+  "id": "2013-12-04-celje",
+  "datumIso": "2013-12-04",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Celje",
+  "prizorisce": "Narodni dom",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert Big Banda Grosuplje, Blaža Vrbiča in Boštjana Korošca. Projekt A Swinging Affair – poklon Franku Sinatri, podprlo Ameriško veleposlaništvo. V sodelovanju z Društvom ljubiteljev umetnosti in Hišo kulture Celje.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-11-26-ljubljana",
+  "datumIso": "2013-11-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Cankarjev dom, Gallusova dvorana",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Mala zasedba se je pridružila Prifarskim muzikantom ob 25. obletnici.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-11-25-ljubljana",
+  "datumIso": "2013-11-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Cankarjev dom, Gallusova dvorana",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Mala zasedba se je pridružila Prifarskim muzikantom ob 25. obletnici.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-11-21-ljubljana",
+  "datumIso": "2013-11-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija, Studio 14",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert z Blažem Vrbičem. Projekt A Swinging Affair – poklon Franku Sinatri, podprlo Ameriško veleposlaništvo. V sodelovanju z RTV Slovenija.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-10-24-ljubljana",
+  "datumIso": "2013-10-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Ringlšpil Bar",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe in pevca Blaža Vrbiča. Jazz-soul glasba 60. let.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-10-18-spodnja-slivnica",
+  "datumIso": "2013-10-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Samostojni koncert Combo zasedbe in pevca Blaža Vrbiča. Jazz-soul glasba 60. let.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-09-21-grosuplje",
+  "datumIso": "2013-09-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kolodvorska cesta",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Grosuplje v jeseni",
+  "opis": "Nastop na prireditvi \"Grosuplje v jeseni\".",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-09-05-ljubljana",
+  "datumIso": "2013-09-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Rezidenca veleposlanika ZDA",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe in Blaža Vrbiča na sprejemu za nove diplomate.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-08-22-ljubljana",
+  "datumIso": "2013-08-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Dvorni trg",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop z Blažem Vrbičem in Ivo Stanič na festivalu Noči v stari Ljubljani (Imago Sloveniae). Projekt A Swinging Affair.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-07-03-ljubljana",
+  "datumIso": "2013-07-03",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Narodna galerija",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop z Blažem Vrbičem ob praznovanju ameriškega Dneva neodvisnosti.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-05-31-spodnja-slivnica",
+  "datumIso": "2013-05-31",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert z gostujočo skupino Nula Kelvina, uspešnice prirejene za big band. Projekt podprla Občina Grosuplje.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-04-25-ljubljana",
+  "datumIso": "2013-04-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Nebotičnik",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert z Blažem Vrbičem. Projekt A Swinging Affair – poklon Franku Sinatri.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2013-03-10-spodnja-slivnica",
+  "datumIso": "2013-03-10",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert z Blažem Vrbičem. Projekt A Swinging Affair – poklon Franku Sinatri.",
+  "vir": "seznam 2013"
+ },
+ {
+  "id": "2012-12-27-spodnja-slivnica",
+  "datumIso": "2012-12-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Božično-novoletni koncert s pevsko solistko Nino Pušlar, njeno spremljevalno skupino in Galom Gjurinom.",
+  "vir": "seznam 2012"
+ },
+ {
+  "id": "2012-12-03-ljubljana",
+  "datumIso": "2012-12-03",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Cankarjev dom, Gallusova dvorana",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Prifarci gremo v svet",
+  "opis": "Nastop Combo zasedbe na koncertu \"Prifarci gremo v svet\". Nastopili Prifarski muzikanti, Nicole, Ivanka Kraševec Prešern, Primož Grašič, Lara Jankovič, šola irskega plesa, zbor mednarodne šole Danile Kumar. Posnetek je predvajala TV Slovenija.",
+  "vir": "seznam 2012"
+ },
+ {
+  "id": "2012-11-24-maribor",
+  "datumIso": "2012-11-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Maribor",
+  "prizorisce": "Narodni dom",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Prifarci gremo v svet",
+  "opis": "Nastop Combo zasedbe na koncertu \"Prifarci gremo v svet\", v okviru prireditev Evropske prestolnice kulture.",
+  "vir": "seznam 2012"
+ },
+ {
+  "id": "2012-04-grosuplje",
+  "datumIso": "2012-04",
+  "natancnost": "mesec",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Hotel & Casino Kongo",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe na Medijadi, dobrodelni prireditvi Rotary kluba Grosuplje.",
+  "vir": "seznam 2012"
+ },
+ {
+  "id": "2012-01-26-ljubljana",
+  "datumIso": "2012-01-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Klubski salon Maxi",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Glasba združuje – Music Unites",
+  "opis": "Nastop Combo zasedbe z ameriško pevko Gwen Hughes, v okviru projekta \"Glasba združuje – Music Unites\".",
+  "vir": "seznam 2012"
+ },
+ {
+  "id": "2012-01-24-grosuplje",
+  "datumIso": "2012-01-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Glasba združuje – Music Unites",
+  "opis": "Nastop Combo zasedbe z ameriško pevko Gwen Hughes, v okviru projekta \"Glasba združuje – Music Unites\".",
+  "vir": "seznam 2012"
+ },
+ {
+  "id": "2011-06-22-volcji-potok",
+  "datumIso": "2011-06-22",
+  "natancnost": "dan",
+  "ura": "19:00",
+  "kraj": "Volčji Potok",
+  "prizorisce": "Arboretum",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Dobrodelni koncert za Zvezo prijateljev mladine Slovenije, pod taktirko Aleša Suše, gost Ratko Divjak (bobni). Nastopili zbor Art Voices, Katja Šulc, Tjaša Fabjančič, Neža Drobnič, Eva Černe, Iva Stanič, Jadranka Juras.",
+  "vir": "seznam 2011"
+ },
+ {
+  "id": "2011-05-27-zagreb",
+  "datumIso": "2011-05-27",
+  "natancnost": "dan",
+  "ura": "20:00",
+  "kraj": "Zagreb",
+  "prizorisce": "Kino Forum – SD Stjepan Radić",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Glasba združuje",
+  "opis": "Tretji koncert projekta \"Glasba združuje\". Big Band Grosuplje pod taktirko Igorja Lundra z orkestralnimi suitami Duka Ellingtona; HGM A Band s svojim programom.",
+  "vir": "seznam 2011"
+ },
+ {
+  "id": "2011-05-20-spodnja-slivnica",
+  "datumIso": "2011-05-20",
+  "natancnost": "dan",
+  "ura": "20:00",
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Glasba združuje",
+  "opis": "Drugi koncert projekta \"Glasba združuje\". Orkestralne suite Duka Ellingtona.",
+  "vir": "seznam 2011"
+ },
+ {
+  "id": "2011-04-20-grosuplje",
+  "datumIso": "2011-04-20",
+  "natancnost": "dan",
+  "ura": "19:30",
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Glasba združuje",
+  "opis": "Prvi koncert projekta \"Glasba združuje\". Nastopil HGM Jazz Orchestra (HR) pod vodstvom Sigija Feigla (A), solist na trobenti Andreas Haderer (A). Dela skladatelja Petra Herbolzheimerja. Pokrovitelji: Občina Grosuplje, Avstrijski kulturni forum, Radio Zeleni Val.",
+  "vir": "seznam 2011"
+ },
+ {
+  "id": "2010-11-12-grosuplje",
+  "datumIso": "2010-11-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Večer slovenske popevke - samostojni koncert big banda z gosti. Ob Big Bandu Grosuplje so nastopili: Elda Viler, Alfi Nipič, Edvin Fliser.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-10-02-krsko",
+  "datumIso": "2010-10-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Krško",
+  "prizorisce": "Kulturni center",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop na prireditvi v okviru festivala big bandov.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-09-17-ljubljana",
+  "datumIso": "2010-09-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Križanke",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe big banda s skupino Pop Design na njihovem samostojnem koncertu.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-07-17-bled",
+  "datumIso": "2010-07-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Bled",
+  "prizorisce": "Festivalna dvorana",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Slavnostni koncert ob 50. letnici jazza na Bledu. Z Big Bandom Grosuplje so nastopili eminentni slovenski jazzisti: Irena Vidic, vokal, Peter Mihelič, klavir, Gašper Bertoncelj, bobni, Robert Jukič, bas, Igor Matkovič, trobenta",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-07-08-ljubljana",
+  "datumIso": "2010-07-08",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Rezidenca veleposlanika ZDA",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na sprejemu.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-05-21-spodnja-slivnica",
+  "datumIso": "2010-05-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Vokal-instrumental - koncert big banda z Ireno Vidic in vokalnimi skupinami Glasbene šole Grosuplje.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-03-26-spodnja-slivnica",
+  "datumIso": "2010-03-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Jazzovsko popotovanje z gostom, priznanim saksofonistom, Juretom Puklom. Samostojni koncert Big Banda Grosuplje.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-03-19-novo-mesto",
+  "datumIso": "2010-03-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Novo mesto",
+  "prizorisce": "Kulturni center Janeza Trdine",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop na prireditvi ob 20. letnici televizije Vaš kanal. Z big bandom sta nastopila: Alenka Godec in Jure Ivanušič. Neposredni prenos na televiziji Vaš kanal.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2010-03-04-koper",
+  "datumIso": "2010-03-04",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Koper",
+  "prizorisce": "Gledališče Koper",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Big Banda Grosuplje na osrednji prireditvi ob dnevu pomorstva.",
+  "vir": "sql:leto_2010 + seznam 2010"
+ },
+ {
+  "id": "2009-12-13-spodnja-slivnica",
+  "datumIso": "2009-12-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na božično-novoletni prireditvi.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-09-30-grosuplje",
+  "datumIso": "2009-09-30",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Družbeni dom",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na prireditvi Jaz, gledalec.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-09-27-ljubljana",
+  "datumIso": "2009-09-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje z Nuško Drašček in Boštjanom Romihom v televizijski oddaji NLP.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-09-26-ptuj",
+  "datumIso": "2009-09-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ptuj",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na družabnem srečanju.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-09-23-grosuplje",
+  "datumIso": "2009-09-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na prireditvi Ura poezije nikogar ne ubije.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-09-17-ravne-na-koroskem",
+  "datumIso": "2009-09-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ravne na Koroškem",
+  "prizorisce": "Mladinski center",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert Big Banda Grosuplje v okviru Jazz abonmaja Ravne.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-08-30-sindos-grcija",
+  "datumIso": "2009-08-30",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Sindos (Grčija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop članov Big Banda Grosuplje na zaključni prireditvi festivala mladinskih orkestrov International Youth Band Festival.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-08-29-thermi-grcija",
+  "datumIso": "2009-08-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Thermi (Grčija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert Big Banda Grosuplje v okviru festivalu mladinskih orkestrov International Youth Band Festival.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-08-28-moudania-chalkidiki-grcija",
+  "datumIso": "2009-08-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Moudania Chalkidiki (Grčija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert Big Banda Grosuplje v okviru festivalu mladinskih orkestrov International Youth Band Festival.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-08-27-sindos-grcija",
+  "datumIso": "2009-08-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Sindos (Grčija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert Big Banda Grosuplje v okviru festivalu mladinskih orkestrov International Youth Band Festival.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-08-25-sindos-grcija",
+  "datumIso": "2009-08-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Sindos (Grčija)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop članov Big Banda Grosuplje na otvoritvi festivala mladinskih orkestrov International Youth Band Festival.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-07-01-ljubljana",
+  "datumIso": "2009-07-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Emonska klet",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na družabnem srečanju udeležencev mednarodnega kongresa agronomov.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-06-19-grosuplje",
+  "datumIso": "2009-06-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Festival mesto na ulici",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Peti koncert Big Banda Grosuplje v okviru praznovanja desete obletnice. Z big bandom je nastopila Nuša Derenda.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-05-16-maribor",
+  "datumIso": "2009-05-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Maribor",
+  "prizorisce": "Narodni dom",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Big Banda Grosuplje na dobrodelni prireditvi Ineerweel kluba Maribor. Z big bandom so nastopili pevci Miha Alujevič, Nina Rotner, Alfi Nipič in Edvin Fliser.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-05-02-grosuplje",
+  "datumIso": "2009-05-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Četrti koncert v okviru praznovanja desete obletnice delovanja. Big Band Grosuplje je gostil HGM Jazz Orchestra Zagreb pod vodstvom dirigenta Sigia Feigla (A) in s solistom Johnom Thomasom (ZDA). Program glasbe The Tonight Show Banda. Koncert je bil vključen v projekt Ameriški dnevi, ki ga pripravlja Ameriško veleposlaništvo v Ljubljani.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben) (besedilo povrnjeno iz seznama 2009)"
+ },
+ {
+  "id": "2009-04-27-spodnja-slivnica",
+  "datumIso": "2009-04-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Spodnja Slivnica",
+  "prizorisce": "Kulturni dom Spodnja Slivnica",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Tretji koncert v okviru praznovanja desete obletnice delovanja, s katerim so člani hkrati obeležili otvoritev prenovljene vadbene in koncertne dvorane, ki bo v prihodnjih letih domovanje Big Banda Grosuplje.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-03-15-ljubljana",
+  "datumIso": "2009-03-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje s pevko Nino Pušlar v televizijski oddaji NLP.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-03-06-portoroz",
+  "datumIso": "2009-03-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": "Avditorij Portorož",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Big Banda Grosuplje na prireditvi ob Dnevu pomorstva v Avditoriju Portorož.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-02-15-ljubljana",
+  "datumIso": "2009-02-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje s Klemnom Slakonjo v televizijski oddaji NLP.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-02-07-grosuplje",
+  "datumIso": "2009-02-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na občinski prireditvi ob kulturnem prazniku. Krstna izvedba Zdarvljice, ki jo je priredil umetniški vodja Igor Lunder.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-02-02-grosuplje",
+  "datumIso": "2009-02-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Dvorana OŠ Louis Adamič",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Big Banda Grosuplje na prireditvi ob razglasitvi najboljših športnikov Občine Grosuplje za leto 2008.",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2009-01-10-ljubljana",
+  "datumIso": "2009-01-10",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija, Studio 14",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Vibraphone Summit",
+  "opis": "Drugi koncert Big Banda Grosuplje v okviru 10. obletnice delovanja. Solisti na koncertu z naslovom \"Vibraphone Summit\" so bili vibrafonisti: Arthur Lipner (ZDA), Boško Petrovič (HR) in Vid Jamnik (SLO).",
+  "vir": "sql:leto_2009 + seznam 2009 (arhiv stare strani, podroben)"
+ },
+ {
+  "id": "2008-12-07-ljubljana",
+  "datumIso": "2008-12-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija - NLP",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje z Danijelom Malalanom in Klemenom Slakonjo. Neposredni prenos na TVS 1.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-11-27-ljubljana",
+  "datumIso": "2008-11-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Grand hotel Union",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Unionska dvorana",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-11-14-grosuplje",
+  "datumIso": "2008-11-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Prvi samostojni koncert Big Banda Grosuplje v sklopu dogodkov ob 10. obletnici delovanja. Solisti so bili nekdanji člani Big Banda Grosuplje.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-11-07-turjak",
+  "datumIso": "2008-11-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Turjak",
+  "prizorisce": "Grad Turjak",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na dobrodelnem gala plesu na Gradu Turjak. Zbirali smo sredstva za Slovensko društvo za celiakijo, organizatorja pa sta bila Rotaract klub Grosuplje in Rotary klub Grosuplje.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-08-30-smartno-ob-paki",
+  "datumIso": "2008-08-30",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Šmartno ob Paki",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Samostojni koncert Big Banda Grosuplje s posebno glasbeno gostjo, eno največjih dam slovenske popevke, gospo Eldo Viler. V okviru 2. poletnega festivala na prireditvenem prostoru ob Hiši mladih v Šmartnem ob Paki.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-08-15-novo-mesto",
+  "datumIso": "2008-08-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Novo mesto",
+  "prizorisce": "Kulturni center Janeza Trdine",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert združenega Big Banda Jazzinty (Big Banda Grosuplje v sodelovanju z Big Bandom Krško). Big Band je vodil naš dirigent, mag. Igor Lunder, glavna solista pa sta bila priznana glasbenika, mentorja glasbenih delavnic, pevka Judy Niemack ter trobentač Daniel Noesig.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-07-26-portoroz",
+  "datumIso": "2008-07-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": "Laguna Bernardin",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Samostojni koncert Big Banda Grosuplje z gostjama: Nuško Drašček in Eldo Viler. Predstavljen je bil program največjih uspešnic iz obdobja slovenske popevke.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-07-23-kranjska-gora",
+  "datumIso": "2008-07-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Kranjska Gora",
+  "prizorisce": "Trg pred cerkvijo",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Samostojni koncert Big Banda Grosuplje v okviru poletnega seminarja.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-05-31-medvode",
+  "datumIso": "2008-05-31",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Medvode",
+  "prizorisce": "Hiša kulinarike Jezeršek",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje na Charterju Rotary kluba Nike. Z zasedbo sta nastopili Nuška Drašček in Elda Viler.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-04-19-rogaska-slatina",
+  "datumIso": "2008-04-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Rogaška Slatina",
+  "prizorisce": "Kristalna dvorana",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Big Banda Grosuplje na gala dobrodelnem plesu ustanov Vrtnica in Ivan Cankar. Z big bandom sta nastopili pevki Darja Švajger in Nuška Drašček.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-04-13-ljubljana",
+  "datumIso": "2008-04-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija - NLP",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Combo zasedbe Big Banda Grosuplje z Alešem Hadalinom, Klemenom Slakonjo in Andrejem Pečenkom. Neposredni prenos na TVS 1.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-04-05-celje",
+  "datumIso": "2008-04-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Celje",
+  "prizorisce": "Narodni dom",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop big banda na gala Rotary in Rotaract plesu v Narodnem domu v Celju. Kot gosta sta se big bandu pridružila vokalna solista Tanja Ravljen in Boštjan Korošec.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-04-04-portoroz",
+  "datumIso": "2008-04-04",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": "Hotel Bernardin",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop Combo zasedbe Big Banda Grosuplje s posebno gostjo Alenko Godec na družabnem dogodku Odvetniške zbornice Slovenije v Hotelu Bernardin v Portorožu.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-03-15-grosuplje",
+  "datumIso": "2008-03-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Sprehod skozi ameriško jazzovsko orkestralno glasbo",
+  "opis": "samostojni koncert Big Banda Grosuplje z naslovom \"Sprehod skozi ameriško jazzovsko orkestralno glasbo\"; v okviru Ameriških dni in Adamičevih dni.Ob big bandu je kot gostja nastopila Tina Gačnik - Tiana, Zbrane pa je nagovorila odpravnica poslov iz ameriškega veleposlaništva, gospa Maryruth Coleman.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2008-01-26-grosuplje",
+  "datumIso": "2008-01-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Zlati ključ mesta Grosuplje",
+  "opis": "nastop Big Banda Grosuplje na dobrodelni prireditvi \"Zlati ključ mesta Grosuplje\". Ob big bandu so kot gostje nastopili: Eva Černe, Iva Stanič in Tina Gačnik - Tiana.",
+  "vir": "sql:leto_2008 + seznam 2008"
+ },
+ {
+  "id": "2007-11-24-grosuplje",
+  "datumIso": "2007-11-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert posvečen spominu na mojstra Jožeta Privška; kot gostji sta se big bandu pridružili Elda Viler in Neža Drobnič.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-11-22-postojna",
+  "datumIso": "2007-11-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Postojna",
+  "prizorisce": "Jamski dvorec",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v Jamskem dvorcu ob 70. letnici podjetja Fragmat; kot pevska gostja je z big bandom nastopila Tina Gačnik - Tiana.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-11-20-ljubljana",
+  "datumIso": "2007-11-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Grand hotel Union",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na slavnostni prireditvi podjetja ELES v dvorani Hotela Union. Kot pevska gostja je z big bandom nastopila Nuška Drašček.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-10-26-turjak",
+  "datumIso": "2007-10-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Turjak",
+  "prizorisce": "Grad Turjak",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop na gala dobrodelnem Rotary plesu na gradu Turjak. Kot pevska gostja je z big bandom nastopila Kristina Oberžan.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-07-28-kobarid",
+  "datumIso": "2007-07-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Kobarid",
+  "prizorisce": "Glavni trg",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na glavnem trgu v Kobaridu ob zaključku mednarodnega poletnega seminarja. Poleg udeležencev seminarja je na koncertu kot solist nastopil tudi Marko Djordevič.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-06-30-tolmin",
+  "datumIso": "2007-06-30",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Tolmin",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na tretjem dnevu festivala Soč'n Fest. Natopili s(m)o: Jazz Punt Big Band, Fool Cool Jazz Orchestra, Cubismo in Big Band Grosuplje.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-06-28-grosuplje",
+  "datumIso": "2007-06-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert na prostem ob zaključku celodnevnega kulturnega dogodka Mesto na ulici. Ob Big Bandu Grosuplje sta zapeli Alenka Godec in Ana Dežman.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-06-25-polzevo",
+  "datumIso": "2007-06-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Polževo",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop na medobčinski (Grosuplje in Ivančna Gorica) prireditvi ob Dnevu državnosti. Z Big Bandom Grosuplje je nastopila Nuša Derenda.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-06-02-zagorje",
+  "datumIso": "2007-06-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Zagorje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na 2. državnem srečanju big bandov",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-05-17-sticna",
+  "datumIso": "2007-05-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Stična",
+  "prizorisce": "Kulturni dom",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert Big Banda Grosuplje v kulturnem domu Stična. Tokrat smo gostili priznano ameriško zasedbo Western Jazz Quartet v sestavi: Tom Knific (bas), Trent Kynaston (saksofoni), Tim Froncek (bobni) in Steve Zegree (klavir).",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-05-12-grosuplje",
+  "datumIso": "2007-05-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Hotel & Casino Kongo",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop Combo zasedbe Big Banda Grosuplje na prireditvi ob ustanovitvi Rotaract kluba Grosuplje v Hotelu & Casinoju Kongo.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-04-20-ljubljana",
+  "datumIso": "2007-04-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Hotel Mons",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na gala dobrodelnem plesu ustanov Vrtnica in Ivan Cankar v Hotelu Mons. Z big bandom so nastopili Nuša Derenda, Rok Kosmač in Ivan Hudnik.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-03-23-ig",
+  "datumIso": "2007-03-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ig",
+  "prizorisce": "Športna dvorana",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na osrednjem delu praznovanja obletnice Občine Ig. Na prireditvi v športni dvorani sta ob spremljavi big banda zapeli Irena Vidic in Elda Viler.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-03-08-ljubljana",
+  "datumIso": "2007-03-08",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "RTV Slovenija, Studio 14",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Javno snemanje, novi aranžmaji in kompozicije Igorja Lundra; gosta Davor Križić (trobenta) in Saša Nestorović (tenor saksofon).",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-03-03-grosuplje",
+  "datumIso": "2007-03-03",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert modernejšega orkestralnega jazza (aranžmaje in kompozicije je prispeval Igor Lunder) sta popestrila gosta iz hrvaške - torbentač Davor Križič in tenorsaksofonist Saša Nestorovič.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-02-20-ljubljana",
+  "datumIso": "2007-02-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "City Park",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "ob 5. obletnici ljubljanskega City Parka smo se pustili ujeti v nostalgijo slovenske popevke. Ob big bandu so nastopili: Oto Pestner, Elda Viler, Anika Horvat ter skupina Pepel in kri.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2007-01-06-grosuplje",
+  "datumIso": "2007-01-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Zlati ključ mesta Grosuplje",
+  "opis": "nastop Big Banda Grosuplje na dobrodelni prireditvi \"Zlati ključ mesta Grosuplje\". Ob big bandu so kot gostje nastopili: Nuša Derenda, Alenka Godec, Rok Kosmač, Frenk Nova in Nina Pušlar.",
+  "vir": "sql:leto_2007 + seznam 2007 (podroben)"
+ },
+ {
+  "id": "2006-12-22-kranjska-gora",
+  "datumIso": "2006-12-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Kranjska Gora",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop Combo zasedbe Big Banda Grosuplje na prireditvi ob otvoritvi zimske smučarske sezone.",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-12-07-ljubljana",
+  "datumIso": "2006-12-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop s pevsko gostjo Kristino Oberžan na prireditvi podjetja SIKA d.o.o. v ljubljanskem hotelu MONS",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-12-02-semic",
+  "datumIso": "2006-12-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Semič",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Trobenta poje",
+  "opis": "nastop v športni dvorani na dobrodelni prireditvi z naslovom \"Trobenta poje\", ki jo je pripravila tamkajšnja godba na pihala.",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-10-25-grosuplje",
+  "datumIso": "2006-10-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "prispevek je bil predvajan v oddaji Spet doma na Televiziji Slovenija",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Jesenska glasbena promenada",
+  "opis": "samostojni koncert poimenovan \"Jesenska glasbena promenada\". Kot pevska gostja je z big bandom nastopila Nina Pušlar.",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-07-13-bovec",
+  "datumIso": "2006-07-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Bovec",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert ob zaključku poletnega seminarja. Big bandu sta dirigirala Igor Lunder in Sigi Feigl. Kot gost je nastopil vibrafonist Vid Jamnik.",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-06-15-bjelovar-hrvaska",
+  "datumIso": "2006-06-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Bjelovar (Hrvaška)",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop (kot gostujoči orkester) na festivalu big bandov",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-06-01-ljubljana",
+  "datumIso": "2006-06-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "javno snemanje koncerta z gostoma, vibrafonistoma Boškom Petrovičem in Vidom Jamnikom v Studiu 14 na Radiu Slovenija.",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-05-27-grosuplje",
+  "datumIso": "2006-05-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert big banda z gostoma, Boškom Petrovičem in Vidom Jamnikom",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-04-07-portoroz",
+  "datumIso": "2006-04-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na gala plesu za Alumni združenje MBA Radovljica v Grand Hotelu Bernardin. Z big bandom sta nastopila Jadranka Juras in Jurij Zrnec.",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2006-01-14-ljubljana",
+  "datumIso": "2006-01-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na gala Lions plesu v Cankarjevem domu v Ljubljani. Nastop je popestrila pevska gostja Kristina Oberžan.",
+  "vir": "sql:leto_2006"
+ },
+ {
+  "id": "2005-12-19-ljubljana",
+  "datumIso": "2005-12-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert v okviru božično - novoletnih prireditev City Parka z gostom, legendarnim Otom Pestnerjem.",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-12-05-ljubljana",
+  "datumIso": "2005-12-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "predvajano na TV Slovenija 1",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi Dobrodelni Miklavžev koncert , ki jo pripravljata RTV Slovenija in Rotary klub Ljubljana.",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-11-24-grosuplje",
+  "datumIso": "2005-11-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop Combo zasedbe Big Banda Grosuplje s pevsko gostjo Nino Pušlar na dobrodelni prireditvi Lokalne akcijske skupine za boj proti drogam",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-10-14-grosuplje",
+  "datumIso": "2005-10-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Poklon Franku Sinatri",
+  "opis": "samostojni koncert z gostoma tenorsaksofonistom Adamom Klemmom in pevcem Otom Pestnerjem. Ob zaključku projekta \"Poklon Franku Sinatri\"",
+  "vir": "sql:leto_2005 + sql:projekti"
+ },
+ {
+  "id": "2005-08-20-sentvid-pri-sticni",
+  "datumIso": "2005-08-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Šentvid pri Stični",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v programu osrednjega večera prireditev ob praznovanju 10. obletnice Radia Zeleni Val. Kot gost je z big bandom nastopil pevec in imitator Dani Gregorc",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-08-19-portoroz",
+  "datumIso": "2005-08-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert s pevsko gostjo Ireno Vidic v morskem parku Laguna Bernardin v oviru poletnih prireditev Hotelov Bernardin",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-07-23-kranjska-gora",
+  "datumIso": "2005-07-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Kranjska Gora",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert na Trgu pred cerkvijo v Kranjski Gori ob zaključku poletnega seminarja. Kot gosta sta nastopila tudi Adam Klemm na tenor saksofonu in pevka Sandra Zupanc - Sendi. V sodelovanju z Lokalno turistično organizacijo Kranjska Gora",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-06-27-ljubljana",
+  "datumIso": "2005-06-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na slavnostni prireditvi ob 60. letnici Mladinske knjige in podelitvi Linhartovih nagrad v Gallusovi dvorani Cankarjevega doma. Kot gostje so z big bandom nastopili: Pevski zbor Veter in Maja Slatinšek",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-06-17-grosuplje",
+  "datumIso": "2005-06-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na gala koncertu ob 15. letnici MPZ Corona, z nami je poleg zbora nastopila tudi Irena Vidic",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-04-21-ljubljana",
+  "datumIso": "2005-04-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob slovesnem odprtju Vodnega mesta Atlantis v ljubljanskem BTC-ju. Kot pevska gostja je z big bandom nastopila Manca Urbanc Izmajlov",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-04-12-grosuplje",
+  "datumIso": "2005-04-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "snemanje matric štirih skladb za MPZ Corona",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-04-02-ljubljana",
+  "datumIso": "2005-04-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na gala plesnemu večeru v Festivalni dvorani po jubilejnemu koncertu prof. Mirka Ramovša - AFS France Marolt",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2005-02-13-skofljica",
+  "datumIso": "2005-02-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Škofljica",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "snemanje štirih skladb z Moškim pevskim zborom Corona",
+  "vir": "sql:leto_2005"
+ },
+ {
+  "id": "2004-11-19-grosuplje",
+  "datumIso": "2004-11-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na dobrodelni prireditvi Lokalne akcijske skupine proti drogam",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-10-14-grosuplje",
+  "datumIso": "2004-10-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Glasba Glenna Millerja in Counta Basiea",
+  "opis": "samostojni koncert ob zaključku projekta \"Glasba Glenna Millerja in Counta Basiea\" v Kulturnem domu v Grosupljem. V sodelovanju z Zvezo kulturnih društev Grosuplje in Radiem Zeleni Val",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-08-21-sentvid-pri-sticni",
+  "datumIso": "2004-08-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Šentvid pri Stični",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na osrednjem večeru prireditev ob 9. obletnici Radia Zeleni val in 10. obletnici letalskega kluba Šentvid pri Stični",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-08-03-portoroz",
+  "datumIso": "2004-08-03",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert s pevsko gostjo Kristino Oberžan v morskem parku Laguna Bernardin v oviru prireditev Bernardin festa",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-07-29-kranjska-gora",
+  "datumIso": "2004-07-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Kranjska Gora",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert na trgu v Kranjski Gori ob zaključku poletnega seminarja. V sodelovanju z Lokalno turistično organizacijo",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-07-10-portoroz",
+  "datumIso": "2004-07-10",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert ob otvoritvi poletne sezone prireditev Hotelov Bernardin v Laguni Bernardin. Kot gostja je z big bandom nastopila pevka Kristina Oberžan",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-06-18-grosuplje",
+  "datumIso": "2004-06-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na otvoritvi novega foto studia in optike Markelj v Grosupljem. Kot pevska gostja je z big bandom nastopila Iva Stanič",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-04-16-grosuplje",
+  "datumIso": "2004-04-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop z gostujočima pevkama Ireno Vidic in Evo Seršen na gala koncertu ob 30. letnici Glasbene šole Grosuplje",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-04-09-ljubljana",
+  "datumIso": "2004-04-09",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v okviru velikonočnih prireditev v ljubljanskem City Parku. Kot pevska gostja je z Big Bandom nastopila Kristina Oberžan",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-03-04-menges",
+  "datumIso": "2004-03-04",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Mengeš",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "snemanje petih skladb",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-02-29-grosuplje",
+  "datumIso": "2004-02-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "snemanje petih skladb",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2004-02-14-sezana",
+  "datumIso": "2004-02-14",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Sežana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na slavnostni akademiji ob 15. letnici stranke SDS. Kot gostja je z Big Bandom nastopila Kristina Oberžan",
+  "vir": "sql:leto_2004"
+ },
+ {
+  "id": "2003-09-27-celje",
+  "datumIso": "2003-09-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Celje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob zaključku Slovenskega filmskega festivala. Aranžma Slovenskih filmskih tem je za Big Band Grosuplje napisal Lojze Kranjčan, kot gostja pa je z nami nastopila Cita Galič (citre)",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-08-01-grosuplje",
+  "datumIso": "2003-08-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert Big Banda ob koncu mednarodnega poletnega seminarja pod vodstvom gosta iz ZDA Ricka Stitzla",
+  "vir": "sql:leto_2003 + sql:projekti"
+ },
+ {
+  "id": "2003-07-31-piran",
+  "datumIso": "2003-07-31",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Piran",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v Gledališču Tartini v Piranu v okviru poletnih prireditev Avditorija Portorož. Za dirigentskim pultom sta se izmenjala Braco J. Doblekar in Rick Stitzel",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-06-24-ljubljana",
+  "datumIso": "2003-06-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na Trgu Republike v programu osrednje državne proslave ob dnevu državnosti (neposredni prenos na RTV Slovenija). Kot pevska gostja je z Big Bandom nastopila Irena Vidic (po uradnem delu še nastop s skupino Elvis Jackson)",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-06-21-ljubljana",
+  "datumIso": "2003-06-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert ob srečanju mladinskih Big Badov v Ljubljani",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-06-13-dolenjske-toplice",
+  "datumIso": "2003-06-13",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Dolenjske Toplice",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob otvoritvi Wellnes centra Balnea (Krka zdravičišča)",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-05-25-grosuplje",
+  "datumIso": "2003-05-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob odprtju prenovljenih namestitvenih zmogljivosti Motela Grosuplje",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-05-17-nemcija",
+  "datumIso": "2003-05-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Nemčija",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert v pivnici Krauss v nemškem kraju Hirschaid",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-05-16-nemcija",
+  "datumIso": "2003-05-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Nemčija",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob otvoritvi nove športne dvorane v nemškem mestu Hirschaid",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-05-05-portoroz",
+  "datumIso": "2003-05-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Portorož",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na večerni prireditvi v okviru NT konference",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-04-25-ljubljana",
+  "datumIso": "2003-04-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "snemanje treh skladb v Studiu 14 Radia Slovenija",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-03-01-muljava",
+  "datumIso": "2003-03-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Muljava",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob 10. obletnici pohoda po Jurčičevi poti",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2003-01-25-ljubljana",
+  "datumIso": "2003-01-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert v klubu Bachus v Ljubljani z gostoma Matijem Cerarjem in Ireno Vidic",
+  "vir": "sql:leto_2003"
+ },
+ {
+  "id": "2002-12-22-ljubljana",
+  "datumIso": "2002-12-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop z gostjo Ireno Vidic na prireditvi Športnik leta 2002 v Cankarjevem domu (neposredni prenos na 2. Programu Televizije Slovenija)",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-12-19-bogenjsperk",
+  "datumIso": "2002-12-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Bogenjšperk",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na novoletni prireditvi za poslovne partnerje podjetja Microsoft na gradu Bogenjšperk",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-11-30-dobrepolje",
+  "datumIso": "2002-11-30",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Dobrepolje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi v organizaciji turističnega društva Dobrepolje v Jakličevem domu",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-11-07-grosuplje",
+  "datumIso": "2002-11-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi župana občine Grosuplje g. Janeza Lesjaka",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-10-20-ljubljana",
+  "datumIso": "2002-10-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v zabavno-glasbeni oddaji Glasbena ogrlica na Televiziji Slovenija (snemanje 10. in 11. september)",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-09-28-grosuplje",
+  "datumIso": "2002-09-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi Zlata jesen v organizaciji Turističnega društva Grosuplje v avli OŠ Louis Adamič",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-09-20-bled",
+  "datumIso": "2002-09-20",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Bled",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob 10. obletnici podjetja Winterhalter Gastronom Slovenija v Vili Bled",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-09-03-grosuplje",
+  "datumIso": "2002-09-03",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi v organizaciji Upravne enote Grosuplje ob podelitvi nagrade za kakovost ISO 9001-2000 v Motelu Grosuplje",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-08-24-metlika",
+  "datumIso": "2002-08-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Metlika",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Pridi zvečer na grad 2002",
+  "opis": "koncert s Tuliom Furlaničem na gradu v Metliki ob zaključku mednarodnih poletnih prireditev \"Pridi zvečer na grad 2002\"",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-07-25-piran",
+  "datumIso": "2002-07-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Piran",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert s Tuliom Furlaničem na Trgu 1.maja v Piranu v organizaciji Avditorija Portorož",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-07-24-izola",
+  "datumIso": "2002-07-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Izola",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert s Tuliom Furlaničem na Mazzinijevem trgu v Izoli v organizaciji Festivala Mediteran",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-07-21-pacug",
+  "datumIso": "2002-07-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Pacug",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert na otroški koloniji v Pacugu",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-06-28-grosuplje",
+  "datumIso": "2002-06-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Ko soseda reče še",
+  "opis": "nastop na koncertu \"Ko soseda reče še\" v organizaciji Študentskega kluba Groš",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-06-07-grosuplje",
+  "datumIso": "2002-06-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi Glasbene šole Grosuplje ob koncu šolskega leta s solisti profesorji Glasbene šole Grosuplje",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-04-24-ljubljana",
+  "datumIso": "2002-04-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi podjetja Ericsson na Ljubljanskem gradu",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-04-05-rogaska-slatina",
+  "datumIso": "2002-04-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Rogaška Slatina",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi v organizaciji podjetja Repro-MS in HP v Kristalni dvorani v Rogaški Slatini",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-03-07-ljubljana",
+  "datumIso": "2002-03-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob predstavitvi poslovenjenega Microsoft Windows XP-ja v multikinu Kolosej",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-02-27-skofljica",
+  "datumIso": "2002-02-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Škofljica",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert in učna ura ob inštrumentih za OŠ Škofljica v kulturnem domu v Škofljici",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-02-12-zelimlje",
+  "datumIso": "2002-02-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Želimlje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "koncert in učna ura ob inštrumentih v Gimnaziji Želimlje",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-02-11-ljubljana",
+  "datumIso": "2002-02-11",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na valentinovem plesu v organizaciji Nove generacije SLS v hotelu Slon",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2002-02-07-grosuplje",
+  "datumIso": "2002-02-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob podelitvi priznanj najboljšim športnikom občine Grosuplje za leto 2001 v avli OŠ Louis Adamič",
+  "vir": "sql:leto_2002"
+ },
+ {
+  "id": "2001-12-25-ljubljana",
+  "datumIso": "2001-12-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert v okviru božično-novoletnih prireditev mestne občine Ljubljana na Prešernovem trgu",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-12-23-ljubljana",
+  "datumIso": "2001-12-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop z gosti skupino Hazard in Tuliem Furlaničem na prireditvi Športnik leta v Linhartovi dvorani Cankarjevega doma (neposredni prenos na TVS2)",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-11-30-skofljica",
+  "datumIso": "2001-11-30",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Škofljica",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi Kulturnega društva Škofljica v tamkajšnjem kulturnem domu",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-10-26-celje",
+  "datumIso": "2001-10-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Celje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na Srečanju amaterskih plesnih orkestrov Slovenije v Narodnem domu v Celju",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-10-05-sticna",
+  "datumIso": "2001-10-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Stična",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert v kulturnem domu v okviru prireditev Festivala Stična",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-10-01-ljubljana",
+  "datumIso": "2001-10-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na svečani akademiji ob 10.obletnici Slovenske nogometne lige v Kosovelovi dvorani Cankarjevega doma",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-09-27-ljubljana",
+  "datumIso": "2001-09-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob predstavitvi poslovenjenega Microsoft Office XP-ja v multikinu Kolosej",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-09-22-grosuplje",
+  "datumIso": "2001-09-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": "Ko sosedje obmolknejo",
+  "opis": "nastop na koncertu \"Ko sosedje obmolknejo\" v organizaciji študentskega kluba Groš",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-09-18-ljubljana",
+  "datumIso": "2001-09-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na Ljubljanskem gradu ob srečanju Ericssonovih partnerjev",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-09-09-piran",
+  "datumIso": "2001-09-09",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Piran",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na Tartinijevem trgu ob zaključku mednarodnega grafičnega bienala",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-07-27-strunjan",
+  "datumIso": "2001-07-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Strunjan",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert pred Krkinim zdraviliščem v Strunjanu",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-06-24-ljubljana",
+  "datumIso": "2001-06-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi Koalicije Slovenije na Kongresnem trgu ob praznovanju 10.obletnice dneva državnosti",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-06-01-grosuplje",
+  "datumIso": "2001-06-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na zaključnem koncertu Glasbene šole Grosuplje v avli OŠ Louis Adamič",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-05-25-ljubljana",
+  "datumIso": "2001-05-25",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob zaključku 28. srečanja skupin v osnovnem zdravstvu v stavbi Smelta",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-05-05-sentvid-pri-sticni",
+  "datumIso": "2001-05-05",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Šentvid pri Stični",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob srečanju pobratenih občin Ivančne Gorice in Hirschtada",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-04-11-ljubljana",
+  "datumIso": "2001-04-11",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob predstavitvi Ericssonove nove tehnologije v hotelu Intercontinental",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-04-07-ljubljana",
+  "datumIso": "2001-04-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v dobrodelni oddaji Zidak dobre volje na Televiziji Slovenija (neposredni prenos na TVS1)",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-03-29-ljubljana",
+  "datumIso": "2001-03-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "snemanje dveh skladb v Studiu 14 Radia Slovenija",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-03-23-ljubljana",
+  "datumIso": "2001-03-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na dobrodelni prireditvi za Center Dolfke Boštjančič v cerkvi sv. Stanislava",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-03-06-ljubljana",
+  "datumIso": "2001-03-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob odprtju restavracije na strehi poslovne stavbe BTC",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-02-16-volcji-potok",
+  "datumIso": "2001-02-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Volčji Potok",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob družabnem srečanju predstavnikov družb Mobitel in Ericsson",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-02-07-grosuplje",
+  "datumIso": "2001-02-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob kulturnem prazniku in učna ura ob inštrumentih v avli OŠ Louis Adamič",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2001-01-12-grosuplje",
+  "datumIso": "2001-01-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert (po sestanku Big Banda) v prostorih Študentskega kluba Groš",
+  "vir": "sql:leto_2001"
+ },
+ {
+  "id": "2000-12-22-ljubljana",
+  "datumIso": "2000-12-22",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop z gostjo Evo Sršen na prireditvi Športniki Slovenije 2000 v Cankarjevem domu (neposredni prenos TVS2)",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-12-15-grosuplje",
+  "datumIso": "2000-12-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na božično-novoletnem koncertu Glasbene šole Grosuplje v avli OŠ Louis Adamič",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-12-08-grosuplje",
+  "datumIso": "2000-12-08",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop Big Banda v Kovinostroju ob odprtju nove zgradbe",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-12-06-racna",
+  "datumIso": "2000-12-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Račna",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni Miklavžev koncert v kulturnem domu v Račni",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-12-01-mala-vas",
+  "datumIso": "2000-12-01",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Mala vas",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni Miklavžev koncert v kulturnem domu v Mali vasi",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-10-12-brdo-pri-kranju",
+  "datumIso": "2000-10-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Brdo pri Kranju",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na slovesnosti ob sprejemu častnih članov sklada GT",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-07-27-piran",
+  "datumIso": "2000-07-27",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Piran",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert na trgu 1.maja v Piranu",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-07-02-ankaran",
+  "datumIso": "2000-07-02",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ankaran",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob oddihu v hotelu Adria",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-06-29-ljubljana",
+  "datumIso": "2000-06-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob podelitvi turističnih nagrad Nove revije na Ljubljanskem gradu",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-06-23-grosuplje",
+  "datumIso": "2000-06-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop ob odprtju nove šole Brinje v Grosuplju",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-06-17-trebnje",
+  "datumIso": "2000-06-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Trebnje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob obletnici mesta Trebnje",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-05-09-ljubljana",
+  "datumIso": "2000-05-09",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na študentski prireditvi na stadionu Ilirija",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-05-06-dobrepolje",
+  "datumIso": "2000-05-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Dobrepolje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert v Jakličevem domu na Vidmu z gostom Janezom Bončino-Benčem",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-03-23-ljubljana",
+  "datumIso": "2000-03-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v klubu Central ob srečanju veleposlanikov in predstavnikov držav",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-02-21-ljubljana",
+  "datumIso": "2000-02-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Enourni koncert v Jazz klubu Gajo, ki ga je posnela Televizija Slovenija",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-02-19-grosuplje",
+  "datumIso": "2000-02-19",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Javna generalka v dvorani Glasbene šole Grosuplje pred nastopom v Jazz klubu Gajo",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-02-09-ljubljana",
+  "datumIso": "2000-02-09",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop v hotelu Avstrotel v Ljubljani",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "2000-02-07-smarje-sap",
+  "datumIso": "2000-02-07",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Šmarje-Sap",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert Big Banda ob kulturnem prazniku v OŠ Šmarje-Sap",
+  "vir": "sql:leto_2000"
+ },
+ {
+  "id": "1999-12-21-grosuplje",
+  "datumIso": "1999-12-21",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na koncertu ob 25. obletnici Glasbene šole Grosuplje v avli OŠ Louis Adamič z Evo Sršen in Janezom Bončino - Benčem.",
+  "vir": "sql:leto_1999"
+ },
+ {
+  "id": "1999-12-03-grosuplje",
+  "datumIso": "1999-12-03",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob podelitvi priznanj najboljšim športnikom občine Grosuplje za leto 1999 v avli OŠ Louis Adamič",
+  "vir": "sql:leto_1999"
+ },
+ {
+  "id": "1999-07-31-catez",
+  "datumIso": "1999-07-31",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Čatež",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "samostojni koncert Big Banda na Obolnarjevi kmetiji v Dolenji vasi ob zaključku poletnega seminarja v Čatež",
+  "vir": "sql:leto_1999"
+ },
+ {
+  "id": "1999-06-24-grosuplje",
+  "datumIso": "1999-06-24",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na zaključnem koncertu Glasbene šole Grosuplje v avli OŠ Louis Adamič",
+  "vir": "sql:leto_1999"
+ },
+ {
+  "id": "1999-05-29-grosuplje",
+  "datumIso": "1999-05-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob podelitvi občinskih turističnih priznanj v avli OŠ Louis Adamič",
+  "vir": "sql:leto_1999"
+ },
+ {
+  "id": "1998-12-23-grosuplje",
+  "datumIso": "1998-12-23",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na božično-novoletnem koncertu Glasbene šole Grosuplje v avli OŠ Louis Adamič",
+  "vir": "sql:leto_1998"
+ },
+ {
+  "id": "1998-06-29-grosuplje",
+  "datumIso": "1998-06-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na prireditvi ob 45. obletnici podjetja ABC Tabor",
+  "vir": "sql:leto_1998"
+ },
+ {
+  "id": "1998-06-26-ljubljana",
+  "datumIso": "1998-06-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na proslavi ob dnevu državnosti na Pogačarjevem trgu",
+  "vir": "sql:leto_1998"
+ },
+ {
+  "id": "1998-05-29-grosuplje",
+  "datumIso": "1998-05-29",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "nastop na zaključnem koncertu Glasbene šole Grosuplje v avli OŠ Louis Adamič",
+  "vir": "sql:leto_1998"
+ },
+ {
+  "id": "1998-02-18-grosuplje",
+  "datumIso": "1998-02-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "prvi samostojni koncert Big Banda v dvorani Glasbene šole Grosuplje",
+  "vir": "sql:leto_1998"
+ }
+]

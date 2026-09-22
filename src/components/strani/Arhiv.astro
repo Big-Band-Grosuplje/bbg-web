@@ -1,0 +1,388 @@
+---
+/* ============================================================
+   Arhiv dogodkov — ena stran, 291 zapisov, brez podstrani.
+
+   Zakaj brez podstrani: arhivski zapis nima naziva, opisa za SEO ne
+   sluga. Iz njega bi nastala tanka stran z enim stavkom, takih pa bi bilo
+   582 (slovenskih in angleških). Utemeljitev v docs/uvoz-zgodovine.md.
+
+   Filtriranje teče v brskalniku nad že izrisanim seznamom: vseh 291
+   vrstic je v oznakah, skripta jim samo prižiga in ugaša prikaz. Brez JS
+   ostane seznam v celoti berljiv, le gumbi ne delujejo — kar je pri
+   arhivu sprejemljivo, ker je njegova naloga branje in ne iskanje.
+   ============================================================ */
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Noga from '../Noga.astro';
+import { pot, slovar, type Jezik } from '../../i18n';
+import { poLetih, stevci, kljucKraja, datumZaIzpis, opisZaIzpis } from '../../lib/arhiv';
+
+interface Props {
+  jezik: Jezik;
+}
+const { jezik } = Astro.props;
+const t = slovar(jezik);
+const leta = poLetih();
+const n = stevci();
+
+const oznakaZasedbe = (z: string) => (z === 'big-band' ? t.arhiv.bigBand : t.arhiv.combo);
+
+/* CollectionPage in ne seznam dogodkov: posamezen zapis nima dovolj polj
+   za Event (ni naziva, ni naslova prizorišča, ni ponudbe). Stran sama pa
+   je res zbirka in to je mogoče povedati po resnici. about kaže na isto
+   entiteto MusicGroup, ki jo na vsaki strani izpiše Layout. */
+const SITE = Astro.site ?? new URL('https://bigband-grosuplje.com');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: t.arhiv.naslov,
+  description: t.arhiv.opisStrani,
+  url: new URL(pot('arhiv', jezik), SITE).href,
+  inLanguage: jezik === 'en' ? 'en-US' : 'sl-SI',
+  about: { '@id': `${SITE.origin}/#orkester` },
+};
+---
+
+<Layout
+  stran="arhiv"
+  jezik={jezik}
+  title={t.arhiv.naslovStrani}
+  description={t.arhiv.opisStrani}
+>
+  <Nav stran="arhiv" jezik={jezik} />
+
+  <main class="stran">
+    <div class="ovoj">
+      <p class="nazaj">
+        <a href={pot('zgodovina', jezik)}>{t.arhiv.nazajNaZgodovino}</a>
+      </p>
+
+      <p class="nadnaslov">{t.arhiv.nadnaslov}</p>
+      <h1>{t.arhiv.naslov}</h1>
+      <p class="uvod">{t.arhiv.uvod}</p>
+      {/* Značka „big band" je pri večini vnosov sklep in ne podatek iz
+          vira. Kdor to prebere, ve, koliko je vredna; brez tega bi stran
+          trdila več, kot ve. */}
+      <p class="uvod uvod--drobno">
+        {t.arhiv.izpeljanaZasedba.replace('{n}', String(n.zasedba.izpeljanih))}
+      </p>
+
+      {/* Filtra sta gumba in ne izbirnika: možnosti je malo, vsaka nosi
+          svoje število in vse morajo biti vidne hkrati. */}
+      <div class="filtri" data-filtri>
+        <fieldset class="filter">
+          <legend>{t.arhiv.filterZasedba}</legend>
+          <button type="button" data-zasedba="vse" aria-pressed="true">
+            {t.arhiv.vse} <span>{n.zasedba.vse}</span>
+          </button>
+          <button type="button" data-zasedba="big-band" aria-pressed="false">
+            {t.arhiv.bigBand} <span>{n.zasedba.bigBand}</span>
+          </button>
+          <button type="button" data-zasedba="combo" aria-pressed="false">
+            {t.arhiv.combo} <span>{n.zasedba.combo}</span>
+          </button>
+          {/* Vsota izbir presega število vseh vnosov, kadar je kak dogodek
+              štet pri obeh. Vrstica to pove na mestu, kjer se pozna — in
+              se izpiše samo, kadar takih dogodkov res je. */}
+          {n.zasedba.obeZasedbi > 0 && (
+            <p class="filter__opomba">
+              {n.zasedba.obeZasedbi === 1
+                ? t.arhiv.obeZasedbiEna
+                : t.arhiv.obeZasedbi.replace('{n}', String(n.zasedba.obeZasedbi))}
+            </p>
+          )}
+        </fieldset>
+
+        <fieldset class="filter">
+          <legend>{t.arhiv.filterKraj}</legend>
+          <button type="button" data-kraj="vse" aria-pressed="true">
+            {t.arhiv.vse} <span>{n.kraj.vse}</span>
+          </button>
+          <button type="button" data-kraj="grosuplje" aria-pressed="false">
+            {t.arhiv.grosuplje} <span>{n.kraj.grosuplje}</span>
+          </button>
+          <button type="button" data-kraj="ljubljana" aria-pressed="false">
+            {t.arhiv.ljubljana} <span>{n.kraj.ljubljana}</span>
+          </button>
+          <button type="button" data-kraj="drugje" aria-pressed="false">
+            {t.arhiv.drugje} <span>{n.kraj.drugje}</span>
+          </button>
+        </fieldset>
+      </div>
+
+      {/* Leta so kazalo in ne filter: pri 29 letih je skok hitrejši od
+          izbire, deluje brez JS in ne skriva ničesar. */}
+      <nav class="kazalo" aria-label={t.arhiv.skoci}>
+        <span class="kazalo__oznaka">{t.arhiv.skoci}</span>
+        {leta.map((l) => <a href={`#leto-${l.leto}`}>{l.leto}</a>)}
+      </nav>
+
+      <p class="prazno" data-prazno hidden>{t.arhiv.prazno}</p>
+
+      {leta.map((l) => (
+        <section class="leto" data-leto={l.leto} aria-labelledby={`leto-${l.leto}`}>
+          <h2 class="leto__naslov" id={`leto-${l.leto}`}>
+            {l.leto} <span class="leto__stevilo">{l.vnosi.length} {t.arhiv.stevilo}</span>
+          </h2>
+
+          <ul class="vnosi" role="list">
+            {l.vnosi.map((v) => (
+              <li
+                class="vnos"
+                data-zasedba={v.zasedba.join(' ')}
+                data-zasedba-vir={v.zasedbaVir}
+                data-kraj={kljucKraja(v.kraj)}
+              >
+                <p class="vnos__datum">
+                  <time datetime={v.datumIso}>{datumZaIzpis(v, jezik, t.koncerti.ob)}</time>
+                </p>
+                <div class="vnos__telo">
+                  <p class="vnos__kje">
+                    {v.prizorisce && <strong>{v.prizorisce}</strong>}
+                    {v.prizorisce && v.kraj && <span aria-hidden="true"> · </span>}
+                    {v.kraj}
+                    {v.zasedba.map((z) => <span class="znacka">{oznakaZasedbe(z)}</span>)}
+                  </p>
+                  {v.naziv && <p class="vnos__naziv">{v.naziv}</p>}
+                  {/* `opisZaIzpis` odreže vodilno ponovitev naziva; podatki
+                      ostanejo celi. Kadar od opisa ne ostane nič, se ne izpiše
+                      nič — „zapis brez opisa" velja le za vnose, ki ga res
+                      nimajo, in tam ni naziva, ki bi ga nadomestil. */}
+                  {opisZaIzpis(v)
+                    ? <p class="vnos__opis">{opisZaIzpis(v)}</p>
+                    : !v.naziv && <p class="vnos__opis vnos__opis--prazno">{t.arhiv.brezOpisa}</p>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    </div>
+  </main>
+
+  <Noga jezik={jezik} />
+</Layout>
+
+<script>
+  /* Filtriranje nad izrisanim seznamom. Brez JS ostane vse vidno.
+     Skripta hkrati skriva prazna leta, da med rezultati ni praznih
+     naslovov, in javi, kadar ni nobenega zadetka. */
+  const koren = document.querySelector<HTMLElement>('[data-filtri]');
+  if (koren) {
+    const vnosi = [...document.querySelectorAll<HTMLElement>('.vnos')];
+    const leta = [...document.querySelectorAll<HTMLElement>('.leto')];
+    const prazno = document.querySelector<HTMLElement>('[data-prazno]');
+    const izbira = { zasedba: 'vse', kraj: 'vse' };
+
+    function osvezi() {
+      let vidnih = 0;
+      for (const v of vnosi) {
+        /* Zasedba se ujema po VSEBOVANOSTI: data-zasedba je lahko
+           "big-band combo" in tak dogodek mora pasti pod obe izbiri. */
+        const zasedbe = (v.dataset.zasedba ?? '').split(' ');
+        const ustreza =
+          (izbira.zasedba === 'vse' || zasedbe.includes(izbira.zasedba))
+          && (izbira.kraj === 'vse' || v.dataset.kraj === izbira.kraj);
+        v.hidden = !ustreza;
+        if (ustreza) vidnih++;
+      }
+      for (const l of leta) {
+        l.hidden = !l.querySelector('.vnos:not([hidden])');
+      }
+      if (prazno) prazno.hidden = vidnih > 0;
+    }
+
+    koren.addEventListener('click', (dogodek) => {
+      const gumb = (dogodek.target as HTMLElement).closest<HTMLButtonElement>('button[data-zasedba], button[data-kraj]');
+      if (!gumb) return;
+      const vrsta = gumb.dataset.zasedba !== undefined ? 'zasedba' : 'kraj';
+      izbira[vrsta] = (vrsta === 'zasedba' ? gumb.dataset.zasedba : gumb.dataset.kraj) ?? 'vse';
+      for (const g of koren.querySelectorAll<HTMLButtonElement>(`button[data-${vrsta}]`)) {
+        const svoja = vrsta === 'zasedba' ? g.dataset.zasedba : g.dataset.kraj;
+        g.setAttribute('aria-pressed', String(svoja === izbira[vrsta]));
+      }
+      osvezi();
+    });
+  }
+</script>
+
+<style>
+  .stran { padding: 52px 0 80px; }
+  .ovoj { max-width: 60rem; }
+  .nazaj { margin: 0 0 26px; font-size: 14px; font-weight: 600; }
+  h1 { margin: 6px 0 0; font-size: clamp(30px, 4.4vw, 46px); color: var(--bbg-naslov); }
+  .uvod {
+    margin: 16px 0 0;
+    max-width: 46rem;
+    font-size: 17px;
+    color: color-mix(in srgb, var(--bbg-besedilo) 86%, var(--bbg-bg));
+  }
+
+  /* Pojasnilo o izpeljani zasedbi: pripada uvodu, a ne sme tekmovati z
+     njim. Manjše in bolj umirjeno, barva po `color-mix` in ne po
+     `opacity` — ta bi stisnila cel poddrevesni izris. */
+  .uvod--drobno {
+    margin-top: 10px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--bbg-besedilo) 62%, var(--bbg-bg));
+  }
+
+  /* --- filtri --------------------------------------------------------- */
+  .filtri {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 36px;
+    margin: 30px 0 0;
+    padding: 18px 20px;
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 30%, transparent);
+    border-radius: var(--bbg-r-m);
+    background: var(--bbg-panel-bg);
+  }
+  .filter { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  /* Opomba o prekrivanju števil stoji pod gumbi svoje skupine, v celotni
+     širini — `flex-basis: 100%` jo prelomi v svojo vrstico, ne da bi bilo
+     treba dodajati ovoj. */
+  /* ⚠️ Merilo je podlaga panela (#EAE2D0), ne papir strani: pri 12,5 px
+     velja prag 4,5 : 1 in 58 % ga na panelu doseže le 3,95 (na papirju bi
+     ga). 66 % da 5,10. Izmerjeno 22. 9. 2026 v svetli temi smeri A. */
+  .filter__opomba {
+    flex-basis: 100%;
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--bbg-besedilo) 66%, var(--bbg-bg));
+  }
+  .filter legend {
+    float: left;
+    width: 100%;
+    padding: 0 0 8px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--bbg-nadnaslov);
+  }
+  .filter button {
+    font-family: var(--bbg-font-besedilo);
+    font-size: 14px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 40%, transparent);
+    background: transparent;
+    color: var(--bbg-besedilo);
+    cursor: pointer;
+  }
+  .filter button span {
+    font-variant-numeric: tabular-nums;
+    color: color-mix(in srgb, var(--bbg-besedilo) 60%, var(--bbg-bg));
+    margin-left: 4px;
+  }
+  .filter button[aria-pressed='true'] {
+    background: var(--bbg-gold);
+    border-color: var(--bbg-gold);
+    color: var(--bbg-black);
+    font-weight: 600;
+  }
+  .filter button[aria-pressed='true'] span { color: inherit; opacity: 0.7; }
+  .filter button:focus-visible { outline: 2px solid var(--bbg-obroba-mocna); outline-offset: 2px; }
+
+  /* --- kazalo let ----------------------------------------------------- */
+  .kazalo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    align-items: baseline;
+    margin: 22px 0 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .kazalo__oznaka {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--bbg-nadnaslov);
+    margin-right: 4px;
+  }
+  .kazalo a { font-size: 14px; font-weight: 600; text-decoration: none; }
+  .kazalo a:hover { text-decoration: underline; }
+
+  .prazno { margin: 34px 0 0; font-size: 16px; }
+
+  /* --- seznam --------------------------------------------------------- */
+  .leto { margin: 44px 0 0; }
+  .leto[hidden] { display: none; }
+  .leto__naslov {
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--bbg-obroba);
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--bbg-naslov);
+    font-variant-numeric: tabular-nums;
+  }
+  .leto__stevilo {
+    font-family: var(--bbg-font-besedilo);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: color-mix(in srgb, var(--bbg-besedilo) 62%, var(--bbg-bg));
+    margin-left: 10px;
+  }
+
+  .vnosi { list-style: none; margin: 0; padding: 0; }
+  .vnos {
+    display: grid;
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    gap: 4px 22px;
+    padding: 14px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--bbg-obroba) 60%, transparent);
+  }
+  .vnos[hidden] { display: none; }
+  .vnos__datum {
+    margin: 0;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--bbg-nadnaslov);
+    font-variant-numeric: tabular-nums;
+  }
+  .vnos__telo { min-width: 0; }
+  .vnos__kje { margin: 0; font-size: 15px; }
+  /* Naziv je enako velik kot vrstica s krajem (15px): prej je pri 18px
+     izstopal bolj kot kraj, ki je v arhivu trdnejši podatek — naziv ima
+     komaj 22 od 291 vnosov. Ker velikost odpade, hierarhijo nosita pisava
+     (Playfair proti Source Sans) in barva; teža ostane navadna, ker bi
+     krepko pri isti velikosti spet prevladalo nad krajem. */
+  .vnos__naziv {
+    margin: 4px 0 0;
+    font-family: var(--bbg-font-naslov);
+    font-size: 15px;
+    color: var(--bbg-naslov);
+  }
+  .vnos__opis {
+    margin: 4px 0 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--bbg-besedilo) 82%, var(--bbg-bg));
+  }
+  /* Vnos brez opisa pove, da opisa ni — ne pusti prazne vrstice, ki bi
+     bila videti kot napaka izrisa. */
+  .vnos__opis--prazno {
+    font-style: italic;
+    color: color-mix(in srgb, var(--bbg-besedilo) 52%, var(--bbg-bg));
+  }
+  .znacka {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 2px 9px;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--bbg-gold) 45%, transparent);
+    color: var(--bbg-besedilo);
+    vertical-align: 1px;
+  }
+
+  @media (max-width: 680px) {
+    .vnos { grid-template-columns: 1fr; gap: 2px; }
+    .vnos__datum { font-size: 14px; }
+    .filtri { gap: 14px 22px; }
+  }
+</style>
