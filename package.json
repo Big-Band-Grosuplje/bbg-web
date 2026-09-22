@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "slicice": "node scripts/prenesi-slicice.mjs",
     "slike": "node scripts/obdelaj-slike.mjs",
-    "kontrast": "node scripts/kontrast-hero.mjs"
+    "kontrast": "node scripts/kontrast-hero.mjs",
+    "datumi": "node scripts/preveri-datume.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
