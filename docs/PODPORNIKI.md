@@ -99,3 +99,28 @@ nič javno do odobritve granta in podpisa pogodb.
    ozek in visok več (1,4). Preveri v obeh temah, preden commitaš.
 4. Pri dogodku ga navedi v frontmatterju (`podporniki: [{ kljuc, raven }]`),
    pri stalnem podporniku pa v `PODPORNIKI_DRUSTVA`.
+5. **Preveri zid pri 380 px.** Tam je rezerva med logotipom in meglico
+   najmanjša — 8 px, medtem ko je na širokem zaslonu 16 px — in logotip z
+   drugačnim razmerjem stranic jo lahko poje.
+
+### Zakaj prav pri 380 px
+
+Ploskev zidu se v temni temi po robu izteče v meglico (`--meglica` v
+`LogoZid.astro`). Tam je ploskev že prosojna, zato logotip vanjo ne sme
+segati. Za to skrbi notranji odmik ploskve, ki je večji od meglice:
+
+| Pogled | Meglica | Odmik | Rezerva |
+|---|---|---|---|
+| širok zaslon | 32 px | 48 px | 16 px |
+| **380 px** | 32 px | **40 px** | **8 px** |
+| noga, kompaktno | 22 px | 38 px | 16 px |
+
+Odmik je `clamp()` in se pri ozkem zaslonu ustavi na spodnji meji, meglica
+pa ostane enaka — zato se rezerva tam prepolovi. Visok in ozek logotip
+(velika `utez`) ali tak z veliko praznega roba v datoteki lahko teh 8 px
+porabi.
+
+**Če jo poje, povečaj notranji odmik ploskve — ne zmanjšuj meglice.**
+Meglica je vizualna odločitev in je enaka na vseh zidovih; odmik je
+tehnična posledica. Zmanjšana meglica bi rob spet spremenila v mehek rob
+pravokotnika, kar je natanko tisto, kar smo odpravili.
