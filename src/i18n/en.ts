@@ -44,7 +44,7 @@ export const en = {
     badge: 'Big band, full force',
     znakAlt: 'Big Band Grosuplje',
     slogan: 'Playing better since 1997/98. Or at least faster. 🙂',
-    gumbNastop: 'Book the band',
+    gumbNastop: 'Invite us',
     gumbPridruzi: 'Join us',
     fotoAlt: 'The conductor leading the orchestra',
     nalepka: 'the conductor, remarkably composed',
@@ -62,12 +62,12 @@ export const en = {
       'The link may be wrong, or the page has moved. ' +
       'It happens — we miss an entry now and then, too.',
     gumbNaslovnica: 'Back to the home page',
-    gumbKoncerti: 'When do we play?',
+    gumbKoncerti: 'Where can you find us?',
   },
 
   koncerti: {
     nadnaslov: 'upcoming',
-    naslov: 'When and where we play',
+    naslov: 'When and where to find us',
     praznoPred: 'No concerts are announced at the moment. We post news on',
     praznoVez: 'and',
     praznoZa: '.',

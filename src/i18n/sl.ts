@@ -40,7 +40,7 @@ export const sl = {
     /* Ključ se je prej imenoval gumbKoncerti in je peljal na #koncerti.
        Zdaj cilja na #organizatorji, zato tudi novo ime — staro bi trdilo
        napačen cilj. */
-    gumbNastop: 'Povabi nas na nastop',
+    gumbNastop: 'Povabi nas',
     gumbPridruzi: 'Pridruži se',
     fotoAlt: 'Dirigent med vodenjem orkestra',
     nalepka: 'dirigent, presenetljivo miren',
@@ -68,7 +68,7 @@ export const sl = {
       'Povezava je morda napačna ali pa je stran zamenjala naslov. ' +
       'Zgodi se — tudi mi kdaj zgrešimo vstop.',
     gumbNaslovnica: 'Na naslovnico',
-    gumbKoncerti: 'Kdaj igramo?',
+    gumbKoncerti: 'Kje se srečamo?',
   },
 
   /* Panel pod herojem. Nizov o vstopu in prijavi tu ni — panel uporablja
@@ -76,7 +76,7 @@ export const sl = {
      ker gre za isto oznako istega dejstva. */
   koncerti: {
     nadnaslov: 'prihajajoče',
-    naslov: 'Kdaj in kje igramo',
+    naslov: 'Kdaj in kje se srečamo',
     praznoPred: 'Trenutno ni napovedanih koncertov. Novice objavljamo na',
     praznoVez: 'in',
     praznoZa: '.',
