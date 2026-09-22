@@ -96,6 +96,11 @@ Ključno:
 - `docs/` — kronika.md, sodelovanja.md, ton-vzorci.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 
+## Hero fotografije
+- Hero ozadje so **vse slike iz `src/assets/hero/`**; ena pomeni statično ozadje, več pomeni slideshow. Vrstni red določa **števčna predpona** (`01-`, `02-`), ker je prva slika LCP element naslovnice. Manjkajoča ali podvojena predpona ustavi build
+- ⚠️ **Zavesa čez fotografijo je naravnana na najslabšo sliko v mapi.** Ob dodajanju slike je treba kontrast slogana in znaka izmeriti na vseh slikah; ena svetlejša slika lahko poruši berljivost, ne da bi karkoli javilo napako. Podrobnosti in izmerjene vrednosti v `docs/design/hero-smer-b.md`
+- Sezonske in jubilejne plasti so v `src/data/hero-plasti.ts`; veljavnost se razreši **ob gradnji**, zato so odvisne od dnevnega redeploya
+
 ## Ročni postopki
 Oba tečeta **zunaj builda**, ker zahtevata mrežo ali velike izvirnike, ki v git ne gredo. Produkcijski build ne sme biti odvisen od nobenega od njiju.
 

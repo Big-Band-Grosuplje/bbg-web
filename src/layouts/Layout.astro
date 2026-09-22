@@ -36,6 +36,8 @@ import {
   type Jezik,
   type Stran,
 } from '../i18n';
+import { getImage } from 'astro:assets';
+import { HERO_SLIKE } from '../lib/hero-slike';
 
 interface Props {
   /* Ključ strani iz POTI — iz njega nastanejo hreflang pari in
@@ -70,6 +72,18 @@ const {
   brezKanonicne = false,
 } = Astro.props;
 const t = slovar(jezik);
+
+/* Prva hero slika je LCP element naslovnice. Preload zanjo mora biti v
+   <head>, ta pa je samo tu — komponenta Hero do njega ne seže. Zato ta
+   ena izjema: Layout ve za hero, ker je edini, ki lahko brskalniku pove,
+   naj sliko začne prenašati takoj, in ne šele ko naleti na <img>.
+
+   Samo naslovnica: drugod heroja ni in preload bi bil prenos slike, ki
+   se nikoli ne izriše. */
+const heroPredpolnitev =
+  stran === 'naslovnica'
+    ? await getImage({ src: HERO_SLIKE[0].slika, widths: [960, 1440, 1920], format: 'webp' })
+    : null;
 
 const naslovStrani = title ?? t.naslovnica.naslovStrani;
 const opisStrani = description ?? t.naslovnica.opisStrani;
@@ -233,6 +247,17 @@ const musicGroup = {
           href={alternative.find((a) => a.jezik === 'sl')?.url}
         />
       </Fragment>
+    )}
+
+    {heroPredpolnitev && (
+      <link
+        rel="preload"
+        as="image"
+        href={heroPredpolnitev.src}
+        imagesrcset={heroPredpolnitev.srcSet.attribute}
+        imagesizes="100vw"
+        fetchpriority="high"
+      />
     )}
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

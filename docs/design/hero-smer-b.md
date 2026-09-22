@@ -1,11 +1,14 @@
 # Hero sekcija — smer b (razdeljeno z napovednikom)
 
-> Stanje: **potrjeno 21. 9. 2026**. Namen: zapisati, katera smer je izbrana,
-> kaj je bilo pri tem zavrnjeno in zakaj, ter pod katerimi pogoji bo dodan
-> video posnetek. Posnetek ob potrditvi še ne obstaja.
+> ⛔ **SMER B JE OPUŠČENA — 22. 9. 2026.** Implementirana je bila in po pregledu
+> na živi strani zavrnjena; vrnjen je fullbleed hero. Razlog in kaj je iz smeri b
+> preživelo, sta v razdelku *Zakaj je bila smer b opuščena* spodaj.
 >
-> Ta zapis je **posnetek stanja ob potrditvi** in se ne posodablja sproti.
-> Vir resnice za videz je živa stran (`src/components/Hero.astro`).
+> Zapis se **ne briše**: naslednji bralec mora videti, da je bila razdeljena
+> postavitev preizkušena in zakaj ni obstala — sicer jo bo predlagal znova.
+>
+> Stanje ob potrditvi: 21. 9. 2026. Vir resnice za videz je živa stran
+> (`src/components/Hero.astro`).
 
 ## Izbrana smer
 
@@ -103,6 +106,33 @@ znajo; H.264 stoji v `<source>` za njim kot rezerva.
 predvajalnik bi obiskovalčev IP predal tretji osebi še pred klikom, kar
 pravila strani prepovedujejo (glej `CLAUDE.md` in `/zasebnost`).
 
+## ⛔ Zakaj je bila smer b opuščena (22. 9. 2026)
+
+Razdeljena postavitev je bila implementirana, objavljena v delovno drevo in
+pregledana na živi strani. Ob pregledu se je pokazalo, kar iz vzorcev ni bilo
+razvidno: **fotografija čez ves zaslon je močnejša od razdelitve.** Orkester v
+polovici širine je fotografija ob besedilu; orkester čez ves zaslon je prizor,
+v katerem besedilo stoji. Vzorec te razlike ni pokazal, ker je bil sam po sebi
+omejen na širino stolpca.
+
+Vrnjen je fullbleed hero z nadgradnjami, ki jih razdeljena postavitev ni imela:
+slideshow iz mape, sezonske in jubilejne plasti ter napovednik kot nalepka.
+
+### Kaj je iz smeri b preživelo
+
+| Kaj | Kako naprej |
+|---|---|
+| `HeroMedij.astro` | Ostaja in je zdaj **bolj** na mestu: iz dveh stanj je zrasel v tri (posnetek / slideshow / ena slika). Fullbleed ozadje je natanko tisto, kar tak vmesnik potrebuje. |
+| Napovednik | Ostaja, a kot **nalepka** čez rob fotografije, ne kot panel v stolpcu. |
+| `naslednjiJavni()` | Nespremenjena. |
+| `src/data/hero-video.ts` | Nespremenjen; stikalo za posnetek velja naprej. |
+| Odstranitev panela „Naslednji javni dogodek“ | Velja naprej — razlog (podvojitev) se z obliko heroja ni spremenil. |
+
+### Kaj je odpadlo
+
+Razdeljena mreža, medijska plošča v stolpcu in napovednik kot panel. Skupaj z
+njimi ključa `hero.naslednjic` in `hero.naslednjicGumb` ter `hero.medijAlt`.
+
 ## Odstranjen panel „Naslednji javni dogodek“
 
 Ob uvedbi heroja je bil odstranjen `<aside class="izpostavljeni">`, ki je
@@ -157,3 +187,168 @@ in so pri A samo skriti — pravilo iz `CLAUDE.md`.
 |---|---|
 | 21. 9. 2026 | Prvi zapis. Potrjena smer b, zavrnjen izrez čez črke, določene omejitve posnetka. |
 | 21. 9. 2026 | Odstranjen panel „Naslednji javni dogodek“; spodnji odmik heroja usklajen z ritmom sekcij. |
+
+---
+
+# Fullbleed hero (velja od 22. 9. 2026)
+
+> Stanje: 22. 9. 2026. Namen: kaj je hero po vrnitvi fullbleed oblike, katere
+> nadgradnje ima in katere številke so izmerjene.
+
+## Slike in slideshow
+
+Slike živijo v **`src/assets/hero/`** in ne v `public/`: tako gredo skozi isto
+Astrovo optimizacijo kot vse ostale slike v repozitoriju (`import.meta.glob`,
+glej `src/lib/galerija.ts`). V `public/` bi se prenesle v izvirni velikosti.
+
+**Vrstni red določa števčna predpona** (`01-`, `02-`, `03-`), ne abeceda in ne
+vrstni red, v katerem datoteke vrne glob. Prva slika je LCP element naslovnice,
+zato je to odločitev in ne stranski učinek poimenovanja. Manjkajoča ali
+podvojena predpona **ustavi build** — tiho razreševanje bi pomenilo, da se LCP
+slika lahko zamenja med dvema gradnjama.
+
+| Slik v mapi | Kaj se zgodi |
+|---|---|
+| ena | statično ozadje, brez animacije in brez skripte |
+| več | menjavanje: 9 s na sliko, prehod 1,8 s |
+| — | `prefers-reduced-motion`: samo prva slika, skripta se ne zažene |
+
+## Prenos — izmerjeno
+
+Meritve z Lighthouse 13.5, `--preset=desktop`, lokalni `astro preview`, isti
+stroj in ista nastavitev pred in po.
+
+| | PRED (razdeljen hero) | PO (fullbleed + slideshow) |
+|---|---|---|
+| **LCP** | **0,6 s** | **0,6 s** |
+| FCP | 0,5 s | 0,5 s |
+| CLS | 0 | 0 |
+| ocena Performance | 100 | 100 |
+| hero slik ob obisku | 2 | **1** |
+| hero bajtov ob obisku | 71 kB | **68 kB** |
+
+LCP se kljub večji sliki ni poslabšal, ker:
+
+- prva slika ima `fetchpriority="high"`, `loading="eager"` in **preload v
+  `<head>`** (`Layout.astro`, samo na naslovnici — drugod heroja ni);
+- druga in tretja slika **nimata atributa `src`**. Pot nosita v `data-src`,
+  skripta jo pripne 2,5 s pred menjavo, torej ~6,5 s po nalaganju. Potrjeno z
+  omrežnimi zahtevki: ob obisku se prenese ena sama slika.
+
+Kdor naslovnico zapusti v treh sekundah, prenese eno sliko — ne glede na to,
+koliko jih je v mapi.
+
+## Kontrast — izmerjeno na vseh slikah
+
+Fullbleed fotografija vrne problem, ki ga je razdeljena postavitev odpravila:
+zlato besedilo čez svetle dele fotografije. Pri slideshowu se podlaga **menja**,
+zato mora zavesa jamčiti kontrast za najslabšo sliko, ne za prvo.
+
+Metoda: kompozit fotografije z zaveso, 95. percentil svetlosti v pasu, kjer
+stoji besedilo (y 55–97 %, cela širina) — torej najslabši realni primer.
+
+**Izhodišče (prejšnja zavesa 0,55 / 0,15 / 0,92 v temni, 0,35 / 0,08 / 0,55 v svetli):**
+
+| Slika | slogan, temna | slogan, svetla |
+|---|---|---|
+| `01-kazina` | 7,93 | 7,18 |
+| `02-oder-temni` | 6,48 | 5,45 |
+| `03-oder-siroki` | 4,67 | **3,37** ⚠️ pade |
+
+Prejšnja meritev v `README.md` („slogan doseže 9,82 :1“) je bila narejena samo
+na sliki Kazina in je veljala samo zanjo.
+
+**Zavrnjena rešitev:** enotna močnejša zavesa (0,55 / 0,28 / 0,86) je kontrastno
+varna (najslabše 5,14 :1), a najtemnejšo fotografijo v mapi zadavi v črnino —
+preverjeno na izrisu.
+
+**Zavrnjena rešitev:** temna ploskev pod besedilom (`radial-gradient`) je
+kontrastno odlična (najslabše 7,02 :1), a mora biti zasidrana na odstotek
+**širine zaslona**, medtem ko besedilo stoji v stolpcu `.ovoj` (največ 1180 px,
+sredinsko). Na 3440 px se razideta in ploskev konča levo od besedila.
+
+**Izbrana rešitev:** en navpičen preliv s **štirimi** postajami —
+`0,45 → 0,08 (38 %) → 0,60 (68 %) → 0,94 (100 %)`. Sredina ostane skoraj čista,
+temna je samo spodnja četrtina, kjer besedilo res stoji. Ni odvisen od širine
+zaslona in je **isti v obeh temah**: fotografija se s temo ne menja, zato se ne
+sme ne zavesa.
+
+| Slika | slogan `#E3C765` (prag 4,5) | znak `#C9A227` (grafika, prag 3,0) |
+|---|---|---|
+| `01-kazina` | 9,17 | 6,31 |
+| `02-oder-temni` | 9,82 | 6,75 |
+| `03-oder-siroki` | **6,32** | **4,35** |
+
+⚠️ **Ob dodajanju slike v `src/assets/hero/` je treba meritev ponoviti.** Zavesa
+je naravnana na najslabšo sliko v mapi; nova svetlejša sliko lahko to poruši in
+build tega ne ujame.
+
+## Plasti
+
+Sezonske in jubilejne plasti so vodene podatkovno v **`src/data/hero-plasti.ts`**
+(razpon, tip, parametri). Datumi niso v komponenti.
+
+⚠️ **Odvisnost od dnevnega redeploya.** Stran je statična, zato se „danes“
+razreši **ob gradnji** (`aktivnePlasti()` se kliče iz frontmatterja) in ne v
+brskalniku. Brez nove gradnje bi sneg obvisel do marca. To pokriva
+`.github/workflows/dnevni-redeploy.yml` (02.00 UTC vsak dan) — isti potek, ki
+skrbi za filtriranje preteklih koncertov. Odjemalskega preverjanja datuma
+namenoma ni: delovalo bi brez redeploya, a bi obletnico vezalo na uro na
+obiskovalčevem računalniku.
+
+| Plast | Razpon | Parametri |
+|---|---|---|
+| `sneg` | 1. 12. – 6. 1., vsako leto | 14 kosov, CSS animacija, brez canvasa |
+| `jubilej` | november 2026 | 25 let društva |
+| `jubilej` | vse leto 2027 | 30 let orkestra |
+
+Datuma obletnic sta **iz naročila** in nista preverjena v `docs/bbg-osnova.md`
+— pred objavo ju potrdi.
+
+### Pravilo ob prekrivanju
+
+1. **Različni tipi se seštevajo.** Sneg je vzdušje čez celotno fotografijo in
+   stoji za vsebino, jubilej je znak v kotu. Ne tekmujeta za isto mesto ne za
+   isto vlogo; december 2027 je res hkrati zima in jubilejno leto in obojega ni
+   treba skrivati.
+2. **Isti tip se izključuje; zmaga ožji razpon.** Če bi veljala dva jubileja
+   hkrati, je ožji bolj določen (en mesec pove več kot celo leto). Brez tega
+   pravila bi odločal vrstni red v seznamu, kar je naključje.
+
+Oboje je preizkušeno: ob začasno prestavljenih datumih sta se izrisali obe
+plasti hkrati, jubilejev pa samo eden — ožji.
+
+### ⚠️ Jubilejni znak je placeholder
+
+Pentljica v `Hero.astro` je **začasna**: pravokotnik z izrezom in številko.
+Za dokončni element potrebujem:
+
+- **SVG, ena barva** (`currentColor`), brez besedila v krivuljah — številka se
+  menja (25, 30) in mora ostati besedilo ali pa jo je treba podati kot parameter;
+- **razmerje stranic in varovalni prostor** — znak stoji v levem zgornjem kotu
+  čez fotografijo, zato mora delovati na poljubni podlagi;
+- odločitev, ali je **napis ob znaku** („let društva“) del grafike ali ostane
+  besedilo. Zdaj je besedilo, ker se prevaja (`hero.jubilejDrustva`,
+  `hero.jubilejOrkestra`) — če gre v grafiko, potrebujemo dve različici.
+
+## Napovednik kot nalepka
+
+Nadnaslov „napovedujemo“, pod njim datum z uro, naziv dogodka in kraj. Cel
+element je povezava na podstran dogodka. **Brez prihajajočega javnega dogodka
+nalepke ni** — nadomestnega besedila namenoma nima, ker prazna nalepka ni
+nalepka, ampak luknja.
+
+| Zahteva | Rešitev | Izmerjeno |
+|---|---|---|
+| dotikalna tarča ≥ 44 × 44 px | cel blok je povezava, `min-height: 44px` | 318 × 140 px pri 380 px |
+| pri 380 px ne prekriva naslova, slogana, gumbov | pri ≤ 820 px izstopi iz absolutne postavitve in gre **pod gumbe** | prekrivanja ni; nalepka se začne pod gumbi |
+| rotirano besedilo berljivo | −2,6° na namiznem, −1,2° pri ≤ 820 px | potrjeno |
+| fokusni obroč sledi zasuku | `transform` je na samem elementu, ne na ovoju, zato ga `outline` sledi | — |
+
+## Zgodovina revizij
+
+| Datum | Sprememba |
+|---|---|
+| 21. 9. 2026 | Prvi zapis. Potrjena smer b, zavrnjen izrez čez črke, določene omejitve posnetka. |
+| 21. 9. 2026 | Odstranjen panel „Naslednji javni dogodek“; spodnji odmik heroja usklajen z ritmom sekcij. |
+| 22. 9. 2026 | **Smer b opuščena**, vrnjen fullbleed hero s slideshowom, plastmi in nalepko. Zavesa preračunana na vse slike v mapi. |

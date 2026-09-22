@@ -1,45 +1,56 @@
 ---
 /* ============================================================
-   Medijska plošča hero sekcije (smer b).
+   Medijsko ozadje hero sekcije. En vmesnik, TRI stanja.
 
-   En vmesnik, dve stanji. Katero velja, določi izključno prisotnost
-   posnetka v src/data/hero-video.ts:
+   Katero velja, se odloči tu in nikjer drugje:
 
-   - BREZ posnetka: mirujoča fotografija. Brez gumba za zvok, brez
-     preklopnika, brez namiga, da kaj manjka. Hero je dokončan.
-   - S posnetkom: tiha zanka (autoplay muted loop playsinline), gumb za
-     zvok v zgornjem kotu plošče, pri prefers-reduced-motion fotografija.
+     1. posnetek vpisan v src/data/hero-video.ts
+        → tiha zanka (autoplay muted loop playsinline), gumb za zvok,
+          pri prefers-reduced-motion plakat
+     2. brez posnetka, VEČ slik v src/assets/hero/
+        → počasno menjavanje s prehodom; pri prefers-reduced-motion
+          samo prva slika
+     3. brez posnetka, ENA slika
+        → statično ozadje. Brez animacije, brez skripte, brez razlik.
 
-   Gumb za zvok stoji na PLOŠČI in ne na strani: pripada posnetku in se
-   mora seliti z njim, ko plošča pri ozkem zaslonu zleze nad besedilo.
+   PRENOS. Prva slika je LCP element naslovnice: pride v oznakah, z
+   loading="eager" in fetchpriority="high", brez lazy. Ostale NIMAJO
+   atributa src — pot nosijo v data-src in jo skripta pripne šele tik
+   pred prvo menjavo. Obiskovalec, ki naslovnico zapusti v treh
+   sekundah, zato prenese natanko eno sliko, ne glede na to, koliko jih
+   je v mapi.
    ============================================================ */
 import { Image, getImage } from 'astro:assets';
 import { slovar, type Jezik } from '../i18n';
 import { HERO_POSNETEK } from '../data/hero-video';
+import { HERO_SLIKE, IMA_SLIDESHOW } from '../lib/hero-slike';
 
 interface Props {
-  /** Fotografija: v stanju brez posnetka vsebina plošče, sicer plakat. */
-  slika: ImageMetadata;
-  alt: string;
   jezik: Jezik;
+  /** Nadomestno besedilo prve slike; ostale so okras iste vsebine. */
+  alt: string;
 }
-const { slika, alt, jezik } = Astro.props;
+const { jezik, alt } = Astro.props;
 const t = slovar(jezik);
 
-/* Plakat je isti kader kot fotografija v stanju brez posnetka, razen če je
-   v podatkih vpisan svoj. Ista slika pomeni, da se ob prehodu iz plakata v
-   zanko nič ne premakne. */
-const plakatSlika = await getImage({ src: slika, width: 900, format: 'webp' });
-const plakat = HERO_POSNETEK?.plakat ?? plakatSlika.src;
+const [prva, ...ostale] = HERO_SLIKE;
+
+/* Odložene slike pripravimo v dveh širinah. Ena sama 1920 bi telefonu
+   poslala namizno sliko, polni srcset pa bi pri sliki, ki je morda nihče
+   ne bo videl, ne prinesel dovolj, da bi odtehtal zapletenost. */
+const odlozene = await Promise.all(
+  ostale.map(async (s) => ({
+    ime: s.ime,
+    ozka: (await getImage({ src: s.slika, width: 1100, format: 'webp' })).src,
+    siroka: (await getImage({ src: s.slika, width: 1920, format: 'webp' })).src,
+  })),
+);
+
+const plakat = HERO_POSNETEK?.plakat ?? (await getImage({ src: prva.slika, width: 1920, format: 'webp' })).src;
 ---
 
 {HERO_POSNETEK ? (
   <div class="medij medij--video">
-    {/* autoplay muted playsinline sta pogoj, ne okras: brez muted mobilni
-        brskalniki predvajanja ne dovolijo, brez playsinline ga iOS požene
-        čez cel zaslon. Atributi ostanejo v oznakah, da zanka teče tudi
-        brez JS; za prefers-reduced-motion poskrbita CSS (skrije video,
-        pokaže plakat) in skripta spodaj (ustavi prenos). */}
     <video
       class="medij__video"
       autoplay
@@ -54,12 +65,14 @@ const plakat = HERO_POSNETEK?.plakat ?? plakatSlika.src;
       <source src={HERO_POSNETEK.tiho.av1} type="video/webm" />
       <source src={HERO_POSNETEK.tiho.h264} type="video/mp4" />
     </video>
-
-    {/* Plakat kot samostojna slika, ne le atribut poster: pri
-        prefers-reduced-motion mora ostati viden tudi takrat, ko je video
-        skrit, in pri tem nositi svoj alt. */}
-    <Image src={slika} alt={alt} width={900} loading="eager" class="medij__plakat" />
-
+    <Image
+      src={prva.slika}
+      alt={alt}
+      widths={[960, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      class="medij__plakat"
+    />
     <button
       class="medij__zvok"
       type="button"
@@ -72,92 +85,163 @@ const plakat = HERO_POSNETEK?.plakat ?? plakatSlika.src;
     </button>
   </div>
 ) : (
-  <div class="medij">
-    <Image src={slika} alt={alt} width={900} loading="eager" class="medij__slika" />
+  <div
+    class:list={['medij', IMA_SLIDESHOW && 'medij--slideshow']}
+    data-trajanje="9000"
+    data-prehod="1800"
+  >
+    {/* LCP element naslovnice. eager + fetchpriority high, nikoli lazy. */}
+    <Image
+      src={prva.slika}
+      alt={alt}
+      widths={[960, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="medij__slika je-vidna"
+    />
+    {/* Brez src: pot nosi data-src in jo skripta pripne tik pred menjavo.
+        alt je prazen — vsebina je ista kot pri prvi, ki alt že nosi, in
+        bralnik zaslona nima kaj pridobiti od treh opisov istega odra. */}
+    {odlozene.map((s) => (
+      <img
+        class="medij__slika"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        data-src={s.siroka}
+        data-srcset={`${s.ozka} 1100w, ${s.siroka} 1920w`}
+      />
+    ))}
   </div>
 )}
 
 <script>
-    /* Zanka je v oznakah in teče brez JS. Skripta doda dvoje:
-       1. pri prefers-reduced-motion ustavi predvajanje IN odstrani vire,
-          da se posnetek sploh ne prenese (CSS ga samo skrije);
-       2. gumb za zvok, ki ob kliku zamenja tiho različico s polno. */
-    const medij = document.querySelector<HTMLElement>('.medij--video');
-    const video = medij?.querySelector<HTMLVideoElement>('.medij__video');
-    const gumb = medij?.querySelector<HTMLButtonElement>('.medij__zvok');
+  /* --- Zvok pri posnetku ------------------------------------------- */
+  const medijVideo = document.querySelector<HTMLElement>('.medij--video');
+  const video = medijVideo?.querySelector<HTMLVideoElement>('.medij__video');
+  const gumb = medijVideo?.querySelector<HTMLButtonElement>('.medij__zvok');
 
-    if (video) {
-      const miruje = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (miruje.matches) {
-        video.pause();
-        video.removeAttribute('autoplay');
-        video.querySelectorAll('source').forEach((v) => v.remove());
-        video.load();
-      }
-
-      gumb?.addEventListener('click', () => {
-        const napis = gumb.querySelector<HTMLElement>('.medij__zvokNapis');
-        if (gumb.getAttribute('aria-pressed') === 'true') {
-          video.muted = true;
-          gumb.setAttribute('aria-pressed', 'false');
-          if (napis) napis.textContent = gumb.dataset.vklopi ?? '';
-          return;
-        }
-
-        /* Polna različica se prenese šele tu — do klika obiskovalec ni
-           plačal niti bajta avdio sledi. Mesto v zanki ohranimo, da
-           menjava ni videti kot ponoven začetek. */
-        const kje = video.currentTime;
-        video.querySelectorAll('source').forEach((v) => v.remove());
-        for (const [pot, tip] of [
-          [video.dataset.zvokAv1, 'video/webm'],
-          [video.dataset.zvokH264, 'video/mp4'],
-        ] as [string | undefined, string][]) {
-          if (!pot) continue;
-          const vir = document.createElement('source');
-          vir.src = pot;
-          vir.type = tip;
-          video.appendChild(vir);
-        }
-        video.load();
-        video.currentTime = kje;
-        video.muted = false;
-        void video.play();
-        gumb.setAttribute('aria-pressed', 'true');
-        if (napis) napis.textContent = gumb.dataset.utisaj ?? '';
-      });
+  if (video) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.pause();
+      video.removeAttribute('autoplay');
+      video.querySelectorAll('source').forEach((v) => v.remove());
+      video.load();
     }
+
+    gumb?.addEventListener('click', () => {
+      const napis = gumb.querySelector<HTMLElement>('.medij__zvokNapis');
+      if (gumb.getAttribute('aria-pressed') === 'true') {
+        video.muted = true;
+        gumb.setAttribute('aria-pressed', 'false');
+        if (napis) napis.textContent = gumb.dataset.vklopi ?? '';
+        return;
+      }
+      const kje = video.currentTime;
+      video.querySelectorAll('source').forEach((v) => v.remove());
+      for (const [pot, tip] of [
+        [video.dataset.zvokAv1, 'video/webm'],
+        [video.dataset.zvokH264, 'video/mp4'],
+      ] as [string | undefined, string][]) {
+        if (!pot) continue;
+        const vir = document.createElement('source');
+        vir.src = pot;
+        vir.type = tip;
+        video.appendChild(vir);
+      }
+      video.load();
+      video.currentTime = kje;
+      video.muted = false;
+      void video.play();
+      gumb.setAttribute('aria-pressed', 'true');
+      if (napis) napis.textContent = gumb.dataset.utisaj ?? '';
+    });
+  }
+
+  /* --- Slideshow ----------------------------------------------------
+     Pri eni sami sliki razreda .medij--slideshow ni in spodnje se ne
+     zgodi nič — statično ozadje ne potrebuje skripte.
+
+     Prenos je zamaknjen namenoma: naslednja slika se začne nalagati
+     šele PREDPRIPRAVA milisekund pred svojo menjavo, ne ob obisku. Kdor
+     odide prej, je prenesel eno sliko. */
+  const zid = document.querySelector<HTMLElement>('.medij--slideshow');
+
+  if (zid && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const slike = [...zid.querySelectorAll<HTMLImageElement>('.medij__slika')];
+    const TRAJANJE = Number(zid.dataset.trajanje) || 9000;
+    const PREHOD = Number(zid.dataset.prehod) || 1800;
+    const PREDPRIPRAVA = 2500;
+    let tekoca = 0;
+
+    function pripni(i: number) {
+      const s = slike[i];
+      if (!s || s.src || !s.dataset.src) return;
+      if (s.dataset.srcset) s.srcset = s.dataset.srcset;
+      s.sizes = '100vw';
+      s.src = s.dataset.src;
+    }
+
+    function naprej() {
+      const naslednja = (tekoca + 1) % slike.length;
+      slike[tekoca].classList.remove('je-vidna');
+      slike[naslednja].classList.add('je-vidna');
+      tekoca = naslednja;
+      /* Predpripravimo tisto ZA naslednjo, ne naslednjo — ta je že tu. */
+      setTimeout(() => pripni((tekoca + 1) % slike.length), TRAJANJE - PREDPRIPRAVA);
+      setTimeout(naprej, TRAJANJE);
+    }
+
+    /* Prvo menjavo in prvi dodatni prenos sprožimo šele po nalaganju
+       strani, da ne tekmujeta z LCP. */
+    const zacni = () => {
+      setTimeout(() => pripni(1), Math.max(0, TRAJANJE - PREDPRIPRAVA));
+      setTimeout(naprej, TRAJANJE);
+    };
+    if (document.readyState === 'complete') zacni();
+    else window.addEventListener('load', zacni, { once: true });
+
+    void PREHOD;
+  }
 </script>
 
 <style>
-  /* Plošča je v obeh stanjih enako velika in enako uokvirjena, zato se ob
-     prihodu posnetka postavitev ne premakne. */
   .medij {
-    position: relative;
-    border-radius: var(--bbg-r-l);
+    position: absolute;
+    inset: 0;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--bbg-gold) 38%, transparent);
-    background: var(--bbg-panel-bg);
+    /* Barva pod sliko: dokler se nalaga, hero ni prazna bela ploskev. */
+    background: var(--bbg-black);
   }
   .medij__slika,
   .medij__plakat,
   .medij__video {
-    display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    height: 100%;
     object-fit: cover;
+    display: block;
   }
 
-  /* Plakat je viden samo pri prefers-reduced-motion; sicer ga prekriva
-     video. Privzeto je torej skrit, ker je zanka privzeto stanje. */
+  /* Slideshow: vse slike druga na drugi, vidna je ena. Prehod je na
+     motnosti in ne na filtrih ali transformih — samo motnost brskalnik
+     pelje po GPU brez ponovnega izrisa. */
+  .medij--slideshow .medij__slika {
+    opacity: 0;
+    transition: opacity 1800ms ease-in-out;
+  }
+  .medij--slideshow .medij__slika.je-vidna { opacity: 1; }
+
   .medij--video .medij__plakat { display: none; }
 
   /* --- Gumb za zvok -------------------------------------------------- */
   .medij__zvok {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 16px;
+    right: 16px;
+    z-index: 3;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -168,8 +252,7 @@ const plakat = HERO_POSNETEK?.plakat ?? plakatSlika.src;
     padding: 8px 14px;
     border-radius: 999px;
     /* Gumb stoji na posnetku, torej na podlagi, ki je ne poznamo. Zato
-       nosi svojo temno ploskev in svetlo besedilo v OBEH temah — žetoni
-       teme bi ga v svetli temi naredili svetlega na svetlem kadru. */
+       nosi svojo temno ploskev in svetlo besedilo v OBEH temah. */
     border: 1px solid color-mix(in srgb, #E3C765 55%, transparent);
     background: rgba(20, 17, 14, 0.66);
     color: #F3EBD8;
@@ -177,12 +260,8 @@ const plakat = HERO_POSNETEK?.plakat ?? plakatSlika.src;
     cursor: pointer;
   }
   .medij__zvok:hover { background: rgba(20, 17, 14, 0.82); }
-  .medij__zvok:focus-visible {
-    outline: 2px solid var(--bbg-gold-light);
-    outline-offset: 3px;
-  }
+  .medij__zvok:focus-visible { outline: 2px solid var(--bbg-gold-light); outline-offset: 3px; }
 
-  /* Ravni mirujejo, dokler je zvok izklopljen — gumb ponazarja tišino. */
   .medij__meter { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
   .medij__meter i { width: 2px; background: var(--bbg-gold-light); display: block; }
   .medij__meter i:nth-child(1) { height: 40%; }
@@ -193,16 +272,16 @@ const plakat = HERO_POSNETEK?.plakat ?? plakatSlika.src;
   }
   .medij__zvok[aria-pressed='true'] .medij__meter i:nth-child(2) { animation-delay: 140ms; }
   .medij__zvok[aria-pressed='true'] .medij__meter i:nth-child(3) { animation-delay: 280ms; }
-  @keyframes medij-nihaj {
-    from { height: 30%; }
-    to { height: 100%; }
-  }
+  @keyframes medij-nihaj { from { height: 30%; } to { height: 100%; } }
 
   /* --- prefers-reduced-motion ---------------------------------------
-     Mirovanje ni samo ustavljena animacija: brez predvajanja ni česa
-     odtišati, zato gumb za zvok odpade. Plošča ostane enaka — obiskovalec
-     ne vidi, da je kaj izpadlo. */
+     Slideshow: ostane prva slika. Skripta se sploh ne zažene, zato
+     ostale ne dobijo src in se ne prenesejo — mirovanje je tu tudi
+     prihranek prenosa, ne le manj gibanja.
+     Posnetek: plakat namesto videa, gumb za zvok odpade, ker brez
+     predvajanja ni česa odtišati. */
   @media (prefers-reduced-motion: reduce) {
+    .medij--slideshow .medij__slika { transition: none; }
     .medij--video .medij__video { display: none; }
     .medij--video .medij__plakat { display: block; }
     .medij__zvok { display: none; }

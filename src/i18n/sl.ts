@@ -44,12 +44,14 @@ export const sl = {
     gumbPridruzi: 'Pridruži se',
     fotoAlt: 'Dirigent med vodenjem orkestra',
     nalepka: 'dirigent, presenetljivo miren',
+    /* Nalepka z napovedjo čez rob fotografije. */
+    napovedujemo: 'napovedujemo',
+    /* Jubilejna plast; katero leto velja, pove src/data/hero-plasti.ts. */
+    jubilejDrustva: 'let društva',
+    jubilejOrkestra: 'let orkestra',
     /* Smer b: napovednik naslednjega koncerta v heroju. */
-    naslednjic: 'naslednjič',
-    naslednjicGumb: 'Podrobnosti →',
     /* Medijska plošča. Alt velja za fotografijo in za plakat posnetka —
        kader je isti, zato je isti tudi opis. */
-    medijAlt: 'Saksofonska in trobentna sekcija orkestra med igranjem',
     zvokVklopi: 'vklopi zvok',
     zvokUtisaj: 'utišaj',
   },
