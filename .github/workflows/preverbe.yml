@@ -1,0 +1,53 @@
+# Preverbe ob spremembi: kontrast hero fotografij in gradnja.
+#
+# Zakaj obstaja: objavo gradi Vercel, ta potek pa je vrata pred njo. Dve
+# stvari, ki se sicer pokažeta šele na živi strani ali sploh ne:
+#
+#   1. Kontrast besedila čez hero fotografije. Zavesa je naravnana na
+#      NAJSLABŠO sliko v src/assets/hero/; dodana svetlejša slika lahko
+#      poruši berljivost slogana, ne da bi karkoli javilo napako. Skripta
+#      to ujame in vrne izhodno kodo 1.
+#   2. Gradnja sama. Več preverb v repozitoriju je izvedenih kot izjema ob
+#      nalaganju modula (neznan ključ podpornika, neznana raven, manjkajoča
+#      števčna predpona hero slike, neujemanje slovarjev). Vse padejo ob
+#      buildu — torej tu, in ne šele pri objavi.
+#
+# Potek ne objavlja in ne piše v repozitorij; za objavo skrbi Vercel, za
+# dnevno osvežitev pa .github/workflows/dnevni-redeploy.yml.
+name: Preverbe
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  # Ob hitrem zaporedju potiskov je zanimiv samo zadnji.
+  group: preverbe-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preverbe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Ista velika različica kot v razvoju.
+          node-version: '24'
+          cache: npm
+
+      # npm ci in ne npm install: gradi natanko iz package-lock.json.
+      - run: npm ci
+
+      # Kontrast pred gradnjo: če pade, je sporočilo o vzroku prva stvar
+      # v dnevniku in ne skrito pod izpisom builda.
+      - name: Kontrast hero fotografij
+        run: npm run kontrast
+
+      - name: Gradnja
+        run: npm run build

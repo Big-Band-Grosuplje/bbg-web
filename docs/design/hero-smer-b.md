@@ -279,9 +279,39 @@ sme ne zavesa.
 | `02-oder-temni` | 9,82 | 6,75 |
 | `03-oder-siroki` | **6,32** | **4,35** |
 
-⚠️ **Ob dodajanju slike v `src/assets/hero/` je treba meritev ponoviti.** Zavesa
-je naravnana na najslabšo sliko v mapi; nova svetlejša sliko lahko to poruši in
-build tega ne ujame.
+### Meritev je samodejna
+
+Zgornje številke niso enkraten ročni izračun — reproducira jih skripta:
+
+```
+npm run kontrast
+```
+
+`scripts/kontrast-hero.mjs` prebere **vse** slike iz `src/assets/hero/`, sestavi
+kompozit z zaveso, v pasu besedila vzame 95. percentil svetlosti in izračuna
+kontrast za obe barvi in obe temi. Ob padcu pod prag vrne **izhodno kodo 1**.
+
+Vrednosti preliva **niso podvojene**: skripta in `Hero.astro` bereta isti vir,
+`src/data/hero-zavesa.mjs`. Komponenta iz postaj sestavi CSS preliv, skripta
+z istimi postajami meri. Dve kopiji bi se lahko razšli, meritev pa bi še naprej
+poročala, da je vse v redu.
+
+Preverba teče tudi v CI: `.github/workflows/preverbe.yml` jo požene ob vsakem
+pull requestu in ob potisku na `main`, pred gradnjo. Neuspeh ustavi potek.
+
+#### Ko skripta pade
+
+Sta dve poti in tretje ni:
+
+1. **Zamenjaj sliko** ali izberi kader z mirnejšim spodnjim predelom. Zavesa je
+   naravnana na najslabšo sliko v mapi, zato ena svetla slika potegne za sabo
+   vse ostale — vsem bi bilo treba pritemniti podlago zaradi ene.
+2. **Prenaravnaj zaveso** v `src/data/hero-zavesa.mjs` (višja motnost v spodnjih
+   postajah) in **meritev ponovi na vseh slikah**. Močnejša zavesa najtemnejšo
+   sliko zadavi v črnino — to se je zgodilo pri prvi različici — zato po
+   spremembi preveri tudi videz, ne le številke.
+
+Skripta oba koraka izpiše ob padcu, da jih ni treba iskati tu.
 
 ## Plasti
 
@@ -352,3 +382,4 @@ nalepka, ampak luknja.
 | 21. 9. 2026 | Prvi zapis. Potrjena smer b, zavrnjen izrez čez črke, določene omejitve posnetka. |
 | 21. 9. 2026 | Odstranjen panel „Naslednji javni dogodek“; spodnji odmik heroja usklajen z ritmom sekcij. |
 | 22. 9. 2026 | **Smer b opuščena**, vrnjen fullbleed hero s slideshowom, plastmi in nalepko. Zavesa preračunana na vse slike v mapi. |
+| 22. 9. 2026 | Meritev kontrasta avtomatizirana (`npm run kontrast`, CI ob PR in push na main); vrednosti preliva preseljene v en vir. |

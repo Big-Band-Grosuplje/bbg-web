@@ -25,6 +25,7 @@ import fotoHero from '../assets/foto/orkester/kotar-dirigent-energija.jpg';
 import { slovar, type Jezik } from '../i18n';
 import { naslednjiJavni, prihajajociKoncerti, pripravi } from '../lib/koncerti';
 import { aktivnePlasti } from '../lib/hero-plasti';
+import { prelivCss } from '../data/hero-zavesa.mjs';
 
 interface Props {
   jezik: Jezik;
@@ -61,11 +62,12 @@ const sneznice = Array.from({ length: KOSOV }, (_, i) => ({
 }));
 ---
 
-<header class="hero">
+<header class="hero" style={`--hero-zavesa: ${prelivCss()}`}>
   <HeroMedij jezik={jezik} alt={t.hero.fotoAlt} />
 
   {/* Zavesa je ista v OBEH temah: fotografija se s temo ne menja, zato se
-      ne sme ne zavesa. Vrednosti so izmerjene na vseh slikah v mapi. */}
+      ne sme ne zavesa. Sam preliv pride iz src/data/hero-zavesa.mjs —
+      isti vir bere skripta, ki kontrast meri (npm run kontrast). */}
   <div class="hero__zavesa" aria-hidden="true"></div>
 
   {sneg && (
@@ -141,10 +143,9 @@ const sneznice = Array.from({ length: KOSOV }, (_, i) => ({
   }
 
   /* --- Zavesa ---------------------------------------------------------
-     Štiri postaje in ne tri: 0,45 zgoraj → 0,08 na 38 % → 0,60 na 68 % →
-     0,94 spodaj. Sredina je namenoma skoraj čista, ker enakomerno močna
-     zavesa najtemnejšo fotografijo v mapi zadavi v črnino; temna je samo
-     spodnja četrtina, kjer besedilo res stoji.
+     Vrednosti preliva NISO tu: so v src/data/hero-zavesa.mjs, ker jih poleg
+     te komponente bere tudi skripta, ki meri kontrast. Dve kopiji bi se
+     lahko razšli, meritev pa bi še naprej poročala, da je vse v redu.
 
      Zakaj navpičen preliv in ne temna ploskev pod besedilom: ploskev bi
      morala biti zasidrana na stolpec .ovoj (največ 1180 px, sredinsko),
@@ -152,23 +153,13 @@ const sneznice = Array.from({ length: KOSOV }, (_, i) => ({
      širine in dejanski položaj besedila razideta — ploskev konča levo od
      besedila. Navpičen preliv te odvisnosti nima.
 
-     Izmerjeno na VSEH slikah v src/assets/hero/, ne na eni: pri slideshowu
-     se podlaga menja, zato velja najslabša. 95. percentil svetlosti v
-     spodnjem pasu (y 55–97 %, cela širina):
-       najslabša slika (03-oder-siroki):  slogan 6,32 :1 · znak 4,35 :1
-       najboljša slika (02-oder-temni):   slogan 9,82 :1 · znak 6,75 :1
-     Pragova: besedilo 4,5 · grafika 3,0. */
+     Kontrast na vseh slikah v mapi preveri `npm run kontrast`; ista preverba
+     teče v GitHub Actions ob vsakem PR in potisku na main. */
   .hero__zavesa {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(
-      180deg,
-      rgba(24, 21, 18, 0.45) 0%,
-      rgba(24, 21, 18, 0.08) 38%,
-      rgba(24, 21, 18, 0.6) 68%,
-      rgba(24, 21, 18, 0.94) 100%
-    );
+    background-image: var(--hero-zavesa);
   }
 
   .hero__mreza { position: relative; z-index: 2; width: 100%; }

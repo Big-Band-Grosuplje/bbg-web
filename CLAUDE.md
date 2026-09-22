@@ -96,9 +96,11 @@ Ključno:
 - `docs/` — kronika.md, sodelovanja.md, ton-vzorci.md (v gitu); bbg-osnova.md in interno* samo lokalno. Nič od tega ne gre v build
 - `public/` — favicon, ikone, `og/og-default.png`
 
-## Hero fotografije
+## Hero fotografije in kontrast
 - Hero ozadje so **vse slike iz `src/assets/hero/`**; ena pomeni statično ozadje, več pomeni slideshow. Vrstni red določa **števčna predpona** (`01-`, `02-`), ker je prva slika LCP element naslovnice. Manjkajoča ali podvojena predpona ustavi build
-- ⚠️ **Zavesa čez fotografijo je naravnana na najslabšo sliko v mapi.** Ob dodajanju slike je treba kontrast slogana in znaka izmeriti na vseh slikah; ena svetlejša slika lahko poruši berljivost, ne da bi karkoli javilo napako. Podrobnosti in izmerjene vrednosti v `docs/design/hero-smer-b.md`
+- ⚠️ **Zavesa čez fotografijo je naravnana na najslabšo sliko v mapi.** Ob dodajanju slike poženi `npm run kontrast` — skripta izmeri kontrast slogana in znaka na vseh slikah in ob padcu pod prag (4,5 za besedilo, 3,0 za grafiko) vrne izhodno kodo 1. Ista preverba teče v CI ob PR in potisku na `main` (`.github/workflows/preverbe.yml`)
+- Vrednosti preliva so v `src/data/hero-zavesa.mjs` in **nikjer drugje**: isti vir bereta komponenta (sestavi CSS preliv) in skripta (meri z njim). Ne prepisuj jih v CSS
+- Ko skripta pade, sta dve poti: zamenjati sliko ali prenaravnati zaveso in **meritev ponoviti na vseh slikah**. Močnejša zavesa najtemnejšo sliko zadavi v črnino, zato po spremembi preveri tudi videz. Podrobnosti v `docs/design/hero-smer-b.md`
 - Sezonske in jubilejne plasti so v `src/data/hero-plasti.ts`; veljavnost se razreši **ob gradnji**, zato so odvisne od dnevnega redeploya
 
 ## Ročni postopki
