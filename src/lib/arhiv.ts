@@ -92,6 +92,8 @@ export interface ArhivVnos {
    bi ročna sprememba kraja pomenila, da ključ kaže na zapis, ki ga po
    svojem kraju ni več mogoče najti. Napačen kraj se popravi v viru. */
 const POLJA_ROCNO = ['naziv', 'opis', 'zasedba', 'prizorisce', 'ura'] as const;
+/** Dovoljen, a se ne zlije: razlog za ročni popravek. */
+const POLJE_OPOMBA = 'opomba';
 type PoljeRocno = (typeof POLJA_ROCNO)[number];
 type RocniPopravki = Partial<{
   naziv: string | null;
@@ -99,6 +101,8 @@ type RocniPopravki = Partial<{
   prizorisce: string | null;
   ura: string | null;
   zasedba: ZasedbaArhiva[];
+  /** Razlog za popravek. Dokumentacija, ne podatek — v vnos se ne zlije. */
+  opomba: string;
 }>;
 
 const uvozeni = uvozData as unknown as ArhivVnos[];
@@ -156,10 +160,19 @@ for (const [id, popravki] of Object.entries(rocni)) {
     );
   }
   for (const [polje, vrednost] of Object.entries(popravki)) {
+    /* `opomba` je razlog za popravek, ne podatek. JSON komentarjev nima,
+       vrednost `null` pa brez razlage čez leto dni ne pove ničesar — zato
+       ima vsak ročni vnos mesto za svoj zakaj. V vnos se NE zlije. */
+    if (polje === POLJE_OPOMBA) {
+      if (typeof vrednost !== 'string' || vrednost.trim() === '') {
+        throw new Error(`Arhiv: opomba pri "${id}" mora biti neprazen niz.`);
+      }
+      continue;
+    }
     if (!(POLJA_ROCNO as readonly string[]).includes(polje)) {
       throw new Error(
         `Arhiv: ročni vnos "${id}" prepisuje polje "${polje}", ki ni dovoljeno. `
-          + `Dovoljena: ${POLJA_ROCNO.join(', ')}.`,
+          + `Dovoljena: ${POLJA_ROCNO.join(', ')} in ${POLJE_OPOMBA}.`,
       );
     }
     if (polje === 'zasedba') {
@@ -184,12 +197,15 @@ for (const [id, popravki] of Object.entries(rocni)) {
 const vnosi: ArhivVnos[] = uvozeni.map((v) => {
   const popravki = rocni[v.id];
   if (!popravki) return v;
-  const zdruzen = { ...v, ...popravki } as ArhivVnos;
+  /* `opomba` pove, ZAKAJ je popravek tu, in ne sme v vnos — drugače bi
+     se razlog znašel med podatki in slej ko prej na strani. */
+  const { [POLJE_OPOMBA]: _razlog, ...vrednosti } = popravki;
+  const zdruzen = { ...v, ...vrednosti } as ArhivVnos;
   /* Zastavica velja za vnose brez opisa; ročno dopisan opis jo pobriše. */
   if (zdruzen.opis) delete zdruzen.zaDopolnitev;
   /* Ročno vpisana zasedba ni ne zapisana ne izpeljana — ima svoj izvor.
      Brez tega bi popravek izpeljane vrednosti ostal videti kot izpeljava. */
-  if (popravki.zasedba) zdruzen.zasedbaVir = 'rocno';
+  if (vrednosti.zasedba) zdruzen.zasedbaVir = 'rocno';
   return zdruzen;
 });
 

@@ -37,9 +37,37 @@ const TBD = /\bTBD\b/i;
 const ODPOVEDANO = /ODPOVEDAN/i;
 const ZAKLJUCEK = /zaključek (pod)?projekta/i;
 
+/* ---------- zasebni dogodki, ki vseeno ostanejo -----------------------
+   Vzorec ZASEBNI je gruba mreža: ujame osem dogodkov, od katerih večina
+   po odstranitvi imen ne razkriva ničesar. Arhiv odgovarja na vprašanje,
+   KJE je orkester igral, in „nastop na poroki na Bledu" je odgovor —
+   pove, da combo igra na porokah, kar je za obiskovalca z gumbom
+   „Povabi nas" uporabna informacija.
+
+   Izpuščena ostaneta dva, in oba z razlogom, ne po privzetku:
+
+     2007-08-13 Grosuplje  „v zakonski stan smo pospremili našo članico" —
+        po odstranitvi imen ostane prazno, zapis pa ni o dogodku, ampak o
+        osebi. AGENTS.md imen članov ne objavlja; tudi brez imena je krog
+        ljudi, ki jih datum in kraj določata, majhen.
+     2009-06-27 Medana  Besedilo je čisto (Nina Rotner je izvajalka in
+        ostane), tveganje je v kraju: zaselek, kjer datum in kraj v praksi
+        določata družino. Izpust kraja ni rešitev — kraj je del ključa id.
+
+   Odločitev je Rokova, 23. 9. 2026. Vrednost je razlog za vključitev in
+   ne le zastavica, da se ob naslednjem branju ve, zakaj vnos tu je. */
+const ZASEBNI_VKLJUCENI = {
+  '2004-05-22': 'poroka zmagovalnega para javne medijske akcije; pet imenovanih gostujočih izvajalcev, para vir ne imenuje',
+  '2003-09-06': 'veliko javno prizorišče (Festivalna dvorana); imeni para odstranjeni v POPRAVKI_OPISA',
+  '2021-09-18': 'komercialno prizorišče (dvorec Zemono); besedilo ne imenuje nikogar zasebnega',
+  '2019-09-14': 'komercialno prizorišče (Gostišče Jezeršek); imen ni',
+  '2009-08-08': 'Bled brez prizorišča; besedilo je že čisto in nikogar ne imenuje',
+  '2007-05-19': 'Otočec, komercialno prizorišče; obvelja zapis „Nastop na poroki." (glej ZDRUZI)',
+};
+
 function razlogIzlocitve(z) {
   const b = z.besedilo || '';
-  if (ZASEBNI.test(b)) return 'zasebni dogodek';
+  if (ZASEBNI.test(b) && !ZASEBNI_VKLJUCENI[z.datumIso]) return 'zasebni dogodek';
   if (TBD.test(b)) return 'nepotrjen (TBD)';
   if (ODPOVEDANO.test(b)) return 'odpovedan';
   if (ZAKLJUCEK.test(b)) return 'zaključek projekta';
@@ -308,6 +336,26 @@ const POPRAVKI_OPISA = {
   '2004-07-10': () =>
     'koncert ob otvoritvi poletne sezone prireditev Hotelov Bernardin v Laguni Bernardin. '
     + 'Kot gostja je z big bandom nastopila pevka Kristina Oberžan',
+
+  /* Edini zasebni dogodek, ki res imenuje zasebni osebi. Imeni para
+     odpadeta, prizorišče ostane — Festivalna dvorana je javno prizorišče
+     in je edino, kar zapis še pove. Gostujoči izvajalci bi ostali, a jih
+     ta zapis nima. */
+  '2003-09-06': (t) => t.replace(/\s+Janje Zupan in Igorja Gajiča/, ''),
+};
+
+/* ---------- prizorišče, ki ga v viru ni -------------------------------
+   Vir pozna samo stolpca kraj in prizorišče; kadar je prizorišče prazno,
+   ga ni od kod vzeti. Tu ga sme dopolniti človek.
+
+   ⚠️ Vrednosti NISO iz vira. Vpisane so po védenju in ne po zapisu; ob
+   dvomu velja vir, ne ta tabela. */
+const POPRAVKI_PRIZORISCA = {
+  /* V viru je "Jezeršek" pristal v stolpcu za kraj — je ime gostišča in
+     ne naselja; vseh ostalih 290 vnosov ima v tem polju naselje. Kraj
+     popravi POPRAVKI_KRAJA. Vpisal Rok 23. 9. 2026 po splošnem védenju,
+     ne po viru. */
+  '2019-09-14': 'Gostišče Jezeršek',
 };
 
 /* Kraj, ki ga iz vira ni mogoče prebrati, ker je na njegovem mestu smet.
@@ -326,12 +374,22 @@ const POPRAVKI_KRAJA = {
      "Portorož- koncert ob otvoritvi …". Kraj je Portorož, ostalo je opis
      (glej POPRAVKI_OPISA). */
   '2004-07-10': 'Portorož',
+
+  /* "Jezeršek" je ime gostišča, ne naselja — gostišče stoji v Sori pri
+     Medvodah. Vpisal Rok 23. 9. 2026 po splošnem védenju, ne po viru;
+     prizorišče dopolni POPRAVKI_PRIZORISCA. */
+  '2019-09-14': 'Medvode',
 };
 
 /* Datuma, ki se združita: dva vira istega dogodka. Obdržimo bogatejši
    zapis, vir navaja oba. */
 const ZDRUZI = {
   '2007-03-08': { obdrzi: 'seznam 2007 (podroben)' },
+  /* Poroka na Otočcu je v viru dvakrat: „Nastop na poroki." (seznam) in
+     „še enega člana smo pospremili v zakonski stan" (sql). Obvelja prvi —
+     drugi je zapis o članu orkestra in ne o dogodku. Brez pravila bi
+     izbira padla na naključni vrstni red v viru. */
+  '2007-05-19': { obdrzi: 'seznam 2007 (podroben)' },
 };
 
 /* ---------- pomožno --------------------------------------------------- */
@@ -424,6 +482,10 @@ const arhiv = zdruzeni.map((z) => {
       neznanaPrizorisca.add(kljuc);
     }
   }
+
+  /* Ročno dopolnjeno prizorišče stoji ZA poenotenjem: ni ga v viru, zato
+     ga tabela PRIZORISCA ne more zadeti, in ga tudi ne sme prepisati. */
+  if (POPRAVKI_PRIZORISCA[z.datumIso]) prizorisce = POPRAVKI_PRIZORISCA[z.datumIso];
 
   let opis = (z.besedilo || '').trim();
   if (POPRAVKI_OPISA[z.datumIso]) opis = POPRAVKI_OPISA[z.datumIso](opis).trim();

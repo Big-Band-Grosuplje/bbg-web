@@ -315,6 +315,123 @@ razhajanje je skripta javila z obema vrednostma; sirota, nedovoljeno polje
 `kraj`, prazen niz in neznana zasedba vsak zase podrejo `npm run build` z
 imenom vnosa v sporočilu.
 
+## Zasebni dogodki: šest od osmih ostane
+
+Vzorec `ZASEBNI` (`porok|poročn|zakonski stan`) ujame **devet zapisov, ki so
+osem dogodkov** — `2007-05-19` je v viru dvakrat. Sprva so bili izločeni vsi.
+
+**Merilo ni „je bil dogodek zaseben", ampak „ali po odstranitvi imen zasebnih
+oseb kaj razkriva".** Arhiv odgovarja na vprašanje, kje je orkester igral, in
+„nastop na poroki na Bledu" je odgovor: pove, da combo igra na porokah, kar je
+za obiskovalca z gumbom „Povabi nas" uporabna informacija. Gostujoči izvajalci
+so izvajalci in ne zasebne osebe — ostanejo, tako kot povsod drugod.
+
+Odločil Rok, 23. 9. 2026. Vključitve so v `ZASEBNI_VKLJUCENI` v
+`scripts/uvozi-arhiv.mjs`; vrednost je razlog in ne le zastavica.
+
+| Datum | Kraj | Zakaj ostane |
+|---|---|---|
+| `2004-05-22` | Radomlje | poroka zmagovalnega para javne medijske akcije („Tek nevest"); pet imenovanih gostujočih izvajalcev, para vir ne imenuje |
+| `2003-09-06` | Ljubljana | veliko javno prizorišče (Festivalna dvorana); imeni para odstranjeni |
+| `2021-09-18` | Vipava | komercialno prizorišče (dvorec Zemono); besedilo ne imenuje nikogar zasebnega |
+| `2019-09-14` | Medvode | komercialno prizorišče (Gostišče Jezeršek); imen ni |
+| `2009-08-08` | Bled | besedilo je že čisto in nikogar ne imenuje |
+| `2007-05-19` | Otočec | komercialno prizorišče; obvelja zapis „Nastop na poroki." |
+
+**Zunaj ostaneta dva, in oba z razlogom:**
+
+| Datum | Kraj | Zakaj ne |
+|---|---|---|
+| `2007-08-13` | Grosuplje | „v zakonski stan smo pospremili našo članico" — po odstranitvi imen ostane prazno, zapis pa ni o dogodku, ampak o osebi. AGENTS.md imen članov ne objavlja; tudi brez imena je krog ljudi, ki jih datum in kraj določata, majhen |
+| `2009-06-27` | Medana | besedilo je čisto (Nina Rotner je izvajalka), tveganje je v kraju: zaselek, kjer datum in kraj v praksi določata družino. Izpust kraja ni rešitev — kraj je del ključa `id` |
+
+### Kaj je bilo treba razrešiti
+
+**`2003-09-06`** je edini, ki je res imenoval zasebni osebi. Imeni odpadeta v
+`POPRAVKI_OPISA`, prizorišče ostane: *„nastop na poročnem slavju v Festivalni
+dvorani v Ljubljani"*.
+
+**`2019-09-14`** je imel v stolpcu za kraj ime gostišča („Jezeršek"). Popravljeno
+na kraj **Medvode**, prizorišče **Gostišče Jezeršek**. ⚠️ Vpisal Rok po splošnem
+védenju, **ne po viru** — zato nova tabela `POPRAVKI_PRIZORISCA`, ki to pove v
+komentarju. Teče **za** poenotenjem prizorišč: vrednosti v viru ni, zato je
+tabela `PRIZORISCA` ne more zadeti in je tudi ne sme prepisati.
+
+**`2007-05-19`** je v viru dvakrat — „Nastop na poroki." (seznam) in „še enega
+člana smo pospremili v zakonski stan" (sql). Pravilo v `ZDRUZI` obdrži prvega;
+brez njega bi izbira padla na vrstni red v viru. Drugi zapis odpade v celoti,
+ostane samo oznaka vira.
+
+**`2021-09-18`** je **prvi vnos z obema zasedbama** (`"BBG in combo"` v viru).
+Vrstica pod filtri se zato prvič izpiše — in v ednini: „Pri enem dogodku sta
+nastopili obe zasedbi in se šteje pri obeh izbirah."
+
+### Kaj se je spremenilo
+
+| | Prej | Zdaj |
+|---|---|---|
+| `arhiv-uvoz.json` | 291 | **297** |
+| vrstic na `/arhiv` | 292 | **298** |
+| big band | 235 | 239 |
+| combo | 57 | 60 |
+| Ljubljana | 82 | 83 |
+| drugje | 120 | 125 |
+| let v kazalu | 29 | 29 |
+| oboje na istem dogodku | 0 | **1** |
+| izločenih kot zasebni | 9 | 2 |
+| združenih podvojenih | 1 | 2 |
+
+Vsota vnosov po letih je 298 in se ujema s številom vrstic. Big band (239) in
+combo (60) dasta 299, ker je en dogodek štet pri obeh — to pove vrstica pod
+filtri.
+
+**`2004-05-22`** je iz navednic dobil naziv „Tek nevest" — ime medijske akcije
+in ne dogodka. Popravljeno v `arhiv-rocno.json` z `naziv: null`; poroka
+zmagovalnega para imena ni imela. To je **prvi ročni vnos** in hkrati preizkus,
+da mehanizem prenese tudi vrednost `null` in ne le nadomestitve z nizom.
+
+### Polje `opomba` v ročni datoteki
+
+JSON komentarjev nima, vrednost `null` pa brez razlage čez leto dni ne pove
+ničesar — zakaj naziva ni, iz podatka ni razvidno. Zato sme vsak ročni vnos
+nositi polje `opomba`: razlog za popravek.
+
+```json
+"2004-05-22-radomlje": {
+  "naziv": null,
+  "opomba": "\"Tek nevest\" je ime medijske akcije, ne dogodka; …"
+}
+```
+
+⚠️ **Opomba se v vnos NE zlije.** Je dokumentacija in ne podatek; če bi se
+zlila, bi se razlog znašel med podatki in slej ko prej na strani. Preverba
+zahteva neprazen niz — preizkušeno 23. 9. 2026 v vse tri smeri neuspeha (prazen
+niz, število namesto niza, neznano polje `razlog`); vsaka podre gradnjo z
+imenom vnosa v sporočilu.
+
+### Kje drugje naziv iz navednic ni ime dogodka
+
+Pravilo „naziv samo iz navednic" je pregledano na vseh 22 nazivih. Pri **devetih**
+navednice ne objemajo imena tega dogodka, ampak nekaj večjega:
+
+| Kaj je v navednicah | Vnosi | Besedilo okoli |
+|---|---|---|
+| **projekt** (več nastopov) | `2004-10-14`, `2005-10-14`, `2011-04-20`, `2011-05-20`, `2011-05-27`, `2012-01-24`, `2012-01-26` | „ob zaključku projekta …", „Prvi/Drugi/Tretji koncert projekta …", „v okviru projekta …" |
+| **medijska akcija** | `2004-05-22` | „poroka zmagovalnega para akcije …" — popravljeno |
+| **serija prireditev** | `2002-08-24` | „ob zaključku mednarodnih poletnih prireditev …" |
+
+Preostalih 13 so prava imena dogodkov: besedilo jih uvaja z „na koncertu …", „na
+prireditvi …", „z naslovom …", „poimenovan …" ali pa se z njimi začne.
+
+**Imena ustanove ali skladbe med njimi ni** — nobena navednica ne objema imena
+organizacije ne glasbenega dela. „Vibraphone Summit" je naslov koncerta, ne
+skladbe.
+
+⚠️ Sedmerica projektov ne potrebuje nujno popravka: to je natanko tisto, kar bo
+zajel **register programov** (glej „Predlogi za program in prireditev"). Ko
+nastane, se te vrednosti preselijo iz `naziv` v `program` — dotlej naziv pove
+več kot prazno polje.
+
 ## Preverbe ob uvozu
 
 Vse tečejo pred zapisom; ob padcu se **ne zapiše nič**, da datoteka nikoli ne
@@ -711,6 +828,7 @@ narobe.
 |---|---|
 | 22. 9. 2026 | Prvi zapis. Predlog preslikave po pregledu 320 zapisov; popravljenih 13 vnosov v viru (ura izluščena iz kraja). |
 | 22. 9. 2026 | Izvedba: 291 vnosov v `arhiv.json`, stran `/arhiv`, filtri, `CollectionPage`, postopek prestavitve. |
+| 23. 9. 2026 | Šest od osmih zasebnih dogodkov vključenih (`ZASEBNI_VKLJUCENI`); izpuščena ostaneta poroka članice in Medana. Nova tabela `POPRAVKI_PRIZORISCA`, pravilo `ZDRUZI` za `2007-05-19`. 292 vrstic → 298. |
 | 22. 9. 2026 | Pretekli dogodki iz `koncerti.json` se ob gradnji zlijejo v arhiv (292 vrstic). Merilo prehoda je `jePrihajajoc` in velja tudi za arhivske vnose. Zaprti dogodki so v arhivu, a brez povezave na podstran. |
 | 22. 9. 2026 | Vodilna ponovitev naziva odrezana ob izrisu (3 vnosi); podatki nedotaknjeni. Poenoteno črkovanje Marezijazz. Predlogi za program in prireditev v `_vhod/predlogi.md`. |
 | 22. 9. 2026 | Kraj povrnjen v ime prireditve pri treh zapisih („Grosuplje v jeseni"), z varovalom na predlog. Ugotovljeno, da odreza ne dela skripta, ampak vir. |

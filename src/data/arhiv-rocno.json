@@ -1,4 +1,9 @@
 {
-  "opomba": "ROČNE DOPOLNITVE ARHIVA. Te datoteke uvozna skripta NIKOLI ne piše in ne bere za pisanje - npm run arhiv prepiše samo arhiv-uvoz.json. Kar je vpisano tu, preživi vsak ponovni uvoz. Ključ je id iz arhiv-uvoz.json. Dovoljena polja: naziv, opis, zasedba, prizorisce, ura. Polja kraj TU NI namenoma: id je izpeljan iz datuma in kraja, zato bi sprememba kraja podrla ključ - napačen kraj popravi v viru in poženi uvoz znova. Vrednost tu VEDNO prevlada nad uvoženo; kadar se razhajata, uvozna skripta to javi in ne odloči sama.",
-  "vnosi": {}
+  "opomba": "ROČNE DOPOLNITVE ARHIVA. Te datoteke uvozna skripta NIKOLI ne piše in ne bere za pisanje - npm run arhiv prepiše samo arhiv-uvoz.json. Kar je vpisano tu, preživi vsak ponovni uvoz. Ključ je id iz arhiv-uvoz.json. Dovoljena polja: naziv, opis, zasedba, prizorisce, ura; poleg njih opomba, ki je razlog za popravek in se v vnos NE zlije. Polja kraj TU NI namenoma: id je izpeljan iz datuma in kraja, zato bi sprememba kraja podrla ključ - napačen kraj popravi v viru in poženi uvoz znova. Vrednost tu VEDNO prevlada nad uvoženo; kadar se razhajata, uvozna skripta to javi in ne odloči sama.",
+  "vnosi": {
+    "2004-05-22-radomlje": {
+      "naziv": null,
+      "opomba": "\"Tek nevest\" je ime medijske akcije, ne dogodka; poroka zmagovalnega para imena ni imela. Pravilo \"naziv samo iz navednic\" je tu zadelo pravo besedilo z napačnim pomenom."
+    }
+  }
 }
