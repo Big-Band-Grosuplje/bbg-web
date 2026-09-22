@@ -142,8 +142,10 @@ kar je pravilo prej razklalo na dvoje.
 npm run dev
 ```
 
-Astro 5.x nima načina v ozadju — `astro dev` teče v ospredju, ustaviš ga s `Ctrl+C`.
-Podukazov `astro dev stop|status|logs` ni.
+Astro 7.x zna teči v ozadju: `npm run dev -- --background`. V ospredju ga ustaviš
+s `Ctrl+C`, v ozadju pa s podukazi `astro dev stop`, `astro dev status` in
+`astro dev logs [--follow]`. Enake podukaze in zastavico `--background` ima tudi
+`astro preview`.
 
 Privzeta vrata so 4321. Če so zasedena, Astro sam prevzame naslednja prosta (4322,
 4323 …) in naslov izpiše ob zagonu — preberi ga iz izpisa, ne predpostavljaj 4321.
