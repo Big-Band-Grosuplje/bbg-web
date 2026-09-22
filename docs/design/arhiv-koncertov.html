@@ -1,0 +1,1253 @@
+<!-- Predlog vizualne zasnove arhiva koncertov (22. 9. 2026). NI potrjena smer in NI implementacija; vir resnice je živa stran. Vsebina je izluščena iz docs/kronika.md in src/data/zgodovina.json in v podatkih dogodkov ne obstaja. -->
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Arhiv koncertov BBG</title>
+
+<style>
+/* ============================================================
+   Arhiv koncertov — mockup, smer A (Zlati klub)
+   Tokeni in izmerjene vrednosti so prevzeti iz src/styles/brand.css.
+   Ničesar tu ne izumljam: zlata, papir, topla črna, ink in zlato
+   besedilo za svetlo temo so iste vrednosti kot na živi strani.
+
+   TEMA: privzeta je temna in to velja brezpogojno — prefers-color-scheme
+   se NE upošteva, enako kot na strani. Svetla nastopi samo prek razreda
+   .bbg-svetla na <html>, ki ga postavi preklopnik. Razred namesto
+   data-theme zato, ker gostitelj artefakta na isti element zapiše svoj
+   data-theme in bi se atributa prepirala.
+   ============================================================ */
+
+:root {
+  /* --- Paleta smeri A (brand.css, :root[data-skin='a']) --- */
+  --gold: #C9A227;
+  --gold-light: #E3C765;
+  --paper: #F3EBD8;
+  --black: #181512;
+  --ink: #171310;
+  /* Zlato BESEDILO za svetlo temo. Merilo je podlaga panela #EAE2D0,
+     ne papir strani — glej docs/design/README.md. */
+  --zlato-besedilo: #785F11;
+
+  /* --- Semantični tokeni, TEMNA tema --- */
+  --bg: var(--black);
+  --besedilo: var(--paper);
+  --naslov: var(--gold-light);
+  --nadnaslov: var(--gold);
+  --povezava: var(--gold-light);
+  --povezava-hover: var(--gold);
+  --obroba: color-mix(in srgb, var(--gold) 25%, transparent);
+  --obroba-mocna: var(--gold);
+  --panel: color-mix(in srgb, var(--paper) 5%, transparent);
+  --panel-trden: #201C18;
+  --meta: var(--gold-light);
+  --nalepka-bg: var(--gold);
+  --nalepka-besedilo: var(--ink);
+  --vnos-bg: transparent;
+
+  /* Sekundarno besedilo z color-mix, nikoli z opacity: motnost stisne
+     cel poddrevesni izris, tudi povezave v istem odstavku. */
+  --tiho: color-mix(in srgb, var(--besedilo) 64%, var(--bg));
+  --tisje: color-mix(in srgb, var(--besedilo) 46%, var(--bg));
+
+  --sirina: 1060px;
+  --r-s: 10px;
+  --r-m: 12px;
+  --r-l: 14px;
+  --r-pilula: 999px;
+
+  --font-naslov: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-besedilo: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  color-scheme: dark;
+}
+
+:root.bbg-svetla {
+  --bg: var(--paper);
+  --besedilo: var(--ink);
+  --naslov: var(--zlato-besedilo);
+  --nadnaslov: var(--zlato-besedilo);
+  --povezava: #735C11;
+  --povezava-hover: #5C490E;
+  --obroba: color-mix(in srgb, var(--ink) 18%, var(--paper));
+  --obroba-mocna: #806613;
+  --panel: color-mix(in srgb, var(--ink) 4%, transparent);
+  --panel-trden: #EAE2D0;
+  --meta: var(--zlato-besedilo);
+  --nalepka-bg: var(--ink);
+  --nalepka-besedilo: var(--paper);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+/* Atribut hidden mora premagati razrede, ki nastavijo display. Brez tega
+   .cip { display: inline-flex } prepiše display:none iz privzetega sloga
+   brskalnika in skriti gumb ostane viden. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  /* Gostitelj artefakta pod stran nariše svojo podlago v SVOJI temi,
+     zato mora biti ta izrecna, sicer stran posodi tujo. */
+  background: var(--bg);
+  color: var(--besedilo);
+  font: 400 17px/1.65 var(--font-besedilo);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-naslov);
+  font-weight: 700;
+  color: var(--naslov);
+  text-wrap: balance;
+  margin: 0;
+  letter-spacing: .005em;
+}
+
+p { margin: 0; max-width: 66ch; }
+a { color: var(--povezava); text-decoration-color: var(--obroba); text-underline-offset: .18em; }
+a:hover { color: var(--povezava-hover); }
+
+:is(a, button, select, summary):focus-visible {
+  outline: 2px solid var(--obroba-mocna);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.ovoj { max-width: var(--sirina); margin-inline: auto; padding-inline: 24px; }
+
+/* Vsak razdelek je hkrati vsebnik za container queries, da se sestavine
+   odzovejo na širino svojega stolpca in ne na širino okna — isti gradnik
+   potem deluje v 380 px okvirju spodaj brez posebnih pravil. */
+.razdelek {
+  padding-block: 60px;
+  border-top: 1px solid var(--obroba);
+  container-type: inline-size;
+}
+
+.nadnaslov {
+  font: 600 .76rem/1.4 var(--font-besedilo);
+  letter-spacing: .07em;
+  color: var(--nadnaslov);
+  margin: 0 0 10px;
+}
+
+.razdelek__glava { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.razdelek__glava h2 { font-size: clamp(1.5rem, 3.4vw, 2.05rem); }
+
+/* ============================================================
+   Glava strani
+   ============================================================ */
+.vrh { padding-block: 64px 44px; }
+.vrh h1 {
+  font-size: clamp(2.2rem, 6.4vw, 3.4rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+}
+.vrh__uvod { font-size: 1.08rem; color: var(--tiho); }
+.vrh__uvod strong { color: var(--besedilo); font-weight: 600; }
+
+.vrstica-orodij {
+  display: flex; flex-wrap: wrap; gap: 12px 20px;
+  align-items: center; justify-content: space-between;
+  margin-top: 30px;
+}
+
+.preklop {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--besedilo);
+  border: 1px solid var(--obroba-mocna); border-radius: var(--r-pilula);
+  padding: 8px 17px; cursor: pointer;
+  font: 600 .84rem/1 var(--font-besedilo);
+}
+.preklop:hover { background: var(--panel); }
+
+.kazalo { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: .92rem; }
+
+/* Opozorilo, da gre za predlog in ne za živo stran. */
+.opomba-mockup {
+  margin-top: 28px; padding: 16px 20px;
+  border: 1px dashed var(--obroba-mocna); border-radius: var(--r-m);
+  background: var(--panel);
+  font-size: .94rem; color: var(--tiho);
+  max-width: 72ch;
+}
+.opomba-mockup strong { color: var(--besedilo); }
+
+/* ============================================================
+   Izhodišče iz podatkov — trak s števili
+   ============================================================ */
+.stevila { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--obroba); border: 1px solid var(--obroba); border-radius: var(--r-m); overflow: hidden; }
+.stevilo { background: var(--bg); padding: 20px 18px; }
+.stevilo__v { font: 700 1.9rem/1 var(--font-naslov); color: var(--naslov); font-variant-numeric: tabular-nums; display: block; }
+.stevilo__o { display: block; margin-top: 8px; font-size: .88rem; color: var(--tiho); }
+
+/* ============================================================
+   Obdobja (smer A)
+   ============================================================ */
+.obdobje {
+  display: grid;
+  grid-template-columns: minmax(0, 19rem) minmax(0, 1fr);
+  gap: 10px 40px;
+  padding: 34px 0 30px;
+}
+.obdobje__leta {
+  font: 700 clamp(1.5rem, 3.6cqw, 2.1rem)/1.1 var(--font-naslov);
+  color: var(--naslov);
+  font-variant-numeric: tabular-nums;
+}
+.obdobje__dirigent { font: 600 1.06rem/1.4 var(--font-besedilo); margin-top: 8px; }
+.obdobje__vloga { font: italic 500 1rem/1.4 var(--font-naslov); color: var(--tiho); }
+.obdobje__opis { color: var(--tiho); }
+.obdobje__foto { margin: 18px 0 0; }
+
+@container (max-width: 700px) {
+  .obdobje { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* ============================================================
+   Letna vrstica s tirnico (smer A)
+   ============================================================ */
+.leto {
+  position: relative;
+  padding-left: 6.2rem;
+  padding-bottom: 30px;
+}
+/* Tirnica: neprekinjena skozi vsa leta. Prazno leto jo dobi črtkano —
+   letnica ostane na istem mestu in v isti velikosti, ker odsotnost
+   dogodkov ni napaka zapisa. */
+.leto::before {
+  content: '';
+  position: absolute; left: 4.6rem; top: .75rem; bottom: 0;
+  width: 1px; background: var(--obroba);
+}
+.leto--prazno::before {
+  background: none;
+  border-left: 1px dashed var(--obroba);
+}
+.leto::after {
+  content: '';
+  position: absolute; left: 4.6rem; top: .55rem;
+  width: 7px; height: 7px; margin-left: -3px;
+  border-radius: 50%; background: var(--gold);
+}
+.leto--prazno::after { background: var(--bg); border: 1px solid var(--obroba); }
+.leto:last-child { padding-bottom: 0; }
+.leto:last-child::before { bottom: auto; height: 1.4rem; }
+
+.leto__st {
+  position: absolute; left: 0; top: 0; width: 3.8rem;
+  text-align: right;
+  font: 600 1.06rem/1.5 var(--font-besedilo);
+  font-variant-numeric: tabular-nums;
+  color: var(--meta);
+}
+.leto--prazno .leto__st { color: var(--tisje); font-weight: 400; }
+
+/* Gostota: ena črtica na zabeležen dogodek. Ni okras — pove, koliko
+   zapisov leto sploh ima, in s tem naredi mirna leta berljiva kot
+   dejstvo in ne kot luknjo v podatkih. */
+.gostota { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; margin-top: 6px; }
+.gostota i { width: 3px; height: 9px; background: var(--gold); display: block; border-radius: 1px; }
+.leto--prazno .gostota i { background: var(--tisje); height: 1px; margin-top: 4px; }
+
+.leto__opomba {
+  color: var(--tiho); font-size: .95rem; font-style: italic;
+  font-family: var(--font-naslov); max-width: 60ch;
+}
+.leto__opomba + .leto__blizje { margin-top: 10px; }
+.leto__blizje { font-size: .9rem; color: var(--tiho); }
+
+@container (max-width: 560px) {
+  .leto { padding-left: 0; padding-top: 2.6rem; }
+  .leto::before, .leto::after { display: none; }
+  .leto__st {
+    position: static; width: auto; text-align: left;
+    display: flex; align-items: baseline; gap: 10px;
+    border-bottom: 1px solid var(--obroba); padding-bottom: 6px; margin-bottom: 12px;
+  }
+  .gostota { margin-top: 0; justify-content: flex-start; }
+}
+
+/* ============================================================
+   Vnos — skupna sestavina obeh smeri
+   ============================================================ */
+.vnos {
+  display: grid;
+  grid-template-columns: 4.4rem minmax(0, 1fr);
+  gap: 0 18px;
+  padding: 12px 14px 12px 12px;
+  margin-left: -12px;
+  border-radius: var(--r-s);
+  background: var(--vnos-bg);
+  text-decoration: none;
+  color: inherit;
+}
+a.vnos:hover { background: var(--panel); }
+a.vnos:hover .vnos__naslov { text-decoration: underline; text-decoration-color: var(--obroba-mocna); }
+
+/* --- Datumski blok, tri natančnosti ---
+   Neznani del datuma se NE nadomesti z znakom. Pomišljaj ali vprašaj
+   bralec prebere kot napako vnosa; prazno mesto prebere kot mejo
+   vednosti. Zato ima vsaka natančnost svojo obliko, ne svoje polnilo. */
+.datum {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  border-right: 1px solid var(--obroba);
+  padding-right: 14px;
+  align-self: start;
+}
+.datum__dan { display: block; font: 700 1.5rem/1 var(--font-naslov); color: var(--naslov); }
+.datum__mesec { display: block; font: 600 .74rem/1.4 var(--font-besedilo); color: var(--meta); margin-top: 4px; }
+.datum__leto { display: block; font: 400 .78rem/1.4 var(--font-besedilo); color: var(--tiho); font-variant-numeric: tabular-nums; }
+/* Znan mesec: dneva ni. Mesec prevzame velikost dneva, da blok ne
+   ostane votel, letnica pa pade pod njega kot pri polnem datumu. */
+.datum--mesec .datum__mesec { font: 700 1.06rem/1.15 var(--font-naslov); color: var(--naslov); margin-top: 0; }
+/* Znana samo letnica: blok se skrči na letnico v naslovni pisavi. */
+.datum--leto .datum__leto { font: 700 1.24rem/1 var(--font-naslov); color: var(--naslov); }
+
+.vnos__naslov { font: 700 1.1rem/1.35 var(--font-naslov); color: var(--besedilo); }
+a.vnos .vnos__naslov { color: var(--naslov); }
+.vnos__meta { margin-top: 4px; font-size: .95rem; color: var(--tiho); }
+.vnos__gostje { margin-top: 3px; font-size: .95rem; }
+.vnos__gostje span { color: var(--tisje); }
+.vnos__natancnost {
+  margin-top: 4px;
+  font: italic 500 .9rem/1.4 var(--font-naslov);
+  color: var(--tisje);
+}
+.vnos__znacke { margin-top: 9px; }
+
+.ni-podatka { color: var(--tisje); font-style: italic; }
+
+@container (max-width: 460px) {
+  .vnos { grid-template-columns: 1fr; gap: 8px; }
+  .datum {
+    text-align: left; border-right: 0; padding-right: 0;
+    border-bottom: 1px solid var(--obroba); padding-bottom: 7px;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .datum__dan, .datum__mesec, .datum__leto { display: inline; margin: 0; }
+  .datum--mesec .datum__mesec, .datum--leto .datum__leto { font-size: 1.06rem; }
+}
+
+/* --- Značke --- */
+.znacke { display: flex; flex-wrap: wrap; gap: 6px; }
+.znacka {
+  display: inline-block;
+  font: 600 .74rem/1 var(--font-besedilo);
+  letter-spacing: .04em;
+  padding: 6px 11px;
+  border-radius: var(--r-pilula);
+  border: 1px solid var(--obroba);
+  color: var(--tiho);
+  white-space: nowrap;
+}
+.znacka--tip { border-color: var(--obroba-mocna); color: var(--meta); }
+.znacka--trdna { background: var(--nalepka-bg); color: var(--nalepka-besedilo); border-color: transparent; }
+
+/* ============================================================
+   Poln vnos (podstran dogodka)
+   ============================================================ */
+.poln {
+  border: 1px solid var(--obroba);
+  border-radius: var(--r-l);
+  background: var(--panel);
+  padding: 30px;
+}
+.poln h3 { font-size: clamp(1.35rem, 3cqw, 1.8rem); margin: 6px 0 0; }
+.poln__meta {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 10px 22px;
+  margin: 22px 0 0;
+  font-size: .97rem;
+}
+.poln__meta dt { color: var(--tisje); font-weight: 600; font-size: .82rem; letter-spacing: .04em; padding-top: .18em; }
+.poln__meta dd { margin: 0; }
+.poln__opis { margin-top: 22px; color: var(--tiho); }
+
+@container (max-width: 520px) {
+  .poln { padding: 22px 18px; }
+  .poln__meta { grid-template-columns: 1fr; gap: 3px 0; }
+  .poln__meta dd { margin-bottom: 10px; }
+}
+
+/* --- Fotografije --- */
+.foto-trak { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 24px 0 0; }
+.foto { margin: 0; }
+.foto img {
+  display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover;
+  border-radius: var(--r-s); border: 1px solid var(--obroba);
+}
+.foto figcaption { margin-top: 8px; font-size: .84rem; color: var(--tiho); line-height: 1.45; }
+.foto__kredit { display: block; color: var(--tisje); margin-top: 3px; }
+
+.brez-foto {
+  margin-top: 24px; padding: 18px 20px;
+  border: 1px dashed var(--obroba); border-radius: var(--r-m);
+  font-size: .94rem; color: var(--tiho); max-width: 62ch;
+}
+
+/* ============================================================
+   Filtri (smer B)
+   ============================================================ */
+.filtri {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--obroba);
+  border-radius: var(--r-m);
+  background: var(--panel);
+}
+.polje { display: flex; flex-direction: column; gap: 6px; }
+.polje > label { font: 600 .76rem/1.3 var(--font-besedilo); letter-spacing: .05em; color: var(--nadnaslov); }
+.polje select {
+  font: 400 .97rem/1.3 var(--font-besedilo);
+  color: var(--besedilo);
+  background: var(--vnos-bg);
+  border: 1px solid var(--obroba-mocna);
+  border-radius: var(--r-s);
+  padding: 9px 11px;
+  width: 100%;
+}
+
+.izbrani { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 16px; min-height: 34px; }
+.cip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 600 .8rem/1 var(--font-besedilo);
+  border: 1px solid var(--obroba-mocna); color: var(--meta);
+  background: transparent; cursor: pointer;
+  padding: 7px 12px; border-radius: var(--r-pilula);
+}
+.cip:hover { background: var(--panel); }
+.cip b { font-weight: 400; color: var(--tiho); }
+.cip span { font-size: 1.05em; line-height: 1; }
+
+.izid { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; margin: 24px 0 8px; }
+.izid__st { font-size: .95rem; color: var(--tiho); font-variant-numeric: tabular-nums; }
+.izid__st b { color: var(--besedilo); font-weight: 600; }
+
+.seznam-leto {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--bg);
+  padding: 14px 0 8px;
+  margin-top: 18px;
+  border-bottom: 1px solid var(--obroba);
+  font: 600 1rem/1.3 var(--font-besedilo);
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.seznam-leto small { font-weight: 400; color: var(--tisje); font-size: .82rem; }
+.seznam-skupina { padding-top: 8px; }
+
+/* Skupina nedatiranih vnosov znotraj leta — vedno na vrhu leta, nikoli
+   pomešana med datirane. */
+.skupina-brez-meseca {
+  margin: 10px 0 4px;
+  font: italic 500 .92rem/1.4 var(--font-naslov);
+  color: var(--tisje);
+}
+
+/* ============================================================
+   Prazno stanje
+   ============================================================ */
+.prazno {
+  border: 1px dashed var(--obroba-mocna);
+  border-radius: var(--r-m);
+  padding: 26px 24px;
+  background: var(--panel);
+}
+.prazno h3 { font-size: 1.25rem; }
+.prazno__zakaj { margin-top: 10px; color: var(--tiho); max-width: 62ch; }
+.prazno__dejanja { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.gumb {
+  display: inline-block; cursor: pointer;
+  font: 600 .86rem/1 var(--font-besedilo);
+  padding: 10px 17px; border-radius: var(--r-pilula);
+  border: 1px solid var(--obroba-mocna);
+  background: transparent; color: var(--besedilo);
+  text-decoration: none;
+}
+.gumb:hover { background: var(--panel); color: var(--besedilo); }
+.gumb--polni { background: var(--nalepka-bg); color: var(--nalepka-besedilo); border-color: transparent; }
+.gumb--polni:hover { background: var(--gold-light); color: var(--ink); }
+
+/* ============================================================
+   Primerjalna mreža in razvrščanje
+   ============================================================ */
+.dvojica { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px; }
+.dvojica > * { min-width: 0; }
+.podnaslov { font: 600 .78rem/1.3 var(--font-besedilo); letter-spacing: .06em; color: var(--nadnaslov); margin-bottom: 12px; }
+
+.primeri { display: grid; gap: 22px; }
+.primer { border: 1px solid var(--obroba); border-radius: var(--r-m); overflow: hidden; }
+.primer__glava {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline;
+  padding: 12px 18px; background: var(--panel); border-bottom: 1px solid var(--obroba);
+}
+.primer__ime { font: 600 .88rem/1.4 var(--font-besedilo); color: var(--meta); }
+.primer__vir { font-size: .82rem; color: var(--tisje); }
+.primer__telo { padding: 16px 18px; container-type: inline-size; }
+
+/* Razvrstitveni ključ */
+.kljuci { width: 100%; border-collapse: collapse; font-size: .93rem; }
+.kljuci th, .kljuci td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--obroba); vertical-align: top; }
+.kljuci th { font: 600 .76rem/1.3 var(--font-besedilo); letter-spacing: .05em; color: var(--nadnaslov); }
+.kljuci code { font-variant-numeric: tabular-nums; color: var(--meta); font-size: .95em; }
+.ovoj-tabele { overflow-x: auto; }
+
+/* ============================================================
+   Okvir 380 px
+   ============================================================ */
+.okvir380 {
+  width: 380px; max-width: 100%;
+  container-type: inline-size;
+  border: 1px solid var(--obroba-mocna);
+  border-radius: var(--r-m);
+  padding: 18px 16px;
+  background: var(--panel);
+  overflow: hidden;
+}
+.okvir-oznaka { font: 600 .76rem/1.3 var(--font-besedilo); letter-spacing: .05em; color: var(--nadnaslov); margin-bottom: 10px; }
+
+/* ============================================================
+   Seznam ugotovitev
+   ============================================================ */
+.tocke { margin: 0; padding-left: 1.15rem; display: grid; gap: 10px; color: var(--tiho); max-width: 68ch; }
+.tocke strong { color: var(--besedilo); font-weight: 600; }
+
+.noga { padding: 46px 0 70px; border-top: 1px solid var(--obroba); color: var(--tisje); font-size: .9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+a.vnos, .cip, .gumb, .preklop { transition: background-color .13s ease, color .13s ease; }
+</style>
+</head>
+<body>
+
+
+<div class="ovoj vrh">
+  <p class="nadnaslov">predlog · smer a (zlati klub) · 22. 9. 2026</p>
+  <h1>Arhiv koncertov</h1>
+  <p class="vrh__uvod">
+    Devetindvajset let orkestra v eni stran. Dve smeri, obe iz istega vira kot
+    napovednik: <strong>dogodek se po datumu sam preseli iz napovednika v arhiv</strong>,
+    drugega seznama ni. Zgodovinski vnosi so redkejši od današnjih — pri koncertu
+    iz leta 2003 zna biti znano samo leto — zato je obravnava nepopolnega zapisa
+    tu prva skrb in ne izjema.
+  </p>
+
+  <div class="vrstica-orodij">
+    <nav class="kazalo" aria-label="Razdelki">
+      <a href="#smer-a">časovnica</a>
+      <a href="#smer-b">filtriran seznam</a>
+      <a href="#gostota">gostota zapisa</a>
+      <a href="#datumi">nenatančen datum</a>
+      <a href="#ozko">380 px</a>
+    </nav>
+    <button class="preklop" id="preklop" type="button" aria-pressed="false">
+      <span aria-hidden="true">◑</span><span id="preklop-besedilo">svetla tema</span>
+    </button>
+  </div>
+
+  <p class="opomba-mockup">
+    <strong>To je mockup, ne živa stran.</strong> Vsebina je resnična — dogodki so
+    izluščeni iz <code>docs/kronika.md</code> in <code>src/data/zgodovina.json</code>,
+    fotografije in krediti iz <code>src/data/galerija.json</code> — a v podatkih
+    dogodkov jih danes ni. V <code>src/data/koncerti.json</code> so trije pretekli
+    vnosi, vsi iz septembra 2026.
+  </p>
+</div>
+
+<section class="razdelek ovoj" aria-labelledby="n-izhodisce">
+  <div class="razdelek__glava">
+    <p class="nadnaslov">izhodišče</p>
+    <h2 id="n-izhodisce">Kaj arhiv dejansko ima</h2>
+  </div>
+  <div class="stevila">
+    <div class="stevilo"><span class="stevilo__v">3</span><span class="stevilo__o">pretekli dogodki v <code>koncerti.json</code></span></div>
+    <div class="stevilo"><span class="stevilo__v">75</span><span class="stevilo__o">dogodkov, izluščenih iz kronike za ta mockup</span></div>
+    <div class="stevilo"><span class="stevilo__v">53 %</span><span class="stevilo__o">teh vnosov ima znano samo letnico</span></div>
+    <div class="stevilo"><span class="stevilo__v">37 %</span><span class="stevilo__o">jih je brez prizorišča in kraja</span></div>
+  </div>
+  <p style="margin-top:20px;color:var(--tiho)">
+    Zadnja dva stolpca oblikujeta ves arhiv: <strong style="color:var(--besedilo);font-weight:600">večina
+    zgodovine nima dneva in vsak tretji vnos nima prizorišča</strong>. Od 75 izluščenih
+    dogodkov jih ima poln datum 21, sam mesec 14 in samo letnico 40. Zasnova, ki polni
+    datum predpostavlja, bi se lomila pri vsakem drugem vnosu — zato se ta mockup
+    začne pri najbolj praznem zapisu in ne pri najbolj polnem.
+  </p>
+</section>
+
+<!-- ============================================================
+     SMER A
+     ============================================================ -->
+<section class="razdelek ovoj" id="smer-a" aria-labelledby="n-a">
+  <div class="razdelek__glava">
+    <p class="nadnaslov">smer a</p>
+    <h2 id="n-a">Časovnica po obdobjih</h2>
+    <p style="color:var(--tiho)">
+      Leta so neprekinjena tirnica, obdobja dirigentov so pasovi na njej. Leto brez
+      dogodkov obdrži svoje mesto, svojo letnico in svojo velikost — spremeni se le
+      tirnica, ki postane črtkana. Arhiv, ki tiha leta preskoči, o orkestru laže.
+    </p>
+  </div>
+
+  <div id="casovnica"></div>
+</section>
+
+<!-- ============================================================
+     SMER B
+     ============================================================ -->
+<section class="razdelek ovoj" id="smer-b" aria-labelledby="n-b">
+  <div class="razdelek__glava">
+    <p class="nadnaslov">smer b</p>
+    <h2 id="n-b">Filtriran seznam</h2>
+    <p style="color:var(--tiho)">
+      Štiri osi: leto, tip dogodka, prizorišče, gost. Filtri spodaj delujejo —
+      izberi leto <b>2009</b> ali <b>2021</b> in poglej, kako izgleda leto brez zapisa.
+    </p>
+  </div>
+
+  <div class="filtri">
+    <div class="polje">
+      <label for="f-leto">leto</label>
+      <select id="f-leto"></select>
+    </div>
+    <div class="polje">
+      <label for="f-tip">tip dogodka</label>
+      <select id="f-tip"></select>
+    </div>
+    <div class="polje">
+      <label for="f-prizorisce">prizorišče</label>
+      <select id="f-prizorisce"></select>
+    </div>
+    <div class="polje">
+      <label for="f-gost">gost</label>
+      <select id="f-gost"></select>
+    </div>
+  </div>
+
+  <div class="izbrani" id="izbrani"></div>
+
+  <div class="izid">
+    <p class="izid__st" id="izid-st" role="status" aria-live="polite"></p>
+    <button class="cip" id="pocisti" type="button" hidden><span aria-hidden="true">×</span> počisti vse filtre</button>
+  </div>
+
+  <div id="seznam"></div>
+</section>
+
+<!-- ============================================================
+     GOSTOTA ZAPISA — štiri stanja
+     ============================================================ -->
+<section class="razdelek ovoj" id="gostota" aria-labelledby="n-g">
+  <div class="razdelek__glava">
+    <p class="nadnaslov">gostota zapisa</p>
+    <h2 id="n-g">Štiri stanja istega gradnika</h2>
+    <p style="color:var(--tiho)">
+      Vsi štirje primeri uporabljajo isti <code>.vnos</code>. Razlikuje se samo to,
+      koliko je znanega — in nobeno polje se ne nadomesti z nadomestnim znakom.
+    </p>
+  </div>
+
+  <div class="primeri">
+    <article class="primer">
+      <div class="primer__glava">
+        <span class="primer__ime">1 · samo leto in naslov</span>
+        <span class="primer__vir">kronika: „2008 — 10. obletnica orkestra; koncert »American Jazz History«"</span>
+      </div>
+      <div class="primer__telo" id="primer-1"></div>
+    </article>
+
+    <article class="primer">
+      <div class="primer__glava">
+        <span class="primer__ime">2 · leto, naslov in prizorišče</span>
+        <span class="primer__vir">kronika: „2003 — Microsoft NT konferenca Portorož"</span>
+      </div>
+      <div class="primer__telo" id="primer-2"></div>
+    </article>
+
+    <article class="primer">
+      <div class="primer__glava">
+        <span class="primer__ime">3 · poln vnos z datumom, gosti in fotografijami</span>
+        <span class="primer__vir">koncerti.json + galerija.json</span>
+      </div>
+      <div class="primer__telo" id="primer-3"></div>
+    </article>
+
+    <article class="primer">
+      <div class="primer__glava">
+        <span class="primer__ime">4 · leto brez zapisa</span>
+        <span class="primer__vir">kronika med 2008 in 2010 ne navaja ničesar</span>
+      </div>
+      <div class="primer__telo" id="primer-4"></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     NENATANČEN DATUM
+     ============================================================ -->
+<section class="razdelek ovoj" id="datumi" aria-labelledby="n-d">
+  <div class="razdelek__glava">
+    <p class="nadnaslov">nenatančen datum</p>
+    <h2 id="n-d">Kako se razvrsti in kako se vidi</h2>
+    <p style="color:var(--tiho)">
+      Nenatančen datum se ne sme po naključju izriniti na rob leta. Nadomestnega
+      dneva mu ne dodeljujemo; dobi razvrstitveni ključ, izpeljan iz natančnosti.
+    </p>
+  </div>
+
+  <div class="dvojica">
+    <div>
+      <p class="podnaslov">razvrstitveni ključ</p>
+      <div class="ovoj-tabele">
+        <table class="kljuci">
+          <thead>
+            <tr><th scope="col">zapis</th><th scope="col">natančnost</th><th scope="col">ključ</th><th scope="col">kam pade</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>2003-06-24</code></td><td>dan</td><td><code>2003-06-24</code></td><td>na svoj dan</td></tr>
+            <tr><td><code>2003-06</code></td><td>mesec</td><td><code>2003-06-15</code></td><td>v sredino junija</td></tr>
+            <tr><td><code>2003</code></td><td>leto</td><td><code>2003-00-00</code></td><td>v skupino na vrhu leta</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:18px;color:var(--tiho);font-size:.95rem">
+        <strong style="color:var(--besedilo);font-weight:600">Zakaj sredina meseca.</strong>
+        Prvi dan meseca potisne vse mesečne vnose pred vse dnevne v istem mesecu,
+        zadnji pa za njihov konec. Sredina jih prepleta — kar je bližje resnici, ker
+        o dnevu ne vemo ničesar. Letni vnosi gredo s ključem <code>00</code> v lastno
+        skupino in nikoli med datirane: tako se nikdar ne pojavi vprašanje, zakaj je
+        koncert iz 2003 „januarja" ali „decembra".
+      </p>
+    </div>
+
+    <div>
+      <p class="podnaslov">leto 2003, kot se izriše</p>
+      <div class="primer">
+        <div class="primer__telo" id="primer-2003"></div>
+      </div>
+      <p style="margin-top:18px;color:var(--tiho);font-size:.95rem">
+        <strong style="color:var(--besedilo);font-weight:600">Zakaj brez nadomestnega znaka.</strong>
+        Pomišljaj ali vprašaj na mestu dneva bralec prebere kot napako vnosa. Prazno
+        mesto prebere kot mejo vednosti. Zato blok pri mesečni natančnosti dneva ne
+        pokaže, mesec pa prevzame njegovo velikost, da ne ostane votel. Isto pove še
+        vrstica pod naslovom in oznaka <code>&lt;time datetime="2003-06"&gt;</code> —
+        ta je hkrati veljaven <code>startDate</code> za schema.org, ki delne datume
+        ISO 8601 sprejema.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     380 px
+     ============================================================ -->
+<section class="razdelek ovoj" id="ozko" aria-labelledby="n-o">
+  <div class="razdelek__glava">
+    <p class="nadnaslov">odzivnost</p>
+    <h2 id="n-o">Pri 380 px</h2>
+    <p style="color:var(--tiho)">
+      Okvir spodaj je res širok 380 px in vsebuje iste gradnike. Sestavine se odzivajo
+      na širino svojega vsebnika (<code>container-type: inline-size</code>), ne na
+      širino okna, zato se vedejo enako v ozkem stolpcu kot na telefonu. Pri 560 px
+      se tirnica umakne in letnica postane naslov skupine; pri 460 px se datumski
+      blok položi v eno vrstico.
+    </p>
+  </div>
+
+  <div class="okvir380">
+    <p class="okvir-oznaka">časovnica</p>
+    <div id="ozko-casovnica"></div>
+    <p class="okvir-oznaka" style="margin-top:26px">seznam</p>
+    <div id="ozko-seznam"></div>
+    <p class="okvir-oznaka" style="margin-top:26px">prazno leto</p>
+    <div id="ozko-prazno"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRIPOROČILO
+     ============================================================ -->
+<section class="razdelek ovoj" aria-labelledby="n-p">
+  <div class="razdelek__glava">
+    <p class="nadnaslov">presoja</p>
+    <h2 id="n-p">Katero smer priporočam</h2>
+  </div>
+  <ul class="tocke">
+    <li>
+      <strong>Smer B kot arhiv, smer A pa ostane tam, kjer je že.</strong> Časovnica po
+      obdobjih na strani <em>obstaja</em> — <code>Zgodovina.astro</code> jo izriše iz
+      <code>zgodovina.json</code>. Druga časovnica pod drugim naslovom bi bila
+      spremenljivka na dveh mestih: ob spremembi bi bilo treba popraviti obe, razhajanje
+      pa bi bilo tiho.
+    </li>
+    <li>
+      <strong>Obdobje naj bo peta os filtra, ne druga stran.</strong> Tako arhiv dobi
+      pripoved časovnice („pokaži vse iz Lundrovega obdobja") brez podvojene vsebine,
+      <code>/zgodovina</code> pa obdrži svojo vlogo — razlago, ne seznama.
+    </li>
+    <li>
+      <strong>Časovnica ostane kot način izrisa rezultatov.</strong> Kar je v smeri A
+      vredno, je tirnica z vidnimi praznimi leti; to je oblika seznama, ne ločena stran.
+      V mockupu sta obe smeri zato zgrajeni iz istega gradnika <code>.vnos</code>.
+    </li>
+    <li>
+      <strong>Iskalno polje priporočam, a ga tu nisem vgradil</strong> — naročilo je
+      imenovalo štiri osi. Pri nekaj sto vnosih bo iskanje po naslovu hitrejše od
+      štirih izbirnikov; smiselno ga je dodati kot peto polje, ne kot zamenjavo.
+    </li>
+  </ul>
+</section>
+
+<div class="ovoj noga">
+  <p>
+    Mockup za Kulturno društvo Big Band Grosuplje · barve, razmiki in obe temi
+    prevzeti iz <code>src/styles/brand.css</code> (smer A, potrjena 31. 8. 2026) ·
+    pisavi Playfair Display in Source Sans 3, vdelani v stran ·
+    fotografije: arhiv KD Big Band Grosuplje
+  </p>
+</div>
+
+<script type="application/json" id="podatki">{"tipi":{"koncert":"lastni koncert","festival":"festival","gostovanje":"gostovanje","sodelovanje":"sodelovanje","protokol":"protokolarni nastop","tv":"tv in snemanje","seminar":"seminar in delavnica"},"opombe":{"2009":"Zatišje med obdobjema Igorja Lundra in Klemna Kotarja; kronika za to leto ne navaja nastopov.","2021":"Kronika obdobje 2020–2021 obravnava skupaj in posameznih nastopov ne datira."},"obdobja":[{"obdobje":"1997/98–2003","vodstvo":"Braco J. Doblekar","vloga":"ustanovitelj in prvi dirigent","opis":"Orkester nastane na pobudo ravnatelja Glasbene šole Grosuplje Franca Korbarja, izključno z mladimi glasbeniki iz okolice Grosuplja. V šestih letih se iz šolske zasedbe prelevi v samostojno kulturno društvo z rednimi televizijskimi nastopi.","od":1998,"do":2003,"foto":{"k":"doblekar","napis":"Člani Big Banda Grosuplje s prvim dirigentom Bracom J. Doblekarjem pri spomeniku na tržnici v Grosupljem, okoli 2002","alt":"Barvna skupinska fotografija na prostem: mladi glasbeniki z inštrumenti stojijo na stopnicah kamnitega spomenika, v ozadju vrbe in stojnice tržnice."}},{"obdobje":"2004–2011","vodstvo":"Igor Lunder","vloga":"dirigent, kitarist in aranžer","opis":"Konec leta 2003 dobi društvo novo vodstvo, dirigentsko taktirko prevzame Igor Lunder. Obdobje prinese vrsto tematskih projektov, mednarodne goste in mladinski ansambel kot prvo razvojno pot za mlade glasbenike.","od":2004,"do":2011},{"obdobje":"2012–2018","vodstvo":"Klemen Kotar","vloga":"prvo obdobje","opis":"Septembra 2012 dirigent in umetniški vodja postane Klemen Kotar. Sledi niz tematskih programov, po katerih je orkester prepoznaven še danes, in prvi festivalski nastop v tujini.","od":2012,"do":2018},{"obdobje":"2019–2023","vodstvo":"Rudi Javornik","vloga":"dirigent in saksofonist","opis":"Obdobje zaznamujeta program velikih swing orkestrov in dve covidni leti, ko orkestrske koncerte nadomestijo nastopi comba. V letih 2022 in 2023 sta si Rudi Javornik in Klemen Kotar dirigentsko vodenje delila po programih; formalni prevzem je sledil jeseni 2023.","od":2019,"do":2023},{"obdobje":"2023–danes","vodstvo":"Klemen Kotar","vloga":"drugo obdobje","opis":"Kotar se jeseni 2023 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.","od":2024,"do":2026}],"dogodki":[["1998-02-18","Prvi samostojni koncert","Dvorana Glasbene šole Grosuplje","Grosuplje","","koncert","big-band"],["1998-06-26","Proslava ob dnevu državnosti","Pogačarjev trg","Ljubljana","","protokol","big-band"],["1998","Prvi poletni seminar","","Fiesa","","seminar","big-band"],["1999-12-21","25. obletnica Glasbene šole Grosuplje","","Grosuplje","Eva Sršen|Janez Bončina - Benč","sodelovanje","big-band"],["2000-02-21","Koncert v Jazz klubu Gajo","Jazz klub Gajo","Ljubljana","","koncert","big-band"],["2000-12-22","Športniki Slovenije 2000","Cankarjev dom","Ljubljana","","tv","big-band"],["2001","Zidak dobre volje","","","","tv","big-band"],["2001","Snemanje v Studiu 14","Studio 14 Radia Slovenija","Ljubljana","","tv","big-band"],["2001","Deset let Slovenske nogometne lige","Cankarjev dom","Ljubljana","","protokol","big-band"],["2001-12","Športnik leta","","","","tv","big-band"],["2001-12","Samostojni koncert","Prešernov trg","Ljubljana","","koncert","big-band"],["2002","Predstavitev poslovenjenih Windows XP in Office XP","Kolosej","Ljubljana","","protokol","big-band"],["2002","Poletni program Franka Sinatre","","slovenska obala","Tulio Furlanič","koncert","big-band"],["2002","Glasbena ogrlica","","","","tv","big-band"],["2002-12","Športnik leta","","","Irena Vidic","tv","big-band"],["2003-06-24","Osrednja državna proslava ob dnevu državnosti","Trg republike","Ljubljana","","protokol","big-band"],["2003","Mednarodni poletni seminar","","","Rick Stitzel","seminar","big-band"],["2003","Gostovanje v Nemčiji","","Hirschaid, Nemčija","","gostovanje","big-band"],["2003","Microsoftova NT konferenca","","Portorož","","protokol","big-band"],["2003","Zaključna prireditev Slovenskega filmskega festivala","","","Cita Galič|Lojze Krajnčan","sodelovanje","big-band"],["2004-10-14","»Glasba Glenna Millerja in Counta Basiea«","Kulturni dom Grosuplje","Grosuplje","","koncert","big-band"],["2004","30. obletnica Glasbene šole Grosuplje","","Grosuplje","","sodelovanje","big-band"],["2004","Delavnica The Kelly Johnson Quartet","","","The Kelly Johnson Quartet","seminar","big-band"],["2005-10","»Poklon Franku Sinatri«","Kongo Hotel & Casino","","Oto Pestner|Adam Klemm","koncert","big-band"],["2005","60. obletnica Mladinske knjige","Gallusova dvorana, Cankarjev dom","Ljubljana","","sodelovanje","big-band"],["2005","Otvoritev Vodnega mesta Atlantis","Atlantis","Ljubljana","","protokol","big-band"],["2005-12","Miklavžev dobrodelni koncert","","","","tv","big-band"],["2006","Koncerta z vibrafonistoma","","","Boško Petrović|Vid Jamnik","sodelovanje","big-band"],["2006","Koncert s HGM Jazz orkestrom Zagreb","","","John Thomas","sodelovanje","big-band"],["2006","Festival big bandov Bjelovar","","Bjelovar, Hrvaška","","festival","big-band"],["2006","Poletni seminar","","Kranjska Gora","Sigi Feigl","seminar","big-band"],["2006","Jesenski koncert","","","Nina Pušlar","koncert","big-band"],["2007","»Zlati ključ mesta Grosuplje«","","Grosuplje","Alenka Godec|Nina Pušlar|Nuša Derenda","sodelovanje","big-band"],["2007","Pet let City Parka","City Park","Ljubljana","Oto Pestner|Elda Viler|Anika Horvat|Pepel in kri","protokol","big-band"],["2007","Javno snemanje v Studiu 14","Studio 14 Radia Slovenija","Ljubljana","Davor Križić|Saša Nestorović","tv","big-band"],["2007","2. državno srečanje big bandov","","Krško","","festival","big-band"],["2007","Poklon Jožetu Privšku","","","Elda Viler|Neža Drobnič","koncert","big-band"],["2008","»American Jazz History« — deseta obletnica orkestra","","","","koncert","big-band"],["2010-07-17","Slavnostni koncert ob 50-letnici jazza na Bledu","Festivalna dvorana Bled","Bled","Gašper Bertoncelj|Peter Mihelič|Irena Vidic|Robert Jukič|Igor Matkovič","festival","big-band"],["2011","»Music Unites«","","","Gwen Hughes","sodelovanje","big-band"],["2012","Koncerti s Prifarskimi muzikanti","","","Prifarski muzikanti","sodelovanje","big-band"],["2012-12","Novoletni koncert","","","Nina Pušlar","koncert","big-band"],["2013","»A Swingin' Affair«","","","Blaž Vrbič","koncert","big-band"],["2013-07","Dan neodvisnosti ZDA","Narodna galerija","Ljubljana","","protokol","big-band"],["2014-12","Novoletni koncert z deli Gordona Goodwina","","","Irena Vidic|Tomaž Zevnik","koncert","big-band"],["2015-07-02","»Songs for Swingin' Lovers«","Križanke","Ljubljana","","koncert","big-band"],["2015-12-01","»Ellingtonia«","Španski borci","Ljubljana","","koncert","big-band"],["2015-12-19","»Ellingtonia«","Kulturni dom Grosuplje","Grosuplje","","koncert","big-band"],["2015","Turneja s Prifarskimi muzikanti","","","Prifarski muzikanti","sodelovanje","big-band"],["2016","Turneja po Avstriji","","Bruck an der Mur, Gradec, Celovec in drugi","","gostovanje","big-band"],["2016-12-23","»Jazz in the Coffin«","","","","koncert","big-band"],["2017-05-20","»The Ella Fitzgerald Songbook«","Kulturni dom Grosuplje","Grosuplje","Ana Čop","koncert","big-band"],["2017-08-18","»The Ella Fitzgerald Songbook«","Jazzinty","Novo mesto","Ana Čop","festival","big-band"],["2017-09-15","Dvajset let orkestra","Kulturni dom Grosuplje","Grosuplje","","koncert","big-band"],["2017-12-22","»Crazy Christmas«","","","Boštjan Gombač","koncert","big-band"],["2018-02-02","»Help! A Beatles Tribute«","","","","koncert","combo"],["2018-09","Nishville Jazz Festival","Glavni oder Earth & Sky","Niš, Srbija","","festival","big-band",["nishville"]],["2019","Sinatra z Blažem Vrbičem","Ljubljanski grad","Ljubljana","Blaž Vrbič","koncert","big-band"],["2019-12","Count Basie in Diane Schuur","","","Simone Zanchini","koncert","big-band"],["2020","Sinatra","","Portorož","","koncert","combo"],["2022-04-22","Otvoritev prenovljene dvorane","Kulturni dom Grosuplje","Grosuplje","Uroš Perić|The Pearlettes","protokol","big-band"],["2022","Samostojni koncert v atriju NUK","NUK","Ljubljana","Peter Savizon","koncert","big-band"],["2022","Marezijazz","","Marezige","","festival","big-band"],["2022-12","Program Charlesa Mingusa","","","Nina Strnad","koncert","big-band"],["2023","70 let VVZ Kekec","Športna dvorana Brinje","Grosuplje","","protokol","big-band"],["2023","»Grosuplje v jeseni«","","Grosuplje","Nina Strnad","koncert","big-band"],["2023-12","Novoletni koncert","","","Jure Pukl|Lara Grbić|Maruša Kos","koncert","big-band"],["2024","»Flying Start«","","","Tadej Tomšič|Petra Vidmar|Erik Čebokli|Žiga Kožar","koncert","big-band"],["2025","»Images«","","","Klara Lavriša|Žan Cesar","koncert","big-band"],["2025","Sinatra","","Marezige","","koncert","big-band"],["2025-12","Božično-novoletni koncert","","","Manca Fekonja|Blaž Vrbič","koncert","big-band"],["2026-05","»Poklon Gordonu Goodwinu«","Kulturni dom Grosuplje","Grosuplje","Tomaž Zevnik","festival","big-band",["goodwinCeloten","goodwinSax","goodwinNapoved"]],["2026-06-05","»Poklon Gordonu Goodwinu«","Jazz klub Kazina","Ljubljana","Tomaž Zevnik","koncert","big-band",["kazinaOder"]],["2026-07-10","Marezijazz","","Marezige","Tomaž Zevnik","festival","big-band"],["2026-09-18","»Grosuplje v jeseni«","","Grosuplje","Rok Ferengja","koncert","big-band"]],"slike":{"goodwinCeloten":"../../src/assets/foto/orkester/orkester-celoten-2026.jpg","goodwinSax":"../../src/assets/foto/orkester/saksofoni-trobente-2026.jpg","goodwinNapoved":"../../src/assets/foto/orkester/kotar-napoved-mozaik-2026.jpg","kazinaOder":"../../src/assets/foto/orkester/kazina-prazen-oder-2026.jpg","nishville":"../../src/assets/foto/zgodovina/mejnik-nishville-2018-oder.jpg","doblekar":"../../src/assets/foto/zgodovina/doblekar-orkester-spomenik-barvna.jpg"}}</script>
+<script>
+(function () {
+  'use strict';
+
+  /* ----------------------------------------------------------
+     Tema. Privzeto temna, brezpogojno — prefers-color-scheme se
+     ne upošteva, enako kot na strani. Izbira se shrani pod istim
+     ključem kot tam (bbg-tema).
+     ---------------------------------------------------------- */
+  var koren = document.documentElement;
+  var gumbTema = document.getElementById('preklop');
+  var napisTema = document.getElementById('preklop-besedilo');
+
+  function nastaviTemo(svetla) {
+    koren.classList.toggle('bbg-svetla', svetla);
+    gumbTema.setAttribute('aria-pressed', svetla ? 'true' : 'false');
+    napisTema.textContent = svetla ? 'temna tema' : 'svetla tema';
+  }
+  var shranjena = null;
+  try { shranjena = localStorage.getItem('bbg-tema'); } catch (e) { /* zasebno okno */ }
+  nastaviTemo(shranjena === 'svetla');
+  gumbTema.addEventListener('click', function () {
+    var svetla = !koren.classList.contains('bbg-svetla');
+    nastaviTemo(svetla);
+    try { localStorage.setItem('bbg-tema', svetla ? 'svetla' : 'temna'); } catch (e) { /* zasebno okno */ }
+  });
+
+  /* ----------------------------------------------------------
+     Podatki
+     ---------------------------------------------------------- */
+  var vir = JSON.parse(document.getElementById('podatki').textContent);
+  var SLIKE = vir.slike;
+  var OBDOBJA = vir.obdobja;
+  var OPOMBE = vir.opombe;
+  var TIPI = vir.tipi;
+
+  var MESECI = ['januar', 'februar', 'marec', 'april', 'maj', 'junij',
+                'julij', 'avgust', 'september', 'oktober', 'november', 'december'];
+  var MESECI_KRATKO = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun',
+                       'jul', 'avg', 'sep', 'okt', 'nov', 'dec'];
+
+  /* Natančnost se izpelje iz OBLIKE datuma — ločenega polja ni.
+     Ena resnica na enem mestu: dolžina zapisa pove, kaj je znano. */
+  function natancnost(iso) {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) return 'dan';
+    if (/^\d{4}-\d{2}$/.test(iso)) return 'mesec';
+    return 'leto';
+  }
+
+  /* Razvrstitveni ključ: mesec pade v sredino meseca, leto na 00-00. */
+  function kljuc(iso) {
+    var n = natancnost(iso);
+    if (n === 'dan') return iso;
+    if (n === 'mesec') return iso + '-15';
+    return iso + '-00-00';
+  }
+
+  var dogodki = vir.dogodki.map(function (v, i) {
+    return {
+      i: i,
+      iso: v[0],
+      leto: parseInt(v[0].slice(0, 4), 10),
+      naziv: v[1],
+      prizorisce: v[2] || '',
+      kraj: v[3] || '',
+      gostje: v[4] ? v[4].split('|') : [],
+      tip: v[5],
+      zasedba: v[6],
+      foto: v[7] || [],
+      natancnost: natancnost(v[0]),
+      kljuc: kljuc(v[0])
+    };
+  });
+
+  var LETA_VSA = [];
+  for (var l = 1998; l <= 2026; l++) LETA_VSA.push(l);
+
+  function najdi(leto) {
+    return dogodki.filter(function (d) { return d.leto === leto; });
+  }
+
+  /* ----------------------------------------------------------
+     Izris — datumski blok in vnos
+     ---------------------------------------------------------- */
+  function ubezi(s) {
+    return String(s).replace(/[&<>"]/g, function (z) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[z];
+    });
+  }
+
+  function datumBlok(d, zLetom) {
+    var del = d.iso.split('-');
+    if (d.natancnost === 'dan') {
+      return '<time class="datum" datetime="' + d.iso + '">' +
+        '<b class="datum__dan">' + parseInt(del[2], 10) + '.</b>' +
+        '<span class="datum__mesec">' + MESECI_KRATKO[+del[1] - 1] + '</span>' +
+        (zLetom ? '<span class="datum__leto">' + del[0] + '</span>' : '') +
+        '</time>';
+    }
+    if (d.natancnost === 'mesec') {
+      return '<time class="datum datum--mesec" datetime="' + d.iso + '">' +
+        '<span class="datum__mesec">' + MESECI_KRATKO[+del[1] - 1] + '</span>' +
+        (zLetom ? '<span class="datum__leto">' + del[0] + '</span>' : '') +
+        '</time>';
+    }
+    return '<time class="datum datum--leto" datetime="' + d.iso + '">' +
+      '<span class="datum__leto">' + del[0] + '</span></time>';
+  }
+
+  function besedaOnatancnosti(d) {
+    if (d.natancnost === 'dan') return '';
+    var del = d.iso.split('-');
+    if (d.natancnost === 'mesec') {
+      return '<p class="vnos__natancnost">' + MESECI[+del[1] - 1] + ' ' + del[0] +
+        ' · dan ni zabeležen</p>';
+    }
+    return '<p class="vnos__natancnost">leto ' + del[0] + ' · mesec in dan nista zabeležena</p>';
+  }
+
+  function krajVrstica(d) {
+    if (d.prizorisce && d.kraj) return ubezi(d.prizorisce) + ', ' + ubezi(d.kraj);
+    if (d.prizorisce) return ubezi(d.prizorisce);
+    if (d.kraj) return ubezi(d.kraj);
+    return '<span class="ni-podatka">prizorišče (ni podatka)</span>';
+  }
+
+  function vnos(d, moznosti) {
+    var o = moznosti || {};
+    return '<article class="vnos">' +
+      datumBlok(d, !!o.zLetom) +
+      '<div>' +
+        '<h4 class="vnos__naslov">' + ubezi(d.naziv) + '</h4>' +
+        besedaOnatancnosti(d) +
+        '<p class="vnos__meta">' + krajVrstica(d) + '</p>' +
+        (d.gostje.length
+          ? '<p class="vnos__gostje"><span>gostje:</span> ' + d.gostje.map(ubezi).join(', ') + '</p>'
+          : '') +
+        '<div class="vnos__znacke znacke">' +
+          '<span class="znacka znacka--tip">' + TIPI[d.tip] + '</span>' +
+          '<span class="znacka">' + d.zasedba + '</span>' +
+          (d.foto.length ? '<span class="znacka">' + d.foto.length + ' fotografij</span>' : '') +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  /* ----------------------------------------------------------
+     Smer A — časovnica
+     ---------------------------------------------------------- */
+  function letnaVrstica(leto, moznosti) {
+    var o = moznosti || {};
+    var v = najdi(leto).sort(function (a, b) { return a.kljuc.localeCompare(b.kljuc); });
+    var opomba = OPOMBE[leto];
+
+    if (!v.length) {
+      var blizu = najblizji(leto);
+      return '<section class="leto leto--prazno">' +
+        '<p class="leto__st">' + leto + '<span class="gostota"><i></i></span></p>' +
+        '<p class="leto__opomba">ni zabeleženih dogodkov' + (opomba ? ' — ' + opomba : '') + '</p>' +
+        '<p class="leto__blizje">najbližje zabeleženo: ' + blizu.join(' · ') + '</p>' +
+      '</section>';
+    }
+
+    var crtice = '';
+    for (var c = 0; c < v.length; c++) crtice += '<i></i>';
+
+    var brezMeseca = v.filter(function (d) { return d.natancnost === 'leto'; });
+    var datirani = v.filter(function (d) { return d.natancnost !== 'leto'; });
+
+    return '<section class="leto">' +
+      '<p class="leto__st">' + leto + '<span class="gostota" title="' + v.length +
+        ' zabeleženih dogodkov">' + crtice + '</span></p>' +
+      (brezMeseca.length
+        ? '<p class="skupina-brez-meseca">brez znanega meseca</p>' +
+          brezMeseca.map(function (d) { return vnos(d, o); }).join('')
+        : '') +
+      datirani.map(function (d) { return vnos(d, o); }).join('') +
+    '</section>';
+  }
+
+  function najblizji(leto) {
+    var pred = null, po = null;
+    for (var i = leto - 1; i >= 1998; i--) { if (najdi(i).length) { pred = i; break; } }
+    for (var j = leto + 1; j <= 2026; j++) { if (najdi(j).length) { po = j; break; } }
+    return [pred, po].filter(Boolean);
+  }
+
+  function obdobjeBlok(o) {
+    return '<div class="obdobje">' +
+      '<div>' +
+        '<p class="obdobje__leta">' + o.obdobje + '</p>' +
+        '<p class="obdobje__dirigent">' + o.vodstvo + '</p>' +
+        '<p class="obdobje__vloga">' + o.vloga + '</p>' +
+        (o.foto ? '<figure class="foto obdobje__foto">' +
+          '<img src="' + SLIKE[o.foto.k] + '" alt="' + ubezi(o.foto.alt) + '" loading="lazy">' +
+          '<figcaption>' + ubezi(o.foto.napis) +
+            '<span class="foto__kredit">Foto: arhiv KD Big Band Grosuplje</span>' +
+          '</figcaption></figure>' : '') +
+      '</div>' +
+      '<p class="obdobje__opis">' + o.opis + '</p>' +
+    '</div>';
+  }
+
+  var casovnica = '';
+  OBDOBJA.forEach(function (o) {
+    casovnica += obdobjeBlok(o);
+    for (var y = o.od; y <= o.do; y++) casovnica += letnaVrstica(y);
+  });
+  document.getElementById('casovnica').innerHTML = casovnica;
+
+  /* ----------------------------------------------------------
+     Smer B — filtriran seznam
+     ---------------------------------------------------------- */
+  var stanje = { leto: '', tip: '', prizorisce: '', gost: '' };
+
+  var eLeto = document.getElementById('f-leto');
+  var eTip = document.getElementById('f-tip');
+  var ePriz = document.getElementById('f-prizorisce');
+  var eGost = document.getElementById('f-gost');
+
+  function napolni(el, prazno, vrednosti) {
+    el.innerHTML = '<option value="">' + prazno + '</option>' +
+      vrednosti.map(function (v) {
+        var vr = typeof v === 'string' ? v : v.v;
+        var nap = typeof v === 'string' ? v : v.n;
+        return '<option value="' + ubezi(vr) + '">' + ubezi(nap) + '</option>';
+      }).join('');
+  }
+
+  napolni(eLeto, 'vsa leta', LETA_VSA.slice().reverse().map(function (l) {
+    return { v: String(l), n: najdi(l).length ? String(l) : l + ' — brez zapisa' };
+  }));
+  napolni(eTip, 'vsi tipi', Object.keys(TIPI).map(function (k) { return { v: k, n: TIPI[k] }; }));
+  napolni(ePriz, 'vsa prizorišča', [...new Set(dogodki.map(function (d) {
+    return d.prizorisce || d.kraj;
+  }).filter(Boolean))].sort(function (a, b) { return a.localeCompare(b, 'sl'); }));
+  napolni(eGost, 'vsi gostje', [...new Set(dogodki.flatMap(function (d) { return d.gostje; }))]
+    .sort(function (a, b) { return a.localeCompare(b, 'sl'); }));
+
+  function ustreza(d) {
+    if (stanje.leto && d.leto !== +stanje.leto) return false;
+    if (stanje.tip && d.tip !== stanje.tip) return false;
+    if (stanje.prizorisce && (d.prizorisce || d.kraj) !== stanje.prizorisce) return false;
+    if (stanje.gost && d.gostje.indexOf(stanje.gost) === -1) return false;
+    return true;
+  }
+
+  function praznoLeto(leto) {
+    var opomba = OPOMBE[leto];
+    var blizu = najblizji(leto);
+    return '<div class="prazno">' +
+      '<h3>' + leto + ' · ni zabeleženih dogodkov</h3>' +
+      '<p class="prazno__zakaj">' +
+        (opomba ? opomba + ' ' : '') +
+        'Vnosa za to leto v arhivu ni. To ne pomeni, da orkester ni deloval — pomeni, ' +
+        'da zapisa nimamo.' +
+      '</p>' +
+      '<div class="prazno__dejanja">' +
+        blizu.map(function (l) {
+          return '<button class="gumb" type="button" data-leto="' + l + '">' + l + '</button>';
+        }).join('') +
+        '<button class="gumb gumb--polni" type="button" data-leto="">vsa leta</button>' +
+      '</div>' +
+      '<p style="margin-top:20px;font-size:.93rem;color:var(--tiho)">' +
+        'Imate fotografijo, posnetek ali spored iz tega leta? ' +
+        '<a href="#">Pišite nam</a> — arhiv dopolnjujemo iz gradiva obiskovalcev.' +
+      '</p>' +
+    '</div>';
+  }
+
+  function izrisiSeznam() {
+    var zadetki = dogodki.filter(ustreza);
+    var cilj = document.getElementById('seznam');
+    var st = document.getElementById('izid-st');
+
+    var jeFilter = stanje.leto || stanje.tip || stanje.prizorisce || stanje.gost;
+    document.getElementById('pocisti').hidden = !jeFilter;
+    izrisiCipe();
+
+    if (!zadetki.length) {
+      /* Izbrano leto brez zapisa dobi svoje sporočilo, ne splošnega
+         „ni zadetkov" — to je drugačna vrsta praznine. */
+      if (stanje.leto && !stanje.tip && !stanje.prizorisce && !stanje.gost) {
+        st.textContent = 'leto ' + stanje.leto + ' nima zabeleženih dogodkov';
+        cilj.innerHTML = praznoLeto(+stanje.leto);
+      } else {
+        st.textContent = 'ni zadetkov';
+        cilj.innerHTML = '<div class="prazno"><h3>Ni zadetkov</h3>' +
+          '<p class="prazno__zakaj">Kombinacija filtrov ne ustreza nobenemu vnosu. ' +
+          'Poskusite odstraniti eno omejitev.</p>' +
+          '<div class="prazno__dejanja"><button class="gumb gumb--polni" type="button" data-leto="">počisti vse</button></div></div>';
+      }
+      return;
+    }
+
+    st.innerHTML = 'prikazanih <b>' + zadetki.length + '</b> od ' + dogodki.length + ' vnosov';
+
+    var poLetih = {};
+    zadetki.forEach(function (d) { (poLetih[d.leto] = poLetih[d.leto] || []).push(d); });
+
+    var leta = Object.keys(poLetih).map(Number).sort(function (a, b) { return b - a; });
+    cilj.innerHTML = leta.map(function (leto) {
+      var v = poLetih[leto].sort(function (a, b) { return b.kljuc.localeCompare(a.kljuc); });
+      var brezMeseca = v.filter(function (d) { return d.natancnost === 'leto'; });
+      var datirani = v.filter(function (d) { return d.natancnost !== 'leto'; });
+      return '<h3 class="seznam-leto">' + leto +
+          '<small>' + v.length + (v.length === 1 ? ' vnos' : v.length === 2 ? ' vnosa' : ' vnosov') + '</small></h3>' +
+        '<div class="seznam-skupina">' +
+          (brezMeseca.length
+            ? '<p class="skupina-brez-meseca">brez znanega meseca</p>' +
+              brezMeseca.map(function (d) { return vnos(d); }).join('')
+            : '') +
+          datirani.map(function (d) { return vnos(d); }).join('') +
+        '</div>';
+    }).join('');
+  }
+
+  function izrisiCipe() {
+    var napisi = { leto: 'leto', tip: 'tip', prizorisce: 'prizorišče', gost: 'gost' };
+    var html = Object.keys(stanje).filter(function (k) { return stanje[k]; }).map(function (k) {
+      var v = k === 'tip' ? TIPI[stanje[k]] : stanje[k];
+      return '<button class="cip" type="button" data-odstrani="' + k + '">' +
+        '<b>' + napisi[k] + ':</b> ' + ubezi(v) + ' <span aria-hidden="true">×</span></button>';
+    }).join('');
+    document.getElementById('izbrani').innerHTML = html;
+  }
+
+  [[eLeto, 'leto'], [eTip, 'tip'], [ePriz, 'prizorisce'], [eGost, 'gost']].forEach(function (par) {
+    par[0].addEventListener('change', function () {
+      stanje[par[1]] = par[0].value;
+      izrisiSeznam();
+    });
+  });
+
+  document.getElementById('izbrani').addEventListener('click', function (e) {
+    var g = e.target.closest('[data-odstrani]');
+    if (!g) return;
+    var k = g.getAttribute('data-odstrani');
+    stanje[k] = '';
+    ({ leto: eLeto, tip: eTip, prizorisce: ePriz, gost: eGost })[k].value = '';
+    izrisiSeznam();
+  });
+
+  document.getElementById('pocisti').addEventListener('click', pocistiVse);
+
+  document.getElementById('seznam').addEventListener('click', function (e) {
+    var g = e.target.closest('[data-leto]');
+    if (!g) return;
+    var l = g.getAttribute('data-leto');
+    if (l === '') { pocistiVse(); return; }
+    stanje.leto = l; eLeto.value = l;
+    izrisiSeznam();
+  });
+
+  function pocistiVse() {
+    stanje = { leto: '', tip: '', prizorisce: '', gost: '' };
+    eLeto.value = ''; eTip.value = ''; ePriz.value = ''; eGost.value = '';
+    izrisiSeznam();
+  }
+
+  izrisiSeznam();
+
+  /* ----------------------------------------------------------
+     Štiri stanja
+     ---------------------------------------------------------- */
+  function poIso(iso, naziv) {
+    return dogodki.filter(function (d) {
+      return d.iso === iso && (!naziv || d.naziv.indexOf(naziv) === 0);
+    })[0];
+  }
+
+  document.getElementById('primer-1').innerHTML = vnos(poIso('2008'), { zLetom: true });
+  document.getElementById('primer-2').innerHTML = vnos(poIso('2003', 'Microsoftova'), { zLetom: true });
+  document.getElementById('primer-4').innerHTML = praznoLeto(2009);
+
+  /* Poln vnos — podstran dogodka. */
+  var p = poIso('2026-05');
+  document.getElementById('primer-3').innerHTML =
+    '<article class="poln">' +
+      '<div class="znacke">' +
+        '<span class="znacka znacka--trdna">' + TIPI[p.tip] + '</span>' +
+        '<span class="znacka">big-band</span>' +
+        '<span class="znacka">obdobje: Klemen Kotar, drugo obdobje</span>' +
+      '</div>' +
+      '<h3>' + ubezi(p.naziv) + '</h3>' +
+      '<dl class="poln__meta">' +
+        '<dt>datum</dt><dd><time datetime="2026-05">maj 2026</time> ' +
+          '<span class="ni-podatka">· dan ni zabeležen</span></dd>' +
+        '<dt>prizorišče</dt><dd>Kulturni dom Grosuplje, Adamičeva cesta 16, Grosuplje</dd>' +
+        '<dt>gostje</dt><dd>Tomaž Zevnik <span class="ni-podatka">— klarinet, solist</span></dd>' +
+        '<dt>organizator</dt><dd>festival Mozaik kulture, soorganizator JSKD</dd>' +
+        '<dt>vir zapisa</dt><dd>kronika društva · <a href="#">stran dogodka</a></dd>' +
+      '</dl>' +
+      '<p class="poln__opis">Program Gordona Goodwina s solistom Tomažem Zevnikom, ' +
+        'izveden v treh terminih: maja na festivalu Mozaik kulture, 5. junija v Jazz ' +
+        'klubu Kazina in 10. julija na Marezijazzu.</p>' +
+      '<div class="foto-trak">' +
+        foto('goodwinCeloten', 'Poklon Gordonu Goodwinu, festival Mozaik kulture, Kulturni dom Grosuplje, 2026 — celoten orkester') +
+        foto('goodwinSax', 'Saksofonska in trobilna sekcija') +
+        foto('goodwinNapoved', 'Napoved z odra') +
+      '</div>' +
+    '</article>' +
+    '<div class="brez-foto">' +
+      '<strong>Isti gradnik brez fotografij:</strong> na mestu traku stoji ta okvir. ' +
+      'Pri 1997–2001, 2003, 2007–2009, 2011–2012, 2014–2016, 2019–2021 in 2025 v ' +
+      'galeriji ni nobene slike, zato je to običajno stanje arhivskega vnosa in ne izjema.' +
+    '</div>';
+
+  function foto(k, napis) {
+    return '<figure class="foto"><img src="' + SLIKE[k] + '" alt="' + ubezi(napis) +
+      '" loading="lazy"><figcaption>' + ubezi(napis) +
+      '<span class="foto__kredit">Foto: arhiv KD Big Band Grosuplje</span>' +
+      '</figcaption></figure>';
+  }
+
+  /* Leto 2003 — prikaz razvrščanja. */
+  document.getElementById('primer-2003').innerHTML = letnaVrstica(2003);
+
+  /* ----------------------------------------------------------
+     380 px
+     ---------------------------------------------------------- */
+  document.getElementById('ozko-casovnica').innerHTML = letnaVrstica(2017);
+  document.getElementById('ozko-seznam').innerHTML =
+    vnos(poIso('2018-09'), { zLetom: true }) + vnos(poIso('2008'), { zLetom: true });
+  document.getElementById('ozko-prazno').innerHTML = praznoLeto(2009);
+})();
+</script>
+
+</body>
+</html>
