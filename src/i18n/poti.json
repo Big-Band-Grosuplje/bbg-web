@@ -3,6 +3,7 @@
   "poti": {
     "naslovnica": { "sl": "/", "en": "/en/" },
     "zgodovina": { "sl": "/zgodovina/", "en": "/en/history/" },
+    "arhiv": { "sl": "/arhiv/", "en": "/en/archive/" },
     "galerija": { "sl": "/galerija/", "en": "/en/gallery/" },
     "multimedija": { "sl": "/multimedija/", "en": "/en/media/" },
     "zasebnost": { "sl": "/zasebnost/", "en": "/en/privacy/" }

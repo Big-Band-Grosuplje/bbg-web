@@ -1,0 +1,4 @@
+{
+  "opomba": "ROČNE DOPOLNITVE ARHIVA. Te datoteke uvozna skripta NIKOLI ne piše in ne bere za pisanje - npm run arhiv prepiše samo arhiv-uvoz.json. Kar je vpisano tu, preživi vsak ponovni uvoz. Ključ je id iz arhiv-uvoz.json. Dovoljena polja: naziv, opis, zasedba, prizorisce, ura. Polja kraj TU NI namenoma: id je izpeljan iz datuma in kraja, zato bi sprememba kraja podrla ključ - napačen kraj popravi v viru in poženi uvoz znova. Vrednost tu VEDNO prevlada nad uvoženo; kadar se razhajata, uvozna skripta to javi in ne odloči sama.",
+  "vnosi": {}
+}

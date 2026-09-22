@@ -10,6 +10,7 @@
    zasedb) prejme kot parametre.
    ============================================================ */
 import koncertiData from '../data/koncerti.json';
+import { jePrihajajoc, natancnostDatuma } from './datumi.mjs';
 import {
   PRESLIKAVA_JSONLD,
   imePodpornika,
@@ -89,6 +90,24 @@ const DRUSTVO = { naziv: 'Kulturno društvo Big Band Grosuplje', url: SITE };
 
 const koncerti = koncertiData.koncerti as Koncert[];
 
+/* Preverba ob nalaganju modula, po vzoru preveriVnosePodpornikov v
+   src/data/podporniki.ts: vnos z manjkajočim ali neprepoznanim datumIso se
+   od 22. 9. 2026 ne šteje več med prihajajoče (glej jePrihajajoc v
+   datumi.mjs). Tak vnos bi tiho izginil z naslovnice in ne bi dobil
+   JSON-LD, zato ob gradnji opozorimo. Opozorilo in ne izjema: sama letnica
+   je legitimen zgodovinski zapis, ki ga model še ne podpira, in gradnje
+   zaradi njega ne ustavljamo. */
+for (const k of koncerti) {
+  if (natancnostDatuma(k.datumIso) === null) {
+    console.warn(
+      `[koncerti] "${k.id}" ima datumIso ${JSON.stringify(k.datumIso)}, kar ni ` +
+        `ne YYYY-MM-DD ne YYYY-MM. Dogodek ne bo med prihajajočimi in ne bo dobil ` +
+        `JSON-LD. Za zapis, ki mu je znano samo leto, glej ` +
+        `docs/predlog-nenatancni-datumi.md.`,
+    );
+  }
+}
+
 /* Vnosi podpornikov iz koncerti.json. Datoteka je uvožena s pretvorbo
    (as Koncert[]), zato tipi vpisa ne preverijo — tipkarska napaka bi ostala
    neopažena do trenutka, ko bi logotip tiho izginil s strani.
@@ -144,8 +163,10 @@ export function oznakaZasedbe(zasedba: Koncert['zasedba'], oznake: OznakeZasedb)
 }
 
 /* Datum v sl-SI zapisu: polni datum kot d. M. yyyy, sam mesec kot "oktober 2026".
+   Izvožena, ker isto oblikovanje potrebuje arhiv (src/lib/arhiv.ts) — dve kopiji
+   bi pomenili dva zapisa istega datuma na isti strani.
    Ob znani uri se doda "ob 19.00" (slovenski zapis ure s piko). */
-function formatDatum(
+export function formatDatum(
   datumIso: string | null,
   ura: string | null,
   jezik: Jezik,
@@ -229,21 +250,9 @@ function datumBlok(datumIso: string | null, konecIso: string | null | undefined,
   };
 }
 
-/* Prihajajoč = brez znanega datuma (napovedan, a še ne uvrščen) ali datum v prihodnosti.
+/* Prihajajoč = datum je znan IN v prihodnosti. Presoja je v src/lib/datumi.mjs,
+   ker jo poleg gradnje potrebuje tudi scripts/preveri-datume.mjs.
    Filtriranje se izvede ob buildu — po preteku koncerta je potrebna nova objava. */
-function jePrihajajoc(datumIso: string | null): boolean {
-  if (!datumIso) return true;
-  const danes = new Date();
-  danes.setUTCHours(0, 0, 0, 0);
-  if (/^\d{4}-\d{2}-\d{2}$/.test(datumIso)) {
-    return new Date(datumIso + 'T00:00:00Z') >= danes;
-  }
-  if (/^\d{4}-\d{2}$/.test(datumIso)) {
-    const [leto, mesec] = datumIso.split('-').map(Number);
-    return new Date(Date.UTC(leto, mesec, 0)) >= danes;
-  }
-  return true;
-}
 
 /* Časovni odmik za Europe/Ljubljana ob danem trenutku — septembra CEST (+02:00),
    decembra CET (+01:00). Odmika ne zapisujemo v podatke, ker se z datumom spreminja. */
@@ -265,12 +274,31 @@ function startDate(datumIso: string, ura: string | null): string {
   return `${datumIso}T${ura}:00${odmikLjubljana(datumIso, ura)}`;
 }
 
-/* JSON-LD nastane samo, če sta znana datum in lokacija — nepopoln MusicEvent
-   je za iskalnike slabši od nobenega. Za description uporabimo nevtralni
-   opisSeo, ne duhovitega besedila s kartice. */
+/* JSON-LD nastane, čim je znan datum. Lokacija ni pogoj — brez nje se polje
+   location izpusti, dogodek pa strukturirane podatke vseeno dobi.
+
+   Prej je bila lokacija pogoj in zapis brez nje ni dobil ničesar. Za
+   napovednik je bilo to nedolžno (vsi prihodnji dogodki prizorišče imajo),
+   za arhiv pa ne: pri zgodovinskih vnosih prizorišče pogosto ni znano in
+   tak vnos bi za iskalnike in AI orodja ostal nem — kar spodnese enega od
+   dveh namenov arhiva.
+
+   Kaj je v resnici obvezno (preverjeno 22. 9. 2026):
+   - schema.org sam ne zahteva nobene lastnosti; Event brez location je
+     veljaven zapis;
+   - Googlova dokumentacija za Event rich results zahteva name, startDate,
+     location in location.address.
+
+   Posledica je torej zavestna in omejena: dogodek brez znanega prizorišča
+   za Googlov rich result ni upravičen, ostane pa veljaven, strojno berljiv
+   Event. Nekaj je v obeh primerih več od nič. Pogoj ostane samo datum:
+   Event brez startDate ni uvrstljiv v čas in za arhiv nima vrednosti.
+
+   Za description uporabimo nevtralni opisSeo, ne duhovitega besedila s
+   kartice. */
 function musicEvent(k: Koncert, jezik: Jezik, url?: string) {
   const en = jezik === 'en';
-  if (!k.datumIso || !k.lokacija) return null;
+  if (!k.datumIso) return null;
   const izvajalci: Record<string, string>[] = [
     { '@type': 'MusicGroup', name: 'Big Band Grosuplje', url: SITE },
   ];
@@ -321,17 +349,23 @@ function musicEvent(k: Koncert, jezik: Jezik, url?: string) {
         ? (k.organizator.url ? { url: k.organizator.url } : {})
         : { url: DRUSTVO.url }),
     },
-    location: {
-      '@type': 'Place',
-      name: en ? (k.lokacija.nazivEn ?? k.lokacija.naziv) : k.lokacija.naziv,
-      address: {
-        '@type': 'PostalAddress',
-        ...(k.lokacija.ulica ? { streetAddress: k.lokacija.ulica } : {}),
-        ...(k.lokacija.postna ? { postalCode: k.lokacija.postna } : {}),
-        addressLocality: k.lokacija.kraj,
-        addressCountry: k.lokacija.drzava ?? 'SI',
-      },
-    },
+    /* Neznano prizorišče: polja ni. Prazen ali izmišljen Place bi bil
+       slabši od odsotnosti — trdil bi nekaj, česar ne vemo. */
+    ...(k.lokacija
+      ? {
+          location: {
+            '@type': 'Place',
+            name: en ? (k.lokacija.nazivEn ?? k.lokacija.naziv) : k.lokacija.naziv,
+            address: {
+              '@type': 'PostalAddress',
+              ...(k.lokacija.ulica ? { streetAddress: k.lokacija.ulica } : {}),
+              ...(k.lokacija.postna ? { postalCode: k.lokacija.postna } : {}),
+              addressLocality: k.lokacija.kraj,
+              addressCountry: k.lokacija.drzava ?? 'SI',
+            },
+          },
+        }
+      : {}),
   };
   /* offers po vrsti vstopa:
      - prost: cena 0 EUR, da iskalniki brezplačen dogodek prepoznajo kot tak;

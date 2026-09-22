@@ -187,6 +187,15 @@ const navigacija = [
         <p class="panel__besedilo">{gostujociDirigenti.join(' · ')}</p>
       </div>
 
+      {/* Arhiv ni v glavni navigaciji: je referenčno gradivo in ne ena od
+          petih glavnih strani. Pot vanj vodi od tod, ker je nadaljevanje
+          iste vsebine — zgodovina pripoveduje, arhiv našteva. */}
+      <p class="vecArhiv">
+        <a class="bbg-gumb bbg-gumb--obris" href={pot('arhiv', jezik)}>
+          {t.zgodovinaStran.arhivGumb}
+        </a>
+      </p>
+
       <p class="kredit">{t.zgodovinaStran.kredit}</p>
     </div>
   </main>
@@ -313,6 +322,8 @@ const navigacija = [
     background: var(--bbg-panel-bg);
   }
   .napoved .obdobje__naslov { margin-bottom: 8px; }
+  .vecArhiv { margin: 34px 0 0; }
+
   /* Mikrorotacija naslova po mockupu smer-c.html, kot pri .sekcija h2. */
   .obdobje__naslov {
     margin: 8px 0 4px;

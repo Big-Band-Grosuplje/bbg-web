@@ -49,5 +49,10 @@ jobs:
       - name: Kontrast hero fotografij
         run: npm run kontrast
 
+      # Datumi prav tako pred gradnjo: napačen zapis datuma gradnje ne
+      # ustavi, samo tiho premakne dogodek na napačno stran današnjega dne.
+      - name: Datumi dogodkov
+        run: npm run datumi
+
       - name: Gradnja
         run: npm run build
