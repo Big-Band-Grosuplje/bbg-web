@@ -158,6 +158,18 @@ ali je bila preverba preizkušena ali le napisana.
 Primer: `scripts/kontrast-hero.mjs` je bil preizkušen z začasno oslabljeno zaveso —
 vrednosti so padle pod prag, skripta je naštela padce in vrnila izhodno kodo 1.
 
+**Navodila o orodjih zastarijo ob nadgradnji orodja.** Ob večji nadgradnji
+odvisnosti preveri, ali kar je o njej zapisano v navodilih, še drži — trditve o
+ukazih, zastavicah, privzetih vrednostih in poteh. Nadgradnja ne javi, da je
+kakšno navodilo razveljavila; navodilo ostane napisano in bralec mu verjame.
+
+Primer: razdelek *Dev strežnik* je trdil, da gre za Astro 5.x, da načina v ozadju
+ni in da podukazov `astro dev stop|status|logs` ni. Tri od štirih trditev so bile
+resnične pri Astru 5 in so zastarele ob nadgradnji na 7 (`9097dfa`, 6. 9. 2026).
+V navodilih so ostale 16 dni, dokler jih ni razkrila preselitev navodil v
+AGENTS.md (`d57871c`, 22. 9. 2026) — ne nadgradnja sama in ne uporaba, ampak
+naključje, da je nekdo besedilo bral skupaj s `package.json`.
+
 ## Dev strežnik
 
 ```
