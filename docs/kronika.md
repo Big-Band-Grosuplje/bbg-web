@@ -62,8 +62,7 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
 - 2006 — koncerta z vibrafonistoma Boškom Petrovićem in Vidom Jamnikom (maj/junij,
   z javnim snemanjem); sodelovanje z Boškom Petrovićem je vključevalo delavnico —
   njen udeleženec Vid Jamnik je pozneje diplomiral iz vibrafona na Berklee College
-  of Music in je danes mednarodno uveljavljen vibrafonist; koncert s HGM Jazz
-  orkestrom Zagreb in trobentačem Johnom Thomasom (ZDA); festival big bandov
+  of Music in je danes mednarodno uveljavljen vibrafonist; festival big bandov
   Bjelovar (Hrvaška); poletni seminar vodi Sigi Feigl (Avstrija); jesenski
   koncert z Nino Pušlar; ustanovitev Mladinskega ansambla BiBa (razvoj mladih)
 - 2007 — dobrodelna »Zlati ključ mesta Grosuplje« (Alenka Godec, Nina Pušlar,
@@ -75,6 +74,9 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
 - 2008 — 10. obletnica orkestra; koncert »American Jazz History«
 
 ### 2009–2012 (zatišje in ponovni zagon)
+- 2009 — 2. 5. koncert s HGM Jazz orkestrom Zagreb pod vodstvom Sigija Feigla
+  in trobentačem Johnom Thomasom (ZDA), četrti v nizu ob 10. obletnici; v okviru
+  projekta Ameriški dnevi (vir: arhiv stare strani, dnevno natančen datum)
 - 2010 — 17. 7. slavnostni koncert ob 50. letnici Jazza na Bledu, Festivalna dvorana
   Bled; dirigent Igor Lunder, gostje Gašper Bertoncelj, Peter Mihelič, Irena Vidic,
   Robert Jukič in Igor Matkovič (vir: RTV SLO, 29. 6. 2010)
@@ -133,7 +135,13 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   oktober: delavnica aranžiranja z Lojzetom Krajnčanom; »Grosuplje v jeseni«
   (Rok Ferengja, zbori); BBG x Slon in sadež
   (Popravek 5. 9. 2026: koncert s HGM Jazz orkestrom Zagreb in Johnom Thomasom
-  je bil leta 2006, ne 2026 — prestavljen pod 2006.)
+  je bil leta 2006, ne 2026 — prestavljen pod 2006.
+  Popravek 23. 9. 2026: tudi 2006 ni držalo. Arhiv stare strani ima za ta
+  koncert dnevno natančen datum 2. 5. 2009 in podroben opis — četrti koncert ob
+  deseti obletnici, HGM Jazz Orchestra Zagreb pod vodstvom Sigija Feigla,
+  projekt Ameriški dnevi. Prestavljen pod 2009. Letnica 2026 je bila zapisana po
+  spominu ob nastanku kronike, 2006 pa je bil popravek brez vira; šele arhiv je
+  prinesel zapis iz tistega časa.)
 
 ### 2027 — 30 let orkestra
 Jubilejni mednarodni projekt v pripravi (javno samo napovednik — glej pravila

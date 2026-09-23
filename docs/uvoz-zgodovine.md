@@ -861,6 +861,7 @@ narobe.
 |---|---|
 | 22. 9. 2026 | Prvi zapis. Predlog preslikave po pregledu 320 zapisov; popravljenih 13 vnosov v viru (ura izluščena iz kraja). |
 | 22. 9. 2026 | Izvedba: 291 vnosov v `arhiv.json`, stran `/arhiv`, filtri, `CollectionPage`, postopek prestavitve. |
+| 23. 9. 2026 | Koncert s HGM Jazz orkestrom in Johnom Thomasom prestavljen iz 2006 v 2009: arhiv stare strani ima dnevno natančen 2. 5. 2009. Popravljeno v `kronika.md`, `zgodovina.json` in `llms.txt`. |
 | 23. 9. 2026 | Popravljen zapis za `2020-01-01` Portorož po pričevanju udeleženca (vir beleži repertoar, ne dogodka). Nov seznam `_vhod/preveri-opise.md` s ponovljenimi opisi. |
 | 23. 9. 2026 | Šest od osmih zasebnih dogodkov vključenih (`ZASEBNI_VKLJUCENI`); izpuščena ostaneta poroka članice in Medana. Nova tabela `POPRAVKI_PRIZORISCA`, pravilo `ZDRUZI` za `2007-05-19`. 292 vrstic → 298. |
 | 22. 9. 2026 | Pretekli dogodki iz `koncerti.json` se ob gradnji zlijejo v arhiv (292 vrstic). Merilo prehoda je `jePrihajajoc` in velja tudi za arhivske vnose. Zaprti dogodki so v arhivu, a brez povezave na podstran. |
