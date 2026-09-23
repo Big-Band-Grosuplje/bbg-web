@@ -118,6 +118,16 @@ const jsonLd = {
                 : t.arhiv.obeZasedbi.replace('{n}', String(n.zasedba.obeZasedbi))}
             </p>
           )}
+          {/* Nasprotni primer: organizatorski vnos ne šteje pri nobeni izbiri
+              in ob izbrani zasedbi izgine. Vsote se slučajno ujamejo, zato
+              brez te vrstice ni ničesar, kar bi to pojasnilo. */}
+          {n.zasedba.organizacija > 0 && (
+            <p class="filter__opomba">
+              {n.zasedba.organizacija === 1
+                ? t.arhiv.organizacijaOpombaEna
+                : t.arhiv.organizacijaOpomba.replace('{n}', String(n.zasedba.organizacija))}
+            </p>
+          )}
         </fieldset>
 
         <fieldset class="filter">
@@ -168,7 +178,12 @@ const jsonLd = {
                     {prizorisceZaIzpis(v, jezik) && <strong>{prizorisceZaIzpis(v, jezik)}</strong>}
                     {prizorisceZaIzpis(v, jezik) && v.kraj && <span aria-hidden="true"> · </span>}
                     {v.kraj}
-                    {v.zasedba.map((z) => <span class="znacka">{oznakaZasedbe(z)}</span>)}
+                    {/* Pri organizatorju značke zasedbe ni — nihče od nas ni
+                        igral. Na njenem mestu stoji značka vloge, ker odgovarja
+                        na isto vprašanje: kaj je orkester na dogodku bil. */}
+                    {v.vloga === 'organizator'
+                      ? <span class="znacka znacka--vloga">{t.arhiv.organizacija}</span>
+                      : v.zasedba.map((z) => <span class="znacka">{oznakaZasedbe(z)}</span>)}
                   </p>
                   {nazivZaIzpis(v, jezik) && (
                     <p class="vnos__naziv">
@@ -413,6 +428,13 @@ const jsonLd = {
     border: 1px solid color-mix(in srgb, var(--bbg-gold) 45%, transparent);
     color: var(--bbg-besedilo);
     vertical-align: 1px;
+  }
+  /* Značka vloge se mora ločiti od značk zasedbe, sicer bi bila videti kot
+     še ena zasedba. Obroba je črtkana — ne trdi, kdo je igral, ampak da
+     nismo. Barva ostane ista, ker gre za enako pomembno oznako. */
+  .znacka--vloga {
+    border-style: dashed;
+    font-style: italic;
   }
 
   @media (max-width: 680px) {

@@ -50,6 +50,24 @@ export type ZasedbaArhiva = 'big-band' | 'combo' | 'mladinski' | 'izobrazevalni'
  */
 export type ZasedbaVir = 'zapisano' | 'izpeljano' | 'rocno';
 
+/**
+ * Kaj je orkester na dogodku bil.
+ *
+ * `izvajalec` — igral je. Velja za vse razen izjem, zato privzeto.
+ * `organizator` — dogodek je pripravil, igral pa ni nihče od nas.
+ *
+ * ⚠️ Pri `organizator` je `zasedba` **prazna**, in to je pravilna
+ * vrednost, ne manjkajoča: nihče od nas ni igral, torej ni zasedbe.
+ * Nadomestna vrednost bi bila laž, kakršno je stran pred uvedbo tega
+ * polja tudi izrekala — zapis 2011-04-20, na katerem je igral samo HGM
+ * Jazz Orchestra, je nosil značko „big band", ker se zasedba izpeljuje.
+ *
+ * Iz besedila vloge NI mogoče izpeljati: „Nastopil HGM Jazz Orchestra"
+ * je ista oblika kot „Nastopil je tudi …". Vpiše se ročno.
+ */
+export type VlogaArhiva = 'izvajalec' | 'organizator';
+const VLOGE: VlogaArhiva[] = ['izvajalec', 'organizator'];
+
 export interface ArhivVnos {
   id: string;
   /** 'YYYY-MM-DD' ali 'YYYY-MM', kadar je znan samo mesec. */
@@ -67,6 +85,8 @@ export interface ArhivVnos {
   /** Množica, ne ena vrednost: na istem dogodku sta lahko nastopila oba. */
   zasedba: ZasedbaArhiva[];
   zasedbaVir: ZasedbaVir;
+  /** Privzeto `izvajalec`; normalizira se ob nalaganju, zato ni neobvezno. */
+  vloga: VlogaArhiva;
   /** Vpisan samo, kadar ga je vir res navedel; sicer ga dopolni človek. */
   naziv: string | null;
   opis: string | null;
@@ -91,7 +111,7 @@ export interface ArhivVnos {
    `kraj` namenoma NI med njimi: id je izpeljan iz datuma in kraja, zato
    bi ročna sprememba kraja pomenila, da ključ kaže na zapis, ki ga po
    svojem kraju ni več mogoče najti. Napačen kraj se popravi v viru. */
-const POLJA_ROCNO = ['naziv', 'opis', 'zasedba', 'prizorisce', 'ura'] as const;
+const POLJA_ROCNO = ['naziv', 'opis', 'zasedba', 'prizorisce', 'ura', 'vloga'] as const;
 /** Dovoljen, a se ne zlije: razlog za ročni popravek. */
 const POLJE_OPOMBA = 'opomba';
 type PoljeRocno = (typeof POLJA_ROCNO)[number];
@@ -101,6 +121,7 @@ type RocniPopravki = Partial<{
   prizorisce: string | null;
   ura: string | null;
   zasedba: ZasedbaArhiva[];
+  vloga: VlogaArhiva;
   /** Razlog za popravek. Dokumentacija, ne podatek — v vnos se ne zlije. */
   opomba: string;
 }>;
@@ -134,6 +155,9 @@ function preveriZasedbo(zasedba: unknown, kje: string): asserts zasedba is Zased
 const vidaneId = new Set<string>();
 for (const v of uvozeni) {
   v.izvor = 'arhiv';
+  /* Uvoz vloge ne pozna — iz besedila ni izpeljiva. Privzetek je
+     'izvajalec'; izjemo vpiše človek v arhiv-rocno.json. */
+  v.vloga = v.vloga ?? 'izvajalec';
   if (!/^\d{4}-\d{2}(-\d{2})?$/.test(v.datumIso)) {
     throw new Error(`Arhiv: neveljaven datumIso "${v.datumIso}" pri ${v.id}.`);
   }
@@ -175,6 +199,14 @@ for (const [id, popravki] of Object.entries(rocni)) {
           + `Dovoljena: ${POLJA_ROCNO.join(', ')} in ${POLJE_OPOMBA}.`,
       );
     }
+    if (polje === 'vloga') {
+      if (!VLOGE.includes(vrednost as VlogaArhiva)) {
+        throw new Error(
+          `Arhiv: neveljavna vloga "${vrednost}" pri ${id}. Dovoljeni: ${VLOGE.join(', ')}.`,
+        );
+      }
+      continue;
+    }
     if (polje === 'zasedba') {
       preveriZasedbo(vrednost, `ročnem vnosu ${id}`);
       continue;
@@ -206,6 +238,14 @@ const vnosi: ArhivVnos[] = uvozeni.map((v) => {
   /* Ročno vpisana zasedba ni ne zapisana ne izpeljana — ima svoj izvor.
      Brez tega bi popravek izpeljane vrednosti ostal videti kot izpeljava. */
   if (vrednosti.zasedba) zdruzen.zasedbaVir = 'rocno';
+  /* Organizator nima zasedbe. Prazno polje je posledica vloge in ne
+     ločen podatek — kdor vpiše vlogo, naj ne vpisuje še praznega polja,
+     ki bi ga bilo mogoče pozabiti uskladiti. Uvožena izpeljana zasedba
+     tu odpade; prav ta je bila napačna trditev. */
+  if (zdruzen.vloga === 'organizator') {
+    zdruzen.zasedba = [];
+    zdruzen.zasedbaVir = 'rocno';
+  }
   return zdruzen;
 });
 
@@ -251,6 +291,9 @@ function izKoncerta(k: Koncert): ArhivVnos | null {
        vnosov, kjer sta lahko nastopili obe zasedbi. */
     zasedba: [k.zasedba],
     zasedbaVir: 'zapisano',
+    /* koncerti.json pozna samo dogodke, na katerih orkester igra; kjer je
+       organizator nekdo drug, to zapiše polje `organizator`, ne vloga. */
+    vloga: 'izvajalec',
     naziv: k.naziv,
     nazivEn: k.nazivEn ?? null,
     opis: k.opis,
@@ -292,6 +335,26 @@ export const ARHIV: ArhivVnos[] = [...brezPodvojenih, ...preteklikoncerti]
   .filter((v) => !jePrihajajoc(v.datumIso))
   .sort((a, b) => b.datumIso.localeCompare(a.datumIso));
 
+/* Vloga in zasedba sta vezani: izvajalec igra, organizator ne. Preverba
+   teče PO združitvi, ker vlogo prinese šele ročna datoteka, prazno
+   zasedbo pa šele združitev. Obe smeri sta napaka:
+   organizator z zasedbo trdi, da smo igrali; izvajalec brez nje pa, da
+   je dogodek brez izvajalca. */
+for (const v of ARHIV) {
+  if (v.vloga === 'organizator' && v.zasedba.length > 0) {
+    throw new Error(
+      `Arhiv: ${v.id} je organizator, a ima zasedbo ${JSON.stringify(v.zasedba)}. `
+        + 'Pri organizatorju ni igral nihče od nas — zasedba mora biti prazna.',
+    );
+  }
+  if (v.vloga === 'izvajalec' && v.zasedba.length === 0) {
+    throw new Error(
+      `Arhiv: ${v.id} je izvajalec, a nima zasedbe. Če orkester ni igral, `
+        + 'vpiši vlogo "organizator" v arhiv-rocno.json.',
+    );
+  }
+}
+
 export const LETA: number[] = [...new Set(ARHIV.map((v) => Number(v.datumIso.slice(0, 4))))].sort(
   (a, b) => b - a,
 );
@@ -327,6 +390,10 @@ export function stevci() {
     izobrazevalni: ARHIV.filter((v) => v.zasedba.includes('izobrazevalni')).length,
     obeZasedbi: ARHIV.filter((v) => v.zasedba.length > 1).length,
     izpeljanih: ARHIV.filter((v) => v.zasedbaVir === 'izpeljano').length,
+    /* Organizatorski vnosi nimajo zasedbe in zato ne štejejo pri nobeni
+       izbiri. Število obstaja zato, da je razlika med „vse" in vsoto
+       izbir pojasnjena in ne videti kot izgubljen vnos. */
+    organizacija: ARHIV.filter((v) => v.vloga === 'organizator').length,
   };
   const kraj = {
     vse: ARHIV.length,

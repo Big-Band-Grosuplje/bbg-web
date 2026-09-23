@@ -121,7 +121,7 @@ export const sl = {
     nadnaslov: 'od 1998 do danes',
     naslov: 'Arhiv dogodkov',
     naslovStrani: 'Arhiv dogodkov — Big Band Grosuplje',
-    opisStrani: 'Kronološki seznam nastopov Big Banda Grosuplje od leta 1998. Datumi, prizorišča in kratki opisi iz arhiva društva.',
+    opisStrani: 'Kronološki seznam nastopov Big Banda Grosuplje od leta 1998 in dogodkov, ki jih je orkester organiziral. Datumi, prizorišča in kratki opisi iz arhiva društva.',
     uvod: 'Kar smo uspeli zbrati iz arhiva stare strani in internih seznamov. Zapisi so različno podrobni — ponekod ostane samo datum in kraj. Dopolnjujemo jih sproti.',
     /* Zasedba je pri večini vnosov izpeljana iz besedila in ne zapisana v
        viru. Stran to pove v eni vrstici pod uvodom: brez nje bi značka
@@ -135,6 +135,11 @@ export const sl = {
     /* Ednina ima drug sklon ("pri enem dogodku") — zamenjava samo števila
        bi dala "pri 1 dogodkih". */
     obeZasedbiEna: 'Pri enem dogodku sta nastopili obe zasedbi in se šteje pri obeh izbirah.',
+    /* Nasprotni primer: organizatorski vnos ne šteje pri NOBENI izbiri.
+       Brez te vrstice bi tak dogodek ob izbrani zasedbi izginil brez
+       pojasnila — vsote se namreč slučajno ujamejo. */
+    organizacijaOpomba: 'Pri {n} dogodkih orkester ni igral, ampak jih je organiziral; ti pri izbiri zasedbe ne štejejo.',
+    organizacijaOpombaEna: 'Pri enem dogodku orkester ni igral, ampak ga je organiziral; ta pri izbiri zasedbe ne šteje.',
     filterZasedba: 'zasedba',
     filterKraj: 'kraj',
     vse: 'vse',
@@ -142,6 +147,10 @@ export const sl = {
     combo: 'combo',
     mladinski: 'mladinski ansambel',
     izobrazevalni: 'delavnica',
+    /* Vloga in ne zasedba: dogodek, ki ga je orkester pripravil, igral pa
+       ni. Značka stoji na mestu značke zasedbe, ker odgovarja na isto
+       vprašanje — kaj je orkester na dogodku bil. */
+    organizacija: 'organizacija',
     grosuplje: 'Grosuplje',
     ljubljana: 'Ljubljana',
     drugje: 'drugje',

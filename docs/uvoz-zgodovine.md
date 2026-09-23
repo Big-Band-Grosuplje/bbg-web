@@ -432,6 +432,72 @@ zajel **register programov** (glej „Predlogi za program in prireditev"). Ko
 nastane, se te vrednosti preselijo iz `naziv` v `program` — dotlej naziv pove
 več kot prazno polje.
 
+## Vloga: izvajalec ali organizator
+
+Arhiv je seznam nastopov — a orkester je nekatere dogodke **pripravil, ne
+odigral**. Prvi koncert projekta „Glasba združuje" (`2011-04-20`, Kulturni dom
+Grosuplje) je odigral HGM Jazz Orchestra pod vodstvom Sigija Feigla s solistom
+Andreasom Hadererjem; BBG je bil organizator.
+
+⚠️ **Do uvedbe tega polja je stran trdila nasprotno.** Ker se zasedba izpeljuje
+iz besedila, je vrstica nosila značko „big band" — torej dejavno trditev, da smo
+igrali. Napačna značka je bila hujša od pomanjkljivega opisa.
+
+| Vrednost | Pomen | Zasedba |
+|---|---|---|
+| `izvajalec` | orkester je igral | neprazna |
+| `organizator` | dogodek je pripravil, igral ni nihče od nas | **prazna** |
+
+**Prazna zasedba je pravilna vrednost, ne manjkajoča.** Nadomestna vrednost bi
+bila laž; zato je model popravljen tako, da prazno zasedbo dovoli — a samo pri
+organizatorju. Obe smeri sta preverjeni ob nalaganju: organizator z zasedbo trdi,
+da smo igrali, izvajalec brez nje pa, da je bil dogodek brez izvajalca.
+
+**Vloge iz besedila ni mogoče izpeljati.** „Nastopil HGM Jazz Orchestra" je ista
+oblika kot „Nastopil je tudi …" — razliko ve samo tisti, ki je bil zraven. Zato
+je `vloga` med dovoljenimi polji v `arhiv-rocno.json` in je uvoz nikoli ne
+zapiše. Privzetek `izvajalec` se nastavi ob nalaganju.
+
+Ročni vnos vpiše **samo vlogo**, ne tudi prazne zasedbe — to stori združitev
+sama. Dve polji, ki ju je treba ročno usklajevati, sta dve priložnosti za
+razhajanje.
+
+```json
+"2011-04-20-grosuplje": {
+  "vloga": "organizator",
+  "opomba": "Po pričevanju BBG na tem koncertu ni igral …"
+}
+```
+
+### Kaj to spremeni na strani
+
+- značko zasedbe zamenja značka **„organizacija"** (črtkana obroba, kurziv — da
+  ni videti kot še ena zasedba);
+- vnos **ne šteje** pri nobeni izbiri zasedbe: big band 239 → 238;
+- vnos ostane v skupnem kronološkem seznamu, ne v ločenem razdelku — tja sodi in
+  značka ga zadosti loči;
+- opis strani (meta, og, `CollectionPage`) pove, da seznam poleg nastopov
+  vsebuje tudi dogodke, ki jih je orkester organiziral.
+
+⚠️ Vsoti se **slučajno ujameta**: 238 + 60 = 298, ker en dvojni vnos šteje
+dvakrat in en organizatorski nič. Bralec, ki bi izbral zasedbo, bi organizatorski
+vnos izgubil brez pojasnila, zato pod filtri stoji druga vrstica — izpiše se
+samo, kadar tak vnos res obstaja.
+
+### Kje drugje
+
+Pregled arhiva je našel **en potrjen primer**. Dva sta odprta, ker besedilo ne
+pove, kdo je igral:
+
+| Datum | Kraj | Zakaj odprt |
+|---|---|---|
+| `2011-05-20` | Spodnja Slivnica | „Drugi koncert projekta „Glasba združuje". Orkestralne suite Duka Ellingtona." — nikogar ne imenuje |
+| `2011-06-22` | Volčji Potok | tuj dirigent (Aleš Suša) in seznam nastopajočih brez BBG |
+
+Delavnice in seminarji vzorca nimajo: vseh 11 zapisov opisuje **koncert ob
+zaključku**, na katerem je orkester igral. Zveza „v organizaciji X" (18 zapisov)
+pomeni ravno nasprotno — organizator je nekdo drug.
+
 ## Opisi, ki se ponavljajo
 
 Znakovno **identičen opis pri več dogodkih iz istega vira** pomeni, da stolpec ni
@@ -861,6 +927,7 @@ narobe.
 |---|---|
 | 22. 9. 2026 | Prvi zapis. Predlog preslikave po pregledu 320 zapisov; popravljenih 13 vnosov v viru (ura izluščena iz kraja). |
 | 22. 9. 2026 | Izvedba: 291 vnosov v `arhiv.json`, stran `/arhiv`, filtri, `CollectionPage`, postopek prestavitve. |
+| 23. 9. 2026 | Novo polje `vloga` (`izvajalec` \| `organizator`): orkester je nekatere dogodke organiziral in ne odigral. Pri organizatorju je zasedba prazna in vnos ne šteje pri izbirah zasedbe. `2011-04-20` je organizator. |
 | 23. 9. 2026 | Koncert s HGM Jazz orkestrom in Johnom Thomasom prestavljen iz 2006 v 2009: arhiv stare strani ima dnevno natančen 2. 5. 2009. Popravljeno v `kronika.md`, `zgodovina.json` in `llms.txt`. |
 | 23. 9. 2026 | Popravljen zapis za `2020-01-01` Portorož po pričevanju udeleženca (vir beleži repertoar, ne dogodka). Nov seznam `_vhod/preveri-opise.md` s ponovljenimi opisi. |
 | 23. 9. 2026 | Šest od osmih zasebnih dogodkov vključenih (`ZASEBNI_VKLJUCENI`); izpuščena ostaneta poroka članice in Medana. Nova tabela `POPRAVKI_PRIZORISCA`, pravilo `ZDRUZI` za `2007-05-19`. 292 vrstic → 298. |
