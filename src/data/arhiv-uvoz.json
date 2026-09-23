@@ -691,6 +691,171 @@
   "vir": "preglednica 2019–2026 (interna; stolpec komentar z imeni članov NAMENOMA IZPUŠČEN)"
  },
  {
+  "id": "2018-12-15-grosuplje",
+  "datumIso": "2018-12-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Koncert big banda s programom Buddyja Richa in Paula Anke.",
+  "vir": "e-poštno vabilo (kulture.si) in seznam koncertov (september 2026)"
+ },
+ {
+  "id": "2018-10-27-grosuplje",
+  "datumIso": "2018-10-27",
+  "natancnost": "dan",
+  "ura": "19:30",
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": "Dokler gnar ne skopni, koncert pesmi Toma Waitsa",
+  "opis": "\"Dokler gnar ne skopni, koncert pesmi Toma Waitsa\". Nastopili so Jani Kovačič, combo zasedba Big Banda Grosuplje in Godalni orkester KD Stična.",
+  "vir": "e-poštno vabilo (kulture.si) (september 2026)"
+ },
+ {
+  "id": "2018-09-06-grosuplje",
+  "datumIso": "2018-09-06",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Knjižnica Grosuplje",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Nastop combo zasedbe Big Banda Grosuplje na otvoritvi razstave o Louisu Adamiču.",
+  "vir": "e-poštno vabilo (kulture.si) in seznam koncertov (september 2026)"
+ },
+ {
+  "id": "2018-08-12-nis-srbija",
+  "datumIso": "2018-08-12",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Niš (Srbija)",
+  "prizorisce": "Glavni oder Earth & Sky",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Nastop Big Banda Grosuplje na glavnem odru festivala Nishville, tretji večer. Izvedena je bila Far East Suite Duka Ellingtona. Orkester je bil v Nišu od 11. do 13. avgusta.",
+  "vir": "Instagram @bigbandgrosuplje in Facebook (september 2026); srbski članek o tretjem večeru festivala"
+ },
+ {
+  "id": "2018-06-28-ljubljana",
+  "datumIso": "2018-06-28",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Rezidenca veleposlanika ZDA",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Umetniški program combo zasedbe Big Banda Grosuplje na sprejemu ob 242. obletnici podpisa Deklaracije neodvisnosti.",
+  "vir": "e-poštno vabilo (kulture.si) in seznam koncertov (september 2026)"
+ },
+ {
+  "id": "2018-06-15-ljubljana",
+  "datumIso": "2018-06-15",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Kavarna NUK",
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Samostojni koncert combo zasedbe Big Banda Grosuplje v kavarni NUK.",
+  "vir": "pričevanje (september 2026)"
+ },
+ {
+  "id": "2018-05-26-cerovo-pri-grosupljem",
+  "datumIso": "2018-05-26",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Cerovo pri Grosupljem",
+  "prizorisce": null,
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "izpeljano",
+  "naziv": null,
+  "opis": "Koncert s programom Franka Sinatre; gost Blaž Vrbič (vokal).",
+  "vir": "e-poštno vabilo (kulture.si) in seznam koncertov (september 2026)"
+ },
+ {
+  "id": "2018-04-18-ljubljana",
+  "datumIso": "2018-04-18",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Ljubljana",
+  "prizorisce": "Klubski salon Maxi",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Koncert big banda s programom Nata Kinga Cola; gost Peter Savizon (vokal). V organizaciji Jazz kluba Gajo.",
+  "vir": "e-poštno vabilo (kulture.si) in seznam koncertov (september 2026)"
+ },
+ {
+  "id": "2018-03-17-grosuplje",
+  "datumIso": "2018-03-17",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Grosuplje",
+  "prizorisce": "Kulturni dom Grosuplje",
+  "zasedba": [
+   "big-band"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": "Nat King Cole's 99'",
+  "opis": "Koncert big banda s programom \"Nat King Cole's 99'\"; gost Peter Savizon (vokal).",
+  "vir": "Instagram @bigbandgrosuplje in Facebook (september 2026)"
+ },
+ {
+  "id": "2018-02-16-kranj",
+  "datumIso": "2018-02-16",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Kranj",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Nastop combo zasedbe Big Banda Grosuplje s skupino Help! A Beatles Tribute. Tretji v nizu treh nastopov s to skupino februarja 2018.",
+  "vir": "e-poštno vabilo (kulture.si) in seznam koncertov (september 2026)"
+ },
+ {
+  "id": "2018-02-09-trbovlje",
+  "datumIso": "2018-02-09",
+  "natancnost": "dan",
+  "ura": null,
+  "kraj": "Trbovlje",
+  "prizorisce": null,
+  "zasedba": [
+   "combo"
+  ],
+  "zasedbaVir": "zapisano",
+  "naziv": null,
+  "opis": "Nastop combo zasedbe Big Banda Grosuplje s skupino Help! A Beatles Tribute. Drugi v nizu treh nastopov s to skupino februarja 2018.",
+  "vir": "e-poštno vabilo (kulture.si) in seznam koncertov (september 2026)"
+ },
+ {
   "id": "2018-02-02-grosuplje",
   "datumIso": "2018-02-02",
   "natancnost": "dan",

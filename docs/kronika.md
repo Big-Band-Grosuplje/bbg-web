@@ -102,10 +102,21 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   neodvisnosti ZDA (Festivalna dvorana); **20 let orkestra**: 15. 9. KD Grosuplje,
   7. 10. Španski borci; 22. 12. »Crazy Christmas« z Boštjanom Gombačem
   (božične priredbe Gordona Goodwina)
-- 2018 — 2. 2. Help! A Beatles Tribute & Combo BBG; program Buddyja Richa;
-  september: **Nishville Jazz Festival (Niš, Srbija)** — Far East Suite Duka
-  Ellingtona na glavnem odru Earth & Sky, pohvale kritikov Davorja Hrvoja in
-  Saše Dracha
+- 2018 — 2. 2. Help! A Beatles Tribute & Combo BBG (Grosuplje), 9. 2. Trbovlje,
+  16. 2. Kranj; 17. 3. »Nat King Cole's 99'« s Petrom Savizonom (KD Grosuplje),
+  18. 4. isti program v Klubskem salonu Maxi (organizacija Jazz klub Gajo);
+  26. 5. Sinatra z Blažem Vrbičem (Cerovo pri Grosupljem); 15. 6. koncert v
+  kavarni NUK; 28. 6. sprejem ob 242. obletnici Deklaracije neodvisnosti
+  (rezidenca veleposlanika ZDA); **12. 8. Nishville Jazz Festival (Niš, Srbija)**
+  — Far East Suite Duka Ellingtona na glavnem odru Earth & Sky, tretji večer
+  festivala, pohvale kritikov Davorja Hrvoja in Saše Dracha; 6. 9. otvoritev
+  razstave o Louisu Adamiču (Knjižnica Grosuplje); 27. 10. »Dokler gnar ne
+  skopni« — pesmi Toma Waitsa z Janijem Kovačičem in Godalnim orkestrom KD
+  Stična; 15. 12. program Buddyja Richa in Paula Anke
+  (Popravek 23. 9. 2026: Nishville je bil **avgusta**, ne septembra; program
+  Buddyja Richa **15. 12.**, ne spomladi. Leto 2018 je bilo prej zapisano s
+  tremi dogodki — dopolnjeno iz e-poštnih vabil, družbenih omrežij in seznama
+  koncertov, september 2026.)
 
 ### 2019–2023 (obdobje Rudija Javornika)
 - 2019 — Sinatra z Blažem Vrbičem (Grosuplje, Ljubljanski grad, Plečnikov avditorij,
