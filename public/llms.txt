@@ -140,7 +140,7 @@ Stran je dvojezična: slovenske strani so v korenu, angleške pod /en/.
 English:
 
 - [Home](https://bigband-grosuplje.com/en/)
-- [Concerts](https://bigband-grosuplje.com/en/#koncerti): upcoming concerts
+- [Events](https://bigband-grosuplje.com/en/#koncerti): upcoming events
   with dates, venues and guests.
 - [History](https://bigband-grosuplje.com/en/history): full timeline by
   conductor, 1997/98 to today.
@@ -154,7 +154,7 @@ English:
 Slovensko:
 
 - [Naslovnica](https://bigband-grosuplje.com/)
-- [Koncerti](https://bigband-grosuplje.com/#koncerti): napovedani koncerti z
+- [Dogodki](https://bigband-grosuplje.com/#koncerti): napovedani dogodki z
   datumi, prizorišči in gosti.
 - [Zgodovina](https://bigband-grosuplje.com/zgodovina): celotna časovnica po
   obdobjih dirigentov.

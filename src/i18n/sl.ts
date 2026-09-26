@@ -22,7 +22,7 @@ export const sl = {
   nav: {
     oznaka: 'Glavna navigacija',
     znakAlt: 'Big Band Grosuplje — naslovnica',
-    koncerti: 'Koncerti',
+    koncerti: 'Dogodki',
     zgodovina: 'Zgodovina',
     galerija: 'Galerija',
     multimedija: 'Multimedija',
@@ -77,7 +77,7 @@ export const sl = {
   koncerti: {
     nadnaslov: 'prihajajoče',
     naslov: 'Kdaj in kje se srečamo',
-    praznoPred: 'Trenutno ni napovedanih koncertov. Novice objavljamo na',
+    praznoPred: 'Trenutno ni napovedanih dogodkov. Novice objavljamo na',
     praznoVez: 'in',
     praznoZa: '.',
     brezPrizorisca: 'prizorišče še ni potrjeno',
@@ -92,7 +92,7 @@ export const sl = {
     prijavaObvezna: 'obvezna prijava',
     prijavaGumb: 'Prijava',
     mimo: 'Dogodek je mimo',
-    vsiKoncerti: '← Vsi koncerti',
+    vsiKoncerti: '← Vsi dogodki',
     gostje: 'Gostje',
     vstopnice: 'Vstopnice',
     organizator: 'Organizator',
