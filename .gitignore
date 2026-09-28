@@ -23,3 +23,6 @@ _vhod/
 
 # Lokalne varnostne kopije — ne gredo v repozitorij
 .backup/
+
+# Lokalna zasebna gradiva (osebni podatki, arhivi) - nikoli v Git
+/_zasebno/
