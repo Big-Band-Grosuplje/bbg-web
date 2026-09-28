@@ -26,3 +26,6 @@ _vhod/
 
 # Lokalna zasebna gradiva (osebni podatki, arhivi) - nikoli v Git
 /_zasebno/
+
+# Osnutki objav za socialna omrežja - lokalno
+/docs/objave/
