@@ -111,10 +111,12 @@ export function najnovejse(n: number): Fotografija[] {
 
    Vrstni red pravil:
    1. Če je v slovenskem napisu imenovan eden od erinih dirigentov, odloči
-      ta — ne glede na leto. Tako pripade koncert v atriju NUK 2022, kjer
-      je dirigiral Kotar, njegovi drugi eri, čeprav je 2022 Javornikovo
-      leto. Kotar vodi dve eri, zato pri njem izbere še leto.
-   2. Sicer odloči leto. Meji 2019 in 2023 sta deljeni; brez imenovanega
+      ta — ne glede na leto. Kotar vodi dve eri, zato pri njem odloči še
+      leto: do 2019 prva, od 2025 druga, vmes pa ni vodil lastne ere in
+      odloči leto samo. Tako pripade koncert v atriju NUK 2022, kjer je
+      dirigiral Kotar, Javornikovi eri — v letih 2022 in 2023 sta si
+      vodenje delila po programih.
+   2. Sicer odloči leto. Meji 2019 in 2025 sta deljeni; brez imenovanega
       dirigenta pripade slika eri, ki se v tem letu KONČUJE.
    Napis beremo slovenski, ker je izhodiščni — dodelitev mora biti v obeh
    jezikih enaka.
@@ -125,6 +127,7 @@ export type EraId =
   | 'lunder'
   | 'kotar-prvo'
   | 'javornik'
+  | 'gostujoci'
   | 'kotar-drugo';
 
 /* Vzorci so na koren imena, ne na celo ime: slovenska sklanjatev pri
@@ -134,7 +137,10 @@ const DIRIGENTI: { vzorec: RegExp; era: (leto: number) => EraId }[] = [
   { vzorec: /Doblekar/, era: () => 'doblekar' },
   { vzorec: /Lundr|Lunder/, era: () => 'lunder' },
   { vzorec: /Javornik/, era: () => 'javornik' },
-  { vzorec: /Kotar/, era: (leto) => (leto <= 2019 ? 'kotar-prvo' : 'kotar-drugo') },
+  {
+    vzorec: /Kotar/,
+    era: (leto) => (leto <= 2019 ? 'kotar-prvo' : leto >= 2025 ? 'kotar-drugo' : eraPoLetu(leto)),
+  },
 ];
 
 function eraPoLetu(leto: number): EraId {
@@ -143,6 +149,7 @@ function eraPoLetu(leto: number): EraId {
   if (leto <= 2011) return 'lunder';
   if (leto <= 2019) return 'kotar-prvo';
   if (leto <= 2023) return 'javornik';
+  if (leto <= 2025) return 'gostujoci';
   return 'kotar-drugo';
 }
 

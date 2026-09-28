@@ -89,6 +89,7 @@ const obdobjaVir = zgodovinaData.obdobja as {
   obdobje: string;
   obdobjeEn?: string;
   vodstvo: string;
+  vodstvoEn?: string;
   vloga: string;
   vlogaEn?: string;
   dosezki: string[];
@@ -105,7 +106,7 @@ const ere: Era[] = [
   ...obdobjaVir.map((o) => ({
     kljuc: o.id,
     obdobje: en ? (o.obdobjeEn ?? o.obdobje) : o.obdobje,
-    naslov: o.vodstvo,
+    naslov: en ? (o.vodstvoEn ?? o.vodstvo) : o.vodstvo,
     podnaslov: en ? (o.vlogaEn ?? o.vloga) : o.vloga,
     dosezki: [...(en ? (o.dosezkiEn ?? o.dosezki) : o.dosezki)].reverse(),
   })),

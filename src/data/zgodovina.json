@@ -172,7 +172,7 @@
       "obdobje": "2019–2023",
       "vodstvo": "Rudi Javornik",
       "vloga": "dirigent in saksofonist",
-      "opis": "Obdobje zaznamujeta program velikih swing orkestrov in dve covidni leti, ko orkestrske koncerte nadomestijo nastopi comba. V letih 2022 in 2023 sta si Rudi Javornik in Klemen Kotar dirigentsko vodenje delila po programih; formalni prevzem je sledil jeseni 2023.",
+      "opis": "Obdobje zaznamujeta program velikih swing orkestrov in dve covidni leti, ko orkestrske koncerte nadomestijo nastopi comba. V letih 2022 in 2023 sta si Rudi Javornik in Klemen Kotar dirigentsko vodenje delila po programih.",
       "vnosi": [
         {
           "leto": "2019",
@@ -191,12 +191,12 @@
         },
         {
           "leto": "2023",
-          "besedilo": "Sinatra na Ljubljanskem gradu in na Krki ter prireditev ob 70-letnici VVZ Kekec v Športni dvorani Brinje v Grosupljem.",
-          "besediloEn": "Sinatra at Ljubljana Castle and at Krka, and the 70th anniversary celebration of the Kekec kindergarten at the Brinje Sports Hall in Grosuplje."
+          "besedilo": "Sinatra na Ljubljanskem gradu in na Krki ter prireditev ob 70-letnici VVZ Kekec v Športni dvorani Brinje v Grosupljem. »Grosuplje v jeseni« z Nino Strnad in novoletni koncert z Juretom Puklom, Laro Grbić in Marušo Kos.",
+          "besediloEn": "Sinatra at Ljubljana Castle and at Krka, and the 70th anniversary celebration of the Kekec kindergarten at the Brinje Sports Hall in Grosuplje. „Grosuplje in Autumn“ with Nina Strnad, and a New Year concert with Jure Pukl, Lara Grbić and Maruša Kos."
         }
       ],
       "vlogaEn": "conductor and saxophonist",
-      "opisEn": "The period is marked by the repertoire of the great swing orchestras and by two covid years, when combo appearances take the place of full orchestral concerts. In 2022 and 2023 Rudi Javornik and Klemen Kotar shared the conducting from programme to programme; the formal handover followed in the autumn of 2023.",
+      "opisEn": "The period is marked by the repertoire of the great swing orchestras and by two covid years, when combo appearances take the place of full orchestral concerts. In 2022 and 2023 Rudi Javornik and Klemen Kotar shared the conducting from programme to programme.",
       "dosezki": [
         "2019 — Sinatra z Blažem Vrbičem na Ljubljanskem gradu in v Plečnikovem avditoriju",
         "2022 — koncert z Urošem Perićem in skupino The Pearlettes ob otvoritvi prenovljene dvorane Kulturnega doma Grosuplje",
@@ -209,17 +209,15 @@
       ]
     },
     {
-      "id": "kotar-drugo",
-      "obdobje": "2023–danes",
-      "vodstvo": "Klemen Kotar",
-      "vloga": "drugo obdobje",
-      "opis": "Kotar se jeseni 2023 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.",
+      "id": "gostujoci",
+      "obdobje": "2024–2025",
+      "vodstvo": "Gostujoči dirigenti",
+      "vodstvoEn": "Guest conductors",
+      "oznaka": "Gostujoči",
+      "oznakaEn": "Guests",
+      "vloga": "Tadej Tomšič, Klara Lavriša, Gašper Kržmanc",
+      "opis": "V letu 2024 in večjem delu leta 2025 orkester vodijo gostujoči dirigenti, vsak s svojim programom: Tadej Tomšič, Klara Lavriša in Gašper Kržmanc.",
       "vnosi": [
-        {
-          "leto": "2023",
-          "besedilo": "Jeseni Klemen Kotar znova prevzame dirigentsko taktirko. »Grosuplje v jeseni« z Nino Strnad in novoletni koncert z Juretom Puklom, Laro Grbić in Marušo Kos.",
-          "besediloEn": "In the autumn Klemen Kotar takes the baton again. „Grosuplje in Autumn“ with Nina Strnad, and a New Year concert with Jure Pukl, Lara Grbić and Maruša Kos."
-        },
         {
           "leto": "2024",
           "besedilo": "»Flying Start« s Tadejem Tomšičem in gosti Petro Vidmar, Erikom Čeboklijem in Žigo Kožarjem; combo na dogodku ameriškega veleposlaništva.",
@@ -227,8 +225,32 @@
         },
         {
           "leto": "2025",
-          "besedilo": "Koncerta z Gašperjem Kržmancem, Sinatra v Marezigah, »Images« s Klaro Lavrišo in Žanom Cesarjem ter tradicionalni božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem.",
-          "besediloEn": "Concerts with Gašper Kržmanc, Sinatra in Marezige, „Images“ with Klara Lavriša and Žan Cesar, and the traditional Christmas and New Year concert with Manca Fekonja and Blaž Vrbič."
+          "besedilo": "Koncerta z Gašperjem Kržmancem, Sinatra v Marezigah in »Images« s Klaro Lavrišo in Žanom Cesarjem.",
+          "besediloEn": "Concerts with Gašper Kržmanc, Sinatra in Marezige and „Images“ with Klara Lavriša and Žan Cesar."
+        }
+      ],
+      "opisEn": "Throughout 2024 and most of 2025 the orchestra is led by guest conductors, each with a programme of their own: Tadej Tomšič, Klara Lavriša and Gašper Kržmanc.",
+      "dosezki": [
+        "2024 — »Flying Start« s Tadejem Tomšičem",
+        "2025 — »Images« s Klaro Lavrišo in Žanom Cesarjem ter koncerta z Gašperjem Kržmancem"
+      ],
+      "dosezkiEn": [
+        "2024 — „Flying Start“ with Tadej Tomšič",
+        "2025 — „Images“ with Klara Lavriša and Žan Cesar, and concerts with Gašper Kržmanc"
+      ],
+      "obdobjeEn": "2024–2025"
+    },
+    {
+      "id": "kotar-drugo",
+      "obdobje": "konec 2025–danes",
+      "vodstvo": "Klemen Kotar",
+      "vloga": "drugo obdobje",
+      "opis": "Kotar se konec leta 2025 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.",
+      "vnosi": [
+        {
+          "leto": "2025",
+          "besedilo": "Tradicionalni božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem.",
+          "besediloEn": "The traditional Christmas and New Year concert with Manca Fekonja and Blaž Vrbič."
         },
         {
           "leto": "2026",
@@ -237,18 +259,16 @@
         }
       ],
       "vlogaEn": "second period",
-      "opisEn": "Kotar returns to the conductor’s stand in the autumn of 2023. The orchestra continues with themed programmes, international collaborations and workshops for musicians.",
+      "opisEn": "Kotar returns to the conductor’s stand in late 2025. The orchestra continues with themed programmes, international collaborations and workshops for musicians.",
       "dosezki": [
-        "2024 — »Flying Start« s Tadejem Tomšičem",
-        "2025 — »Images« s Klaro Lavrišo in Žanom Cesarjem ter koncerta z Gašperjem Kržmancem",
+        "2025 — božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem",
         "2026 — »Poklon Gordonu Goodwinu« s solistom Tomažem Zevnikom"
       ],
       "dosezkiEn": [
-        "2024 — „Flying Start“ with Tadej Tomšič",
-        "2025 — „Images“ with Klara Lavriša and Žan Cesar, and concerts with Gašper Kržmanc",
+        "2025 — Christmas and New Year concert with Manca Fekonja and Blaž Vrbič",
         "2026 — „A Tribute to Gordon Goodwin“ with soloist Tomaž Zevnik"
       ],
-      "obdobjeEn": "2023–present"
+      "obdobjeEn": "late 2025–present"
     }
   ],
   "gostujociDirigenti": [

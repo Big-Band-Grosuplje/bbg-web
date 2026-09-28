@@ -20,6 +20,12 @@ type Obdobje = {
   obdobje: string;
   obdobjeEn?: string;
   vodstvo: string;
+  /* Neobvezno: imena dirigentov so v obeh jezikih enaka, prevod potrebuje
+     samo opisni naslov (npr. „Gostujoči dirigenti“). */
+  vodstvoEn?: string;
+  /* Neobvezna kratka oznaka za vrstico sidr; brez nje velja priimek. */
+  oznaka?: string;
+  oznakaEn?: string;
   vloga: string;
   vlogaEn?: string;
   opis: string;
@@ -64,6 +70,7 @@ const obdobja = obdobjaVir
     ...o,
     aktualna: i === obdobjaVir.length - 1,
     obdobjePrikaz: v(o.obdobje, o.obdobjeEn),
+    vodstvoPrikaz: v(o.vodstvo, o.vodstvoEn),
     vlogaPrikaz: v(o.vloga, o.vlogaEn),
     opisPrikaz: v(o.opis, o.opisEn),
     vnosiPrikaz: o.vnosi
@@ -76,19 +83,22 @@ const obdobja = obdobjaVir
 /* Vrstica sidr pod uvodom. Oznaka je priimek dirigenta, pri ponovljenem
    priimku pa priimek z obdobjem — sicer bi bili Kotarjevi eri v vrstici
    nerazločljivi. Oboje bere ista polja kot naslovi odsekov, zato se
-   zapisa ne moreta raziti. */
+   zapisa ne moreta raziti. Era brez enega dirigenta (gostujoči) nosi
+   svojo oznako v polju oznaka — priimek bi iz „Gostujoči dirigenti“
+   naredil „dirigenti“. */
 function priimek(ime: string): string {
   const deli = ime.trim().split(' ').filter(Boolean);
   return deli[deli.length - 1];
 }
 const kolikokrat = new Map<string, number>();
-for (const o of obdobjaVir) {
+for (const o of obdobjaVir.filter((o) => !o.oznaka)) {
   const p = priimek(o.vodstvo);
   kolikokrat.set(p, (kolikokrat.get(p) ?? 0) + 1);
 }
 const navigacija = [
   { sidro: 'era-jubilej', oznaka: '2027' },
   ...obdobja.map((o) => {
+    if (o.oznaka) return { sidro: `era-${o.id}`, oznaka: v(o.oznaka, o.oznakaEn) };
     const p = priimek(o.vodstvo);
     return {
       sidro: `era-${o.id}`,
@@ -156,7 +166,7 @@ const navigacija = [
               <span class="obdobje__znacka">{t.zgodovinaSekcija.aktualno}</span>
             )}
           </p>
-          <h2 id={`obdobje-${o.id}`} class="obdobje__naslov">{o.vodstvo}</h2>
+          <h2 id={`obdobje-${o.id}`} class="obdobje__naslov">{o.vodstvoPrikaz}</h2>
           <p class="obdobje__vloga">{o.vlogaPrikaz}</p>
           <p class="obdobje__opis">{o.opisPrikaz}</p>
 

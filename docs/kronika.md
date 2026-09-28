@@ -10,11 +10,17 @@
 | Obdobje | Dirigent / umetniški vodja |
 |---|---|
 | 1997/98–2003 | Braco J. Doblekar (ustanovitelj; 2003 zlati znak Občine Grosuplje) |
-| 2004–~2008 | Igor Lunder (magister, kitarist, skladatelj, aranžer) |
-| ~2008–2012 | manj aktivno obdobje |
+| 2004–2011 | Igor Lunder (magister, kitarist, skladatelj, aranžer) |
 | sept. 2012–2019 | Klemen Kotar (1. obdobje) |
 | 2019–2023 | Rudi Javornik |
-| jesen 2023–danes | Klemen Kotar (2. obdobje) |
+| 2024–2025 | gostujoči dirigenti: Tadej Tomšič, Klara Lavriša, Gašper Kržmanc |
+| konec 2025–danes | Klemen Kotar (2. obdobje) |
+
+(Popravek 28. 9. 2026: tabela je prej navajala Lunderja za obdobje
+2004–~2008, nato vrstico „~2008–2012 manj aktivno obdobje“, drugo obdobje
+Klemna Kotarja pa od jeseni 2023. Po potrditvi zaporedja v umetniškem vodstvu
+je Lunder zapisan za 2004–2011, v letih 2024 in 2025 so orkester vodili
+gostujoči dirigenti, drugo Kotarjevo obdobje se začne konec leta 2025.)
 
 Gostujoči dirigenti (izbor): Rick Stitzel, Sigi Feigl, Aleš Suša, Klara Lavriša,
 Tadej Tomšič, Gašper Kržmanc.
@@ -129,18 +135,23 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   dirigent Klemen Kotar; Marezijazz (program Jeffa Coffina); Sinatra Velenje;
   december: program Charlesa Mingusa z Nino Strnad in Klemnom Kotarjem.
   V letih 2022 in 2023 sta si Rudi Javornik in Klemen Kotar dirigentsko
-  vodenje delila po programih; formalni prevzem je sledil jeseni 2023.
+  vodenje delila po programih.
 - 2023 — Sinatra na Ljubljanskem gradu in na Krki; 70 let VVZ Kekec, Športna
-  dvorana Brinje, dirigent Rudi Javornik
+  dvorana Brinje, dirigent Rudi Javornik; jesen: »Grosuplje v jeseni« z Nino
+  Strnad; novoletni z Juretom Puklom, Laro Grbić in Marušo Kos
+  (Popravek 28. 9. 2026: prejšnja različica je navajala formalni prevzem
+  Klemna Kotarja jeseni 2023 in ta dva koncerta uvrstila v njegovo drugo
+  obdobje. Kotar se je za dirigentski pult vrnil šele konec leta 2025; kdo je
+  dirigiral jesenskima koncertoma 2023, ni podatka.)
 
-### jesen 2023–2026 (drugo obdobje Klemna Kotarja)
-- jesen 2023 — **Klemen Kotar znova prevzame dirigentsko taktirko**; »Grosuplje v
-  jeseni« z Nino Strnad; novoletni z Juretom Puklom, Laro Grbić in Marušo Kos
+### 2024–2025 (gostujoči dirigenti: Tadej Tomšič, Klara Lavriša, Gašper Kržmanc)
 - 2024 — »Flying Start« s Tadejem Tomšičem (gostje Petra Vidmar, Erik Čebokli,
   Žiga Kožar); combo za ameriško veleposlaništvo (Grand Plaza)
 - 2025 — koncerta z Gašperjem Kržmancem; Sinatra Marezige; »Images« (Klara
-  Lavriša, Žan Cesar); tradicionalni božično-novoletni koncert (Manca Fekonja,
-  Blaž Vrbič)
+  Lavriša, Žan Cesar)
+
+### konec 2025–2026 (drugo obdobje Klemna Kotarja)
+- 2025 — tradicionalni božično-novoletni koncert (Manca Fekonja, Blaž Vrbič)
 - 2026 — **Poklon Gordonu Goodwinu** (solist Tomaž Zevnik): maj festival Mozaik kulture
   (soorganizator JSKD), Kulturni dom Grosuplje, 5. 6. Jazz klub Kazina Ljubljana, 10. 7. Marezijazz;
   oktober: delavnica aranžiranja z Lojzetom Krajnčanom; »Grosuplje v jeseni«
