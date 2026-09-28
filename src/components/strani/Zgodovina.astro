@@ -83,9 +83,10 @@ const obdobja = obdobjaVir
 /* Vrstica sidr pod uvodom. Oznaka je priimek dirigenta, pri ponovljenem
    priimku pa priimek z obdobjem — sicer bi bili Kotarjevi eri v vrstici
    nerazločljivi. Oboje bere ista polja kot naslovi odsekov, zato se
-   zapisa ne moreta raziti. Era brez enega dirigenta (gostujoči) nosi
-   svojo oznako v polju oznaka — priimek bi iz „Gostujoči dirigenti“
-   naredil „dirigenti“. */
+   zapisa ne moreta raziti. Polje oznaka ima prednost pred obojim: nosi
+   ga era brez enega dirigenta (priimek bi iz „Gostujoči dirigenti“
+   naredil „dirigenti“) in Kotarjevi eri, kjer bi obdobje „konec
+   2025–danes“ naredilo predolgo oznako. */
 function priimek(ime: string): string {
   const deli = ime.trim().split(' ').filter(Boolean);
   return deli[deli.length - 1];
