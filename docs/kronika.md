@@ -12,9 +12,9 @@
 | 1997/98–2003 | Braco J. Doblekar (ustanovitelj; 2003 zlati znak Občine Grosuplje) |
 | 2004–2011 | Igor Lunder (magister, kitarist, skladatelj, aranžer) |
 | sept. 2012–2019 | Klemen Kotar (1. obdobje) |
-| 2019–2023 | Rudi Javornik |
-| 2024–2025 | gostujoči dirigenti: Tadej Tomšič, Klara Lavriša, Gašper Kržmanc |
-| poletje 2025–danes | Klemen Kotar (2. obdobje) |
+| 2019–2023 | Rudi Javornik (2022–2023 vodenje deljeno s Klemnom Kotarjem) |
+| 2024 – prva polovica 2025 | gostujoči dirigenti: Tadej Tomšič, Klara Lavriša, Gašper Kržmanc; Lavriša jeseni 2025 še program »Images« |
+| poletje 2025–danes | Klemen Kotar (2. obdobje; prvi koncert Sinatra v Marezigah, 11. 7. 2025) |
 
 (Popravek 28. 9. 2026: tabela je prej navajala Lunderja za obdobje
 2004–~2008, nato vrstico „~2008–2012 manj aktivno obdobje“, drugo obdobje
@@ -26,7 +26,8 @@ znova prevzel poleti 2025 — prvi koncert drugega obdobja je Sinatra v
 Marezigah, 11. 7. 2025. »Images« 18. 10. 2025 ni v nasprotju s tem: to je
 gostujoči program Klare Lavriše, ki ga je vodila, ko je bil Kotar že znova
 stalni dirigent. Gostujoči dirigenti so torej vodili orkester v letu 2024 in
-v prvi polovici leta 2025.)
+v prvi polovici leta 2025.
+Vrstica gostujočih dirigentov je prej navajala 2024–2025; zdaj 2024 – prva polovica 2025.)
 
 Gostujoči dirigenti (izbor): Rick Stitzel, Sigi Feigl, Aleš Suša, Klara Lavriša,
 Tadej Tomšič, Gašper Kržmanc.
