@@ -14,13 +14,19 @@
 | sept. 2012–2019 | Klemen Kotar (1. obdobje) |
 | 2019–2023 | Rudi Javornik |
 | 2024–2025 | gostujoči dirigenti: Tadej Tomšič, Klara Lavriša, Gašper Kržmanc |
-| konec 2025–danes | Klemen Kotar (2. obdobje) |
+| poletje 2025–danes | Klemen Kotar (2. obdobje) |
 
 (Popravek 28. 9. 2026: tabela je prej navajala Lunderja za obdobje
 2004–~2008, nato vrstico „~2008–2012 manj aktivno obdobje“, drugo obdobje
 Klemna Kotarja pa od jeseni 2023. Po potrditvi zaporedja v umetniškem vodstvu
 je Lunder zapisan za 2004–2011, v letih 2024 in 2025 so orkester vodili
-gostujoči dirigenti, drugo Kotarjevo obdobje se začne konec leta 2025.)
+gostujoči dirigenti, drugo Kotarjevo obdobje se začne konec leta 2025.
+Dopolnitev istega dne: tudi „konec leta 2025“ ni držalo. Kotar je orkester
+znova prevzel poleti 2025 — prvi koncert drugega obdobja je Sinatra v
+Marezigah, 11. 7. 2025. »Images« 18. 10. 2025 ni v nasprotju s tem: to je
+gostujoči program Klare Lavriše, ki ga je vodila, ko je bil Kotar že znova
+stalni dirigent. Gostujoči dirigenti so torej vodili orkester v letu 2024 in
+v prvi polovici leta 2025.)
 
 Gostujoči dirigenti (izbor): Rick Stitzel, Sigi Feigl, Aleš Suša, Klara Lavriša,
 Tadej Tomšič, Gašper Kržmanc.
@@ -141,17 +147,19 @@ Braco J. Doblekar, izključno z mladimi glasbeniki iz okolice Grosuplja.
   Strnad; novoletni z Juretom Puklom, Laro Grbić in Marušo Kos
   (Popravek 28. 9. 2026: prejšnja različica je navajala formalni prevzem
   Klemna Kotarja jeseni 2023 in ta dva koncerta uvrstila v njegovo drugo
-  obdobje. Kotar se je za dirigentski pult vrnil šele konec leta 2025; kdo je
+  obdobje. Kotar se je za dirigentski pult vrnil šele poleti 2025; kdo je
   dirigiral jesenskima koncertoma 2023, ni podatka.)
 
 ### 2024–2025 (gostujoči dirigenti: Tadej Tomšič, Klara Lavriša, Gašper Kržmanc)
 - 2024 — »Flying Start« s Tadejem Tomšičem (gostje Petra Vidmar, Erik Čebokli,
-  Žiga Kožar); combo za ameriško veleposlaništvo (Grand Plaza)
-- 2025 — koncerta z Gašperjem Kržmancem; Sinatra Marezige; »Images« (Klara
-  Lavriša, Žan Cesar)
+  Žiga Kožar); combo za ameriško veleposlaništvo (Grand Plaza); koncert z
+  Gašperjem Kržmancem (14. 12. 2024)
+- 2025 — koncert z Gašperjem Kržmancem (16. 5. 2025); »Images« (Klara
+  Lavriša, Žan Cesar; 18. 10. 2025) — gostujoči program Klare Lavriše, ko je
+  bil Kotar že znova stalni dirigent
 
-### konec 2025–2026 (drugo obdobje Klemna Kotarja)
-- 2025 — tradicionalni božično-novoletni koncert (Manca Fekonja, Blaž Vrbič)
+### poletje 2025–2026 (drugo obdobje Klemna Kotarja)
+- 2025 — Sinatra Marezige (Blaž Vrbič; 11. 7. 2025); tradicionalni božično-novoletni koncert (Manca Fekonja, Blaž Vrbič)
 - 2026 — **Poklon Gordonu Goodwinu** (solist Tomaž Zevnik): maj festival Mozaik kulture
   (soorganizator JSKD), Kulturni dom Grosuplje, 5. 6. Jazz klub Kazina Ljubljana, 10. 7. Marezijazz;
   oktober: delavnica aranžiranja z Lojzetom Krajnčanom; »Grosuplje v jeseni«

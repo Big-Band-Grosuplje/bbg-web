@@ -217,42 +217,42 @@
       "oznaka": "Gostujoči",
       "oznakaEn": "Guests",
       "vloga": "Tadej Tomšič, Klara Lavriša, Gašper Kržmanc",
-      "opis": "V letu 2024 in večjem delu leta 2025 orkester vodijo gostujoči dirigenti, vsak s svojim programom: Tadej Tomšič, Klara Lavriša in Gašper Kržmanc.",
+      "opis": "V letu 2024 in v prvi polovici leta 2025 orkester vodijo gostujoči dirigenti, vsak s svojim programom: Tadej Tomšič, Klara Lavriša in Gašper Kržmanc. Jeseni 2025 Klara Lavriša kot gostujoča dirigentka vodi še program »Images«.",
       "vnosi": [
         {
           "leto": "2024",
-          "besedilo": "»Flying Start« s Tadejem Tomšičem in gosti Petro Vidmar, Erikom Čeboklijem in Žigo Kožarjem; combo na dogodku ameriškega veleposlaništva.",
-          "besediloEn": "„Flying Start“ with Tadej Tomšič and guests Petra Vidmar, Erik Čebokli and Žiga Kožar; the combo at a U.S. Embassy event."
+          "besedilo": "»Flying Start« s Tadejem Tomšičem in gosti Petro Vidmar, Erikom Čeboklijem in Žigo Kožarjem; combo na dogodku ameriškega veleposlaništva; koncert z Gašperjem Kržmancem.",
+          "besediloEn": "„Flying Start“ with Tadej Tomšič and guests Petra Vidmar, Erik Čebokli and Žiga Kožar; the combo at a U.S. Embassy event; a concert with Gašper Kržmanc."
         },
         {
           "leto": "2025",
-          "besedilo": "Koncerta z Gašperjem Kržmancem, Sinatra v Marezigah in »Images« s Klaro Lavrišo in Žanom Cesarjem.",
-          "besediloEn": "Concerts with Gašper Kržmanc, Sinatra in Marezige and „Images“ with Klara Lavriša and Žan Cesar."
+          "besedilo": "Koncert z Gašperjem Kržmancem in »Images« s Klaro Lavrišo in Žanom Cesarjem.",
+          "besediloEn": "A concert with Gašper Kržmanc and „Images“ with Klara Lavriša and Žan Cesar."
         }
       ],
-      "opisEn": "Throughout 2024 and most of 2025 the orchestra is led by guest conductors, each with a programme of their own: Tadej Tomšič, Klara Lavriša and Gašper Kržmanc.",
+      "opisEn": "Throughout 2024 and the first half of 2025 the orchestra is led by guest conductors, each with a programme of their own: Tadej Tomšič, Klara Lavriša and Gašper Kržmanc. In autumn 2025 Klara Lavriša returns as guest conductor for the „Images“ programme.",
       "dosezki": [
-        "2024 — »Flying Start« s Tadejem Tomšičem",
-        "2025 — »Images« s Klaro Lavrišo in Žanom Cesarjem ter koncerta z Gašperjem Kržmancem"
+        "2024 — »Flying Start« s Tadejem Tomšičem in koncert z Gašperjem Kržmancem",
+        "2025 — koncert z Gašperjem Kržmancem in »Images« s Klaro Lavrišo in Žanom Cesarjem"
       ],
       "dosezkiEn": [
-        "2024 — „Flying Start“ with Tadej Tomšič",
-        "2025 — „Images“ with Klara Lavriša and Žan Cesar, and concerts with Gašper Kržmanc"
+        "2024 — „Flying Start“ with Tadej Tomšič and a concert with Gašper Kržmanc",
+        "2025 — concert with Gašper Kržmanc and „Images“ with Klara Lavriša and Žan Cesar"
       ],
       "obdobjeEn": "2024–2025"
     },
     {
       "id": "kotar-drugo",
-      "obdobje": "konec 2025–danes",
+      "obdobje": "poletje 2025–danes",
       "vodstvo": "Klemen Kotar",
       "oznaka": "Kotar II",
       "vloga": "drugo obdobje",
-      "opis": "Kotar se konec leta 2025 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.",
+      "opis": "Kotar se poleti 2025 vrne za dirigentski pult. Orkester nadaljuje s tematskimi programi, mednarodnimi sodelovanji in delavnicami za glasbenike.",
       "vnosi": [
         {
           "leto": "2025",
-          "besedilo": "Tradicionalni božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem.",
-          "besediloEn": "The traditional Christmas and New Year concert with Manca Fekonja and Blaž Vrbič."
+          "besedilo": "Sinatra v Marezigah in tradicionalni božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem.",
+          "besediloEn": "Sinatra in Marezige and the traditional Christmas and New Year concert with Manca Fekonja and Blaž Vrbič."
         },
         {
           "leto": "2026",
@@ -261,16 +261,16 @@
         }
       ],
       "vlogaEn": "second period",
-      "opisEn": "Kotar returns to the conductor’s stand in late 2025. The orchestra continues with themed programmes, international collaborations and workshops for musicians.",
+      "opisEn": "Kotar returns to the conductor’s stand in summer 2025. The orchestra continues with themed programmes, international collaborations and workshops for musicians.",
       "dosezki": [
-        "2025 — božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem",
+        "2025 — Sinatra v Marezigah z Blažem Vrbičem in božično-novoletni koncert z Manco Fekonjo in Blažem Vrbičem",
         "2026 — »Poklon Gordonu Goodwinu« s solistom Tomažem Zevnikom"
       ],
       "dosezkiEn": [
-        "2025 — Christmas and New Year concert with Manca Fekonja and Blaž Vrbič",
+        "2025 — Sinatra in Marezige with Blaž Vrbič and the Christmas and New Year concert with Manca Fekonja and Blaž Vrbič",
         "2026 — „A Tribute to Gordon Goodwin“ with soloist Tomaž Zevnik"
       ],
-      "obdobjeEn": "late 2025–present"
+      "obdobjeEn": "summer 2025–present"
     }
   ],
   "gostujociDirigenti": [
